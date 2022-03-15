@@ -13,7 +13,7 @@ export default function ProfileButton({ user }) {
 
         const closeMenu = (e) => {
             if (!showMenu) return;
-            setShowMenu(false);
+            if (!e.target.classList.contains('dd')) setShowMenu(false);
         };
 
         document.addEventListener('click', closeMenu);
@@ -29,11 +29,11 @@ export default function ProfileButton({ user }) {
           <i className='fa-solid fa-circle-user profile-icon' onClick={openMenu}></i>
 
           {showMenu && (
-              <div className='user-dropdown'>
+              <div className='user-dropdown dd'>
 
-                  <div>{user.username}</div>
-                  <div>{user.email}</div>
-                  <div>
+                  <div className='profile-dropdown-single dd'>{user.username}</div>
+                  {/* <div>{user.email}</div> */}
+                  <div className='dd'>
                       <LogoutButton />
                   </div>
               </div>

@@ -3,6 +3,7 @@
 :root {
     --background-main-black: #0d1111;
     --background-secondary-dark-gray: #111616;
+    --main-gray: #202626;
     --highlight-gray: #202626;
     --glow-box-gray: #181f1f;
     --text-main-white: #d9e0e6;
@@ -18,6 +19,7 @@
 
 body {
     /* position: relative; */
+    background-color: var(--background-main-black);
     margin: 0;
 }
 
