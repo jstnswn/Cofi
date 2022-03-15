@@ -13,7 +13,7 @@ export default function NavBar() {
   const sessionLinks = user
     ? (
       <>
-        <NavLink className='library-link' to='/library'>Library</NavLink>
+        <NavLink className='library-link' activeClassName='selected' to='/library'>Library</NavLink>
         <div>Upload</div>
         <div className='nav-icon-container'>
           <NotificationButton />
@@ -30,7 +30,7 @@ export default function NavBar() {
 
   return (
     <nav id='navbar'>
-      <NavLink className='home-link' exact to='/'>Home</NavLink>
+      <NavLink className='home-link' activeClassName='selected' exact to='/'>Home</NavLink>
       {sessionLinks}
     </nav>
   )
