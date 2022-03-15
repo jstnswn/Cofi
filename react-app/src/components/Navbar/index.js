@@ -5,8 +5,6 @@ import './NavBar.css';
 import NotificationButton from './Notifications';
 import ProfileButton from './ProfileButton';
 
-
-
 export default function NavBar() {
   const user = useSelector(({ session }) => session.user);
 
@@ -28,8 +26,6 @@ export default function NavBar() {
       <div>SignUp</div>
       </>
     )
-
-
 
   return (
     <nav id='navbar'>
