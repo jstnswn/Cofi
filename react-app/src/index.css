@@ -7,13 +7,13 @@
     --highlight-gray: #202626;
     --glow-box-gray: #181f1f;
     --text-main-white: #d9e0e6;
-    --text-secondary-grey: #a2a8ad;
+    --text-secondary-gray: #a2a8ad;
     --accent-orange: rgb(160, 31, 9);
     --border-gray: rgb(34, 36, 43);
     /* --header-font: 'Overlock', cursive; */
     --header-font: 'Comfortaa', cursive;
     --main-font: 'Open Sans', sans-serif;
-    --module-box-shadow: 1px 3px 15px 2px rgba(8, 8, 8, 0.192);
+    --box-shadow: 1px 3px 15px 2px rgba(8, 8, 8, 0.192);
   }
 
 
