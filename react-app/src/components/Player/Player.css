@@ -1,0 +1,50 @@
+.player-container {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  justify-content: center;
+  align-self: flex-end;
+  z-index: 5;
+  font-family: var(--main-font);
+}
+
+.rhap_container {
+  background-color: rgb(25, 25, 25);
+}
+
+.rhap_progress-bar,
+.rhap_volume-bar {
+  background-color: #0e1111;
+  transition: .5s;
+}
+
+.rhap_volume-bar:hover {
+  box-shadow: 0 0 5px 2px #181f1f;
+}
+
+.rhap_progress-bar.active {
+  box-shadow: 0 0 5px 2px #181f1f;
+}
+
+.rhap_progress-filled {
+  background-color: var(--main-gray);
+}
+
+.rhap_download-progress {
+  background-color: #0e1111;
+}
+
+.rhap_time {
+  color: var(--text-main-white);
+}
+
+.rhap_progress-indicator {
+  background-color: var(--main-gray);
+  box-shadow: none;
+}
+
+.rhap_progress-indicator.active {
+  background-color: var(--accent-orange);
+}

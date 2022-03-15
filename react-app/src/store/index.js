@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import session from './session';
 import home from './home';
 import library from './library';
+import active from './active';
 
 const rootReducer = combineReducers({
   session,
   home,
-  library
+  library,
+  active
 });
 
 
