@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import LoginModal from './Login';
+import LoginModal from '../auth/LoginModal';
 import './NavBar.css';
 import NotificationButton from './Notifications';
 import ProfileButton from './ProfileButton';
-import SignupModal from './Signup';
+import SignupModal from '../auth/SignupModal';
 
 export default function NavBar() {
   const user = useSelector(({ session }) => session.user);
