@@ -3,9 +3,9 @@ from app.models import Song
 
 song_routes = Blueprint('songs', __name__)
 
-@song_routes.route('/new-15')
-def get_15_new_songs():
-    songs = Song.query.filter(Song.private==False).order_by(Song.id.desc()).limit(15).all()
+@song_routes.route('/new/<int:amount>')
+def get_15_new_songs(amount):
+    songs = Song.query.filter(Song.private==False).order_by(Song.id.desc()).limit(amount).all()
 
     if not songs:
         return {'error': 'Unable to get songs from database'}

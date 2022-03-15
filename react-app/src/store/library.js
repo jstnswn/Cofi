@@ -4,6 +4,12 @@ const LOAD_ALBUMS = 'librarye/LOAD_ALBUMS';
 const LOAD_ALBUM = 'library/LOAD_ALBUM';
 
 // Action Creators
+const loadSongs = (data) => {
+    return {
+        type: LOAD_SONGS,
+        data
+    }
+}
 
 // Thunks
 
@@ -21,6 +27,12 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
+        // case LOAD_SONGS:
+        //     return {
+        //         ...state,
+
+        //     }
+
         default:
             return state;
     };
