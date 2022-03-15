@@ -1,0 +1,24 @@
+#home-wrapper {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+#home-wrapper .main-wrapper {
+    grid-column-start: 1;
+    padding-left: 20px;
+}
+
+#home-wrapper h2 {
+    font-size: 24px;
+    font-family: var(--header-font);
+    color: var(--text-main-white);
+    margin-top: 80px;
+}
+
+
+
+
+#home-wrapper .sidebar {
+    grid-column-start: 2;
+}

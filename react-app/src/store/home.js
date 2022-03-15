@@ -49,6 +49,7 @@ export const getFeaturedAlbum = () => async dispatch => {
 
 // Helper Functions
 export const getNewSongsArray = state => Object.values(state.home.newSongs);
+export const getFeaturedAlbumArray = state => Object.values(state.home.featuredAlbum);
 
 // Promises
 

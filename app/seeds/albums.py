@@ -82,7 +82,7 @@ def seed_albums():
     albums[6].songs = albums[6].songs + songs[36:43]
     albums[7].songs = albums[7].songs + songs[43:48]
     albums[8].songs = albums[8].songs + songs[48:54]
-    albums[9].songs = albums[9].songs + songs[54:3]
+    albums[9].songs = albums[9].songs + songs[54:63]
     albums[10].songs = albums[10].songs + songs[63:69]
 
     for album in albums:
