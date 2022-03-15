@@ -24,7 +24,7 @@
     align-items: center;
     /* justify-content: center; */
     font-weight: bold;
-    transition: .4s;
+    transition: .3s;
     border-radius: 5px;
     padding: 10px;
     color: var(--text-main-white);
@@ -32,12 +32,14 @@
     cursor: pointer;
 }
 
-.home-link {
-    background-color: var(--accent-orange);
-}
-
+.home-link,
 .library-link {
     background-color: black;
+}
+
+.selected {
+    background-color: var(--accent-orange);
+
 }
 
 .nav-icon-container {
