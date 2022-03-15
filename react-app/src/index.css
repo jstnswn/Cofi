@@ -3,12 +3,13 @@
 :root {
     --background-main-black: #0d1111;
     --background-secondary-dark-gray: #111616;
+    --main-gray: #202626;
     --highlight-gray: #202626;
     --glow-box-gray: #181f1f;
     --text-main-white: #d9e0e6;
     --text-secondary-grey: #a2a8ad;
     --accent-orange: rgb(160, 31, 9);
-    --border-main-gray: rgb(34, 36, 43);
+    --border-gray: rgb(34, 36, 43);
     /* --header-font: 'Overlock', cursive; */
     --header-font: 'Comfortaa', cursive;
     --main-font: 'Open Sans', sans-serif;
@@ -18,6 +19,7 @@
 
 body {
     /* position: relative; */
+    background-color: var(--background-main-black);
     margin: 0;
 }
 

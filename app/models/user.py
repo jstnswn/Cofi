@@ -38,6 +38,7 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'songs': self.songs,
-            'liked_songs': self.liked_songs
+            # 'songs': [song.to_dict() for song in self.songs],
+            'liked_song_ids': [song.id for song in self.songs]
+            # 'liked_songs': self.liked_songs
         }

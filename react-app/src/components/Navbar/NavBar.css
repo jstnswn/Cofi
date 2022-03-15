@@ -18,7 +18,8 @@
 
 .home-link,
 #navbar > a,
-#navbar > div {
+#navbar > div,
+.nav-auth.button {
     display: flex;
     align-items: center;
     /* justify-content: center; */
@@ -50,4 +51,61 @@
 #navbar .profile-icon,
 #navbar .notifications-icon {
     font-size: 23px;
+}
+
+.login-container {
+    display: flex;
+}
+
+.nav-auth.button {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    font-family: var(--header-font);
+    padding: 0 15px;
+    font-size: 16px;
+}
+
+
+
+.profile-button-container {
+    position: relative;
+}
+
+
+.user-dropdown {
+    position: absolute;
+    top: 36px;
+    right: -39px;
+    background-color: var(--background-secondary-dark-gray);
+    width: 200px;
+    /* border: red 1px solid; */
+    font-family: var(--main-font);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* padding-right: 30px; */
+    border: rgb(3, 1, 1) solid 1px;
+    border-top: none;
+    border-bottom-left-radius: 5px;
+}
+
+.user-dropdown > * {
+    /* padding-right: 30px; */
+    padding: 5px 0;
+}
+
+.profile-dropdown-box {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    justify-content: space-between;
+    padding: 10px 30px 7px 20px;
+}
+
+.profile-dropdown-box i {
+    font-size: 18px;
+}
+
+.profile-dropdown-single {
+    padding-right: 30px;
 }
