@@ -9,6 +9,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Home from './components/Home';
 import NavBar from './components/Navbar';
+import Player from './components/Player';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -45,6 +46,7 @@ function App() {
           <Home />
         </ProtectedRoute>
       </Switch>
+      <Player />
     </BrowserRouter>
   );
 }
