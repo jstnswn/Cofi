@@ -18,7 +18,8 @@
 
 .home-link,
 #navbar > a,
-#navbar > div {
+#navbar > div,
+.nav-auth.button {
     display: flex;
     align-items: center;
     /* justify-content: center; */
@@ -50,4 +51,19 @@
 #navbar .profile-icon,
 #navbar .notifications-icon {
     font-size: 23px;
+}
+
+.login-container {
+    display: flex;
+}
+
+.nav-auth.button {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    font-family: var(--header-font);
+    padding: 0 15px;
+    font-size: 16px;
+}
+
+.nav-auth-container {
 }

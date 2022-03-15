@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import LogoutButton from '../auth/LogoutButton';
 
-export default function ProfileButton() {
+export default function ProfileButton({ user }) {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
 
@@ -21,11 +22,22 @@ export default function ProfileButton() {
     }, [showMenu])
 
 
-    
+
 
   return (
     <div className='profile-button-container'>
-          <i className='fa-solid fa-circle-user profile-icon'></i>
+          <i className='fa-solid fa-circle-user profile-icon' onClick={openMenu}></i>
+
+          {showMenu && (
+              <div className='user-dropdown'>
+
+                  <div>{user.username}</div>
+                  <div>{user.email}</div>
+                  <div>
+                      <LogoutButton />
+                  </div>
+              </div>
+          )}
     </div>
   )
 }

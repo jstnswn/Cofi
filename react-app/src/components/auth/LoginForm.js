@@ -18,6 +18,11 @@ const LoginForm = () => {
     }
   };
 
+  const loginDemoUser = (e) => {
+    e.preventDefault()
+    dispatch(login('demo@aa.io', 'password'));
+  }
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -31,13 +36,13 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
+    <form className='login-form form' onSubmit={onLogin}>
+      {/* <div> */}
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
-      </div>
-      <div>
+      {/* </div> */}
+      {/* <div> */}
         <label htmlFor='email'>Email</label>
         <input
           name='email'
@@ -46,8 +51,8 @@ const LoginForm = () => {
           value={email}
           onChange={updateEmail}
         />
-      </div>
-      <div>
+      {/* </div> */}
+      {/* <div> */}
         <label htmlFor='password'>Password</label>
         <input
           name='password'
@@ -57,7 +62,10 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
         <button type='submit'>Login</button>
-      </div>
+
+
+      {/* </div> */}
+        <button onClick={loginDemoUser}>Demo</button>
     </form>
   );
 };
