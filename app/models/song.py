@@ -13,9 +13,24 @@ class Song(db.Model):
     song_url = db.Column(db.String, nullable=False)
     image_url = db.Column(db.String)
     track_number = db.Column(db.Integer)
+    private = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     user = db.relationship('User', back_populates='songs')
     artist = db.relationship('Artist', back_populates='songs')
     album = db.relationship('Album', back_populates='songs')
     likers = db.relationship('User', back_populates='liked_songs', secondary=song_likes)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'user': self.user.s_to_dict(),
+            'artist': self.artist.to_dict(),
+            'album': self.album.to_dict(),
+            'song_url': self.song_url,
+            'image_url': self.image_url,
+            'track_number': self.track_number,
+            'private': self.private,
+            'likers': [liker.s_to_dict() for liker in self.likers]
+        }

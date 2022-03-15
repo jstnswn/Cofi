@@ -496,17 +496,142 @@ songs = [
         track_number=6
     ),
 
-    # Song( #55
-    #     title='',
-    #     user_id=1,
-    #     artist_id=6,
-    #     album_id=8,
-    #     song_url='',
-    #     image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/sattelite_nights_art.png',
-    #     track_number=1
-    # ),
+    Song( #55
+        title='Sun',
+        user_id=1,
+        artist_id=8,
+        album_id=10,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/1-sun.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/staring_through.png',
+        track_number=1
+    ),
+    Song( #56
+        title='Off',
+        user_id=1,
+        artist_id=8,
+        album_id=10,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/2-off.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/staring_through.png',
+        track_number=2
+    ),
+    Song( #57
+        title='Cold',
+        user_id=1,
+        artist_id=8,
+        album_id=10,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/3-cold.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/staring_through.png',
+        track_number=3
+    ),
+    Song( #58
+        title='Station',
+        user_id=1,
+        artist_id=8,
+        album_id=10,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/4-station+(master).mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/staring_through.png',
+        track_number=4
+    ),
+    Song( #59
+        title='Bodies',
+        user_id=1,
+        artist_id=8,
+        album_id=10,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/5-bodies.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/staring_through.png',
+        track_number=5
+    ),
+    Song( #60
+        title='Sing',
+        user_id=1,
+        artist_id=8,
+        album_id=10,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/6-sing.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/staring_through.png',
+        track_number=6
+    ),
+    Song( #61
+        title='Slow',
+        user_id=1,
+        artist_id=8,
+        album_id=10,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/7-slow.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/staring_through.png',
+        track_number=7
+    ),
+    Song( #62
+        title='Put',
+        user_id=1,
+        artist_id=8,
+        album_id=10,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/8-put+(1).mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/staring_through.png',
+        track_number=8
+    ),
+    Song( #63
+        title='Painting',
+        user_id=1,
+        artist_id=8,
+        album_id=10,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/9-painting.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/staring_through.png',
+        track_number=9
+    ),
 
-
+    Song( #64
+        title='Black Cherry',
+        user_id=1,
+        artist_id=9,
+        album_id=11,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/1+-+Black+Cherry.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/sweet_dreams_art.png',
+        track_number=1
+    ),
+    Song( #65
+        title='Caramellow',
+        user_id=1,
+        artist_id=9,
+        album_id=11,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/2+-+Caramellow.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/sweet_dreams_art.png',
+        track_number=2
+    ),
+    Song( #66
+        title='Late Night Latte',
+        user_id=1,
+        artist_id=9,
+        album_id=11,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/3+-+Late+Night+Latte.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/sweet_dreams_art.png',
+        track_number=3
+    ),
+    Song( #67
+        title='Sundae Sunset',
+        user_id=1,
+        artist_id=9,
+        album_id=11,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/4+-+Sundae+Sunset.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/sweet_dreams_art.png',
+        track_number=4
+    ),
+    Song( #68
+        title='Dark Chocolate',
+        user_id=1,
+        artist_id=9,
+        album_id=11,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/5+-+Dark+Chocolate.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/sweet_dreams_art.png',
+        track_number=5
+    ),
+    Song( #69
+        title='Sugar Coat',
+        user_id=1,
+        artist_id=9,
+        album_id=11,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/6+-+Sugar+Coat.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/sweet_dreams_art.png',
+        track_number=6
+    ),
 ]
 
 def seed_songs():

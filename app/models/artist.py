@@ -10,3 +10,9 @@ class Artist(db.Model):
 
     albums = db.relationship('Album', back_populates='artist')
     songs = db.relationship('Song', back_populates='artist')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }

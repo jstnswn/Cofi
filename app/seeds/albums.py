@@ -55,6 +55,18 @@ albums = [
         user_id=1,
         image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/sattelite_nights_art.png'
     ),
+    Album( #10
+        title='Staring Through',
+        artist_id=8,
+        user_id=1,
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/staring_through.png'
+    ),
+    Album( #11
+        title='Sweet Dreams',
+        artist_id=9,
+        user_id=1,
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/sweet_dreams_art.png'
+    ),
 ]
 
 
