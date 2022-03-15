@@ -13,7 +13,7 @@ export default function NavBar() {
   const sessionLinks = user
     ? (
       <>
-        <NavLink className='library-link' to='/'>Library</NavLink>
+        <NavLink className='library-link' to='/library'>Library</NavLink>
         <div>Upload</div>
         <div className='nav-icon-container'>
           <NotificationButton />
