@@ -1,4 +1,5 @@
 from app.models import db, Album
+from app.seeds.songs import songs
 
 albums = [
     Album( #1
@@ -71,6 +72,19 @@ albums = [
 
 
 def seed_albums():
+
+    albums[0].songs = albums[0].songs + songs[:5]
+    albums[1].songs = albums[1].songs + songs[5:10]
+    albums[2].songs = albums[2].songs + songs[11:15]
+    albums[3].songs = albums[3].songs + songs[16:21]
+    albums[4].songs = albums[4].songs + songs[21:27]
+    albums[5].songs = albums[5].songs + songs[27:36]
+    albums[6].songs = albums[6].songs + songs[36:43]
+    albums[7].songs = albums[7].songs + songs[43:48]
+    albums[8].songs = albums[8].songs + songs[48:54]
+    albums[9].songs = albums[9].songs + songs[54:3]
+    albums[10].songs = albums[10].songs + songs[63:69]
+
     for album in albums:
         db.session.add(album)
 

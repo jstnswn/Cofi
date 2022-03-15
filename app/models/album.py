@@ -1,5 +1,6 @@
 from .db import db
 from datetime import datetime
+from .album_song import album_songs
 
 class Album(db.Model):
     __tablename__ = 'albums'
@@ -14,20 +15,21 @@ class Album(db.Model):
 
     user = db.relationship('User', back_populates='albums')
     artist = db.relationship('Artist', back_populates='albums')
-    songs = db.relationship('Song', back_populates='album', cascade='all, delete-orphan')
+    songs = db.relationship('Song', back_populates='albums', secondary=album_songs)
 
-    # def s_to_dict(self):
-    #     return {
-    #         'id': self.id,
-    #         'title': self.title,
-    #         'artist': self.artist.to_dict()
-    #     }
+    def s_to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'artist': self.artist.to_dict()
+        }
 
     def to_dict(self):
         return {
             'id': self.id,
             'title': self.title,
             'artist': self.artist.to_dict(),
+            'songs': [song.a_to_dict() for song in self.songs],
             'user': self.user.s_to_dict(),
             'image_url': self.image_url,
             'private': self.private
