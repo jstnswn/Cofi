@@ -16,19 +16,24 @@ export default function Home() {
     if (homeDisplay === 'albums') {
         homeContent = (
             <>
-                <h2>Featured</h2>
+                <h2>Featured Albums</h2>
                 <AlbumPlayer album={featuredAlbum} />
                 <h2>New Albums</h2>
-                <TileCarousel content={homeItems.newAlbums} />
+                <TileCarousel content={homeItems.newAlbums} optin='albums'/>
             </>
         )
     } else if (homeDisplay === 'songs') {
         homeContent = (
             <>
-                <h2>Featured</h2>
-                <SongPlayer />
+                <h2>Featured Songs</h2>
+                <div className='featured-songs-container'>
+                    {homeItems.featuredSongs.map((song, idx) => (
+                        <SongPlayer key={idx} song={song}/>
+
+                    ))}
+                </div>
                 <h2>New Songs</h2>
-                <TileCarousel content={homeItems.newSongs} />
+                <TileCarousel content={homeItems.newSongs} option='songs'/>
             </>
         )
     }

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import PlayableTile from './PlayableTile';
 import './TileCarousel.css'
 
-export default function TileCarousel({ content }) {
+export default function TileCarousel({ content, option }) {
 
     // Get initial number of albums in carousel
     const initial = useSelector(({ home }) => Object.values(home.newAlbums).length);
@@ -72,8 +72,8 @@ export default function TileCarousel({ content }) {
                 <i className='carousel-button fas fa-chevron-right' onClick={scrollRight}></i>
             </div>
             <div className='tile-carousel'>
-                {content.map(song => (
-                    <PlayableTile key={song.id} song={song} />
+                {content.map(item => (
+                    <PlayableTile key={item.id} item={item} option={option}/>
 
                 ))}
             </div>

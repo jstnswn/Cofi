@@ -3,12 +3,16 @@ import { useDispatch } from 'react-redux';
 import { setSong } from '../../../store/active';
 import './PlayableTile.css';
 
-export default function PlayableTile({ song }) {
+export default function PlayableTile({ item, option }) {
     const dispatch = useDispatch()
     const [isShown, setIsShown] = useState();
+    const song = option === 'songs'
+        ? item
+        : item.songs[0]
+
     // console.log("song", song)
 
-    const playSong = () => dispatch(setSong(song?.songs[0]));
+    const playSong = () => dispatch(setSong(song));
 
     return (
         <div

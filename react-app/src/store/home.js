@@ -98,9 +98,9 @@ export const getFeaturedAlbumArray = state => Object.values(state.home.featuredA
 export const loadHome = () => async dispatch => {
     await Promise.all([
         dispatch(getFeaturedSongs()),
-        // dispatch(getNewSongs()),
+        dispatch(getNewSongs()),
         dispatch(getFeaturedAlbum()),
-        // dispatch(getNewAlbums()),
+        dispatch(getNewAlbums()),
     ]);
 }
 

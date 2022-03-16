@@ -1,3 +1,8 @@
+.featured-songs-container {
+    display: flex;
+    justify-content: space-around;
+}
+
 .song-player {
     background-color: var(--background-secondary-dark-gray);
     color: var(--text-main-white);
@@ -6,9 +11,55 @@
     font-family: var(--main-font);
     font-size: 1.1em;
     height: 282px;
+    width: 282px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: .3s;
 }
 
 .song-player-image-container {
     height: 230px;
     width: 230px;
+}
+
+.song-player-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.song-player-overlay {
+    position: absolute;
+    top: 26px;
+    height: 230px;
+    width: 230px;
+    background-color: rgba(0, 0, 0, 0.733);
+    opacity: 0;
+    transition: .3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+}
+
+.song-player-overlay:hover {
+    opacity: 1;
+}
+
+.song-player-overlay p {
+    padding-bottom: 5px;
+    margin: 0;
+    font-size: 16px;
+}
+
+.song-player-overlay .song-title {
+    color: var(--text-main-white)
+}
+
+.song-player-overlay .song-artist {
+    color: gray;
 }
