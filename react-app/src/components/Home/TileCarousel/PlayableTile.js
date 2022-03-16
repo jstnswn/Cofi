@@ -6,7 +6,7 @@ import './PlayableTile.css';
 export default function PlayableTile({ song }) {
     const dispatch = useDispatch()
     const [isShown, setIsShown] = useState();
-    console.log("song", song)
+    // console.log("song", song)
 
     const playSong = () => dispatch(setSong(song?.songs[0]));
 

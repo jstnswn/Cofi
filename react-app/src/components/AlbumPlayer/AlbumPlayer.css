@@ -7,8 +7,8 @@
   box-shadow: var(--box-shadow);
   font-family: var(--main-font);
   font-size: 1.1em;
-  height: 88%;
-  max-height: 282px;
+  height: 282px;
+  /* max-height: 282px; */
   width: 93%;
   align-items: center;
   padding-left: 25px;

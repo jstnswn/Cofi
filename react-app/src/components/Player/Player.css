@@ -48,3 +48,24 @@
 .rhap_progress-indicator.active {
   background-color: var(--accent-orange);
 }
+
+.player-artwork-container {
+    position: fixed;
+    height: 145px;
+    width: 145px;
+    bottom: 88px;
+    border-radius: 5px;
+    /* right: 29px; */
+    margin-right: 51%;
+    margin-left: 49%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.current-song-artwork {
+    height: 130px;
+    width: 130px;
+    object-fit: cover;
+}

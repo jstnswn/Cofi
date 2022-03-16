@@ -565,6 +565,32 @@ songs = [
         image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/sweet_dreams_art.png',
         track_number=6
     ),
+
+    # Singles
+    Song(  # 70
+        title='Mando',
+        user_id=1,
+        artist_id=10,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/1_Mando.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/lightsaber-bar.png',
+        # track_number=1
+    ),
+    Song(  # 71
+        title='Aligned',
+        user_id=1,
+        artist_id=11,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/6_Aligned.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/Weightless.png',
+        # track_number=1
+    ),
+    Song(  # 72
+        title='Voices',
+        user_id=1,
+        artist_id=12,
+        song_url='https://cofi-bucket.s3.amazonaws.com/song-seeds/9_Voices_of_the_Ancestors.mp3',
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/The-magic-unfolds.png',
+        # track_number=1
+    ),
 ]
 
 def seed_songs():

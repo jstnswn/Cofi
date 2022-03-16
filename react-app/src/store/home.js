@@ -1,4 +1,5 @@
 const LOAD_NEW_SONGS = 'home/LOAD_SONGS';
+const LOAD_FEATURED_SONGS = 'home/LOAD_FEATURED_SONGS';
 const LOAD_SONG = 'home/LOAD_SONG'
 const LOAD_ALBUMS = 'home/LOAD_ALBUMS';
 const LOAD_FEATURED_ALBUM = 'home/LOAD_FEATURED_ALBUM';
@@ -26,7 +27,28 @@ const loadNewAlbums = (albums) => {
     };
 };
 
+
+const loadFeaturedSongs = (songs) => {
+    return {
+        type: LOAD_FEATURED_SONGS,
+        songs
+    }
+}
 // Thunks
+
+export const getFeaturedSongs = () => async dispatch => {
+    // Featured album currently returns a random album from 10 most recent
+    const res = await fetch('/api/songs/featured');
+
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(loadFeaturedSongs(data.songs));
+    } else {
+        const error = await res.json();
+        return error.error;
+    }
+}
+
 export const getNewSongs = (amount) => async dispatch => {
     if (!amount) amount = 15;
 
@@ -75,9 +97,10 @@ export const getFeaturedAlbumArray = state => Object.values(state.home.featuredA
 // Promises
 export const loadHome = () => async dispatch => {
     await Promise.all([
-        dispatch(getNewSongs()),
+        dispatch(getFeaturedSongs()),
+        // dispatch(getNewSongs()),
         dispatch(getFeaturedAlbum()),
-        dispatch(getNewAlbums())
+        // dispatch(getNewAlbums()),
     ]);
 }
 
@@ -85,6 +108,7 @@ export const loadHome = () => async dispatch => {
 const initialState = {
     featuredAlbum: {},
     newAlbums: [],
+    featuredSongs: [],
     newSongs: [],
 
 };
@@ -95,6 +119,12 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 newSongs: action.songs
+            }
+
+        case LOAD_FEATURED_SONGS:
+            return {
+                ...state,
+                featuredSongs: action.songs
             }
 
         case LOAD_FEATURED_ALBUM:
