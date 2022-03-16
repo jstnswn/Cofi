@@ -1,12 +1,14 @@
 #home-wrapper {
     margin-top: 50px;
     display: grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 90% 10%;
+    height: 100%;
 }
 
 #home-wrapper .main-wrapper {
     grid-column-start: 1;
     padding-left: 20px;
+    height: 100%;
 }
 
 #home-wrapper h2 {
@@ -14,6 +16,7 @@
     font-family: var(--header-font);
     color: var(--text-main-white);
     margin-top: 80px;
+    /* height: 100%; */
 }
 
 
@@ -21,4 +24,8 @@
 
 #home-wrapper .sidebar {
     grid-column-start: 2;
+    height: calc(100vh - 50px);
+    width: 100%;
+    /* background-color: var(--background-secondary-dark-gray); */
+    background-color: black;
 }
