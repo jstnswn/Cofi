@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getFeaturedAlbumArray, loadHome } from '../../store/home';
 import AlbumPlayer from '../AlbumPlayer';
 import './Home.css';
+import TileCarousel from './TileCarousel';
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ export default function Home() {
                 <h2>Featured</h2>
                 <AlbumPlayer album={featuredAlbum}/>
                 <h2>New Albums</h2>
-                {/* <NewAlbums /> */}
+                <TileCarousel content={homeItems.newAlbums}/>
             </div>
             <div className='sidebar'>
                 <div className='logo-container'>
@@ -34,4 +35,4 @@ export default function Home() {
             </div>
         </div>
     )
-}
+};

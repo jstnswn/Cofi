@@ -9,42 +9,30 @@
   font-size: 1.1em;
   height: 88%;
   max-height: 282px;
-  width: 100%;
+  width: 93%;
   align-items: center;
-  /* margin-bottom: 70px; */
+  padding-left: 25px;
 }
 
 
 .album-player-image-container {
     height: 230px;
     width: 230px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
 }
 .album-player-image {
-    height: 200px;
-    width: 200px;
+    height: 100%;
+    width: 100%;
     object-fit: cover;
-    /* padding: 15px; */
 }
 
 
 .album-player-songs-container {
   overflow-y: scroll;
-  padding-left: 30px;
-  padding-right: 40px;
-  margin-top: -23px;
   position: relative;
   display: flex;
-  justify-content: flex-start;
   flex-direction: column;
-  align-items: center;
   width: 100%;
   height: 78%;
-  /* padding-top: 10px; */
-  /* z-index: 10; */
 }
 
 .album-player-songs-container::-webkit-scrollbar {
@@ -52,10 +40,8 @@
 }
 
 .album-player-song-box {
-  padding: 4px;
-  padding-left: 10px;
-  padding-right: 10px;
-  width: 87%;
+  padding: 2px 45px 2px 25px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,12 +70,4 @@
 .player-song-artist {
   color: gray;
   font-size: .8em;
-}
-
-.song-options-container {
-  height: 1.9em;
-  padding-left: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }

@@ -4,8 +4,8 @@ import AlbumPlayerSongs from './AlbumPlayerSongs';
 import './AlbumPlayer.css';
 
 export default function AlbumPlayer({ album }) {
-    console.log('album', album)
     const songs = album.songs;
+
     return (
         <div id='album-player'>
 

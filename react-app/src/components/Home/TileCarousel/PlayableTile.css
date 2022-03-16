@@ -1,0 +1,44 @@
+.playable-tile {
+    align-self: flex-end;
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: var(--main-font);
+    color: var(--text-main-white);
+}
+
+.playable-tile {
+    transition: .7s;
+}
+
+.playable-tile:hover {
+    background-color: var(--main-gray);
+}
+
+.tile-image-container {
+    position: relative;
+    font-size: 4vw;
+}
+
+.carousel-container {
+    margin-top: -35px;
+}
+
+.tile-art {
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+}
+
+.tile-art:hover {
+    cursor: pointer;
+}
+
+.song-title,
+.tile-artist {
+    padding: 1px;
+}
+
+.tile-artist {
+    color: grey;
+}

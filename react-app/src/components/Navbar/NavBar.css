@@ -12,7 +12,7 @@
     background-color: var(--background-secondary-dark-gray);
     font-family: var(--header-font);
     z-index: 5;
-    margin-right: 60px;
+    /* margin-right: 60px; */
     /* border: blue 5px solid; */
 }
 
@@ -22,7 +22,6 @@
 .nav-auth.button {
     display: flex;
     align-items: center;
-    /* justify-content: center; */
     font-weight: bold;
     transition: .3s;
     border-radius: 5px;

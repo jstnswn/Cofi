@@ -4,9 +4,7 @@ import { setSong } from '../../store/active';
 
 export default function AlbumPlayerSongs({ song, idx }) {
     const dispatch = useDispatch();
-
     // idx may be needed for edit options later on
-    // const [isHovered, setIsHovered] = useState(false);
 
     const playSong = () => {
         dispatch(setSong(song))
