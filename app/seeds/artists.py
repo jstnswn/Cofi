@@ -28,6 +28,15 @@ artists = [
     Artist(#9
         name='Purple Cat'
     ),
+    Artist(#10
+        name='Chau Sara'
+    ),
+    Artist(#11
+        name='Sling Dilly'
+    ),
+    Artist(#12
+        name='DaniSogen'
+    ),
 ]
 
 def seed_artists():

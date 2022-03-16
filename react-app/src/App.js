@@ -10,6 +10,7 @@ import { authenticate } from './store/session';
 import Home from './components/Home';
 import NavBar from './components/Navbar';
 import Player from './components/Player';
+import { loadHome } from './store/home';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -18,7 +19,8 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
-      setLoaded(true);
+      await dispatch(loadHome())
+      setLoaded(true)
     })();
   }, [dispatch]);
 

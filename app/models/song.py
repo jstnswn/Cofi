@@ -43,7 +43,7 @@ class Song(db.Model):
             'title': self.title,
             'user': self.user.s_to_dict(),
             'artist': self.artist.to_dict(),
-            'albums': [album.to_dict() for album in self.albums],
+            'albums': [album.s_to_dict() for album in self.albums],
             'song_url': self.song_url,
             'image_url': self.image_url,
             'track_number': self.track_number,

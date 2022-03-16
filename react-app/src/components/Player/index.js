@@ -10,10 +10,14 @@ export default function Player() {
     const active = useSelector(({ active }) => active);
     const sessionUser = useSelector(({ session }) => session.user);
 
-    let url;
+    let songUrl;
+    let artworkUrl;
 
     // const isPlaying = active.isPlaying
-    if (active.currentSong) url = active.currentSong.song_url
+    if (active.currentSong) {
+        songUrl = active.currentSong.song_url;
+        artworkUrl = active.currentSong.image_url;
+    };
 
     const handleOnPlay = () => {
         dispatch(playActions.togglePlay())
@@ -35,11 +39,22 @@ export default function Player() {
         <div className='player-container'>
             {sessionUser && (
                 <AudioPlayer
-                    src={url} customAdditionalControls={[]}
+                    src={songUrl} customAdditionalControls={[]}
                     onPlay={handleOnPlay}
                     onPause={handleOnPause}
                     className='player'
                 />
+            )}
+
+            {active.currentSong && (
+                <div className='player-artwork-container'>
+                    <img
+                        alt='current song artwork'
+                        className='current-song-artwork'
+                        src={artworkUrl}
+                    />
+                </div>
+
             )}
         </div>
     )
