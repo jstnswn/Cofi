@@ -24,6 +24,8 @@ export default function Home() {
                 <AlbumPlayer album={featuredAlbum} />
                 <h2>New Albums</h2>
                 <TileCarousel content={newAlbums} optin='albums'/>
+                <h2>Top Albums</h2>
+                <TileCarousel content={newAlbums} optin='albums'/>
             </>
         )
     } else if (homeDisplay === 'songs') {

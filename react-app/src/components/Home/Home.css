@@ -8,7 +8,7 @@
 
 #home-wrapper .main-wrapper {
     grid-column-start: 1;
-    padding-left: 20px;
+    padding: 0 60px;
     height: 100%;
 }
 
@@ -17,5 +17,6 @@
     font-family: var(--header-font);
     color: var(--text-main-white);
     margin-top: 80px;
+    margin-bottom: 30px;
     /* height: 100%; */
 }
