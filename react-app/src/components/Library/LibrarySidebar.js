@@ -3,6 +3,8 @@ import './LibrarySidebar.css'
 
 export default function LibrarySidebar() {
     return (
-        <div className='sidebar top-sidebar'>LibrarySidebar</div>
+        <div className='sidebar bottom-sidebar'>
+
+        </div>
     )
 };
