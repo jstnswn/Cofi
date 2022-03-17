@@ -4,12 +4,16 @@ import AlbumPlayer from '../AlbumPlayer';
 import SongPlayer from '../SongPlayer';
 import './Home.css';
 import HomeSidebar from './HomeSidebar';
-import TileCarousel from './TileCarousel';
+import TileCarousel from '../TileCarousel';
+import { getNewAlbumsArray, getNewSongsArray } from '../../store/home';
 
 export default function Home() {
     const [homeDisplay, setHomeDisplay] = useState('albums');
     const homeItems = useSelector(({ home }) => home);
+    const newSongs = useSelector(getNewSongsArray);
+    const newAlbums = useSelector(getNewAlbumsArray);
     const featuredAlbum = homeItems.featuredAlbum;
+    const featuredSongs = Object.values(homeItems.featuredSongs)
 
     // console.log()
     let homeContent;
@@ -19,7 +23,7 @@ export default function Home() {
                 <h2>Featured Albums</h2>
                 <AlbumPlayer album={featuredAlbum} />
                 <h2>New Albums</h2>
-                <TileCarousel content={homeItems.newAlbums} optin='albums'/>
+                <TileCarousel content={newAlbums} optin='albums'/>
             </>
         )
     } else if (homeDisplay === 'songs') {
@@ -27,13 +31,13 @@ export default function Home() {
             <>
                 <h2>Featured Songs</h2>
                 <div className='featured-songs-container'>
-                    {homeItems.featuredSongs.map((song, idx) => (
+                    {featuredSongs.map((song, idx) => (
                         <SongPlayer key={idx} song={song}/>
 
                     ))}
                 </div>
                 <h2>New Songs</h2>
-                <TileCarousel content={homeItems.newSongs} option='songs'/>
+                <TileCarousel content={newSongs} option='songs'/>
             </>
         )
     }

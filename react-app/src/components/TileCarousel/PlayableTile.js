@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setSong } from '../../../store/active';
+import { setSong } from '../../store/active';
 import './PlayableTile.css';
 
 export default function PlayableTile({ item, option }) {
@@ -9,8 +9,6 @@ export default function PlayableTile({ item, option }) {
     const song = option === 'songs'
         ? item
         : item.songs[0]
-
-    // console.log("song", song)
 
     const playSong = () => dispatch(setSong(song));
 

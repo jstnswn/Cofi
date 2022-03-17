@@ -15,3 +15,5 @@ def get_or_make_artist_id(name):
 
     return artist_id
 
+
+# Create song upload form along with backend route working with AWS upload for song and song artwork

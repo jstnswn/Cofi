@@ -1,20 +1,36 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { loadNewSong } from '../../../store/home';
 import { uploadSong } from '../../../store/library';
 
 export default function SongUploadForm({ closeModal }) {
     const dispatch = useDispatch();
 
+    const userAlbums = useSelector(({ session }) => session.user.albums);
+    // const
+
     const [title, setTitle] = useState('');
     const [artist, setArtist] = useState('');
     const [song, setSong] = useState(null);
     const [image, setImage] = useState(null);
+    const [albumInput, setAlbumInput] = useState('')
+    const [albumName, setAlbumName] = useState('');
     const [imageUrl, setImageUrl] = useState(null)
     const [ImageError, setImageError] = useState(null);
     const [isPrivate, setIsPrivate] = useState(false);
+    const [disableSubmit, setDisableSubmit] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [errors, setErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+    // useEffect(() => {
+
+    // }, [albumId])
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        if (disableSubmit) return;
+        setDisableSubmit(true);
+        setIsLoading(true);
 
         const payload = {
             title,
@@ -25,6 +41,10 @@ export default function SongUploadForm({ closeModal }) {
         }
 
         dispatch(uploadSong(payload))
+            .then((song) => dispatch(loadNewSong(song)))
+            .then(() => setDisableSubmit(false))
+            .then(() => closeModal(e))
+            .catch(errors => setErrors(errors.errors))
     };
 
     const handleImageFileReader = (e, file) => {
@@ -55,8 +75,32 @@ export default function SongUploadForm({ closeModal }) {
         setSong(file);
     };
 
-
-
+    const albumOption = albumInput === 'create new'
+        ? (
+            <>
+                <label>New album name</label>
+                <input
+                    type='text'
+                    value={albumName}
+                    onChange={e => setAlbumName(e.target.value)}
+                />
+            </>
+        )
+        : (
+            <>
+                <label>Album</label>
+                <select
+                    value={albumInput}
+                    onChange={e => setAlbumInput(e.target.value)}
+                >
+                    <option>-Select an Album-</option>
+                    {userAlbums?.map((album, idx) => (
+                        <option key={idx} value={album.id}>{album.title}</option>
+                    ))}
+                    <option value='create new'>--Create a new album--</option>
+                </select>
+            </>
+        )
 
     return (
         <form className='song-upload-form form' onSubmit={handleSubmit}>
@@ -72,28 +116,37 @@ export default function SongUploadForm({ closeModal }) {
                 value={artist}
                 onChange={e => setArtist(e.target.value)}
             />
+            {albumOption}
+            <div className='upload-form radio-container'>
+                <label>Private</label>
+                <input
+                    type='radio'
+                    onChange={e => setIsPrivate(true)}
+                    value={true}
+                    checked={isPrivate === true ? true : false}
+                />
+                <label>Public</label>
+                <input
+                    type='radio'
+                    onChange={e => setIsPrivate(true)}
+                    value={false}
+                    checked={isPrivate === false ? true : false}
+                />
+            </div>
             <label>Song File</label>
             <input
                 type='file'
-                onChange={handleFileChange}
+                onChange={e => setSong(e.target.files[0])}
                 accepted='aduio/mpeg, audio/mp3'
             />
-            <label>Private</label>
+            <label>Song Art (optional)</label>
             <input
-                type='radio'
-                onChange={e => setIsPrivate(true)}
-                value={true}
-                checked={isPrivate === true ? true: false}
-            />
-            <label>Public</label>
-            <input
-                type='radio'
-                onChange={e => setIsPrivate(true)}
-                value={false}
-                checked={isPrivate === false ? true: false}
+                type='file'
+                onChange={e => setImage(e.target.files[0])}
+                accepted='image/png, image/jpeg, image/jpg'
             />
 
-            <button type='submit'>Submit</button>
+            <button type='submit'>{isLoading ? 'Submitting...' : 'Submit'}</button>
         </form>
     )
 }

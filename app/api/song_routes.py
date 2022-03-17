@@ -9,10 +9,6 @@ from .utils import get_or_make_artist_id
 
 song_routes = Blueprint('songs', __name__)
 
-
-# https://cofi-bucket.s3.amazonaws.com/art-seeds/song_cover.png
-
-
 @song_routes.route('/new/<int:limit>')
 def get_new_songs(limit):
     songs = Song.query.filter(Song.private==False).order_by(
@@ -61,6 +57,9 @@ def upload_song():
     form = SongForm()
     current_user_id = current_user.get_id()
     artist_id = get_or_make_artist_id(form.artist.data)
+    image_url = (form.image_url.data
+    if form.image_url.data
+    else 'https://cofi-bucket.s3.amazonaws.com/art-seeds/song_cover.png')
 
     # Song upload
     if 'song' not in request.files:
@@ -86,7 +85,7 @@ def upload_song():
         user_id=current_user_id,
         artist_id=artist_id,
         song_url=song_url,
-        image_url=form.image_url.data,
+        image_url=image_url
     )
 
     db.session.add(new_song)

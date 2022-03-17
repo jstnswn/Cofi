@@ -13,8 +13,7 @@ def artist_exists(form, field):
 
 class SongForm(FlaskForm):
     title = StringField('title', validators=[
-        DataRequired('Song title is required'),
-        Length(max=50, message='Tile must be less than 50 characters')])
+        DataRequired('Song title is required')])
     artist = StringField('artist', validators=[
         DataRequired('Artist is required'),
         Length(max=50, message='Artist name must be less than 50 characters')])

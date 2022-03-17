@@ -24,3 +24,17 @@
     background-color:white;
     border-radius: 8px;
 }
+
+.upload-form.radio-container {
+    display: flex;
+    width: 70px;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+.upload-form.radio-container label {
+    width: 100px;
+    display: flex;
+    padding-bottom: 20px;
+    /* justify-content: center; */
+}

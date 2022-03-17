@@ -14,4 +14,20 @@ export const getImageUrl = async (image) => {
         const errors = await res.json();
         return errors.errors;
     }
+};
+
+export const normalize = (content) => {
+    return content.reduce((acc, item) => {
+        acc[item.id] = item;
+        return acc;
+    }, {})
+};
+
+export const orderIds = (content) => {
+    // const orderedIds = [];
+    // for (let i = 0; i < content.length; i ++) {
+    //     orderedIds.push(content[i].id)
+    // }
+    // return orderedIds;
+    return content.map(item => item.id)
 }

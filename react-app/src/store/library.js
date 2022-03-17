@@ -35,7 +35,6 @@ export const uploadSong = (payload) => async dispatch => {
         formData.append('image_url', imageUrl);
     }
 
-
     const res = await fetch('/api/songs', {
         method: 'POST',
         body: formData
@@ -47,7 +46,7 @@ export const uploadSong = (payload) => async dispatch => {
         return data.song;
     } else {
         const errors = await res.json();
-        console.log('😬', errors.errors)
+        console.log('errors', errors)
         return errors.errors;
     }
 };
@@ -57,21 +56,23 @@ export const uploadSong = (payload) => async dispatch => {
 // Reducer
 
 const initialState = {
-    userSongs: [],
-    userAlbums: [],
-    userPlaylists: [],
+    songs: [],
+    albums: [],
+    playlists: [],
     currentAlbum: {},
     // currentPlaylist: null,
 };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-        // case LOAD_SONGS:
-        //     return {
-        //         ...state,
-
-        //     }
-
+        case LOAD_SONGS:
+            return {
+                ...state,
+                songs: {
+                    ...state.songs,
+                    [action.song.id]: action.song
+                }
+            }
         default:
             return state;
     };
