@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getLibrarySongsArray, loadLibrary } from '../../store/library';
 import './Library.css';
 import LibrarySidebar from './LibrarySidebar';
+import SongsList from './SongsList';
 
 export default function Library() {
+    const dispatch = useDispatch();
+    const user = useSelector(({ session }) => session.user);
+    const songs = useSelector(getLibrarySongsArray);
+
+    useEffect(() => {
+        dispatch(loadLibrary())
+    }, [dispatch])
+
+    const params = useParams();
+
+
     return (
         <div id='library-wrapper'>
             <div className='main-wrapper'>
@@ -23,15 +38,10 @@ export default function Library() {
                         <p className='song-album column-title'>Album</p>
                     </div>
                     <div className='library-body-container'>
-                        <div className='song-list'>
-                            songs
-                        </div>
-                        <div className='artist-list'>
-                            artists
-                        </div>
-                        <div className='album-list'>
-                            albums
-                        </div>
+                        {songs.map((song, idx) => (
+
+                            <SongsList key={idx} song={song}/>
+                        ))}
                     </div>
 
                 </div>

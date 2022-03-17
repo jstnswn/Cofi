@@ -1,4 +1,4 @@
-import { getImageUrl } from "./utils";
+import { getImageUrl, normalize, orderIds } from "./utils";
 
 const LOAD_SONGS = 'library/LOAD_SONGS';
 const LOAD_SONG = 'library/LOAD_SONG';
@@ -13,10 +13,10 @@ const loadSong = (song) => {
     }
 }
 
-const loadSongs = (data) => {
+const loadSongs = (songs) => {
     return {
         type: LOAD_SONGS,
-        data
+        songs
     }
 }
 
@@ -46,31 +46,63 @@ export const uploadSong = (payload) => async dispatch => {
         return data.song;
     } else {
         const errors = await res.json();
-        console.log('errors', errors)
         return errors.errors;
     }
 };
 
+export const getLibrarySongs = () => async dispatch => {
+    const res = await fetch('/api/songs/current_user');
+
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(loadSongs(data.songs))
+    } else {
+        const error = await res.json();
+        return error.error;
+    }
+};
+
 // Helper Functions
+export const getLibrarySongsArray = (state) => {
+    const orderedIds = state.library.songs.order;
+    return orderedIds.map(id => state.library.songs.byIds[id]);
+}
+
+// Bulk Loaders
+export const loadLibrary = () => async dispatch => {
+    await Promise.all([
+        dispatch(getLibrarySongs())
+    ]);
+};
 
 // Reducer
 
 const initialState = {
-    songs: [],
-    albums: [],
-    playlists: [],
+    songs: {
+        byIds: {},
+        order: []
+    },
+    albums: {
+        byIds: {},
+        order: []
+    },
+    playlists: {},
     currentAlbum: {},
     // currentPlaylist: null,
 };
 
 export default function reducer(state = initialState, action) {
+    let normalizedData;
+    let orderedIds;
     switch (action.type) {
         case LOAD_SONGS:
+            normalizedData = normalize(action.songs);
+            orderedIds = orderIds(action.songs);
             return {
                 ...state,
                 songs: {
-                    ...state.songs,
-                    [action.song.id]: action.song
+                    byIds: normalizedData,
+                    order: orderedIds
                 }
             }
         default:

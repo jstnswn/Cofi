@@ -8,8 +8,11 @@
 }
 
 #library-wrapper .main-wrapper {
-    padding: 0 60px;
-
+    /* padding: 0 90px; */
+    padding-left: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #library-header {
@@ -19,6 +22,7 @@
     height: calc(470px - 50px);
     /* border: red 1px solid; */
     position: relative;
+    padding-right: 90px;
 
 }
 
@@ -28,7 +32,7 @@
     /* border: green 1px solid; */
     padding: 0;
     overflow: hidden;
-    height: 420px;
+    /* height: 420px; */
 }
 
 .library-header-image {
@@ -40,7 +44,7 @@
 .library-header-title {
     position: absolute;
     bottom: 0;
-    left: 30px;
+    /* left: 30px; */
     font-family: var(--main-font);
     font-weight: 400;
     color: var(--text-secondary-white);
@@ -53,10 +57,7 @@
 #library-body {
     grid-column-start: 1;
     height: calc(100vh - 560px);
-    /* grid-template-columns: 40% 30% 50%;
-    display: grid; */
-    /* border: blue 1px solid; */
-
+    width: 800px;
 }
 
 #library-body .library-body-header {
@@ -66,31 +67,75 @@
     grid-template-columns: 40% 30% 50%;
     display: grid;
     color: var(--text-secondary-white);
+    height: 50px;
+    /* margin-top: 10px; */
+    /* padding: 0; */
 }
 
 .library-body-header .song-title.column-title {
     grid-column-start: 1;
 }
+
 .library-body-header .song-artist.column-title {
     grid-column-start: 2;
-
 }
+
 .library-body-header .song-album.column-title {
     grid-column-start: 3;
+}
 
+.library-body-header .column-title {
+    /* margin-bottom: 5px; */
+    font-family: var(--main-font);
+    color: gray;
 }
 
 #library-body .library-body-container {
     grid-template-columns: 40% 30% 50%;
     display: grid;
+    overflow-y: scroll;
+    /* scrollbar-color: red yellow; */
+    height: calc(100vh - 560px);
+    font-family: var(--main-font);
+    font-size: 16px;
+    margin-right: 20px;
+    /* padding-right: 20px; */
 }
+
+.library-body-container::-webkit-scrollbar {
+    background-color: var(--background-main-black)
+}
+.library-body-container::-webkit-scrollbar-thumb {
+    background-color: rgb(37, 37, 37);
+    border: 3px solid transparent;
+    border-radius: 9px;
+    background-clip: content-box;
+}
+
 
 .library-body-container .song-list {
     grid-column-start: 1;
 }
+
 .library-body-container .artist-list {
     grid-column-start: 2;
 }
+
 .library-body-container .album-list {
     grid-column-start: 3;
+}
+
+.library-list {
+    color: var(--text-secondary-white);
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.library-list .list-image {
+    height: 29px;
+    width: 29px;
+    object-fit: cover;
+    margin-right: 10px;
 }
