@@ -19,6 +19,7 @@
     height: calc(470px - 50px);
     /* border: red 1px solid; */
     position: relative;
+
 }
 
 #library-header .header-image-container {
@@ -64,6 +65,7 @@
     border-bottom: 2px solid var(--border-gray);
     grid-template-columns: 40% 30% 50%;
     display: grid;
+    color: var(--text-secondary-white);
 }
 
 .library-body-header .song-title.column-title {

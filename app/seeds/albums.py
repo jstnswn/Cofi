@@ -88,7 +88,6 @@ def seed_albums():
     albums[9].songs = albums[9].songs + songs[54:63]
     albums[10].songs = albums[10].songs + songs[63:69]
 
-
     # albums[0].likers.append(demo)
 
     for album in albums:
