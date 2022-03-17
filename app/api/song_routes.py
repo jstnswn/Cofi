@@ -42,8 +42,10 @@ def get_featured_songs():
         max_songs = 3
 
     number_cashe = []
+
     while len(featured_songs) < max_songs and len(number_cashe) < num_of_songs:
         idx = randint(0, num_of_songs - 1)
+        
         if idx not in number_cashe:
             featured_songs.append(songs[idx])
             number_cashe.append(idx)
