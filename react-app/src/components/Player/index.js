@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import AudioPlayer from 'react-h5-audio-player';
+import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
 import 'react-h5-audio-player/lib/styles.css';
 import './Player.css';
 import * as playActions from '../../store/active';
@@ -37,25 +37,32 @@ export default function Player() {
 
     return (
         <div className='player-container'>
+            <div className='current-song-info-container'>
+                {active.currentSong && (
+                    <>
+                        <img
+                            alt='current song artwork'
+                            className='current-song-artwork'
+                            src={artworkUrl}
+                        />
+                        <div className='current-song-info'>
+                            <p className='song-title'>{active.currentSong.title}</p>
+                            <p className='song-artist'>{active.currentSong.artist.name}</p>
+                        </div>
+                    </>
+
+                )}
+            </div>
             {sessionUser && (
                 <AudioPlayer
                     src={songUrl} customAdditionalControls={[]}
                     onPlay={handleOnPlay}
                     onPause={handleOnPause}
                     className='player'
+                    layout='horizontal-reverse'
                 />
             )}
 
-            {active.currentSong && (
-                <div className='player-artwork-container'>
-                    <img
-                        alt='current song artwork'
-                        className='current-song-artwork'
-                        src={artworkUrl}
-                    />
-                </div>
-
-            )}
         </div>
     )
 }

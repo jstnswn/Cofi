@@ -6,7 +6,7 @@ import './TileCarousel.css'
 export default function TileCarousel({ content, option }) {
 
     // Get initial number of albums in carousel
-    const initial = useSelector(({ home }) => Object.values(home.newAlbums).length);
+    const initial = content.length;
     const [difference, setDifference] = useState(initial);
 
     // Start by targeting 8th div in carousel
@@ -22,6 +22,7 @@ export default function TileCarousel({ content, option }) {
     }, [prevDirection, initial, difference, forwardTarget, backTarget])
 
     const scrollRight = (e) => {
+        console.log('click', difference)
         e.preventDefault()
         if (difference <= 0) return;
 

@@ -4,9 +4,34 @@
     height: calc(100vh - 50px);
     width: 100%;
     /* background-color: var(--background-secondary-dark-gray); */
-    background-color: black;
+    /* background-color: black; */
     display: flex;
     flex-direction: column;
-    gap: 30%;
+    /* gap: 30%; */
+    border-left: 2px solid var(--border-gray)
     /* justify-content: space-around; */
+}
+
+.sidebar-button {
+    /* padding: 10px; */
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    width: 65%;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 24px;
+    color: gray;
+    font-family: var(--header-font);
+}
+
+.sidebar-button-container {
+    margin: 5px;
+}
+
+.sidebar-button-container .selector {
+    color: var(--main-gray);
+}
+
+.sidebar-button-container .selector.active {
+    color: var(--accent-orange)
 }

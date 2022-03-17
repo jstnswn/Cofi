@@ -103,9 +103,7 @@ export const getFeaturedAlbum = () => async dispatch => {
 // export const getFeaturedAlbumArray = state => Object.values(state.home.featuredAlbum);
 
 export const getNewSongsArray = (state) => {
-    console.log('state: ', state)
     const orderedIds = state.home.newSongs.order;
-    console.log('orderIDs ', orderedIds)
     return orderedIds.map(id => state.home.newSongs.songs[id]);
 };
 
