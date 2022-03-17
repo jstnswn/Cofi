@@ -6,7 +6,7 @@ export default function SongUploadModal() {
     const [showModal, setShowModal] = useState(false);
 
     const openModal = (e) => setShowModal(true);
-    
+
     const closeModal = (e) => {
         e.stopPropagation()
         setShowModal(false);
@@ -16,7 +16,7 @@ export default function SongUploadModal() {
         <div
             className='song-upload-button-container'
             onClick={openModal}
-        >Upload
+        >Upload Song
             {showModal && (
                 <Modal onClose={closeModal}>
                     <SongUploadForm closeModal={closeModal}/>

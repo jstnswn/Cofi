@@ -1,15 +1,12 @@
-#home-wrapper .sidebar {
+#home-wrapper .bottom-sidebar {
     grid-column-start: 2;
-    padding-top: 250px;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 560px);
     width: 100%;
-    /* background-color: var(--background-secondary-dark-gray); */
-    /* background-color: black; */
     display: flex;
     flex-direction: column;
-    /* gap: 30%; */
-    border-left: 2px solid var(--border-gray)
-    /* justify-content: space-around; */
+    border-left: 2px solid var(--border-gray);
+    padding-top: 50px;
+    margin-top: 420px;
 }
 
 .sidebar-button {

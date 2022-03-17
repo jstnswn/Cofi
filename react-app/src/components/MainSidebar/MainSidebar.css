@@ -1,0 +1,30 @@
+#main-sidebar {
+    /* border: red 1px solid; */
+    height: 420px;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 200px;
+    border-left: 2px solid var(--border-gray);
+    border-bottom: 2px solid var(--border-gray);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 105px;
+    font-family: var(--header-font)
+
+}
+
+#main-sidebar > div {
+    display: flex;
+    color: gray;
+    display: flex;
+    align-items: center;
+
+}
+
+#main-sidebar .icon {
+    font-size: 24px;
+    color: gray;
+    margin: 10px;
+}
