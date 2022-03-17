@@ -5,6 +5,7 @@ from app.forms.song_form import SongForm
 from random import randint
 from app.aws import (
     upload_file_to_s3, allowed_image_file, allowed_song_file, get_unique_filename)
+from .utils import get_or_make_artist_id
 
 song_routes = Blueprint('songs', __name__)
 
@@ -55,36 +56,19 @@ def get_featured_songs():
 
 
 @song_routes.route('', methods=['POST'])
-def post_song():
+def upload_song():
 
-    current_user_id = current_user.get_id()
     form = SongForm()
-    song = form.song.data
+    current_user_id = current_user.get_id()
+    artist_id = get_or_make_artist_id(form.artist.data)
 
-
-    # Image validation
-    image_url = None
-    if 'image' in request.files:
-        image = form.image.data
-
-        if not allowed_image_file(image.filename):
-            return {'errors': 'file type not permitted'}, 400
-
-        image.filename = get_unique_filename(image.filename)
-
-        image_upload = upload_file_to_s3(image)
-
-        if 'url' not in image_upload:
-            return image_upload, 400
-
-        image_url = image_upload['url']
-
-
-    # Song validation
+    # Song upload
     if 'song' not in request.files:
         return {'errors': 'song required'}, 400
 
-    if not allowed_song_file(somg.filename):
+    song = request.files['song']
+
+    if not allowed_song_file(song.filename):
         return {'errors': 'file type not permitted'}, 400
 
     song.filename = get_unique_filename(song.filename)
@@ -96,29 +80,20 @@ def post_song():
 
     song_url = song_upload['url']
 
-    # Get artist id
-    artist_name = form.artist.data
-    artist = Artist.query.filter(Artist.name==artist_name).one()
-    artist_id = None
-
-    if artist:
-        artist_id = artist.id
-    else:
-        artist = Artist(name=artist_name)
-        artist_id = artist.id
-        db.session.add(artist)
-
 
     new_song = Song(
         title=form.title.data,
         user_id=current_user_id,
         artist_id=artist_id,
         song_url=song_url,
-        image_url=image_url,
+        image_url=form.image_url.data,
     )
 
+    db.session.add(new_song)
+    db.session.commit()
 
-    return {'test': 'ok'}
+
+    return {'song': new_song.to_dict()}
 
 
 # @song_routes.route('/<int:song_id>/image')
