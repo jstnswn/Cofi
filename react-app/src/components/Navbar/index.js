@@ -6,6 +6,7 @@ import './NavBar.css';
 import NotificationButton from './Notifications';
 import ProfileButton from './ProfileButton';
 import SignupModal from '../auth/SignupModal';
+import SongUploadModal from '../Upload/SongUpload';
 
 export default function NavBar() {
   const user = useSelector(({ session }) => session.user);
@@ -14,7 +15,7 @@ export default function NavBar() {
     ? (
       <>
         <NavLink className='library-link' activeClassName='selected' to='/library'>Library</NavLink>
-        <div>Upload</div>
+        <SongUploadModal />
         <div className='nav-icon-container'>
           <NotificationButton />
           <ProfileButton user={user}/>
