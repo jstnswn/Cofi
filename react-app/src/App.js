@@ -11,6 +11,8 @@ import Home from './components/Home';
 import NavBar from './components/Navbar';
 import Player from './components/Player';
 import { loadHome } from './store/home';
+import MainSidebar from './components/MainSidebar';
+import Library from './components/Library';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -41,13 +43,14 @@ function App() {
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
+        <ProtectedRoute path='/library' exact={true} >
+          <Library />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <Home />
         </ProtectedRoute>
       </Switch>
+      <MainSidebar />
       <Player />
     </BrowserRouter>
   );

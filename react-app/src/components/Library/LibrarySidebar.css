@@ -1,0 +1,9 @@
+#library-wrapper .top-sidebar {
+    grid-column-start: 2;
+    height: calc(470px - 50px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid var(--border-gray);
+    padding-top: 150px;
+}

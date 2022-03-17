@@ -15,7 +15,7 @@ export default function NavBar() {
     ? (
       <>
         <NavLink className='library-link' activeClassName='selected' to='/library'>Library</NavLink>
-        <SongUploadModal />
+        {/* <SongUploadModal /> */}
         <div className='nav-icon-container'>
           <NotificationButton />
           <ProfileButton user={user}/>

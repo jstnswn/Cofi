@@ -1,0 +1,22 @@
+#library-wrapper {
+    margin-top: 50px;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: calc(100vw - 200px) 200px;
+    height: 100%;
+}
+
+
+
+#library-header {
+    grid-column-start: 1;
+    height: calc(470px - 50px);
+    border: red 1px solid;
+}
+
+#library-body {
+    grid-column-start: 1;
+    height: calc(100vh - 560px);
+    border: rgb(76, 0, 255) 1px solid;
+
+}

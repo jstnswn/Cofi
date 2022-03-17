@@ -1,0 +1,10 @@
+#main-sidebar {
+    /* border: red 1px solid; */
+    height: calc(100vh - 560px);
+    position: absolute;
+    top: 470px;
+    right: 0;
+    width: 200px;
+    border-left: 2px solid var(--border-gray);
+    border-top: 2px solid var(--border-gray)
+}
