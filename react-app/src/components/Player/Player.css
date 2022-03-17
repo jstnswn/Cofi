@@ -3,29 +3,56 @@
   position: fixed;
   bottom: 0;
   width: 100%;
+  height: 90px;
   left: 0;
   justify-content: center;
   align-self: flex-end;
   z-index: 5;
   font-family: var(--main-font);
+  background-color: rgb(25, 25, 25);
 }
 
 .rhap_container {
   background-color: rgb(25, 25, 25);
+  /* padding-right: 50px; */
+  width: 80%;
 }
+
+.rhap_progress-bar {
+    /* width: 80%; */
+}
+
+#rhap_current-time,
+.rhap_total-time {
+    width: 41px;
+    font-size: 14px;
+    color: var(--text-main-white)
+}
+
+
+/* .rhab_time {
+    width: 41px;
+} */
 
 .rhap_progress-bar,
 .rhap_volume-bar {
   background-color: #0e1111;
-  transition: .5s;
+}
+
+.rhap_volume-container {
+    margin-right: 50px;
+}
+
+.rhap_volume-bar {
+    width: 70px;
 }
 
 .rhap_volume-bar:hover {
-  box-shadow: 0 0 5px 2px #181f1f;
+  box-shadow: 0 0 2px 2px #181f1f;
 }
 
 .rhap_progress-bar.active {
-  box-shadow: 0 0 5px 2px #181f1f;
+  box-shadow: 0 0 1px 1px #181f1f;
 }
 
 .rhap_progress-filled {
@@ -46,26 +73,43 @@
 }
 
 .rhap_progress-indicator.active {
-  background-color: var(--accent-orange);
+  background-color: rgba(87, 17, 5, 0.877);
 }
 
-.player-artwork-container {
-    position: fixed;
-    height: 145px;
-    width: 145px;
-    bottom: 88px;
+.current-song-info-container {
+    bottom: 5px;
     border-radius: 5px;
-    /* right: 29px; */
-    margin-right: 51%;
-    margin-left: 49%;
-    background-color: black;
     display: flex;
     justify-content: center;
-    align-items: center;
+    width: 220px;
+    padding: 5px 0;
 }
 
+.rhap_main-controls {
+    margin-right: 20px;
+}
+
+
+
 .current-song-artwork {
-    height: 130px;
-    width: 130px;
+    height: 80px;
+    width: 80px;
     object-fit: cover;
+}
+
+.current-song-info {
+    /* align-items: flex-end; */
+    align-self: flex-end;
+    padding-left: 8px;
+    padding-bottom: 2px;
+}
+
+.current-song-info p {
+    color: var(--text-main-white);
+    margin: 0;
+    font-size: 13px;
+}
+
+.current-song-info .song-artist {
+    color: gray;
 }

@@ -1,6 +1,7 @@
 .carousel-container {
   position: relative;
-  width: 93%;
+  /* width: 93%; */
+  width: 100%;
 }
 
 .tile-carousel {

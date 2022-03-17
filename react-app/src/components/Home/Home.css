@@ -2,7 +2,7 @@
     margin-top: 50px;
     width: 100vw;
     display: grid;
-    grid-template-columns: calc(100vw - 180px) 180px;
+    grid-template-columns: calc(100vw - 200px) 200px;
     height: 100%;
 }
 
@@ -19,8 +19,3 @@
     margin-top: 80px;
     /* height: 100%; */
 }
-
-
-
-
-

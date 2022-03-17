@@ -20,7 +20,7 @@ export default function Home() {
     if (homeDisplay === 'albums') {
         homeContent = (
             <>
-                <h2>Featured Albums</h2>
+                <h2>Featured Album</h2>
                 <AlbumPlayer album={featuredAlbum} />
                 <h2>New Albums</h2>
                 <TileCarousel content={newAlbums} optin='albums'/>
@@ -48,7 +48,7 @@ export default function Home() {
                 {homeContent}
             </div>
 
-            <HomeSidebar setHomeDisplay={setHomeDisplay}/>
+            <HomeSidebar setHomeDisplay={setHomeDisplay} homeDisplay={homeDisplay}/>
         </div>
     )
 };
