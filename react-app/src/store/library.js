@@ -104,7 +104,7 @@ export const getLibrarySongsArray = (state) => {
 // Bulk Loaders
 export const loadLibrary = () => async dispatch => {
     await Promise.all([
-        // dispatch(getLibrarySongs()),
+        dispatch(getLibrarySongs()),
         dispatch(getLibraryAlbums())
     ]);
 };
