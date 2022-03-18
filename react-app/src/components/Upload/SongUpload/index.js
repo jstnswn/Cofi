@@ -16,7 +16,8 @@ export default function SongUploadModal() {
         <div
             className='song-upload-button-container'
             onClick={openModal}
-        >Upload Song
+        >
+            <p>Upload Song</p>
             {showModal && (
                 <Modal onClose={closeModal}>
                     <SongUploadForm closeModal={closeModal}/>

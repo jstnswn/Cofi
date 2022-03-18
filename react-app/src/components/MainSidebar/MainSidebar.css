@@ -23,6 +23,10 @@
 
 }
 
+#main-sidebar > div p {
+    cursor: pointer;
+}
+
 #main-sidebar .icon {
     font-size: 24px;
     color: gray;

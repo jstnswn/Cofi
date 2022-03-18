@@ -6,4 +6,5 @@
     flex-direction: column;
     border-left: 2px solid var(--border-gray);
     margin-top: 470px;
+    padding-top: 50px;
 }

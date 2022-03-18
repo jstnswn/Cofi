@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getLibrarySongsArray, loadLibrary } from '../../store/library';
 import './Library.css';
 import LibrarySidebar from './LibrarySidebar';
-import SongsList from './SongsList';
+import SongsList from './SongsList/SongsList';
 
 export default function Library() {
     const dispatch = useDispatch();
     const user = useSelector(({ session }) => session.user);
     const songs = useSelector(getLibrarySongsArray);
+
+    const [libraryDisplay, setLibraryDisplay] = useState('songs');
+
 
     useEffect(() => {
         dispatch(loadLibrary())
@@ -46,7 +49,7 @@ export default function Library() {
 
                 </div>
             </div>
-            <LibrarySidebar />
+            <LibrarySidebar libraryDisplay={libraryDisplay} setLibraryDisplay={setLibraryDisplay}/>
         </div>
     )
 }

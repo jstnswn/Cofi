@@ -95,6 +95,18 @@ export default function reducer(state = initialState, action) {
     let normalizedData;
     let orderedIds;
     switch (action.type) {
+        case LOAD_SONG:
+            return {
+                ...state,
+                songs: {
+                    byIds: {
+                        ...state.songs.byIds,
+                        [action.song.id]: action.song
+                    },
+                    order: [action.song.id, ...state.songs.order]
+                }
+            }
+
         case LOAD_SONGS:
             normalizedData = normalize(action.songs);
             orderedIds = orderIds(action.songs);

@@ -91,7 +91,7 @@
 }
 
 #library-body .library-body-container {
-    grid-template-columns: 40% 30% 50%;
+    /* grid-template-columns: 40% 30% 25% 5%; */
     display: grid;
     overflow-y: scroll;
     /* scrollbar-color: red yellow; */
@@ -100,6 +100,7 @@
     font-size: 16px;
     margin-right: 20px;
     /* padding-right: 20px; */
+    position: relative;
 }
 
 .library-body-container::-webkit-scrollbar {
@@ -131,6 +132,7 @@
     display: flex;
     align-items: center;
     padding-left: 20px;
+    /* cursor: pointer; */
 }
 
 .library-list .list-image {
@@ -138,4 +140,47 @@
     width: 29px;
     object-fit: cover;
     margin-right: 10px;
+}
+
+.library-list .item {
+    margin: 0;
+    cursor: pointer;
+}
+
+
+
+.library-list:hover {
+    /* background-color: blue; */
+}
+
+.library-body-container .list-box {
+    width: 100%;
+    grid-template-columns: 40% 30% 25% 5%;
+    display: grid;
+}
+
+.library-body-container .list-box:hover {
+    background-color: var(--highlight-gray);
+}
+
+.library-body-container .song-options {
+    color: var(--text-secondary-white);
+    margin-top: auto;
+    margin-bottom: auto;
+    display: none;
+}
+
+.library-body-container .song-options.active {
+    pointer-events: all;
+    cursor: pointer;
+    display: block;
+}
+
+.library-list-dropdown {
+    height: 200px;
+    width: 200px;
+    border: red 1px solid;
+    position: absolute;
+    top: 0;
+    /* right: 0; */
 }
