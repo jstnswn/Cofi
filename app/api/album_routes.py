@@ -1,5 +1,5 @@
 from flask import Blueprint
-from sqlalchemy import func
+from flask_login import current_user
 from random import randint
 from app.models import Album
 
@@ -42,3 +42,14 @@ def get_most_liked_albums(limit):
     albums = Album.query.order_by(Album.likers.count().desc()).limit(5).all()
 
     return {'albums': [album.to_dict() for album in albums]}
+
+@album_routes.route('/current_user')
+def get_user_albums():
+    current_user_id = current_user.get_id()
+
+    albums = Album.query.filter(Album.user_id==current_user_id).all()
+
+    if not albums:
+        return {'error': 'No albums were found'}, 400
+
+    return {'albums': [album.to_dict() for album in albums]}, 200

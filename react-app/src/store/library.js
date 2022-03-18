@@ -11,22 +11,29 @@ const loadSong = (song) => {
     return {
         type: LOAD_SONG,
         song
-    }
-}
+    };
+};
 
 const loadSongs = (songs) => {
     return {
         type: LOAD_SONGS,
         songs
-    }
-}
+    };
+};
 
 const removeSong = (songId) => {
     return {
         type: REMOVE_SONG,
         songId
-    }
-}
+    };
+};
+
+const loadAlbums = (albums) => {
+    return {
+        type: LOAD_ALBUMS,
+        albums
+    };
+};
 
 // Thunks
 export const uploadSong = (payload) => async dispatch => {
@@ -74,11 +81,18 @@ export const deleteLibrarySong = (songId) => async dispatch => {
     const res = await fetch(`/api/songs/${songId}`, { method: 'DELETE' });
 
     if (res.ok) dispatch(removeSong(songId));
+};
 
-    // } else {
-    //     const data = await res.json();
-    //     return data.error;
-    // }
+export const getLibraryAlbums = () => async dispatch => {
+    const res = await fetch('/api/albums/current_user');
+
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(loadAlbums(data.albums))
+    } else {
+        const error = await res.json();
+        return error.error;
+    }
 };
 
 // Helper Functions
@@ -90,7 +104,8 @@ export const getLibrarySongsArray = (state) => {
 // Bulk Loaders
 export const loadLibrary = () => async dispatch => {
     await Promise.all([
-        dispatch(getLibrarySongs())
+        // dispatch(getLibrarySongs()),
+        dispatch(getLibraryAlbums())
     ]);
 };
 
@@ -134,6 +149,17 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 songs: {
+                    byIds: normalizedData,
+                    order: orderedIds
+                }
+            }
+
+        case LOAD_ALBUMS:
+            normalizedData = normalize(action.albums)
+            orderedIds = orderIds(action.albums)
+            return {
+                ...state,
+                albums: {
                     byIds: normalizedData,
                     order: orderedIds
                 }
