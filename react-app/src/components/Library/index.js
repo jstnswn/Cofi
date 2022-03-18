@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { getLibraryAlbumsArray, getLibrarySongsArray, loadLibrary } from '../../store/library';
 import AlbumsBody from './AlbumsBody';
 import './Library.css';
@@ -13,8 +13,16 @@ export default function Library() {
     const user = useSelector(({ session }) => session.user);
     const songs = useSelector(getLibrarySongsArray);
     const albums = useSelector(getLibraryAlbumsArray);
+    const history = useHistory();
+    const location = useLocation();
+    console.log('location: ', location)
 
     const [libraryDisplay, setLibraryDisplay] = useState('songs');
+
+    useEffect(() => {
+        if (libraryDisplay === 'albums') history.push(`/library/${user.username}/albums`);
+        if (libraryDisplay === 'songs') history.push(`/library/${user.username}/songs`);
+    },[libraryDisplay, history, user])
 
 
     useEffect(() => {
@@ -22,18 +30,12 @@ export default function Library() {
     }, [dispatch])
 
     const params = useParams();
+    console.log("params", params)
 
     let libraryBody;
-    if (libraryDisplay === 'albums') {
-        libraryBody = (
-            <AlbumsBody />
-        )
-    } else if (libraryDisplay === 'songs') {
-        libraryBody = (
-            <SongsBody songs={songs}/>
-        );
-    };
 
+    if (location.pathname === `/library/${user.username}/albums`) libraryBody = <AlbumsBody albums={albums}/>
+    else if (location.pathname === `/library/${user.username}/songs`) libraryBody = <SongsBody songs={songs}/>
 
     return (
         <div id='library-wrapper'>
