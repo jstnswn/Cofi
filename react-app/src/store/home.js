@@ -104,15 +104,15 @@ export const getFeaturedAlbum = () => async dispatch => {
 
 export const getNewSongsArray = (state) => {
     const orderedIds = state.home.newSongs.order;
-    return orderedIds.map(id => state.home.newSongs.songs[id]);
+    return orderedIds.map(id => state.home.newSongs.byIds[id]);
 };
 
 export const getNewAlbumsArray = (state) => {
     const orderedIds = state.home.newAlbums.order;
-    return orderedIds.map(id => state.home.newAlbums.albums[id]);
+    return orderedIds.map(id => state.home.newAlbums.byIds[id]);
 };
 
-// Promises
+// Bulk Loaders
 export const loadHome = () => async dispatch => {
     await Promise.all([
         dispatch(getFeaturedSongs()),
@@ -147,7 +147,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 newSongs: {
-                    songs: {
+                    byIds: {
                         ...state.newSongs.songs,
                         [action.song.id]: action.song
                     },
@@ -161,7 +161,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 newSongs: {
-                    songs: normalizedData,
+                    byIds: normalizedData,
                     order: orderedIds
                 }
             }
@@ -185,7 +185,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 newAlbums: {
-                    albums: normalizedData,
+                    byIds: normalizedData,
                     order: orderedIds
                 }
             }

@@ -9,6 +9,17 @@ from .utils import get_or_make_artist_id
 
 song_routes = Blueprint('songs', __name__)
 
+@song_routes.route('/current_user')
+def get_current_users_songs():
+    current_user_id = current_user.get_id()
+    songs = Song.query.filter(Song.user_id==current_user_id).order_by(Song.id.desc()).all()
+
+    if not songs:
+        return {'error': 'Unable to get songs from the database'}
+
+    return {'songs': [song.to_dict() for song in songs]}
+
+
 @song_routes.route('/new/<int:limit>')
 def get_new_songs(limit):
     songs = Song.query.filter(Song.private==False).order_by(
@@ -45,7 +56,7 @@ def get_featured_songs():
 
     while len(featured_songs) < max_songs and len(number_cashe) < num_of_songs:
         idx = randint(0, num_of_songs - 1)
-        
+
         if idx not in number_cashe:
             featured_songs.append(songs[idx])
             number_cashe.append(idx)

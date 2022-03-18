@@ -14,7 +14,7 @@ export default function NavBar() {
   const sessionLinks = user
     ? (
       <>
-        <NavLink className='library-link' activeClassName='selected' to='/library'>Library</NavLink>
+        <NavLink className='library-link' activeClassName='selected' to={`/library/${user.username}`}>Library</NavLink>
         {/* <SongUploadModal /> */}
         <div className='nav-icon-container'>
           <NotificationButton />
