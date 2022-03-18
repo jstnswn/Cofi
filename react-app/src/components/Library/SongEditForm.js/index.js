@@ -1,18 +1,46 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadHome } from '../../../store/home';
+import { getLibraryAlbumsArray, patchSong } from '../../../store/library';
 import './SongEditForm.css';
 
-export default function SongEditForm({ closeModal }) {
-    const [name, setName] = useState('');
+export default function SongEditForm({ closeModal, song, album }) {
+    const dispatch = useDispatch();
+    const libraryAlbums = useSelector(getLibraryAlbumsArray);
+
+    const [title, setTitle] = useState(song.title);
     const [image, setImage] = useState(null);
-    const [songfile, setSongFile] = useState(null);
-    const [albumId, setAlbumId] = useState(null);
-    const [artist, setArtist] = useState(null);
-    const [isPrivate, setPrivate] = useState(false);
+    const [songFile, setSongFile] = useState(null);
+    const [albumId, setAlbumId] = useState(album ? album.id : -1);
+    // const [albumName]
+    const [artist, setArtist] = useState(song.artist.name);
+    const [isPrivate, setPrivate] = useState(song.private);
     const [disableSubmit, setDisableSubmit] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [errors, setErrors] = useState([]);
 
 
-    // const
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (disableSubmit) return;
+        setDisableSubmit(true);
+        setIsLoading(true);
+
+        const payload = {
+            title,
+            artist,
+            songId: song.id,
+            song: songFile,
+            image,
+            private: isPrivate
+        };
+
+        dispatch(patchSong(payload))
+            .then(() => setDisableSubmit(false))
+            .then(() => closeModal(e))
+            .catch(errors => setErrors(errors.errors))
+            .then(() => dispatch(loadHome()))
+    };
 
     const handleImageFileReader = (e, file) => {
         // const dataUrl = e.target.result;
@@ -33,12 +61,14 @@ export default function SongEditForm({ closeModal }) {
     return (
         <form
             className='song-edit-form form'
+            onSubmit={handleSubmit}
         >
+            <h2>Edit Song</h2>
             <label>Song Name</label>
             <input
                 type='type'
-                value={name}
-                onChange={e => setName(e.target.value)}
+                value={title}
+                onChange={e => setTitle(e.target.value)}
             />
             <label>Artist</label>
             <input
@@ -51,10 +81,10 @@ export default function SongEditForm({ closeModal }) {
                 value={albumId}
                 onChange={e => setAlbumId(e.target.value)}
             >
-                {/* <option>-Select an Album-</option>
-                {userAlbums?.map((album, idx) => (
+                <option>{album ? album.title : '-Select an Album-'}</option>
+                {libraryAlbums?.map((album, idx) => (
                     <option key={idx} value={album.id}>{album.title}</option>
-                ))} */}
+                ))}
                 <option value='create new'>--Create a new album--</option>
             </select>
             <div className='upload-form radio-container'>
@@ -69,7 +99,7 @@ export default function SongEditForm({ closeModal }) {
                 <label>Public</label>
                 <input
                     type='radio'
-                    onChange={e => setPrivate(true)}
+                    onChange={e => setPrivate(false)}
                     value={false}
                     checked={isPrivate === false ? true : false}
                 />

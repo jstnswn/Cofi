@@ -17,6 +17,9 @@ class SongForm(FlaskForm):
     artist = StringField('artist', validators=[
         DataRequired('Artist is required'),
         Length(max=50, message='Artist name must be less than 50 characters')])
-    song = FileField('song', validators=[DataRequired()])
+
+    #TODO song validation
+    # song = FileField('song', validators=[DataRequired()])
+    song = FileField('song')
     image_url = StringField('image_url')
     private = BooleanField('private', validators=[DataRequired()])

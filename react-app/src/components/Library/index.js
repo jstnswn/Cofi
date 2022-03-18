@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getLibrarySongsArray, loadLibrary } from '../../store/library';
 import './Library.css';
 import LibrarySidebar from './LibrarySidebar';
-import SongsList from './SongsList/SongsList';
+import SongsList from './SongsList';
 
 export default function Library() {
     const dispatch = useDispatch();

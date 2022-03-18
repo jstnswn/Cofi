@@ -115,7 +115,7 @@ def upload_song():
 
 
 @song_routes.route('/<int:song_id>', methods=['DELETE'])
-def delte_song(song_id):
+def delete_song(song_id):
     song = Song.query.get(song_id)
 
     # if not song:
@@ -125,3 +125,42 @@ def delte_song(song_id):
     db.session.commit()
 
     return {'response': 'Song deleted.'}, 204
+
+
+@song_routes.route('/<int:song_id>', methods=['PATCH'])
+def update_song(song_id):
+
+    song = Song.query.get(song_id)
+
+    form = SongForm()
+    current_user_id = current_user.get_id()
+    artist_id = get_or_make_artist_id(form.artist.data)
+
+     # Song upload if new file present
+    if 'song' in request.files:
+
+        song_file = request.files['song']
+
+        if not allowed_song_file(song_file.filename):
+            return {'errors': 'file type not permitted'}, 400
+
+        song_file.filename = get_unique_filename(song_file.filename)
+
+        song_upload = upload_file_to_s3(song_file)
+
+        if 'url' not in song_upload:
+            return song_upload, 400
+
+        # song_url = song_upload['url']
+        song.song_url = song_upload['url']
+
+
+    if form.image_url.data:
+        song.image_url = form.image_url.data
+
+    song.title=form.title.data
+    song.artist_id=artist_id
+
+    db.session.commit()
+
+    return {'song': song.to_dict()}, 201

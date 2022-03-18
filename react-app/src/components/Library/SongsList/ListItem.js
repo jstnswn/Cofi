@@ -32,7 +32,6 @@ export default function ListItem({ song, album }) {
 
     };
 
-
     const openDropdown = () => setShowMenu(true);
 
     useEffect(() => {
@@ -81,8 +80,8 @@ export default function ListItem({ song, album }) {
             )}
 
             {showEditMenu && (
-                <Modal>
-                    <SongEditForm closeModal={closeEditMenu} song={song}/>
+                <Modal onClose={closeEditMenu}>
+                    <SongEditForm closeModal={closeEditMenu} song={song} album={album}/>
                 </Modal>
             )}
 

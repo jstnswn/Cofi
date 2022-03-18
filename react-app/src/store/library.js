@@ -2,6 +2,7 @@ import { getImageUrl, normalize, orderIds } from "./utils";
 
 const LOAD_SONGS = 'library/LOAD_SONGS';
 const LOAD_SONG = 'library/LOAD_SONG';
+const UPDATE_SONG = 'library/UPDATE_SONG';
 const REMOVE_SONG = 'library/REMOVE_SONG';
 const LOAD_ALBUMS = 'librarye/LOAD_ALBUMS';
 const LOAD_ALBUM = 'library/LOAD_ALBUM';
@@ -18,6 +19,13 @@ const loadSongs = (songs) => {
     return {
         type: LOAD_SONGS,
         songs
+    };
+};
+
+const updateSong = (song) => {
+    return {
+        type: UPDATE_SONG,
+        song
     };
 };
 
@@ -77,6 +85,38 @@ export const getLibrarySongs = () => async dispatch => {
     }
 };
 
+export const patchSong = (payload) => async dispatch => {
+    const formData = new FormData();
+    formData.append('title', payload.title);
+    formData.append('artist', payload.artist);
+    // formData.append('song', payload.song);
+    formData.append('private', payload.private);
+    if (payload.song) formData.append('song', payload.song)
+
+    let imageUrl;
+    if (payload.image) {
+        imageUrl = await getImageUrl(payload.image);
+        formData.append('image_url', imageUrl);
+    }
+
+    const res = await fetch(`/api/songs/${payload.songId}`, {
+        method: 'PATCH',
+        // headers: {'Content-Type': 'application/json'},
+        body: formData
+    });
+
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(loadSong(data.song));
+        return data.song;
+    } else {
+        const errors = await res.json();
+        return errors.errors;
+    }
+
+
+};
+
 export const deleteLibrarySong = (songId) => async dispatch => {
     const res = await fetch(`/api/songs/${songId}`, { method: 'DELETE' });
 
@@ -99,6 +139,11 @@ export const getLibraryAlbums = () => async dispatch => {
 export const getLibrarySongsArray = (state) => {
     const orderedIds = state.library.songs.order;
     return orderedIds.map(id => state.library.songs.byIds[id]);
+}
+
+export const getLibraryAlbumsArray = (state) => {
+    const orderedIds = state.library.albums.order;
+    return orderedIds.map(id => state.library.albums.byIds[id]);
 }
 
 // Bulk Loaders
@@ -129,9 +174,19 @@ export default function reducer(state = initialState, action) {
     let normalizedData;
     let orderedIds;
     let stateCopy;
+    let orderArray;
+    let idx;
 
     switch (action.type) {
         case LOAD_SONG:
+            orderArray = [...state.songs.order];
+            idx = orderArray.findIndex(id => id === action.song.id);
+            if (idx > -1) {
+                orderArray.splice(idx, 1, action.song.id);
+            } else {
+                orderArray = [action.song.id, ...orderArray];
+            }
+
             return {
                 ...state,
                 songs: {
@@ -139,7 +194,7 @@ export default function reducer(state = initialState, action) {
                         ...state.songs.byIds,
                         [action.song.id]: action.song
                     },
-                    order: [action.song.id, ...state.songs.order]
+                    order: orderArray
                 }
             }
 
@@ -154,6 +209,20 @@ export default function reducer(state = initialState, action) {
                 }
             }
 
+        // case UPDATE_SONG:
+
+
+        case REMOVE_SONG:
+            stateCopy = { ...state };
+            orderArray = stateCopy.songs.order;
+
+            idx = orderArray.findIndex(id => id === action.songId);
+            orderArray.splice(idx, 1);
+
+            delete stateCopy.songs.byIds[action.songId];
+
+            return stateCopy;
+
         case LOAD_ALBUMS:
             normalizedData = normalize(action.albums)
             orderedIds = orderIds(action.albums)
@@ -165,16 +234,7 @@ export default function reducer(state = initialState, action) {
                 }
             }
 
-        case REMOVE_SONG:
-            stateCopy = {...state};
-            const orderArray = stateCopy.songs.order;
 
-            const idx = orderArray.findIndex(id => id === action.songId);
-            orderArray.splice(idx, 1);
-
-            delete stateCopy.songs.byIds[action.songId];
-
-            return stateCopy;
 
         default:
             return state;

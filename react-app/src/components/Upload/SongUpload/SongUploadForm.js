@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { loadHome, loadNewSong } from '../../../store/home';
+import { loadHome, loadHomeAlbums, loadNewSong } from '../../../store/home';
 import { uploadSong } from '../../../store/library';
 
 export default function SongUploadForm({ closeModal }) {
@@ -40,7 +40,7 @@ export default function SongUploadForm({ closeModal }) {
             .then(() => setDisableSubmit(false))
             .then(() => closeModal(e))
             .catch(errors => setErrors(errors.errors))
-            .then(() => dispatch(loadHome()))
+            .then(() => dispatch(loadHomeAlbums()))
     };
 
     const handleImageFileReader = (e, file) => {
@@ -123,7 +123,7 @@ export default function SongUploadForm({ closeModal }) {
                 <label>Public</label>
                 <input
                     type='radio'
-                    onChange={e => setIsPrivate(true)}
+                    onChange={e => setIsPrivate(false)}
                     value={false}
                     checked={isPrivate === false ? true : false}
                 />
