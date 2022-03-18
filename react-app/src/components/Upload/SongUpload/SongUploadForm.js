@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { loadNewSong } from '../../../store/home';
+import { loadHome, loadNewSong } from '../../../store/home';
 import { uploadSong } from '../../../store/library';
 
 export default function SongUploadForm({ closeModal }) {
@@ -41,10 +41,13 @@ export default function SongUploadForm({ closeModal }) {
         }
 
         dispatch(uploadSong(payload))
-            .then((song) => dispatch(loadNewSong(song)))
+        .then((song) => dispatch(loadNewSong(song)))
+        .then(() => console.log(333))
+            .then(() => console.log(4444))
             .then(() => setDisableSubmit(false))
             .then(() => closeModal(e))
             .catch(errors => setErrors(errors.errors))
+            // .then(() => dispatch(loadHome()))
     };
 
     const handleImageFileReader = (e, file) => {

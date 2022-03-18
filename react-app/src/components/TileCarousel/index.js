@@ -4,7 +4,6 @@ import PlayableTile from './PlayableTile';
 import './TileCarousel.css'
 
 export default function TileCarousel({ content, option }) {
-
     // Get initial number of albums in carousel
     const initial = content.length;
     const [difference, setDifference] = useState(initial);
@@ -22,7 +21,6 @@ export default function TileCarousel({ content, option }) {
     }, [prevDirection, initial, difference, forwardTarget, backTarget])
 
     const scrollRight = (e) => {
-        console.log('click', difference)
         e.preventDefault()
         if (difference <= 0) return;
 
@@ -73,8 +71,8 @@ export default function TileCarousel({ content, option }) {
                 <i className='carousel-button fas fa-chevron-right' onClick={scrollRight}></i>
             </div>
             <div className='tile-carousel'>
-                {content.map(item => (
-                    <PlayableTile key={item.id} item={item} option={option}/>
+                {content.map((item, idx) => (
+                    <PlayableTile key={idx} item={item} option={option}/>
 
                 ))}
             </div>

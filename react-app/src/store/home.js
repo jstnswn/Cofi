@@ -1,10 +1,12 @@
 import { normalize, orderIds } from "./utils";
 
-const LOAD_NEW_SONG = 'home/LOAD_SONG';
-const LOAD_NEW_SONGS = 'home/LOAD_SONGS';
+const LOAD_NEW_SONG = 'home/NEW_LOAD_SONG';
+const LOAD_NEW_SONGS = 'home/LOAD_NEW_SONGS';
 const LOAD_FEATURED_SONGS = 'home/LOAD_FEATURED_SONGS';
 const LOAD_FEATURED_ALBUM = 'home/LOAD_FEATURED_ALBUM';
 const LOAD_NEW_ALBUMS = 'home/LOAD_NEW_ALBUMS';
+
+const CLEAN_STORE = 'home/CLEAN_STORE';
 
 // Action Creators
 export const loadNewSong = (song) => {
@@ -41,7 +43,14 @@ const loadFeaturedSongs = (songs) => {
         type: LOAD_FEATURED_SONGS,
         songs
     }
-}
+};
+
+const cleanHome = () => {
+    return {
+        type: CLEAN_STORE
+    };
+};
+
 // Thunks
 
 export const getFeaturedSongs = () => async dispatch => {
@@ -50,9 +59,11 @@ export const getFeaturedSongs = () => async dispatch => {
 
     if (res.ok) {
         const data = await res.json();
+        console.log('featured songs thunk: ', data.songs)
         dispatch(loadFeaturedSongs(data.songs));
     } else {
         const error = await res.json();
+        console.log("errors: ', ", error)
         return error.error;
     }
 }
@@ -115,25 +126,27 @@ export const getNewAlbumsArray = (state) => {
 // Bulk Loaders
 export const loadHome = () => async dispatch => {
     await Promise.all([
+        dispatch(cleanHome()),
         dispatch(getFeaturedSongs()),
         dispatch(getNewSongs()),
         dispatch(getFeaturedAlbum()),
         dispatch(getNewAlbums()),
     ]);
-}
+};
 
 // Reducer
 const initialState = {
     featuredAlbum: {},
     newAlbums: {
-        albums: {},
+        byIds: {},
         order: []
     },
     featuredSongs: {},
     newSongs: {
-        songs: {},
+        byIds: {},
         order: []
     },
+    // update: false
 
 };
 
@@ -143,12 +156,11 @@ export default function reducer(state = initialState, action) {
 
     switch (action.type) {
         case LOAD_NEW_SONG:
-            console.log("state.newSongs.order", state.newSongs.order)
             return {
                 ...state,
                 newSongs: {
                     byIds: {
-                        ...state.newSongs.songs,
+                        ...state.newSongs.byIds,
                         [action.song.id]: action.song
                     },
                     order: [action.song.id, ...state.newSongs.order]
@@ -189,6 +201,9 @@ export default function reducer(state = initialState, action) {
                     order: orderedIds
                 }
             }
+
+        case CLEAN_STORE:
+            return initialState;
 
         default:
             return state;
