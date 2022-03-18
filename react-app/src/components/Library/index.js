@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getLibrarySongsArray, loadLibrary } from '../../store/library';
+import { getLibraryAlbumsArray, getLibrarySongsArray, loadLibrary } from '../../store/library';
+import AlbumsBody from './AlbumsBody';
 import './Library.css';
 import LibrarySidebar from './LibrarySidebar';
-import SongsList from './SongsList';
+import SongsBody from './SongsBody';
+import SongsList from './SongsBody';
 
 export default function Library() {
     const dispatch = useDispatch();
     const user = useSelector(({ session }) => session.user);
     const songs = useSelector(getLibrarySongsArray);
+    const albums = useSelector(getLibraryAlbumsArray);
 
     const [libraryDisplay, setLibraryDisplay] = useState('songs');
 
@@ -19,6 +22,17 @@ export default function Library() {
     }, [dispatch])
 
     const params = useParams();
+
+    let libraryBody;
+    if (libraryDisplay === 'albums') {
+        libraryBody = (
+            <AlbumsBody />
+        )
+    } else if (libraryDisplay === 'songs') {
+        libraryBody = (
+            <SongsBody songs={songs}/>
+        );
+    };
 
 
     return (
@@ -35,7 +49,7 @@ export default function Library() {
                     <h2 className='library-header-title'>Your Collection</h2>
                 </div>
                 <div id='library-body'>
-                    <div className='library-body-header'>
+                    {/* <div className='library-body-header'>
                         <p className='song-title column-title'>Title</p>
                         <p className='song-artist column-title'>Artist</p>
                         <p className='song-album column-title'>Album</p>
@@ -45,7 +59,8 @@ export default function Library() {
 
                             <SongsList key={idx} song={song}/>
                         ))}
-                    </div>
+                    </div> */}
+                    {libraryBody}
 
                 </div>
             </div>

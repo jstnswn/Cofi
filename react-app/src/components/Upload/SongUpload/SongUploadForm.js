@@ -132,13 +132,13 @@ export default function SongUploadForm({ closeModal }) {
             <input
                 type='file'
                 onChange={e => setSong(e.target.files[0])}
-                accepted='aduio/mpeg, audio/mp3'
+                accept='aduio/mpeg, audio/mp3'
             />
             <label>Song Art (optional)</label>
             <input
                 type='file'
                 onChange={e => setImage(e.target.files[0])}
-                accepted='image/png, image/jpeg, image/jpg'
+                accept='image/png, image/jpeg, image/png, image/jpeg'
             />
 
             <button type='submit'>{isLoading ? 'Submitting...' : 'Submit'}</button>

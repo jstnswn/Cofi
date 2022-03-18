@@ -4,10 +4,10 @@ import { Modal } from '../../../context/Modal';
 import { setSong } from '../../../store/active';
 import { loadHome } from '../../../store/home';
 import { deleteLibrarySong } from '../../../store/library';
-import SongEditForm from '../SongEditForm.js';
+import SongEditForm from '../SongEditForm.js/index.js';
 import SongConfirmDelete from './SongConfirmDelete';
 
-export default function ListItem({ song, album }) {
+export default function SongItem({ song, album }) {
     const dispatch = useDispatch();
 
     const [hovered, setHovered] = useState(false);
