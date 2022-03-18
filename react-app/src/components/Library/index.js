@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { Route, Switch, useHistory, useLocation, useParams } from 'react-router-dom';
 import { getLibraryAlbumsArray, getLibrarySongsArray, loadLibrary } from '../../store/library';
 import AlbumsBody from './AlbumsBody';
 import './Library.css';
@@ -11,6 +11,7 @@ import SongsList from './SongsBody';
 export default function Library() {
     const dispatch = useDispatch();
     const user = useSelector(({ session }) => session.user);
+    const libraryItems = useSelector(({ library }) => library);
     const songs = useSelector(getLibrarySongsArray);
     const albums = useSelector(getLibraryAlbumsArray);
     const history = useHistory();
@@ -18,26 +19,53 @@ export default function Library() {
     console.log('location: ', location)
 
     const [libraryDisplay, setLibraryDisplay] = useState('songs');
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    // const params = useParams();
+    // useEffect(() => {
+    //     console.log("params", params)
+    //     if (libraryDisplay === 'albums') history.push(`/library/${user.username}/albums`);
+    //     if (libraryDisplay === 'songs') history.push(`/library/${user.username}/songs`);
+    // },[libraryDisplay, history, user])
+
 
     useEffect(() => {
-        if (libraryDisplay === 'albums') history.push(`/library/${user.username}/albums`);
-        if (libraryDisplay === 'songs') history.push(`/library/${user.username}/songs`);
-    },[libraryDisplay, history, user])
+        (async () => {
+            await dispatch(loadLibrary())
+            setIsLoaded(true);
+        })()
 
-
-    useEffect(() => {
-        dispatch(loadLibrary())
     }, [dispatch])
 
-    const params = useParams();
-    console.log("params", params)
 
     let libraryBody;
 
     if (location.pathname === `/library/${user.username}/albums`) libraryBody = <AlbumsBody albums={albums}/>
     else if (location.pathname === `/library/${user.username}/songs`) libraryBody = <SongsBody songs={songs}/>
 
-    return (
+
+    const routes = (
+        <>
+        <Switch>
+
+            <Route path={`/library/${user.username}/albums`} exact={true}>
+                <AlbumsBody albums={albums} />
+            </Route>
+            <Route path={`/library/${user.username}/songs`} exact={true}>
+                <SongsBody songs={songs} libraryItems={libraryItems} />
+            </Route>
+            <Route path={`/library/${user.username}/albums/:albumId`}>
+                <SongsBody libraryItems={libraryItems}/>
+            </Route>
+            <Route>
+                    <SongsBody songs={songs} libraryItems={libraryItems} />
+            </Route>
+        </Switch>
+        </>
+    )
+
+
+    return isLoaded && (
         <div id='library-wrapper'>
             <div className='main-wrapper'>
                 <div id='library-header'>
@@ -62,7 +90,8 @@ export default function Library() {
                             <SongsList key={idx} song={song}/>
                         ))}
                     </div> */}
-                    {libraryBody}
+                    {/* {libraryBody} */}
+                    {routes}
 
                 </div>
             </div>
