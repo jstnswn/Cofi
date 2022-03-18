@@ -2,6 +2,7 @@ import { getImageUrl, normalize, orderIds } from "./utils";
 
 const LOAD_SONGS = 'library/LOAD_SONGS';
 const LOAD_SONG = 'library/LOAD_SONG';
+const REMOVE_SONG = 'library/REMOVE_SONG';
 const LOAD_ALBUMS = 'librarye/LOAD_ALBUMS';
 const LOAD_ALBUM = 'library/LOAD_ALBUM';
 
@@ -17,6 +18,13 @@ const loadSongs = (songs) => {
     return {
         type: LOAD_SONGS,
         songs
+    }
+}
+
+const removeSong = (songId) => {
+    return {
+        type: REMOVE_SONG,
+        songId
     }
 }
 
@@ -62,6 +70,17 @@ export const getLibrarySongs = () => async dispatch => {
     }
 };
 
+export const deleteLibrarySong = (songId) => async dispatch => {
+    const res = await fetch(`/api/songs/${songId}`, { method: 'DELETE' });
+
+    if (res.ok) dispatch(removeSong(songId));
+
+    // } else {
+    //     const data = await res.json();
+    //     return data.error;
+    // }
+};
+
 // Helper Functions
 export const getLibrarySongsArray = (state) => {
     const orderedIds = state.library.songs.order;
@@ -94,6 +113,8 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     let normalizedData;
     let orderedIds;
+    let stateCopy;
+
     switch (action.type) {
         case LOAD_SONG:
             return {
@@ -117,6 +138,18 @@ export default function reducer(state = initialState, action) {
                     order: orderedIds
                 }
             }
+
+        case REMOVE_SONG:
+            stateCopy = {...state};
+            const orderArray = stateCopy.songs.order;
+
+            const idx = orderArray.findIndex(id => id === action.songId);
+            orderArray.splice(idx, 1);
+
+            delete stateCopy.songs.byIds[action.songId];
+
+            return stateCopy;
+
         default:
             return state;
     };

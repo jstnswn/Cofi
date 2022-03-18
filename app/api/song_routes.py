@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import current_user
-from app.models import Song, Artist, db
+from app.models import Song, Artist, db, song
 from app.forms.song_form import SongForm
 from random import randint
 from app.aws import (
@@ -15,9 +15,9 @@ def get_current_users_songs():
     songs = Song.query.filter(Song.user_id==current_user_id).order_by(Song.id.desc()).all()
 
     if not songs:
-        return {'error': 'Unable to get songs from the database'}
+        return {'error': 'Unable to get songs from the database'}, 400
 
-    return {'songs': [song.to_dict() for song in songs]}
+    return {'songs': [song.to_dict() for song in songs]}, 200
 
 
 @song_routes.route('/new/<int:limit>')
@@ -26,22 +26,28 @@ def get_new_songs(limit):
         Song.id.desc()).limit(limit).all()
 
     if not songs:
-        return {'error': 'Unable to get songs from the database'}
+        return {'error': 'Unable to get songs from the database'}, 400
 
-    return {'songs': [song.to_dict() for song in songs]}
+    return {'songs': [song.to_dict() for song in songs]}, 200
 
 @song_routes.route('/featured')
 def get_featured_songs():
     """
-    returns 3 random songs from 10 most recent singles (no album association)
+    First returns 3 random songs from 10 most recent singles (no album association).
+    If all tracks are associated with albums, returns 3 random from all recent.
     """
 
     # Songs without track numbers don't belong to albums
     songs = Song.query.filter(Song.track_number==None).order_by(
-        Song.id.desc()).limit(3).all()
+        Song.id.desc()).limit(10).all()
+
+    if type(songs) is list:
+        if len(songs) is 0:
+            songs = Song.query.order_by(Song.id.desc()).limit(10).all()
 
     if not songs:
-        return {'error': 'Unable to get songs from the database'}
+        return {'error': 'Could not retreive songs from the database.'}, 500
+
 
     num_of_songs = len(songs)
     featured_songs = []
@@ -61,7 +67,7 @@ def get_featured_songs():
             featured_songs.append(songs[idx])
             number_cashe.append(idx)
 
-    return {'songs': [song.to_dict() for song in featured_songs]}
+    return {'songs': [song.to_dict() for song in featured_songs]}, 200
 
 
 @song_routes.route('', methods=['POST'])
@@ -105,34 +111,17 @@ def upload_song():
     db.session.commit()
 
 
-    return {'song': new_song.to_dict()}
+    return {'song': new_song.to_dict()}, 200
 
 
-# @song_routes.route('/<int:song_id>/image')
-# def upload_song_artwork():
-#     current_user_id = current_user.get_id()
-#     form = PostForm()
-#     image = form.image.data
+@song_routes.route('/<int:song_id>', methods=['DELETE'])
+def delte_song(song_id):
+    song = Song.query.get(song_id)
 
-#     if 'image' not in request.files:
-#         return {'errors': 'image required'}, 400
+    # if not song:
+    #     return {'error': 'Song to deleted was not found.'}, 400
 
-#     if not allowed_file(image.filename):
-#         return {'errors': 'file type not permitted'}, 400
+    db.session.delete(song)
+    db.session.commit()
 
-#     image.filename = get_unique_filename(image.filename)
-
-#     upload = upload_file_to_s3(image)
-
-#     if 'url' not in upload:
-#         return upload, 400
-
-#     url = upload['url']
-
-#     new_post = Post(
-#         user_id=current_user_id,
-#         image_url=url,
-#         caption=form.caption.data)
-#     db.session.add(new_post)
-#     db.session.commit()
-#     return {'post': new_post.to_dict()}, 200
+    return {'response': 'Song deleted.'}, 204

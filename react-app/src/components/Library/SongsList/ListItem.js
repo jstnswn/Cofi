@@ -1,16 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { Modal } from '../../../context/Modal';
 import { setSong } from '../../../store/active';
+import { loadHome } from '../../../store/home';
+import { deleteLibrarySong } from '../../../store/library';
+import SongConfirmDelete from './SongConfirmDelete';
 
 export default function ListItem({ song, album }) {
-
     const dispatch = useDispatch();
+
     const [hovered, setHovered] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
+    const [showConfirmDel, setShowConfirmDel] = useState(false);
 
     const playSong = () => {
         dispatch(setSong(song));
     };
+
+
+    const openConfirmModal = () => setShowConfirmDel(true);
+    const closeConfirmModal = () => setShowConfirmDel(false);
+
+    const deleteSong = async () => {
+        closeConfirmModal();
+
+      dispatch(deleteLibrarySong(song.id))
+        .then(() => dispatch(loadHome()))
+
+    };
+
 
     const openDropdown = () => setShowMenu(true);
 
@@ -54,9 +72,15 @@ export default function ListItem({ song, album }) {
                 <div className='library-list-dropdown'>
                     <ul>
                         <li>Edit Song</li>
-                        <li>Delete Song</li>
+                        <li onClick={openConfirmModal}>Delete Song</li>
                     </ul>
                 </div>
+            )}
+
+            {showConfirmDel && (
+                <Modal onClose={closeConfirmModal}>
+                    <SongConfirmDelete closeModal={closeConfirmModal} deleteSong={deleteSong} song={song}/>
+                </Modal>
             )}
         </div>
     )

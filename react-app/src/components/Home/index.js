@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
 import AlbumPlayer from '../AlbumPlayer';
 import SongPlayer from '../SongPlayer';
@@ -14,6 +14,10 @@ export default function Home() {
     const newAlbums = useSelector(getNewAlbumsArray);
     const featuredAlbum = homeItems.featuredAlbum;
     const featuredSongs = Object.values(homeItems.featuredSongs)
+
+    // useEffect(() => {
+
+    // }, [])
 
     // console.log()
     let homeContent;
