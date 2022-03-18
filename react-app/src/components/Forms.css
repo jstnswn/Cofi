@@ -54,6 +54,11 @@
   margin: 0px;
 }
 
+/* .form > div {
+  display: flex;
+  flex-direction: column;
+} */
+
 input.upload {
   height: 59px;
   display: flex;

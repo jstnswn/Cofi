@@ -4,6 +4,7 @@ import { Modal } from '../../../context/Modal';
 import { setSong } from '../../../store/active';
 import { loadHome } from '../../../store/home';
 import { deleteLibrarySong } from '../../../store/library';
+import SongEditForm from '../SongEditForm.js';
 import SongConfirmDelete from './SongConfirmDelete';
 
 export default function ListItem({ song, album }) {
@@ -12,14 +13,16 @@ export default function ListItem({ song, album }) {
     const [hovered, setHovered] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
     const [showConfirmDel, setShowConfirmDel] = useState(false);
+    const [showEditMenu, setShowEditMenu] = useState(false);
+
+    const openEditMenu = () => setShowEditMenu(true);
+    const closeEditMenu = () => setShowEditMenu(false);
+    const openConfirmModal = () => setShowConfirmDel(true);
+    const closeConfirmModal = () => setShowConfirmDel(false);
 
     const playSong = () => {
         dispatch(setSong(song));
     };
-
-
-    const openConfirmModal = () => setShowConfirmDel(true);
-    const closeConfirmModal = () => setShowConfirmDel(false);
 
     const deleteSong = async () => {
         closeConfirmModal();
@@ -71,10 +74,16 @@ export default function ListItem({ song, album }) {
             {showMenu && (
                 <div className='library-list-dropdown'>
                     <ul>
-                        <li>Edit Song</li>
+                        <li onClick={openEditMenu}>Edit Song</li>
                         <li onClick={openConfirmModal}>Delete Song</li>
                     </ul>
                 </div>
+            )}
+
+            {showEditMenu && (
+                <Modal>
+                    <SongEditForm closeModal={closeEditMenu} song={song}/>
+                </Modal>
             )}
 
             {showConfirmDel && (

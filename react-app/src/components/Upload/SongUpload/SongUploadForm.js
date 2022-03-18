@@ -7,7 +7,6 @@ export default function SongUploadForm({ closeModal }) {
     const dispatch = useDispatch();
 
     const userAlbums = useSelector(({ session }) => session.user.albums);
-    // const
 
     const [title, setTitle] = useState('');
     const [artist, setArtist] = useState('');
@@ -15,16 +14,12 @@ export default function SongUploadForm({ closeModal }) {
     const [image, setImage] = useState(null);
     const [albumInput, setAlbumInput] = useState('')
     const [albumName, setAlbumName] = useState('');
-    const [imageUrl, setImageUrl] = useState(null)
-    const [ImageError, setImageError] = useState(null);
+    // const [imageUrl, setImageUrl] = useState(null)
+    // const [ImageError, setImageError] = useState(null);
     const [isPrivate, setIsPrivate] = useState(false);
     const [disableSubmit, setDisableSubmit] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([]);
-
-    // useEffect(() => {
-
-    // }, [albumId])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -41,42 +36,39 @@ export default function SongUploadForm({ closeModal }) {
         }
 
         dispatch(uploadSong(payload))
-        .then((song) => dispatch(loadNewSong(song)))
-        .then(() => console.log(333))
-            .then(() => console.log(4444))
+            .then((song) => dispatch(loadNewSong(song)))
             .then(() => setDisableSubmit(false))
             .then(() => closeModal(e))
             .catch(errors => setErrors(errors.errors))
-            // .then(() => dispatch(loadHome()))
+            .then(() => dispatch(loadHome()))
     };
 
     const handleImageFileReader = (e, file) => {
-        const dataUrl = e.target.result;
+        // const dataUrl = e.target.result;
 
-        const allowedFileTypes = ['png', 'jpg', 'jpeg'];
-        const stopIdx = dataUrl.indexOf(';');
-        const fileType = dataUrl.slice(11, stopIdx)
+        // const allowedFileTypes = ['png', 'jpg', 'jpeg'];
+        // const stopIdx = dataUrl.indexOf(';');
+        // const fileType = dataUrl.slice(11, stopIdx)
 
-        if (!allowedFileTypes.includes(fileType)) {
-            setImage(null)
-            setImageUrl(null);
-            setImageError('Must upload a PNG, JPG, or JPEG image.')
-            return
-        }
+        // if (!allowedFileTypes.includes(fileType)) {
+        //     setImage(null)
+        //     setImageUrl(null);
+        //     setImageError('Must upload a PNG, JPG, or JPEG image.')
+        //     return
+        // }
         setImage(file);
     }
 
-    const setImageFile = (file) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = (e) => handleImageFileReader(e, file);
-    };
+    // const setImageFile = (file) => {
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onload = (e) => handleImageFileReader(e, file);
+    // };
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        console.log('file: ', file)
-        setSong(file);
-    };
+    // const handleFileChange = (e) => {
+    //     const file = e.target.files[0];
+    //     setSong(file);
+    // };
 
     const albumOption = albumInput === 'create new'
         ? (
