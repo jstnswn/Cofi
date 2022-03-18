@@ -126,11 +126,11 @@ export const getNewAlbumsArray = (state) => {
 // Bulk Loaders
 export const loadHome = () => async dispatch => {
     await Promise.all([
-        // dispatch(cleanHome()),
-        // dispatch(getFeaturedSongs()),
-        // dispatch(getNewSongs()),
-        // dispatch(getFeaturedAlbum()),
-        // dispatch(getNewAlbums()),
+        dispatch(cleanHome()),
+        dispatch(getFeaturedSongs()),
+        dispatch(getNewSongs()),
+        dispatch(getFeaturedAlbum()),
+        dispatch(getNewAlbums()),
     ]);
 };
 
