@@ -23,9 +23,24 @@ export default function Library() {
         path: '/library/:user/albums/:albumId'
     });
 
-    const headerUrl = isLoaded && match?.params.albumId
-        ? libraryItems.albums.byIds[match.params.albumId].image_url
-        : 'https://cofi-bucket.s3.amazonaws.com/art-seeds/escapade.png'
+    const albumId = match?.params?.albumId;
+    let headerUrl;
+    let headerTitle
+
+    if (isLoaded && albumId) {
+
+        headerUrl = libraryItems.albums.byIds[albumId].image_url;
+        headerTitle = libraryItems.albums.byIds[albumId].title;
+    } else {
+        headerUrl = 'https://cofi-bucket.s3.amazonaws.com/art-seeds/escapade.png';
+        headerTitle = 'Your Collection'
+    }
+
+    // const headerUrl = isLoaded && match?.params.albumId
+    //     ? libraryItems.albums.byIds[match.params.albumId].image_url
+    //     : 'https://cofi-bucket.s3.amazonaws.com/art-seeds/escapade.png';
+
+    // const headerTitle =
 
 
     useEffect(() => {
@@ -57,7 +72,6 @@ export default function Library() {
         </>
     )
 
-
     return isLoaded && (
         <div id='library-wrapper'>
             <div className='main-wrapper'>
@@ -69,7 +83,7 @@ export default function Library() {
                             src={headerUrl}
                         />
                     </div>
-                    <h2 className='library-header-title'>Your Collection</h2>
+                    <h2 className='library-header-title'>{headerTitle}</h2>
                 </div>
                 <div id='library-body'>
                     {/* <div className='library-body-header'>
