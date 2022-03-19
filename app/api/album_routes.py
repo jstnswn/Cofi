@@ -1,7 +1,11 @@
-from flask import Blueprint
+from dataclasses import dataclass
+from app.api.utils import get_or_make_artist_id
+from flask import Blueprint, request
 from flask_login import current_user
 from random import randint
-from app.models import Album
+from app.models import Album, db
+from app.forms.album_form import AlbumForm
+from app.api.auth_routes import validation_errors_to_error_messages
 
 album_routes = Blueprint('albums', __name__)
 
@@ -53,3 +57,30 @@ def get_user_albums():
         return {'error': 'No albums were found'}, 400
 
     return {'albums': [album.to_dict() for album in albums]}, 200
+
+
+@album_routes.route('', methods=['POST'])
+def create_album():
+    current_user_id = current_user.get_id()
+
+    form = AlbumForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        artist_id = get_or_make_artist_id(form.artist.data)
+
+        album = Album(
+            user_id = current_user_id,
+            title = form.title.data,
+            private = form.private.data,
+            image_url = form.image_url.data,
+            artist_id = artist_id
+        )
+
+        db.session.add(album)
+        db.session.commit()
+
+        return {'album': album.to_dict()}, 200
+
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
