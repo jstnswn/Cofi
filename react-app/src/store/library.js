@@ -6,6 +6,8 @@ const UPDATE_SONG = 'library/UPDATE_SONG';
 const REMOVE_SONG = 'library/REMOVE_SONG';
 const LOAD_ALBUMS = 'librarye/LOAD_ALBUMS';
 const LOAD_ALBUM = 'library/LOAD_ALBUM';
+const REMOVE_ALBUM = 'library/REMOVE_ALBUM';
+
 
 // Action Creators
 const loadSong = (song, albumId) => {
@@ -49,6 +51,13 @@ const loadAlbums = (albums) => {
     return {
         type: LOAD_ALBUMS,
         albums
+    };
+};
+
+const removeAlbum = (albumId) => {
+    return {
+        type: REMOVE_ALBUM,
+        albumId
     };
 };
 
@@ -163,6 +172,17 @@ export const createAlbum = (payload) => async dispatch => {
     }
 };
 
+export const deleteLibraryAlbum = (albumId) => async dispatch => {
+    const res = await fetch(`/api/albums/${albumId}`, { method: 'DELETE' });
+
+    if (res.ok) {
+        dispatch(removeAlbum(albumId));
+        dispatch(getLibrarySongs());
+    }
+};
+
+
+
 // Helper Functions
 export const getLibrarySongsArray = (state) => {
     const orderedIds = state.library.songs.order;
@@ -212,7 +232,7 @@ export default function reducer(state = initialState, action) {
             stateCopy.songs.byIds[action.song.id] = action.song;
             orderArray = stateCopy.songs.order;
             idx = orderArray.findIndex(id => id === action.song.id);
-            // replace song in ordered arrray if exists
+
             if (idx > -1) {
                 orderArray.splice(idx, 1, action.song.id);
             } else {
@@ -228,8 +248,6 @@ export default function reducer(state = initialState, action) {
                 if (idx > -1) albumSongs.splice(idx, 1, action.song);
                 else albumSongs = [action.song, ...albumSongs];
             }
-
-            console.log('statecopy', stateCopy.songs)
 
             return stateCopy;
 
@@ -286,7 +304,17 @@ export default function reducer(state = initialState, action) {
                 }
             }
 
+        case REMOVE_ALBUM:
+            stateCopy = {...state};
+            orderArray = stateCopy.albums.order;
 
+            idx = orderArray.findIndex(id => id === action.albumId);
+            orderArray.splice(idx, 1);
+
+            stateCopy.albums.order = orderArray;
+            delete stateCopy.albums.byIds[action.albumId];
+
+            return stateCopy;
 
         default:
             return state;

@@ -1,8 +1,13 @@
 import React from 'react'
 import AlbumItem from './AlbumItem';
 import './AlbumBody.css';
+import { useSelector } from 'react-redux';
+import { orderContent } from '../../utils';
 
-export default function AlbumsBody({ albums, user }) {
+export default function AlbumsBody({ user }) {
+    const library = useSelector(({ library }) => library);
+    const albums = orderContent(library.albums);
+    // const albums = Object.values(library.albums.byIds);
 
     return (
         <>

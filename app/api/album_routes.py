@@ -27,7 +27,7 @@ def get_featured_album():
 @album_routes.route('/new/<int:limit>')
 def get_new_albums(limit):
     """
-    Returns array of most new albums. Can specify the amount via limit
+    Returns array of most new albums. Can specify the a mount via limit
     """
     albums = Album.query.order_by(Album.id.desc()).limit(limit).all()
 
@@ -84,3 +84,12 @@ def create_album():
 
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@album_routes.route('/<int:album_id>', methods=['DELETE'])
+def delete_album(album_id):
+    album = Album.query.get(album_id)
+
+    db.session.delete(album)
+    db.session.commit()
+
+    return {'response': 'Album deleted.'}, 204
