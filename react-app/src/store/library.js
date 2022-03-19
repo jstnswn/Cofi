@@ -156,7 +156,7 @@ export const createAlbum = (payload) => async dispatch => {
     if (res.ok) {
         const data = await res.json();
         dispatch(loadAlbum(data.album));
-        return data.song;
+        return data.album;
     } else {
         const errors = await res.json();
         return errors.errors;

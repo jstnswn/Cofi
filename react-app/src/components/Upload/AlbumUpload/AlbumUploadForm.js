@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { loadNewAlbum as loadHomeAlbum } from '../../../store/home';
 import { createAlbum } from '../../../store/library';
 
 export default function AlbumUploadForm({ closeModal }) {
@@ -12,7 +13,7 @@ export default function AlbumUploadForm({ closeModal }) {
     const [disableSubmit, setDisableSubmit] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (disableSubmit) return;
         setDisableSubmit(true);
@@ -25,7 +26,9 @@ export default function AlbumUploadForm({ closeModal }) {
             private: isPrivate,
         }
 
-        dispatch(createAlbum(payload))
+        await dispatch(createAlbum(payload))
+            .then((album) => dispatch(loadHomeAlbum(album)))
+
     };
 
     return (
