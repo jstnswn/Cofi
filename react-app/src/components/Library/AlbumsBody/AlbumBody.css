@@ -9,8 +9,15 @@
     position: relative;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 
+    /* min-width: 800px;
+    max-width: 1300px; */
     /* z-index: 1;; */
     /* width: 100%; */
+}
+
+#library-body .library-album-body-header {
+    border-bottom: 2px solid var(--border-gray);
+    height: 50px;
 }
 
 .library-albums-body-container::-webkit-scrollbar {

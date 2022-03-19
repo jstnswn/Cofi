@@ -16,7 +16,7 @@
     position: relative;
     /* border: red 1px solid; */
     height: calc(100vh - 140px);
-    
+
     /* padding-bottom: 190px; */
 }
 
@@ -35,12 +35,14 @@
     align-self: center;
     padding: 0;
     overflow: hidden;
+
 }
 
 .library-header-image {
     object-fit: cover;
     max-width: calc(100vw - 200px);
     min-height: 420px;
+    max-width: 800px;
 }
 
 .library-header-title {

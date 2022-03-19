@@ -17,7 +17,6 @@ export default function Library() {
     const history = useHistory();
     const location = useLocation();
 
-    const [libraryDisplay, setLibraryDisplay] = useState('songs');
     const [isLoaded, setIsLoaded] = useState(false);
 
     const match = matchPath(history.location.pathname, {
@@ -89,7 +88,7 @@ export default function Library() {
 
                 </div>
             </div>
-            <LibrarySidebar libraryDisplay={libraryDisplay} setLibraryDisplay={setLibraryDisplay}/>
+            <LibrarySidebar />
         </div>
     )
 }
