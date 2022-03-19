@@ -4,6 +4,8 @@
     display: grid;
     grid-template-columns: calc(100vw - 200px) 200px;
     height: 100%;
+
+    /* min-width: 1030px; */
 }
 
 #library-wrapper .main-wrapper {
@@ -11,6 +13,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    /* border: red 1px solid; */
+    height: calc(100vh - 140px);
+    
+    /* padding-bottom: 190px; */
 }
 
 #library-header {
@@ -46,7 +53,7 @@
     margin: 0;
 }
 
-/* 
+/*
 #library-body {
     grid-column-start: 1;
     height: calc(100vh - 560px);

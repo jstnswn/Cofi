@@ -34,13 +34,14 @@
 }
 
 #library-body .library-songs-body-container {
-    display: grid;
+    /* display: grid; */
     overflow-y: scroll;
-    height: calc(100vh - 560px);
+    height: calc(100vh - 611px);
     font-family: var(--main-font);
     font-size: 16px;
     margin-right: 20px;
     position: relative;
+    /* border: red 1px solid; */
 }
 
 .library-songs-body-container::-webkit-scrollbar {
@@ -73,6 +74,7 @@
     display: flex;
     align-items: center;
     padding-left: 20px;
+    /* height: 100px; */
 }
 
 .library-list .list-image {
@@ -92,6 +94,7 @@
     grid-template-columns: 40% 30% 25% 5%;
     display: grid;
     position: relative;
+    /* height: 10px; */
 }
 
 .library-songs-body-container .list-box:hover {

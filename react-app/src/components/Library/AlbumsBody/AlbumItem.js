@@ -2,13 +2,9 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 
-export default function AlbumItem({ album, idx }) {
+export default function AlbumItem({ album, idx, user }) {
     // console.log("album", album)
     const history = useHistory();
-    const user = useSelector(({session}) => session.user);
-
-
-
 
     return (
         <div

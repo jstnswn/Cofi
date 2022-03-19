@@ -32,7 +32,8 @@ export default function SongEditForm({ closeModal, song, album }) {
             songId: song.id,
             song: songFile,
             image,
-            private: isPrivate
+            private: isPrivate,
+            fromAlbumId: album?.id
         };
 
         dispatch(patchSong(payload))

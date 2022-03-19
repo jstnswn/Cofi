@@ -22,10 +22,21 @@ body {
     /* position: relative; */
     background-color: var(--background-main-black);
     margin: 0;
+
+    /* border: rgb(38, 0, 255) 3px solid; */
+    /* max-width: 100vw; */
+
+
+    /* min-width: 1220px; */
 }
 
 * {
     box-sizing: border-box;
+}
+
+#root {
+    /* border: red 3px solid; */
+    /* max-width: 100vw; */
 }
 
 button {

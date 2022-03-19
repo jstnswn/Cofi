@@ -16,7 +16,6 @@ export default function Library() {
     const albums = useSelector(getLibraryAlbumsArray);
     const history = useHistory();
     const location = useLocation();
-    console.log('location: ', location)
 
     const [libraryDisplay, setLibraryDisplay] = useState('songs');
     const [isLoaded, setIsLoaded] = useState(false);
@@ -38,10 +37,10 @@ export default function Library() {
     }, [dispatch])
 
 
-    let libraryBody;
+    // let libraryBody;
 
-    if (location.pathname === `/library/${user.username}/albums`) libraryBody = <AlbumsBody albums={albums}/>
-    else if (location.pathname === `/library/${user.username}/songs`) libraryBody = <SongsBody songs={songs}/>
+    // if (location.pathname === `/library/${user.username}/albums`) libraryBody = <AlbumsBody albums={albums}/>
+    // else if (location.pathname === `/library/${user.username}/songs`) libraryBody = <SongsBody songs={songs}/>
 
 
     const routes = (
@@ -49,17 +48,18 @@ export default function Library() {
         <Switch>
 
             <Route path={`/library/${user.username}/albums`} exact={true}>
-                <AlbumsBody albums={albums} />
+                <AlbumsBody user={user} albums={albums} />
             </Route>
             <Route path={`/library/${user.username}/songs`} exact={true}>
-                <SongsBody songs={songs} libraryItems={libraryItems} />
+                <SongsBody libraryItems={libraryItems} />
             </Route>
             <Route path={`/library/${user.username}/albums/:albumId`}>
-                <SongsBody libraryItems={libraryItems}/>
+                <SongsBody user={user} libraryItems={libraryItems}/>
             </Route>
             <Route>
-                    <SongsBody songs={songs} libraryItems={libraryItems} />
+                <SongsBody user={user} libraryItems={libraryItems} />
             </Route>
+
         </Switch>
         </>
     )
