@@ -41,7 +41,6 @@ export default function SongItem({ song, album }) {
     const openDropdown = () => setShowMenu(true);
 
     useEffect(() => {
-        console.log("useEffect")
         if (!showMenu) return;
 
         const closeDropdown = () => setShowMenu(false);

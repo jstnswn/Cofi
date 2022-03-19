@@ -1,24 +1,32 @@
 import React from 'react'
-import { matchPath, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { matchPath, useLocation } from 'react-router-dom';
 
 export default function LibraryHeader({ libraryItems }) {
-    const history = useHistory();
-    const match = matchPath(history.location.pathname, {
+    const location = useLocation();
+    const user = useSelector(({ session }) => session.user);
+    const match = matchPath(location.pathname, {
         path: '/library/:user/albums/:albumId'
     });
 
-    const albumId = match?.params?.albumId;
+    const albumIdParam = match?.params?.albumId;
+    const userParam = match?.params?.user;
     let headerUrl;
     let headerTitle
+    let editOption;
 
-    if (albumId) {
+    if (albumIdParam) {
 
-        headerUrl = libraryItems.albums.byIds[albumId].image_url;
-        headerTitle = libraryItems.albums.byIds[albumId].title;
+        headerUrl = libraryItems.albums.byIds[albumIdParam].image_url;
+        headerTitle = libraryItems.albums.byIds[albumIdParam].title;
     } else {
         headerUrl = 'https://cofi-bucket.s3.amazonaws.com/art-seeds/escapade.png';
         headerTitle = 'Your Collection'
     }
+
+    // if (albumIdParam && userParam === user.username) {
+
+    // }
 
     return (
         <div id='library-header'>
@@ -29,7 +37,13 @@ export default function LibraryHeader({ libraryItems }) {
                     src={headerUrl}
                 />
             </div>
-            <h2 className='library-header-title'>{headerTitle}</h2>
+            <div className='header-title-container'>
+            <h2 className='library-header-title'>{headerTitle}
+                {albumIdParam && userParam === user.username && (
+                    <span><i className='fas fa-ellipsis-h libary-header-edit'></i></span>)}
+            </h2>
+
+            </div>
         </div>
     )
 }

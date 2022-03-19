@@ -59,6 +59,27 @@
     margin: 0;
 }
 
+
+
+.library-header-title span {
+    margin-left: 10px;
+    font-size: 26px;
+    cursor: pointer;
+    /* display: flex;
+    flex-direction: row;
+    width: 30px; */
+}
+
+.library-header-title span i {
+    background-color: rgba(8, 8, 8, 0.719);
+    padding: 4px 10px;
+    border-radius: 5px;
+    color: var(--text-secondary-white)
+    /* margin-left: auto;
+    margin-right: auto; */
+}
+
+
 /*
 #library-body {
     grid-column-start: 1;
