@@ -11,8 +11,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 125px;
-    font-family: var(--header-font)
-
+    font-family: var(--header-font);
 }
 
 #main-sidebar > div {

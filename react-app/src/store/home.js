@@ -7,6 +7,7 @@ const LOAD_FEATURED_ALBUM = 'home/LOAD_FEATURED_ALBUM';
 const LOAD_NEW_ALBUMS = 'home/LOAD_NEW_ALBUMS';
 
 const CLEAN_STORE = 'home/CLEAN_STORE';
+const CLEAN_ALBUMS = 'home/CLEAN_ALBUMS';
 
 // Action Creators
 export const loadNewSong = (song) => {
@@ -50,6 +51,12 @@ const cleanHome = () => {
         type: CLEAN_STORE
     };
 };
+
+const cleanHomeAlbums = () => {
+    return {
+        type: CLEAN_ALBUMS
+    }
+}
 
 // Thunks
 
@@ -134,6 +141,14 @@ export const loadHome = () => async dispatch => {
     ]);
 };
 
+export const loadHomeAlbums = () => async dispatch => {
+    await Promise.all([
+        dispatch(cleanHomeAlbums()),
+        dispatch(getFeaturedAlbum()),
+        dispatch(getNewAlbums()),
+    ])
+};
+
 // Reducer
 const initialState = {
     featuredAlbum: {},
@@ -204,6 +219,16 @@ export default function reducer(state = initialState, action) {
 
         case CLEAN_STORE:
             return initialState;
+
+        case CLEAN_ALBUMS:
+            return {
+                ...state,
+                featuredAlbum: {},
+                newAlbums: {
+                    byIds: {},
+                    order: []
+                },
+            }
 
         default:
             return state;

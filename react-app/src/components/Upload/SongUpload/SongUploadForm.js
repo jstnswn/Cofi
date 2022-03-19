@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { loadHome, loadNewSong } from '../../../store/home';
+import { loadHome, loadHomeAlbums, loadNewSong } from '../../../store/home';
 import { uploadSong } from '../../../store/library';
 
 export default function SongUploadForm({ closeModal }) {
@@ -40,7 +40,7 @@ export default function SongUploadForm({ closeModal }) {
             .then(() => setDisableSubmit(false))
             .then(() => closeModal(e))
             .catch(errors => setErrors(errors.errors))
-            .then(() => dispatch(loadHome()))
+            .then(() => dispatch(loadHomeAlbums()))
     };
 
     const handleImageFileReader = (e, file) => {
@@ -123,7 +123,7 @@ export default function SongUploadForm({ closeModal }) {
                 <label>Public</label>
                 <input
                     type='radio'
-                    onChange={e => setIsPrivate(true)}
+                    onChange={e => setIsPrivate(false)}
                     value={false}
                     checked={isPrivate === false ? true : false}
                 />
@@ -132,13 +132,13 @@ export default function SongUploadForm({ closeModal }) {
             <input
                 type='file'
                 onChange={e => setSong(e.target.files[0])}
-                accepted='aduio/mpeg, audio/mp3'
+                accept='aduio/mpeg, audio/mp3'
             />
             <label>Song Art (optional)</label>
             <input
                 type='file'
                 onChange={e => setImage(e.target.files[0])}
-                accepted='image/png, image/jpeg, image/jpg'
+                accept='image/png, image/jpeg, image/png, image/jpeg'
             />
 
             <button type='submit'>{isLoading ? 'Submitting...' : 'Submit'}</button>

@@ -1,0 +1,74 @@
+#library-body .library-albums-body-container {
+    display: grid;
+    overflow-y: scroll;
+    height: calc(100vh - 660px);
+    font-family: var(--main-font);
+    font-size: 16px;
+    margin-top: 50px;
+    margin-right: 20px;
+    position: relative;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    /* min-width: 800px;
+    max-width: 1300px; */
+    /* z-index: 1;; */
+    /* width: 100%; */
+}
+
+#library-body .library-album-body-header {
+    border-bottom: 2px solid var(--border-gray);
+    height: 50px;
+}
+
+.library-albums-body-container::-webkit-scrollbar {
+    background-color: var(--background-main-black)
+}
+
+.library-albums-body-container::-webkit-scrollbar-thumb {
+    background-color: rgb(37, 37, 37);
+    border: 3px solid transparent;
+    border-radius: 9px;
+    background-clip: content-box;
+}
+
+.album-item-container {
+    align-self: flex-end;
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: var(--main-font);
+    color: var(--text-main-white);
+    margin: 10px;
+}
+
+.album-item-container {
+    transition: .7s;
+}
+
+.album-item-container:hover {
+    background-color: var(--main-gray);
+}
+/*
+.album-item-container .tile-image-container {
+    position: relative;
+    font-size: 4vw;
+} */
+
+.album-item-container .tile-image-container  .tile-art {
+    object-fit: cover;
+    width: 190px;
+    height: 190px;
+}
+
+.tile-art:hover {
+    cursor: pointer;
+}
+
+/* .song-title,
+.tile-artist {
+    padding: 1px;
+} */
+
+/* .tile-artist {
+    color: grey;
+} */

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Modal } from '../../../context/Modal';
 import { setSong } from '../../../store/active';
 import { loadHome } from '../../../store/home';
 import { deleteLibrarySong } from '../../../store/library';
-import SongEditForm from '../SongEditForm.js';
+import SongEditForm from '../SongEditForm.js/index.js';
 import SongConfirmDelete from './SongConfirmDelete';
 
-export default function ListItem({ song, album }) {
+export default function SongItem({ song, album, user }) {
+    // console.log('song', song)
+
     const dispatch = useDispatch();
+    const params = useParams();
 
     const [hovered, setHovered] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
@@ -27,11 +31,10 @@ export default function ListItem({ song, album }) {
     const deleteSong = async () => {
         closeConfirmModal();
 
-      dispatch(deleteLibrarySong(song.id))
+      dispatch(deleteLibrarySong(song.id, album.id))
         .then(() => dispatch(loadHome()))
 
     };
-
 
     const openDropdown = () => setShowMenu(true);
 
@@ -40,7 +43,7 @@ export default function ListItem({ song, album }) {
 
         const closeDropdown = () => setShowMenu(false);
 
-        const scrollContainer = document.querySelector('.library-body-container');
+        const scrollContainer = document.querySelector('.library-songs-body-container');
 
         document.addEventListener('click', closeDropdown);
         scrollContainer.addEventListener('scroll', closeDropdown);
@@ -81,8 +84,8 @@ export default function ListItem({ song, album }) {
             )}
 
             {showEditMenu && (
-                <Modal>
-                    <SongEditForm closeModal={closeEditMenu} song={song}/>
+                <Modal onClose={closeEditMenu}>
+                    <SongEditForm closeModal={closeEditMenu} song={song} album={album}/>
                 </Modal>
             )}
 
