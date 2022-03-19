@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Switch, useHistory, useLocation, useParams } from 'react-router-dom';
+import { matchPath, Route, Switch, useHistory, useLocation, useParams } from 'react-router-dom';
 import { getLibraryAlbumsArray, getLibrarySongsArray, loadLibrary } from '../../store/library';
 import AlbumsBody from './AlbumsBody';
 import './Library.css';
@@ -20,12 +20,13 @@ export default function Library() {
     const [libraryDisplay, setLibraryDisplay] = useState('songs');
     const [isLoaded, setIsLoaded] = useState(false);
 
-    // const params = useParams();
-    // useEffect(() => {
-    //     console.log("params", params)
-    //     if (libraryDisplay === 'albums') history.push(`/library/${user.username}/albums`);
-    //     if (libraryDisplay === 'songs') history.push(`/library/${user.username}/songs`);
-    // },[libraryDisplay, history, user])
+    const match = matchPath(history.location.pathname, {
+        path: '/library/:user/albums/:albumId'
+    });
+
+    const headerUrl = isLoaded && match?.params.albumId
+        ? libraryItems.albums.byIds[match.params.albumId].image_url
+        : 'https://cofi-bucket.s3.amazonaws.com/art-seeds/escapade.png'
 
 
     useEffect(() => {
@@ -35,13 +36,6 @@ export default function Library() {
         })()
 
     }, [dispatch])
-
-
-    // let libraryBody;
-
-    // if (location.pathname === `/library/${user.username}/albums`) libraryBody = <AlbumsBody albums={albums}/>
-    // else if (location.pathname === `/library/${user.username}/songs`) libraryBody = <SongsBody songs={songs}/>
-
 
     const routes = (
         <>
@@ -73,7 +67,7 @@ export default function Library() {
                         <img
                             alt='library cover'
                             className='library-header-image'
-                            src='https://cofi-bucket.s3.amazonaws.com/art-seeds/escapade.png'
+                            src={headerUrl}
                         />
                     </div>
                     <h2 className='library-header-title'>Your Collection</h2>

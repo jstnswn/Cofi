@@ -4,11 +4,11 @@ import './SongBody.css';
 import { useParams } from 'react-router-dom';
 
 export default function SongsBody({ libraryItems, user }) {
-    const params = useParams();
+    const { albumId } = useParams();
     let songs;
 
-    if (params.albumId) {
-        songs = libraryItems.albums.byIds[params.albumId].songs
+    if (albumId) {
+        songs = libraryItems.albums.byIds[albumId].songs
     } else {
         songs = Object.values(libraryItems.songs.byIds);
     }
