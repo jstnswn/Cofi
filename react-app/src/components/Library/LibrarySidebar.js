@@ -13,10 +13,14 @@ export default function LibrarySidebar() {
         history.push(`/library/${user.username}/albums`)
 
     };
-    console.log('hisgtory: his', history)
+
+
+
     const selection = history.location.pathname.split('/')[3];
 
-    console.log(history.location.pathname.split('/'))
+    const defaultActive = selection
+        ? ''
+        : 'active'
 
     return (
         <div className='sidebar bottom-sidebar'>
@@ -26,7 +30,7 @@ export default function LibrarySidebar() {
             </div>
             <div className='sidebar-button-container'>
                 <button className='sidebar-button' onClick={() => history.push(`/library/${user.username}/songs`)}>Songs</button>
-                <i className={`fas fa-circle-notch selector ${selection === 'songs' ? 'active' : ''}`}></i>
+                <i className={`fas fa-circle-notch selector ${defaultActive} ${selection === 'songs' ? 'active' : ''}`}></i>
             </div>
         </div>
     )
