@@ -34,7 +34,6 @@ class Album(db.Model):
             'title': self.title
         }
 
-
     def to_dict(self):
         return {
             'id': self.id,

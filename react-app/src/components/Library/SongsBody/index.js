@@ -16,8 +16,6 @@ export default function SongsBody() {
         songs = orderContent(libraryItems.songs);
     }
 
-    console.log('songs: ', songs)
-
     return (
         <>
             <div className='library-song-body-header'>

@@ -1,4 +1,6 @@
 import React from 'react';
+import AlbumUploadModal from '../Upload/AlbumUpload';
+import AlbumUploadForm from '../Upload/AlbumUpload/AlbumUploadForm';
 import SongUploadModal from '../Upload/SongUpload';
 import './MainSidebar.css';
 
@@ -10,8 +12,7 @@ export default function MainSidebar() {
                 <i className='fas fa-music icon'></i>
             </div>
             <div>
-                <div>
-                    Create Album </div>
+                <AlbumUploadModal />
                 <i className='fad fa-album icon'></i>
             </div>
         </div>

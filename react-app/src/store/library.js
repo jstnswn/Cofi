@@ -38,6 +38,13 @@ const removeSong = (songId, albumId) => {
     };
 };
 
+const loadAlbum = (album) => {
+    return {
+        type: LOAD_ALBUM,
+        album
+    }
+}
+
 const loadAlbums = (albums) => {
     return {
         type: LOAD_ALBUMS,
@@ -47,18 +54,15 @@ const loadAlbums = (albums) => {
 
 // Thunks
 export const uploadSong = (payload) => async dispatch => {
+    payload.image_url = await getImageUrl(payload.image);
+
     const formData = new FormData();
     formData.append('title', payload.title);
     formData.append('artist', payload.artist);
     formData.append('song', payload.song);
-    // formData.append('image', payload.image);
     formData.append('private', payload.private);
+    formData.append('image_url', payload.image_url);
 
-    let imageUrl;
-    if (payload.image) {
-        imageUrl = await getImageUrl(payload.image);
-        formData.append('image_url', imageUrl);
-    }
 
     const res = await fetch('/api/songs', {
         method: 'POST',
@@ -131,6 +135,31 @@ export const getLibraryAlbums = () => async dispatch => {
     } else {
         const error = await res.json();
         return error.error;
+    }
+};
+
+export const createAlbum = (payload) => async dispatch => {
+    payload.imageUrl = await getImageUrl(payload.image);
+
+    const formData = new FormData();
+    formData.append('title', payload.title);
+    formData.append('artist', payload.artist);
+    formData.append('private', true);
+    formData.append('image_url', payload.imageUrl);
+
+
+    const res = await fetch('/api/albums', {
+        method: 'POST',
+        body: formData
+    });
+
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(loadAlbum(data.album));
+        return data.song;
+    } else {
+        const errors = await res.json();
+        return errors.errors;
     }
 };
 
@@ -233,6 +262,18 @@ export default function reducer(state = initialState, action) {
             }
 
             return stateCopy;
+
+        case LOAD_ALBUM:
+            return {
+                ...state,
+                albums: {
+                    byIds: {
+                        ...state.albums.byIds,
+                        [action.album.id]: action.album
+                    },
+                    order: [action.album.id, ...state.albums.order]
+                }
+            }
 
         case LOAD_ALBUMS:
             normalizedData = normalize(action.albums)

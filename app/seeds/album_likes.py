@@ -5,5 +5,5 @@ def add_likers_to_albums(album, users):
     for user in users:
         flip = randint(0, 1)
 
-        if flip is 1:
+        if flip == 1:
             album.likers.append(user)

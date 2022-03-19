@@ -42,7 +42,7 @@ def get_featured_songs():
         Song.id.desc()).limit(10).all()
 
     if type(songs) is list:
-        if len(songs) is 0:
+        if len(songs) == 0:
             songs = Song.query.order_by(Song.id.desc()).limit(10).all()
 
     if not songs:
@@ -76,11 +76,7 @@ def upload_song():
     form = SongForm()
     current_user_id = current_user.get_id()
     artist_id = get_or_make_artist_id(form.artist.data)
-    image_url = (form.image_url.data
-    if form.image_url.data
-    else 'https://cofi-bucket.s3.amazonaws.com/art-seeds/song_cover.png')
 
-    # Song upload
     if 'song' not in request.files:
         return {'errors': 'song required'}, 400
 
@@ -104,7 +100,7 @@ def upload_song():
         user_id=current_user_id,
         artist_id=artist_id,
         song_url=song_url,
-        image_url=image_url
+        image_url=form.image_url.data
     )
 
     db.session.add(new_song)
