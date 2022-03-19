@@ -5,6 +5,7 @@ const LOAD_NEW_SONGS = 'home/LOAD_NEW_SONGS';
 const LOAD_FEATURED_SONGS = 'home/LOAD_FEATURED_SONGS';
 const LOAD_FEATURED_ALBUM = 'home/LOAD_FEATURED_ALBUM';
 const LOAD_NEW_ALBUMS = 'home/LOAD_NEW_ALBUMS';
+const LOAD_NEW_ALBUM = 'home/LOAD_NEW_ALBUM';
 
 const CLEAN_STORE = 'home/CLEAN_STORE';
 const CLEAN_ALBUMS = 'home/CLEAN_ALBUMS';
@@ -35,6 +36,13 @@ const loadNewAlbums = (albums) => {
     return {
         type: LOAD_NEW_ALBUMS,
         albums
+    };
+};
+
+export const loadNewAlbum = (album) => {
+    return {
+        type: LOAD_NEW_ALBUM,
+        album
     };
 };
 
@@ -214,6 +222,18 @@ export default function reducer(state = initialState, action) {
                 newAlbums: {
                     byIds: normalizedData,
                     order: orderedIds
+                }
+            }
+
+        case LOAD_NEW_ALBUM:
+            return {
+                ...state,
+                newAlbums: {
+                    byIds: {
+                        ...state.newAlbums.byIds,
+                        [action.album.id]: action.album
+                    },
+                    order: [action.album.id, ...state.newAlbums.order]
                 }
             }
 

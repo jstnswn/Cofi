@@ -6,11 +6,14 @@ import './PlayableTile.css';
 export default function PlayableTile({ item, option }) {
     const dispatch = useDispatch()
     const [isShown, setIsShown] = useState();
+
     const song = option === 'songs'
         ? item
         : item.songs[0]
 
-    const playSong = () => dispatch(setSong(song));
+    const playSong = () => {
+        if (song) dispatch(setSong(song));
+    }
 
     return (
         <div
@@ -20,12 +23,12 @@ export default function PlayableTile({ item, option }) {
          >
             <div className='tile-image-container' onClick={playSong}>
 
-                <img alt='content art' className='tile-art' src={song.image_url} />
+                <img alt='content art' className='tile-art' src={item.image_url} />
 
             </div>
             <div>
-                <div className='song-title'>{song.title}</div>
-                <div className='tile-artist'>{song.artist?.name}</div>
+                <div className='item-title'>{item.title}</div>
+                <div className='tile-artist'>{item.artist?.name}</div>
             </div>
         </div>
     )

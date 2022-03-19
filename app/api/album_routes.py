@@ -29,7 +29,7 @@ def get_new_albums(limit):
     """
     Returns array of most new albums. Can specify the amount via limit
     """
-    albums = Album.query.limit(limit).all()
+    albums = Album.query.order_by(Album.id.desc()).limit(limit).all()
 
     if not albums:
         return {'error': 'Unable to get albums from the database'}
