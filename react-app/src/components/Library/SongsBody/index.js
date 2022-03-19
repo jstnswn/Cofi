@@ -3,9 +3,11 @@ import SongItem from './SongItem';
 import './SongBody.css';
 import { useParams } from 'react-router-dom';
 import { orderContent, sortSongsArray } from '../../utils';
+import { useSelector } from 'react-redux';
 
-export default function SongsBody({ libraryItems }) {
+export default function SongsBody() {
     const { albumId } = useParams();
+    const libraryItems = useSelector(({ library }) => library);
     let songs;
 
     if (albumId) {
@@ -13,6 +15,8 @@ export default function SongsBody({ libraryItems }) {
     } else {
         songs = orderContent(libraryItems.songs);
     }
+
+    console.log('songs: ', songs)
 
     return (
         <>

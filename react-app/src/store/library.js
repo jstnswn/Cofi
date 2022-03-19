@@ -190,6 +190,7 @@ export default function reducer(state = initialState, action) {
                 orderArray = [action.song.id, ...orderArray];
             }
 
+            stateCopy.songs.order = orderArray;
 
             if (action.albumId) {
                 albumSongs = stateCopy.albums.byIds[action.albumId].songs;
@@ -198,6 +199,8 @@ export default function reducer(state = initialState, action) {
                 if (idx > -1) albumSongs.splice(idx, 1, action.song);
                 else albumSongs = [action.song, ...albumSongs];
             }
+
+            console.log('statecopy', stateCopy.songs)
 
             return stateCopy;
 
