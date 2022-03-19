@@ -4,37 +4,38 @@ import { matchPath, Route, Switch, useHistory, useLocation, useParams } from 're
 import { getLibraryAlbumsArray, getLibrarySongsArray, loadLibrary } from '../../store/library';
 import AlbumsBody from './AlbumsBody';
 import './Library.css';
+import LibraryHeader from './LibraryHeader';
 import LibrarySidebar from './LibrarySidebar';
 import SongsBody from './SongsBody';
-import SongsList from './SongsBody';
+// import SongsList from './SongsBody';
 
 export default function Library() {
     const dispatch = useDispatch();
     const user = useSelector(({ session }) => session.user);
     const libraryItems = useSelector(({ library }) => library);
-    const songs = useSelector(getLibrarySongsArray);
+    // const songs = useSelector(getLibrarySongsArray);
     const albums = useSelector(getLibraryAlbumsArray);
-    const history = useHistory();
-    const location = useLocation();
+    // const history = useHistory();
+    // const location = useLocation();
 
     const [isLoaded, setIsLoaded] = useState(false);
 
-    const match = matchPath(history.location.pathname, {
-        path: '/library/:user/albums/:albumId'
-    });
+    // const match = matchPath(history.location.pathname, {
+    //     path: '/library/:user/albums/:albumId'
+    // });
 
-    const albumId = match?.params?.albumId;
-    let headerUrl;
-    let headerTitle
+    // const albumId = match?.params?.albumId;
+    // let headerUrl;
+    // let headerTitle
 
-    if (isLoaded && albumId) {
+    // if (isLoaded && albumId) {
 
-        headerUrl = libraryItems.albums.byIds[albumId].image_url;
-        headerTitle = libraryItems.albums.byIds[albumId].title;
-    } else {
-        headerUrl = 'https://cofi-bucket.s3.amazonaws.com/art-seeds/escapade.png';
-        headerTitle = 'Your Collection'
-    }
+    //     headerUrl = libraryItems.albums.byIds[albumId].image_url;
+    //     headerTitle = libraryItems.albums.byIds[albumId].title;
+    // } else {
+    //     headerUrl = 'https://cofi-bucket.s3.amazonaws.com/art-seeds/escapade.png';
+    //     headerTitle = 'Your Collection'
+    // }
 
     // const headerUrl = isLoaded && match?.params.albumId
     //     ? libraryItems.albums.byIds[match.params.albumId].image_url
@@ -75,16 +76,7 @@ export default function Library() {
     return isLoaded && (
         <div id='library-wrapper'>
             <div className='main-wrapper'>
-                <div id='library-header'>
-                    <div className='header-image-container'>
-                        <img
-                            alt='library cover'
-                            className='library-header-image'
-                            src={headerUrl}
-                        />
-                    </div>
-                    <h2 className='library-header-title'>{headerTitle}</h2>
-                </div>
+                <LibraryHeader libraryItems={libraryItems} />
                 <div id='library-body'>
                     {/* <div className='library-body-header'>
                         <p className='song-title column-title'>Title</p>
