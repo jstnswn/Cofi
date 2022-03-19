@@ -3,7 +3,6 @@ import AlbumItem from './AlbumItem';
 import './AlbumBody.css';
 
 export default function AlbumsBody({ albums, user }) {
-    console.log('albums: ', albums)
 
     return (
         <>

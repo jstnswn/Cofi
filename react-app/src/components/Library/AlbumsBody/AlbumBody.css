@@ -1,7 +1,7 @@
 #library-body .library-albums-body-container {
     display: grid;
     overflow-y: scroll;
-    height: calc(100vh - 613px);
+    height: calc(100vh - 660px);
     font-family: var(--main-font);
     font-size: 16px;
     margin-top: 50px;

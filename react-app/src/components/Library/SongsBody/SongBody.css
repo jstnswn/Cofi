@@ -40,7 +40,7 @@
 #library-body .library-songs-body-container {
     /* display: grid; */
     overflow-y: scroll;
-    height: calc(100vh - 611px);
+    height: calc(100vh - 660px);
     font-family: var(--main-font);
     font-size: 16px;
     margin-right: 20px;
