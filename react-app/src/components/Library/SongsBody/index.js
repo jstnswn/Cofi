@@ -2,15 +2,16 @@ import React from 'react'
 import SongItem from './SongItem';
 import './SongBody.css';
 import { useParams } from 'react-router-dom';
+import { orderContent, sortSongsArray } from '../../utils';
 
-export default function SongsBody({ libraryItems, user }) {
+export default function SongsBody({ libraryItems }) {
     const { albumId } = useParams();
     let songs;
 
     if (albumId) {
-        songs = libraryItems.albums.byIds[albumId].songs
+        songs = sortSongsArray(libraryItems.albums.byIds[albumId].songs)
     } else {
-        songs = Object.values(libraryItems.songs.byIds);
+        songs = orderContent(libraryItems.songs);
     }
 
     return (
@@ -22,8 +23,8 @@ export default function SongsBody({ libraryItems, user }) {
             </div>
             <div className='library-songs-body-container'>
                 {songs.map((song, idx) => (song.albums?.length
-                    ? (song.albums.map((album, idx) => <SongItem key={idx} song={song} album={album} user={user}/>))
-                    : (<SongItem key={idx} song={song} />)))}
+                    ? (song.albums.map((album, idx) => <SongItem key={idx} song={song} album={album}/>))
+                    : (<SongItem key={idx} song={song}/>)))}
             </div>
         </>
     )

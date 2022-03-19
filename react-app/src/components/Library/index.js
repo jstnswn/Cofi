@@ -47,10 +47,10 @@ export default function Library() {
                 <SongsBody libraryItems={libraryItems} />
             </Route>
             <Route path={`/library/${user.username}/albums/:albumId`}>
-                <SongsBody user={user} libraryItems={libraryItems}/>
+                <SongsBody libraryItems={libraryItems}/>
             </Route>
             <Route>
-                <SongsBody user={user} libraryItems={libraryItems} />
+                <SongsBody libraryItems={libraryItems} />
             </Route>
 
         </Switch>

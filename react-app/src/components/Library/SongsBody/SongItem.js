@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import { Modal } from '../../../context/Modal';
 import { setSong } from '../../../store/active';
 import { loadHome } from '../../../store/home';
@@ -8,10 +8,12 @@ import { deleteLibrarySong } from '../../../store/library';
 import SongEditForm from '../SongEditForm.js/index.js';
 import SongConfirmDelete from './SongConfirmDelete';
 
-export default function SongItem({ song, album, user }) {
+export default function SongItem({ song, album }) {
     // console.log('song', song)
+    const user = useSelector(({ session }) => session.user);
 
     const dispatch = useDispatch();
+    const history = useHistory();
     const params = useParams();
 
     const [hovered, setHovered] = useState(false);
@@ -31,7 +33,7 @@ export default function SongItem({ song, album, user }) {
     const deleteSong = async () => {
         closeConfirmModal();
 
-      dispatch(deleteLibrarySong(song.id, album.id))
+      dispatch(deleteLibrarySong(song.id, album?.id))
         .then(() => dispatch(loadHome()))
 
     };
@@ -39,6 +41,7 @@ export default function SongItem({ song, album, user }) {
     const openDropdown = () => setShowMenu(true);
 
     useEffect(() => {
+        console.log("useEffect")
         if (!showMenu) return;
 
         const closeDropdown = () => setShowMenu(false);
@@ -69,7 +72,7 @@ export default function SongItem({ song, album, user }) {
                 <p className='item'>{song.artist.name}</p>
             </div>
             <div className='album-list library-list'>
-                {album ? <p className='item'>{album.title}</p> : <p className='item'>--</p>}
+                {album ? <p className='item' onClick={() => history.push(`/library/${user.username}/albums/${album.id}`)}>{album.title}</p> : <p className='item'>--</p>}
 
             </div>
             <i className={`fa-solid fa-ellipsis song-options ${hovered ? 'active' : ''}`} onClick={openDropdown}></i>
