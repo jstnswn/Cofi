@@ -51,7 +51,7 @@ def get_most_liked_albums(limit):
 def get_user_albums():
     current_user_id = current_user.get_id()
 
-    albums = Album.query.filter(Album.user_id==current_user_id).all()
+    albums = Album.query.filter(Album.user_id==current_user_id).order_by(Album.id.desc()).all()
 
     if not albums:
         return {'error': 'No albums were found'}, 400
