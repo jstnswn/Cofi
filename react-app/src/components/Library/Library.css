@@ -35,7 +35,11 @@
     align-self: center;
     padding: 0;
     overflow: hidden;
-
+    width: 800px;
+    /* justify-self: center;
+    align-self: center; */
+    display: flex;
+    justify-content: center;
 }
 
 .library-header-image {
