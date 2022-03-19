@@ -1,13 +1,18 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
-import { matchPath, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { matchPath, useHistory, useLocation } from 'react-router-dom';
+import { deleteLibraryAlbum } from '../../store/library';
 
 export default function LibraryHeader({ libraryItems }) {
+    const dispatch = useDispatch();
     const location = useLocation();
+    const history = useHistory();
     const user = useSelector(({ session }) => session.user);
     const match = matchPath(location.pathname, {
         path: '/library/:user/albums/:albumId'
     });
+
+
 
     const albumIdParam = match?.params?.albumId;
     const userParam = match?.params?.user;
@@ -24,9 +29,10 @@ export default function LibraryHeader({ libraryItems }) {
         headerTitle = 'Your Collection'
     }
 
-    // if (albumIdParam && userParam === user.username) {
-
-    // }
+    const deleteAlbum = () => {
+        dispatch(deleteLibraryAlbum(Number(albumIdParam)));
+        history.goBack();
+    };
 
     return (
         <div id='library-header'>
@@ -40,7 +46,7 @@ export default function LibraryHeader({ libraryItems }) {
             <div className='header-title-container'>
             <h2 className='library-header-title'>{headerTitle}
                 {albumIdParam && userParam === user.username && (
-                    <span><i className='fas fa-ellipsis-h libary-header-edit'></i></span>)}
+                    <span><i onClick={deleteAlbum} className='fas fa-ellipsis-h libary-header-edit'></i></span>)}
             </h2>
 
             </div>
