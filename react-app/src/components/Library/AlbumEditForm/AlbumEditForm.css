@@ -24,6 +24,29 @@
     object-fit: cover;
 }
 
+.update-form.album  .image-overlay {
+    height: 170px;
+    width: 170px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.644);
+    color: var(--text-main-white);
+    font-family: var(--header-font);
+    /* display: hidden; */
+    pointer-events: none;
+}
+
+/* .update-form.album  .image-overlay:hover {
+    display: flex;
+} */
+
+.update-form.album  .image-overlay i {
+    font-size: 30px;
+}
+
 .update-form.album .confirm-message-box {
     width: 100%;
     display: flex;
@@ -38,19 +61,7 @@
     font-weight: bold;
 }
 
-.update-form.album button {
-    margin-top: 10px;
-    width: 66px;
-    height: 27px;
-    font-family: var(--header-font);
-    color: var(--background-main-black);
-    background-color: var(--text-main-white);
-    border-radius: 15px;
-    border: none;
-    font-weight: bold;
-    font-size: 15px;
-    /* border: solid 1px */
-}
+
 
 .update-form.album .close-icon {
     position: absolute;
@@ -58,4 +69,49 @@
     right: 16px;
     top: 16px;
     color: rgb(161, 161, 161);
+}
+
+.update-form.album .form-content {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    font-family: var(--header-font);
+}
+
+.update-form.album .form-content label {
+    color: var(--text-main-white)
+}
+
+.update-form.album .form-content input {
+    background-color: rgb(54, 54, 54);
+    border: none;
+    height: 30px;
+    border-radius: 3px;
+    color: var(--text-main-white);
+    padding-left: 10px;
+}
+
+.update-form.album .form-content input:focus {
+    outline: none;
+}
+
+.update-form.album .form-content * {
+    margin: 5px;
+}
+
+.update-form.album button {
+    /* margin-top: 60px; */
+    width: 70px;
+    height: 27px;
+    font-family: var(--header-font);
+
+    color: var(--background-main-black);
+    background-color: var(--text-main-white);
+    border-radius: 15px;
+    border: none;
+    font-weight: bold;
+    font-size: 13px;
+    align-self: flex-end;
+
+    /* border: solid 1px */
 }

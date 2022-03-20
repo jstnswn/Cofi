@@ -90,6 +90,35 @@ export const createAlbum = (payload) => async dispatch => {
     }
 };
 
+export const patchAlbum = (payload) => async dispatch => {
+    const { title, image, albumId } = payload;
+
+    const body = {title};
+    if (image) {
+        const imageUrl = await getImageUrl(image);
+        body.image_url = imageUrl
+    }
+
+    const res = await fetch(`/api/albums/${albumId}`, {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(body)
+    });
+
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(loadAlbum(data.album));
+        dispatch(getLibrarySongs())
+        // if (payload.fromAlbumId) dispatch(loadAlbumSong(data.song, payload.fromAlbumId))
+        //  if (payload.fromAlbumId) dispatch(getLibraryAlbums())
+        return data.album;
+    } else {
+        const errors = await res.json();
+        return errors.errors;
+    }
+
+};
+
 export const deleteLibraryAlbum = (albumId) => async dispatch => {
     const res = await fetch(`/api/albums/${albumId}`, { method: 'DELETE' });
 

@@ -93,3 +93,18 @@ def delete_album(album_id):
     db.session.commit()
 
     return {'response': 'Album deleted.'}, 204
+
+@album_routes.route('/<int:album_id>', methods=['PATCH'])
+def update_album(album_id):
+
+    album = Album.query.get(album_id)
+    data = request.json
+
+    album.title = data['title']
+
+    if 'image_url' in data:
+        album.image_url = data['image_url']
+
+    db.session.commit()
+
+    return {'album': album.to_dict()}, 201
