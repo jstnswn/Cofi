@@ -49,21 +49,29 @@
     max-width: 800px;
 }
 
-.library-header-title {
+.header-title-container {
     position: absolute;
     bottom: 0;
-    font-family: var(--main-font);
     font-weight: 400;
     color: var(--text-secondary-white);
-    font-size: 2.2em;
-    margin: 0;
+    font-family: var(--main-font);
+    margin-left: 10px;
 }
 
+.library-header-title {
+    font-size: 2.8em;
+    margin: 0;
+
+}
+
+.library-list-dropdown.album {
+    top: 40px;
+    right: 0px;
+}
 
 
 .library-header-title span {
     margin-left: 10px;
-    font-size: 26px;
     cursor: pointer;
     /* display: flex;
     flex-direction: row;
@@ -72,9 +80,11 @@
 
 .library-header-title span i {
     background-color: rgba(8, 8, 8, 0.719);
-    padding: 4px 10px;
+    font-size: .5em;
+    padding: 1px 9px;
     border-radius: 5px;
     color: var(--text-secondary-white)
+
     /* margin-left: auto;
     margin-right: auto; */
 }

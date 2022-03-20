@@ -6,7 +6,7 @@ import { setSong } from '../../../store/active';
 import { loadHome } from '../../../store/home';
 import { deleteLibrarySong } from '../../../store/library';
 import SongEditForm from '../SongEditForm.js/index.js';
-import SongConfirmDelete from './SongConfirmDelete';
+import SongConfirmDelete from '../ConfirmModal/SongConfirmDelete';
 
 export default function SongItem({ song, album }) {
     // console.log('song', song)
