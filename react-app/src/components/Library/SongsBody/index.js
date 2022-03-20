@@ -23,10 +23,14 @@ export default function SongsBody() {
                 <p className='song-artist column-title'>Artist</p>
                 <p className='song-album column-title'>Album</p>
             </div>
-            <div className='library-songs-body-container'>
-                {songs.map((song, idx) => (song.albums?.length
-                    ? (song.albums.map((album, idx) => <SongItem key={idx} song={song} album={album}/>))
-                    : (<SongItem key={idx} song={song}/>)))}
+
+            <div className='library-container'>
+                <div className='library-songs-body-container'>
+                    {songs.map((song, idx) => (song.albums?.length
+                        ? (song.albums.map((album, idx) => <SongItem key={idx} song={song} album={album}/>))
+                        : (<SongItem key={idx} song={song}/>)))}
+                </div>
+
             </div>
         </>
     )

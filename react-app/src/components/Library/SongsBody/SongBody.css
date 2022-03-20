@@ -34,10 +34,12 @@
     height: calc(100vh - 660px);
     font-family: var(--main-font);
     font-size: 16px;
-    margin-right: 20px;
+    /* margin-right: 20px; */
     position: relative;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     /* border: red 1px solid; */
+
+    margin: 0 7px;
 }
 
 .library-songs-body-container::-webkit-scrollbar {

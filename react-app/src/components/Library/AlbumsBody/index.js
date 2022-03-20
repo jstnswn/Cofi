@@ -11,11 +11,14 @@ export default function AlbumsBody({ user }) {
 
     return (
         <>
-            <div className='library-album-body-header'></div>
-            <div className='library-albums-body-container'>
-                {albums.map((album, idx) => (
-                    <AlbumItem user={user} key={idx} album={album} idx={idx} />
-                ))}
+                <div className='library-album-body-header'></div>
+            <div className='library-body-container'>
+
+                <div className='library-albums-body-container'>
+                    {albums.map((album, idx) => (
+                        <AlbumItem user={user} key={idx} album={album} idx={idx} />
+                    ))}
+                </div>
             </div>
         </>
     )

@@ -82,9 +82,9 @@ export default function Library() {
             <div className='main-wrapper'>
                 <LibraryHeader libraryItems={libraryItems} />
                 <div id='library-body'>
-                    <div className='library-container'>
+
                         {routes}
-                    </div>
+
 
                 </div>
             </div>

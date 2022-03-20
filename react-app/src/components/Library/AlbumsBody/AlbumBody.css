@@ -1,6 +1,6 @@
 #library-body .library-albums-body-container {
     display: grid;
-    overflow-y: scroll;
+
     height: calc(100vh - 660px);
     font-family: var(--main-font);
     font-size: 16px;
@@ -10,7 +10,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
 
     /* border: green 3px solid; */
-    margin: 50px 7px 0px 7px;
+    margin: 0 7px;
 }
 
 #library-body .library-album-body-header {
@@ -18,16 +18,7 @@
     height: 50px;
 }
 
-.library-albums-body-container::-webkit-scrollbar {
-    background-color: var(--background-main-black)
-}
 
-.library-albums-body-container::-webkit-scrollbar-thumb {
-    background-color: rgb(37, 37, 37);
-    border: 3px solid transparent;
-    border-radius: 9px;
-    background-clip: content-box;
-}
 
 .album-item-container {
     align-self: flex-end;
