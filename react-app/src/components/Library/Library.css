@@ -89,6 +89,17 @@
     margin-right: auto; */
 }
 
+#library-body {
+    grid-column-start: 1;
+    height: calc(100vh - 560px);
+
+
+    min-width: 755px;
+    max-width: 1300px;
+
+    /* margin-top: 50px; */
+}
+
 
 /*
 #library-body {
