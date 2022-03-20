@@ -16,7 +16,9 @@ export default function Player() {
     // const isPlaying = active.isPlaying
     if (active.currentSong) {
         songUrl = active.currentSong.song_url;
-        artworkUrl = active.currentSong.image_url;
+        artworkUrl = active.currentSong.album
+            ? active.currentSong.album.image_url
+            : active.currentSong.image_url
     };
 
     const handleOnPlay = () => {

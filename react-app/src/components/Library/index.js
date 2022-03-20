@@ -16,6 +16,7 @@ export default function Library() {
     const libraryItems = useSelector(({ library }) => library);
     // const songs = useSelector(getLibrarySongsArray);
     const albums = useSelector(getLibraryAlbumsArray);
+    // const albums = Object.values(libraryItems.albums.byIds)
     // const history = useHistory();
     // const location = useLocation();
 

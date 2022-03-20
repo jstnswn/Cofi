@@ -8,9 +8,12 @@ import { deleteLibrarySong } from '../../../../store/library/librarySongs';
 import SongEditForm from '../../SongEditForm.js/index.js';
 import SongConfirmDelete from './SongConfirmDelete';
 
-export default function SongItem({ song, album }) {
+export default function SongItem({ song }) {
     // console.log('song', song)
     const user = useSelector(({ session }) => session.user);
+
+    const album = song.album;
+    console.log('albuM: ', album)
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -65,7 +68,7 @@ export default function SongItem({ song, album }) {
         >
 
             <div className='song-list library-list'>
-                <img alt='cover art' className='list-image' src={song.image_url} /> <span onClick={playSong} className='item'>{song.title}</span>
+                <img alt='cover art' className='list-image' src={album ? album.image_url : song.image_url} /> <span onClick={playSong} className='item'>{song.title}</span>
             </div>
             <div className='artist-list library-list'>
                 <p className='item'>{song.artist.name}</p>

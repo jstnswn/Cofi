@@ -67,6 +67,7 @@ def get_featured_songs():
             featured_songs.append(songs[idx])
             number_cashe.append(idx)
 
+    print('🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄', [song.to_dict() for song in featured_songs])
     return {'songs': [song.to_dict() for song in featured_songs]}, 200
 
 

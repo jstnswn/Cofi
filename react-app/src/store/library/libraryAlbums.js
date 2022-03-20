@@ -133,7 +133,6 @@ export const deleteLibraryAlbum = (albumId) => async dispatch => {
 // Helper Functions
 
 export const getLibraryAlbumsArray = (state) => {
-    console.log('state library ', state.library.albums)
     const orderedIds = state.library.albums.order;
     return orderedIds.map(id => state.library.albums.byIds[id]);
 }

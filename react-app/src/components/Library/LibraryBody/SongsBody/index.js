@@ -26,9 +26,7 @@ export default function SongsBody() {
 
             <div className='library-body-container'>
                 <div className='library-songs-body-container'>
-                    {songs.map((song, idx) => (song.albums?.length
-                        ? (song.albums.map((album, idx) => <SongItem key={idx} song={song} album={album}/>))
-                        : (<SongItem key={idx} song={song}/>)))}
+                    {songs.map((song, idx) => <SongItem key={idx} song={song} />)}
                 </div>
 
             </div>
