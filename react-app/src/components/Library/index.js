@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { matchPath, Route, Switch, useHistory, useLocation, useParams } from 'react-router-dom';
 import { loadLibrary } from '../../store/library';
 import { getLibraryAlbumsArray } from '../../store/library/libraryAlbums';
-import AlbumsBody from './AlbumsBody';
+import AlbumsBody from './LibraryBody/AlbumsBody';
 import './Library.css';
 import LibraryHeader from './LibraryHeader';
 import LibrarySidebar from './LibrarySidebar';
-import SongsBody from './SongsBody';
+import SongsBody from './LibraryBody/SongsBody';
 // import SongsList from './SongsBody';
 
 export default function Library() {

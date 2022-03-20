@@ -2,7 +2,7 @@ import React from 'react'
 import AlbumItem from './AlbumItem';
 import './AlbumBody.css';
 import { useSelector } from 'react-redux';
-import { orderContent } from '../../utils';
+import { orderContent } from '../../../utils';
 
 export default function AlbumsBody({ user }) {
     const library = useSelector(({ library }) => library);

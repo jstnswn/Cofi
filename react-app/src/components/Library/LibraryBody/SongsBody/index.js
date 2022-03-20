@@ -2,7 +2,7 @@ import React from 'react'
 import SongItem from './SongItem';
 import './SongBody.css';
 import { useParams } from 'react-router-dom';
-import { orderContent, sortSongsArray } from '../../utils';
+import { orderContent, sortSongsArray } from '../../../utils';
 import { useSelector } from 'react-redux';
 
 export default function SongsBody() {

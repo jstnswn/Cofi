@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { Modal } from '../../../context/Modal';
-import { setSong } from '../../../store/active';
-import { loadHome } from '../../../store/home';
-import { deleteLibrarySong } from '../../../store/library/librarySongs';
-import SongEditForm from '../SongEditForm.js/index.js';
-import SongConfirmDelete from '../ConfirmModal/SongConfirmDelete';
+import { Modal } from '../../../../context/Modal';
+import { setSong } from '../../../../store/active';
+import { loadHome } from '../../../../store/home';
+import { deleteLibrarySong } from '../../../../store/library/librarySongs';
+import SongEditForm from '../../SongEditForm.js/index.js';
+import SongConfirmDelete from './SongConfirmDelete';
 
 export default function SongItem({ song, album }) {
     // console.log('song', song)
