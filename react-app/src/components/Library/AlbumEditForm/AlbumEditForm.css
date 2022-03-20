@@ -1,0 +1,61 @@
+.update-form.album {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--main-gray);
+    border-radius: 5px;
+    padding: 20px;
+    position: relative;
+}
+
+
+.update-form.album .image-container {
+    display: flex;
+    /* margin-right: auto;
+    margin-left: auto; */
+    justify-content: center;
+    align-items: center;
+}
+
+.update-form.album img {
+    /* padding-right: 20px; */
+    height: 170px;
+    width: 170px;
+    object-fit: cover;
+}
+
+.update-form.album .confirm-message-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-main-white);
+    font-size: 18px;
+    padding-left: 20px;
+}
+
+.update-form.albumx .song-name {
+    font-weight: bold;
+}
+
+.update-form.album button {
+    margin-top: 10px;
+    width: 66px;
+    height: 27px;
+    font-family: var(--header-font);
+    color: var(--background-main-black);
+    background-color: var(--text-main-white);
+    border-radius: 15px;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+    /* border: solid 1px */
+}
+
+.update-form.album .close-icon {
+    position: absolute;
+    font-size: 22px;
+    right: 16px;
+    top: 16px;
+    color: rgb(161, 161, 161);
+}
