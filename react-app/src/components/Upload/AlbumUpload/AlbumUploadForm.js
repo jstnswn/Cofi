@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { loadNewAlbum as loadHomeAlbum } from '../../../store/home';
-import { createAlbum } from '../../../store/library';
+import { createAlbum } from '../../../store/library/libraryAlbums';
 
 export default function AlbumUploadForm({ closeModal }) {
     const dispatch = useDispatch();

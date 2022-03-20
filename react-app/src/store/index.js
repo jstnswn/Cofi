@@ -2,7 +2,8 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session';
 import home from './home';
-import library from './library';
+// import library from './library';
+import library from './library'
 import active from './active';
 
 const rootReducer = combineReducers({

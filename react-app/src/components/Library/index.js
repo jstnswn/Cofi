@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { matchPath, Route, Switch, useHistory, useLocation, useParams } from 'react-router-dom';
-import { getLibraryAlbumsArray, getLibrarySongsArray, loadLibrary } from '../../store/library';
+import { loadLibrary } from '../../store/library';
+import { getLibraryAlbumsArray } from '../../store/library/libraryAlbums';
 import AlbumsBody from './AlbumsBody';
 import './Library.css';
 import LibraryHeader from './LibraryHeader';

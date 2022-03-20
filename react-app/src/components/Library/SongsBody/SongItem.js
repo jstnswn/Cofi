@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Modal } from '../../../context/Modal';
 import { setSong } from '../../../store/active';
 import { loadHome } from '../../../store/home';
-import { deleteLibrarySong } from '../../../store/library';
+import { deleteLibrarySong } from '../../../store/library/librarySongs';
 import SongEditForm from '../SongEditForm.js/index.js';
 import SongConfirmDelete from '../ConfirmModal/SongConfirmDelete';
 

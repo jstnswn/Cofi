@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { matchPath, useHistory, useLocation } from 'react-router-dom';
 import { Modal } from '../../context/Modal';
-import { deleteLibraryAlbum } from '../../store/library';
+import { deleteLibraryAlbum } from '../../store/library/libraryAlbums';
 import AlbumConfirmDelete from './ConfirmModal/AlbumConfirmDelete';
 
 export default function LibraryHeader({ libraryItems }) {
