@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import './LibrarySidebar.css'
 
 export default function LibrarySidebar() {
     const history = useHistory();
+    const location = useLocation();
     const user = useSelector(({ session }) => session.user);
 
-    const [libraryDisplay, setLibraryDisplay] = useState('songs');
 
-    const toggleAlbums = () => {
-        history.push(`/library/${user.username}/albums`)
-
-    };
-
-
-
-    const selection = history.location.pathname.split('/')[3];
+    const selection = location.pathname.split('/')[3];
 
     const defaultActive = selection
         ? ''

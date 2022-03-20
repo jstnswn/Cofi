@@ -54,7 +54,7 @@ export default function Library() {
 
     }, [dispatch])
 
-    
+
 
     const routes = (
         <>
@@ -82,19 +82,9 @@ export default function Library() {
             <div className='main-wrapper'>
                 <LibraryHeader libraryItems={libraryItems} />
                 <div id='library-body'>
-                    {/* <div className='library-body-header'>
-                        <p className='song-title column-title'>Title</p>
-                        <p className='song-artist column-title'>Artist</p>
-                        <p className='song-album column-title'>Album</p>
-                    </div>
-                    <div className='library-body-container'>
-                        {songs.map((song, idx) => (
 
-                            <SongsList key={idx} song={song}/>
-                        ))}
-                    </div> */}
-                    {/* {libraryBody} */}
-                    {routes}
+                        {routes}
+
 
                 </div>
             </div>
