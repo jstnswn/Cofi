@@ -4,11 +4,13 @@
     height: calc(100vh - 660px);
     font-family: var(--main-font);
     font-size: 16px;
-    margin-top: 50px;
-    margin-right: 20px;
+    /* margin-top: 50px; */
+    /* margin-right: 20px; */
     position: relative;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 
+    /* border: green 3px solid; */
+    margin: 50px 7px 0px 7px;
 }
 
 #library-body .library-album-body-header {
