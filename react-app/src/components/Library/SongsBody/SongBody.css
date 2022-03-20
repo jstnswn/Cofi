@@ -16,6 +16,7 @@
 
     width: 100%;
 
+    max-width: 880px;
 
 
     /* padding-left: 10%; */
@@ -46,6 +47,7 @@
 .library-song-body-header .column-title {
     font-family: var(--main-font);
     color: gray;
+    padding-left: 10px;
 
     /* text-align: center; */
 
@@ -64,6 +66,8 @@
 
     margin-right: auto;
     margin-left: auto;
+
+    max-width: 880px;
 
     /* border: green 2px solid; */
 
@@ -100,6 +104,7 @@
     grid-template-columns: 35% 35% 25% 5%;
     display: grid;
     position: relative;
+    padding-left: 10px;
     /* padding-left: 10%; */
     /* height: 10px; */
 }
