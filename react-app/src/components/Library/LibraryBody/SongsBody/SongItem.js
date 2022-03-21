@@ -4,8 +4,9 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Modal } from '../../../../context/Modal';
 import { setSong } from '../../../../store/active';
 import { loadHome } from '../../../../store/home';
-import { deleteLibrarySong } from '../../../../store/library/librarySongs';
+import { deleteLibrarySong, patchSongAlbum } from '../../../../store/library/librarySongs';
 import SongEditForm from '../../SongEditForm.js/index.js';
+import ConfirmSingle from './ConfirmSingle';
 import SongConfirmDelete from './SongConfirmDelete';
 
 export default function SongItem({ song }) {
@@ -13,7 +14,6 @@ export default function SongItem({ song }) {
     const user = useSelector(({ session }) => session.user);
 
     const album = song.album;
-    console.log('albuM: ', album)
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -23,22 +23,32 @@ export default function SongItem({ song }) {
     const [showMenu, setShowMenu] = useState(false);
     const [showConfirmDel, setShowConfirmDel] = useState(false);
     const [showEditMenu, setShowEditMenu] = useState(false);
+    const [showSingleConfirm, setShowSingleConfirm] = useState(false)
 
     const openEditMenu = () => setShowEditMenu(true);
     const closeEditMenu = () => setShowEditMenu(false);
-    const openConfirmModal = () => setShowConfirmDel(true);
-    const closeConfirmModal = () => setShowConfirmDel(false);
+    const openConfirmDel = () => setShowConfirmDel(true);
+    const closeConfirmDel = () => setShowConfirmDel(false);
+    const openConfirmSingle = () => setShowSingleConfirm(true);
+    const closeConfirmSingle = () => setShowSingleConfirm(false);
+
 
     const playSong = () => {
         dispatch(setSong(song));
     };
 
     const deleteSong = async () => {
-        closeConfirmModal();
+        closeConfirmDel();
 
       dispatch(deleteLibrarySong(song.id, album?.id))
         .then(() => dispatch(loadHome()))
 
+    };
+
+    const updateSongAlbum = async () => {
+        closeConfirmSingle();
+
+        dispatch(patchSongAlbum(song.id))
     };
 
     const openDropdown = () => setShowMenu(true);
@@ -83,7 +93,11 @@ export default function SongItem({ song }) {
                 <div className='library-list-dropdown'>
                     <ul>
                         <li onClick={openEditMenu}>Edit Song</li>
-                        <li onClick={openConfirmModal}>Delete Song</li>
+                        <li onClick={openConfirmDel}>Delete Song</li>
+                        {album && <li onClick={openConfirmSingle}>Make Single</li>}
+
+                        <li>Move to Album</li>
+                        <li>Add to Playlist</li>
                     </ul>
                 </div>
             )}
@@ -95,8 +109,14 @@ export default function SongItem({ song }) {
             )}
 
             {showConfirmDel && (
-                <Modal onClose={closeConfirmModal}>
-                    <SongConfirmDelete closeModal={closeConfirmModal} deleteSong={deleteSong} song={song}/>
+                <Modal onClose={closeConfirmDel}>
+                    <SongConfirmDelete closeModal={closeConfirmDel} deleteSong={deleteSong} song={song}/>
+                </Modal>
+            )}
+
+            {showSingleConfirm && (
+                <Modal onClose={closeConfirmSingle}>
+                    <ConfirmSingle closeModal={closeConfirmSingle} song={song} update={updateSongAlbum}/>
                 </Modal>
             )}
         </div>

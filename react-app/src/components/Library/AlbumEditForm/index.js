@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { patchAlbum } from '../../../store/library/libraryAlbums';
 import './AlbumEditForm.css'
 
-export default function AlbumEditForm({closeModal, album}) {
+export default function AlbumEditForm({ closeModal, album }) {
     const dispatch = useDispatch();
 
     const [image, setImage] = useState(null);
@@ -15,7 +15,7 @@ export default function AlbumEditForm({closeModal, album}) {
 
     // const album = useSelector(({ library }) => library.albums.byIds[albumId])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         if (disableSubmit) return;
 
@@ -25,7 +25,8 @@ export default function AlbumEditForm({closeModal, album}) {
             albumId: album.id
         };
 
-        dispatch(patchAlbum(payload));
+        await dispatch(patchAlbum(payload));
+        closeModal();
     };
 
     const imageInputRef = useRef(null);

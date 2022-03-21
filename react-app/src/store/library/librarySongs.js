@@ -102,6 +102,24 @@ export const patchSong = (payload) => async dispatch => {
     }
 };
 
+export const patchSongAlbum = (songId, albumId) => async dispatch => {
+    const res = await fetch(`/api/songs/${songId}/albums/${albumId ? albumId : 0}`, {
+        method: 'PATCH',
+        // headers: {'Content-Type': 'application/json'},
+        // body: JSON.stringify({albumId})
+    })
+
+    if (res.ok) {
+        const data = await res.json();
+        // dispatch(removeSong(songId, albumId));
+        dispatch(loadSong(data.song));
+    } else {
+        const errors = await res.json();
+        return errors.errors;
+    }
+}
+
+
 export const deleteLibrarySong = (songId, albumId) => async dispatch => {
     const res = await fetch(`/api/songs/${songId}`, { method: 'DELETE' });
 
