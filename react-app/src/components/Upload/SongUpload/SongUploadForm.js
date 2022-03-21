@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadHome, loadHomeAlbums, loadNewSong } from '../../../store/home';
-import { uploadSong } from '../../../store/library';
+import { uploadSong } from '../../../store/library/librarySongs';
 
 export default function SongUploadForm({ closeModal }) {
     const dispatch = useDispatch();

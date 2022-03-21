@@ -1,6 +1,6 @@
 from .db import db
 from datetime import datetime
-from .album_song import album_songs
+# from .album_song import album_songs
 from .album_like import album_likes
 
 class Album(db.Model):
@@ -16,8 +16,7 @@ class Album(db.Model):
 
     user = db.relationship('User', back_populates='albums')
     artist = db.relationship('Artist', back_populates='albums')
-    songs = db.relationship('Song', back_populates='albums',
-                            secondary=album_songs, cascade='all, delete-orphan', single_parent=True)
+    songs = db.relationship('Song', back_populates='album', cascade='all, delete-orphan')
     likers = db.relationship('User', back_populates='liked_albums', secondary=album_likes)
 
     # for songs
@@ -25,7 +24,8 @@ class Album(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'artist': self.artist.to_dict()
+            'artist': self.artist.to_dict(),
+            'image_url': self.image_url
         }
 
     # for user

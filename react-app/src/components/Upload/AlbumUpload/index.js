@@ -8,7 +8,7 @@ export default function AlbumUploadModal() {
     const openModal = (e) => setShowModal(true);
 
     const closeModal = (e) => {
-        e.stopPropagation()
+        if (e) e.stopPropagation()
         setShowModal(false);
     }
 

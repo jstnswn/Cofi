@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadHome } from '../../../store/home';
-import { getLibraryAlbumsArray, patchSong } from '../../../store/library';
+import { patchSong } from '../../../store/library/librarySongs';
+import { getLibraryAlbumsArray } from '../../../store/library/libraryAlbums';
 import './SongEditForm.css';
 
 export default function SongEditForm({ closeModal, song, album }) {

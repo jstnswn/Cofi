@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { matchPath, useHistory, useLocation } from 'react-router-dom';
-import { Modal } from '../../context/Modal';
-import { deleteLibraryAlbum } from '../../store/library';
-import AlbumConfirmDelete from './ConfirmModal/AlbumConfirmDelete';
+import { Modal } from '../../../context/Modal';
+import { deleteLibraryAlbum } from '../../../store/library/libraryAlbums';
+import AlbumEditForm from '../AlbumEditForm';
+import AlbumConfirmDelete from './AlbumConfirmDelete';
+// import HeaderDropdown from './HeaderDropdown';
+import './LibraryHeader.css';
 
 export default function LibraryHeader({ libraryItems }) {
     const dispatch = useDispatch();
-    const [showEditMenu, setShowEditMenu] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
 
     const location = useLocation();
     const history = useHistory();
@@ -33,18 +37,23 @@ export default function LibraryHeader({ libraryItems }) {
     }
 
     useEffect(() => {
-        if (!showEditMenu) return;
+        if (!showDropdown) return;
 
-        const closeEditMenu = () => setShowEditMenu(false)
-        document.addEventListener('click', closeEditMenu);
+        const closeDropdown = () => setShowDropdown(false)
+        document.addEventListener('click', closeDropdown);
 
-        return () => document.removeEventListener('click', closeEditMenu);
-    }, [showEditMenu])
+        return () => document.removeEventListener('click', closeDropdown);
+    }, [showDropdown])
 
-    const openEditMenu = () => setShowEditMenu(true);
+
+
+    const openDropdown = () => setShowDropdown(true);
 
     const openConfirmMenu = () => setShowConfirm(true);
     const closeConfirmMenu = () => setShowConfirm(false);
+
+    const openEditForm = () => setShowEdit(true);
+    const closeEditForm = () => setShowEdit(false);
 
 
     const deleteAlbum = async () => {
@@ -65,14 +74,15 @@ export default function LibraryHeader({ libraryItems }) {
             <div className='header-title-container'>
                 <h2 className='library-header-title'>{headerTitle}
                     {albumIdParam && userParam === user.username && (
-                        <span><i onClick={openEditMenu} className='fas fa-ellipsis-h libary-header-edit'></i></span>)}
+                        <span><i onClick={openDropdown} className='fas fa-ellipsis-h libary-header-edit'></i></span>)}
                 </h2>
 
-                {showEditMenu && (
+                {showDropdown && (
                     <div className='library-list-dropdown album'>
                         <ul>
-                            <li onClick={openEditMenu}>Edit Song</li>
+                            {/* <li onClick={openEditMenu}>Edit Song</li> */}
                             <li onClick={openConfirmMenu}>Remove Album</li>
+                            <li onClick={openEditForm}>Edit Details</li>
                         </ul>
                     </div>
                 )}
@@ -80,6 +90,12 @@ export default function LibraryHeader({ libraryItems }) {
                 {showConfirm && (
                     <Modal onClose={closeConfirmMenu}>
                         <AlbumConfirmDelete closeModal={closeConfirmMenu} deleteAlbum={deleteAlbum} album={libraryItems.albums.byIds[albumIdParam]} />
+                    </Modal>
+                )}
+
+                {showEdit && (
+                    <Modal onClose={closeEditForm}>
+                        <AlbumEditForm closeModal={closeEditForm} album={libraryItems.albums.byIds[albumIdParam]}/>
                     </Modal>
                 )}
             </div>

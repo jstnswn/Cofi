@@ -160,3 +160,13 @@ def update_song(song_id):
     db.session.commit()
 
     return {'song': song.to_dict()}, 201
+
+@song_routes.route('/<int:song_id>/albums/<int:album_id>', methods=['PATCH'])
+def update_song_album(song_id, album_id):
+    song = Song.query.get(song_id)
+
+    song.album_id = album_id if album_id else None
+
+    db.session.commit()
+
+    return {'song': song.to_dict()}, 201

@@ -70,13 +70,17 @@ const cleanHomeAlbums = () => {
 
 export const getFeaturedSongs = () => async dispatch => {
     // Featured album currently returns a random album from 10 most recent
+    console.log(1)
     const res = await fetch('/api/songs/featured');
 
     if (res.ok) {
         const data = await res.json();
         console.log('featured songs thunk: ', data.songs)
+
         dispatch(loadFeaturedSongs(data.songs));
+
     } else {
+        console.log(2)
         const error = await res.json();
         console.log("errors: ', ", error)
         return error.error;

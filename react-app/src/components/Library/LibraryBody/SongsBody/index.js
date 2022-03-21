@@ -2,7 +2,7 @@ import React from 'react'
 import SongItem from './SongItem';
 import './SongBody.css';
 import { useParams } from 'react-router-dom';
-import { orderContent, sortSongsArray } from '../../utils';
+import { orderContent, sortSongsArray } from '../../../utils';
 import { useSelector } from 'react-redux';
 
 export default function SongsBody() {
@@ -26,9 +26,7 @@ export default function SongsBody() {
 
             <div className='library-body-container'>
                 <div className='library-songs-body-container'>
-                    {songs.map((song, idx) => (song.albums?.length
-                        ? (song.albums.map((album, idx) => <SongItem key={idx} song={song} album={album}/>))
-                        : (<SongItem key={idx} song={song}/>)))}
+                    {songs.map((song, idx) => <SongItem key={idx} song={song} />)}
                 </div>
 
             </div>

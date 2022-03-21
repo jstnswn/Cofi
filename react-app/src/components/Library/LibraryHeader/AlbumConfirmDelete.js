@@ -1,5 +1,5 @@
 import React from 'react'
-import './SongConfirmDelete.css';
+import '../LibraryBody/SongsBody/SongConfirmDelete.css'
 
 export default function AlbumConfirmDelete({ album, closeModal, deleteAlbum }) {
 

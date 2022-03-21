@@ -1,3 +1,4 @@
+import { combineReducers } from "redux";
 import { getImageUrl, normalize, orderIds } from "./utils";
 
 const LOAD_SONGS = 'library/LOAD_SONGS';
@@ -135,6 +136,8 @@ export const deleteLibrarySong = (songId, albumId) => async dispatch => {
     if (res.ok) dispatch(removeSong(songId, albumId));
 };
 
+
+
 export const getLibraryAlbums = () => async dispatch => {
     const res = await fetch('/api/albums/current_user');
 
@@ -218,7 +221,7 @@ const initialState = {
     // currentPlaylist: null,
 };
 
-export default function reducer(state = initialState, action) {
+function songReducer(state = initialState, action) {
     let normalizedData;
     let orderedIds;
     let stateCopy;
@@ -281,6 +284,37 @@ export default function reducer(state = initialState, action) {
 
             return stateCopy;
 
+
+        default:
+            return state;
+    };
+};
+
+function albumReducer(state = initialState, action) {
+    let normalizedData;
+    let orderedIds;
+    let stateCopy;
+    let orderArray;
+    let idx;
+    let albumSongs;
+
+    switch (action.type) {
+        case REMOVE_SONG:
+            stateCopy = { ...state };
+            orderArray = stateCopy.songs.order;
+
+            idx = orderArray.findIndex(id => id === action.songId);
+            orderArray.splice(idx, 1);
+
+            delete stateCopy.songs.byIds[action.songId];
+            if (action.albumId) {
+                albumSongs = stateCopy.albums.byIds[action.albumId].songs;
+                idx = albumSongs.findIndex(song => song.id === action.songId);
+                albumSongs.splice(idx, 1);
+            }
+
+            return stateCopy;
+
         case LOAD_ALBUM:
             return {
                 ...state,
@@ -305,7 +339,7 @@ export default function reducer(state = initialState, action) {
             }
 
         case REMOVE_ALBUM:
-            stateCopy = {...state};
+            stateCopy = { ...state };
             orderArray = stateCopy.albums.order;
 
             idx = orderArray.findIndex(id => id === action.albumId);
@@ -320,3 +354,11 @@ export default function reducer(state = initialState, action) {
             return state;
     };
 };
+
+const libraryReducer =  combineReducers({
+   songReducer,
+   albumReducer
+});
+
+
+export default libraryReducer;
