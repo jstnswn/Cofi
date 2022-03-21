@@ -6,12 +6,15 @@ import { setSong } from '../../../../store/active';
 import { loadHome } from '../../../../store/home';
 import { deleteLibrarySong, patchSongAlbum } from '../../../../store/library/librarySongs';
 import SongEditForm from '../../SongEditForm.js/index.js';
+import AlbumList from './AlbumList';
+import ChangeAlbum from './AlbumList';
 import ConfirmSingle from './ConfirmSingle';
 import SongConfirmDelete from './SongConfirmDelete';
 
 export default function SongItem({ song }) {
     // console.log('song', song)
     const user = useSelector(({ session }) => session.user);
+
 
     const album = song.album;
 
@@ -24,6 +27,7 @@ export default function SongItem({ song }) {
     const [showConfirmDel, setShowConfirmDel] = useState(false);
     const [showEditMenu, setShowEditMenu] = useState(false);
     const [showSingleConfirm, setShowSingleConfirm] = useState(false)
+    const [showChangeAlbum, setShowChangeAlbum] = useState(false);
 
     const openEditMenu = () => setShowEditMenu(true);
     const closeEditMenu = () => setShowEditMenu(false);
@@ -31,6 +35,8 @@ export default function SongItem({ song }) {
     const closeConfirmDel = () => setShowConfirmDel(false);
     const openConfirmSingle = () => setShowSingleConfirm(true);
     const closeConfirmSingle = () => setShowSingleConfirm(false);
+    const openChangeAlbum = () => setShowChangeAlbum(true);
+    const closeChangeAlbum = () => setShowChangeAlbum(false);
 
 
     const playSong = () => {
@@ -45,10 +51,11 @@ export default function SongItem({ song }) {
 
     };
 
-    const updateSongAlbum = async () => {
+    const updateSongAlbum = async (songId, albumId) => {
         closeConfirmSingle();
+        closeChangeAlbum();
 
-        dispatch(patchSongAlbum(song.id))
+        dispatch(patchSongAlbum(songId, albumId))
     };
 
     const openDropdown = () => setShowMenu(true);
@@ -69,6 +76,8 @@ export default function SongItem({ song }) {
         };
 
     }, [showMenu])
+
+
 
     return (
         <div
@@ -96,7 +105,11 @@ export default function SongItem({ song }) {
                         <li onClick={openConfirmDel}>Delete Song</li>
                         {album && <li onClick={openConfirmSingle}>Make Single</li>}
 
-                        <li>Move to Album</li>
+                        <li
+                            // onMouseEnter={openChangeAlbum}
+                            // onMouseLeave={handleMouseLeave}
+                            onClick={openChangeAlbum}
+                        >Move to Album</li>
                         <li>Add to Playlist</li>
                     </ul>
                 </div>
@@ -117,6 +130,12 @@ export default function SongItem({ song }) {
             {showSingleConfirm && (
                 <Modal onClose={closeConfirmSingle}>
                     <ConfirmSingle closeModal={closeConfirmSingle} song={song} update={updateSongAlbum}/>
+                </Modal>
+            )}
+
+            {showChangeAlbum && (
+                <Modal onClose={closeChangeAlbum}>
+                    <AlbumList song={song} closeModal={closeChangeAlbum} update={updateSongAlbum}/>
                 </Modal>
             )}
         </div>

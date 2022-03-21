@@ -137,7 +137,6 @@ export const getLibraryAlbumsArray = (state) => {
     return orderedIds.map(id => state.library.albums.byIds[id]);
 }
 
-
 // Reducer
 
 const initialState = {

@@ -83,7 +83,7 @@
 }
 
 .update-form.album .form-content input {
-    background-color: rgb(54, 54, 54);
+    background-color: var(--dropdown-gray);
     border: none;
     height: 30px;
     border-radius: 3px;
