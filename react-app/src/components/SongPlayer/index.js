@@ -25,8 +25,13 @@ export default function SongPlayer({ song }) {
             </div>
             {/* {showOverlay && ( */}
             <div className='song-player-overlay' onClick={playSong}>
-                <p className='song-title'>{song.title}</p>
-                <p className='song-artist'>{song.artist.name}</p>
+                <i className='far fa-heart heart'></i>
+
+                {/* <div> */}
+                    <p className='song-title'>{song.title}</p>
+                    <p className='song-artist'>{song.artist.name}</p>
+
+                {/* </div> */}
             </div>
 
             {/* )} */}
