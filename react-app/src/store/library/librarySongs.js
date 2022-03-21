@@ -102,8 +102,9 @@ export const patchSong = (payload) => async dispatch => {
     }
 };
 
-export const patchSongAlbum = (songId, albumId) => async dispatch => {
-    const res = await fetch(`/api/songs/${songId}/albums/${albumId ? albumId : 0}`, {
+export const patchSongAlbum = (songId, toAlbumId, fromAlbumId) => async dispatch => {
+    console.log('albumID', songId)
+    const res = await fetch(`/api/songs/${songId}/albums/${toAlbumId ? toAlbumId : 0}`, {
         method: 'PATCH',
         // headers: {'Content-Type': 'application/json'},
         // body: JSON.stringify({albumId})
@@ -111,7 +112,9 @@ export const patchSongAlbum = (songId, albumId) => async dispatch => {
 
     if (res.ok) {
         const data = await res.json();
+        console.log('hiiii')
         // dispatch(removeSong(songId, albumId));
+        dispatch(removeAlbumSong(songId, fromAlbumId))
         dispatch(loadSong(data.song));
     } else {
         const errors = await res.json();
@@ -124,7 +127,7 @@ export const deleteLibrarySong = (songId, albumId) => async dispatch => {
     const res = await fetch(`/api/songs/${songId}`, { method: 'DELETE' });
 
     if (res.ok) {
-        dispatch(removeSong(songId, albumId));
+        // dispatch(removeSong(songId, albumId));
         if (albumId) dispatch(removeAlbumSong(songId, albumId))
         // if (albumId) dispatch(getLibraryAlbums())
     }
