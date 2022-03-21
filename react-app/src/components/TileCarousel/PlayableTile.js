@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSong } from '../../store/active';
+import { createAlbumLike, createSongLike, deleteAlbumLike, deleteSongLike } from '../../store/session';
 import './PlayableTile.css';
 
 export default function PlayableTile({ item, option }) {
@@ -10,22 +11,38 @@ export default function PlayableTile({ item, option }) {
     const likedSongIds = user.liked.song_ids;
     const likedAlbumIds = user.liked.album_ids;
 
+    const likeSong = () => dispatch(createSongLike(item.id));
+    const unlikeSong = () => dispatch(deleteSongLike(item.id));
+    const likeAlbum = () => dispatch(createAlbumLike(item.id));
+    const unlikeAlbum = () => dispatch(deleteAlbumLike(item.id));
+
     let song;
     let likeIconClass;
+    let toggleLike;
 
     if (option === 'songs') {
         song = item
-        likeIconClass = likedSongIds.includes(item.id)
-            ? 'fas fa-heart'
-            : 'far fa-heart'
+
+        if (likedSongIds.includes(item.id)) {
+            likeIconClass = 'fas fa-heart';
+            toggleLike = unlikeSong;
+
+        } else {
+            likeIconClass = 'far fa-heart';
+            toggleLike = likeSong;
+        }
 
     } else if (option === 'albums') {
         song = item.songs[0]
-        likeIconClass = likedAlbumIds.includes(item.id)
-            ? 'fas fa-heart'
-            : 'far fa-heart'
-    }
 
+        if (likedAlbumIds.includes(item.id)) {
+            likeIconClass = 'fas fa-heart';
+            toggleLike = unlikeAlbum;
+        } else {
+            likeIconClass = 'far fa-heart';
+            toggleLike = likeAlbum;
+        }
+    }
 
 
     const playSong = () => {
@@ -50,7 +67,7 @@ export default function PlayableTile({ item, option }) {
 
                 </div>
                 <div className='icon-container'>
-                    {hovered && <i className={likeIconClass}></i>}
+                    {hovered && <i onClick={toggleLike} className={likeIconClass}></i>}
                 </div>
             </div>
         </div>

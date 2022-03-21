@@ -1,7 +1,29 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { createAlbumLike, deleteAlbumLike } from '../../store/session';
 
 export default function AlbumPlayerAlbum({ album }) {
+    const dispatch = useDispatch()
     const [hovered, setHovered] = useState(false);
+
+    const user = useSelector(({ session }) => session.user);
+
+    const likedAlbumIds = user.liked.album_ids;
+
+    const likeAlbum = () => dispatch(createAlbumLike(album.id));
+    const unlikeAlbum = () => dispatch(deleteAlbumLike(album.id));
+
+    let likeIconClass;
+    let toggleLike;
+
+    if (likedAlbumIds.includes(album.id)) {
+        likeIconClass = 'fas fa-heart';
+        toggleLike = unlikeAlbum;
+    } else {
+        likeIconClass = 'far fa-heart';
+        toggleLike = likeAlbum;
+    }
+
     return (
         <div
             className='album-player-album'
@@ -15,7 +37,7 @@ export default function AlbumPlayerAlbum({ album }) {
                     src={album.image_url}
                 />
                 <div className='icon-container'>
-                    {hovered && <i className='far fa-heart heart'></i>}
+                    {hovered && <i onClick={toggleLike} className={likeIconClass}></i>}
 
                 </div>
             </div>

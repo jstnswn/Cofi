@@ -5,6 +5,7 @@ import { Modal } from '../../../../context/Modal';
 import { setSong } from '../../../../store/active';
 import { loadHome } from '../../../../store/home';
 import { deleteLibrarySong, patchSongAlbum } from '../../../../store/library/librarySongs';
+import { createSongLike, deleteSongLike } from '../../../../store/session';
 import SongEditForm from '../../SongEditForm.js/index.js';
 import AlbumList from './AlbumList';
 import ChangeAlbum from './AlbumList';
@@ -36,11 +37,25 @@ export default function SongItem({ song }) {
     const openChangeAlbum = () => setShowChangeAlbum(true);
     const closeChangeAlbum = () => setShowChangeAlbum(false);
 
-    const likedSongIds = user.liked.song_ids;
-    const likeIconClass = likedSongIds.includes(song.id)
-        ? 'fas fa-heart'
-        : 'far fa-heart';
+    const likeSong = () => dispatch(createSongLike(song.id));
+    const unlikeSong = () => dispatch(deleteSongLike(song.id));
 
+    const likedSongIds = user.liked.song_ids;
+
+    let likeIconClass;
+    let toggleLike;
+
+    // const likeIconClass = likedSongIds.includes(song.id)
+    //     ? 'fas fa-heart'
+    //     : 'far fa-heart';
+    if (likedSongIds.includes(song.id)) {
+        likeIconClass = 'fas fa-heart';
+        toggleLike = unlikeSong;
+
+    } else {
+        likeIconClass = 'far fa-heart';
+        toggleLike = likeSong;
+    }
 
 
     const playSong = () => {
@@ -104,7 +119,7 @@ export default function SongItem({ song }) {
                 {album ? <p className='item' onClick={() => history.push(`/library/${user.username}/albums/${album.id}`)}>{album.title}</p> : <p className='item'>--</p>}
 
             </div>
-            <i className={`${likeIconClass} heart`}></i>
+            <i onClick={toggleLike} className={`${likeIconClass} heart`}></i>
             <i className={`fa-solid fa-ellipsis song-options ${hovered ? 'active' : ''}`} onClick={openDropdown}></i>
 
             {showMenu && (

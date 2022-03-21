@@ -1,16 +1,35 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom'
+import { createAlbumLike, deleteAlbumLike } from '../../../../store/session';
 
 export default function AlbumItem({ album, idx, user }) {
+    const dispatch = useDispatch()
     const history = useHistory();
     const [hovered, setHovered] = useState(false);
 
+    const likeAlbum = (e) => {
+        e.stopPropagation();
+        dispatch(createAlbumLike(album.id));
+    }
+    const unlikeAlbum = (e) => {
+        e.stopPropagation();
+        dispatch(deleteAlbumLike(album.id));
+    }
+
     const likedAlbumIds = user.liked.album_ids;
 
-    const likeIconClass = likedAlbumIds.includes(album.id)
-        ? 'fas fa-heart'
-        : 'far fa-heart'
+    let likeIconClass;
+    let toggleLike;
+
+
+    if (likedAlbumIds.includes(album.id)) {
+        likeIconClass = 'fas fa-heart';
+        toggleLike = unlikeAlbum;
+    } else {
+        likeIconClass = 'far fa-heart';
+        toggleLike = likeAlbum;
+    }
 
 
     return (
@@ -34,7 +53,7 @@ export default function AlbumItem({ album, idx, user }) {
                     <div className='tile-artist'>{album?.artist.name}</div>
                 </div>
                 <div className='icon-container'>
-                    {hovered && <i className={likeIconClass}></i>}
+                    {hovered && <i onClick={toggleLike} className={likeIconClass}></i>}
                 </div>
             </div>
 

@@ -22,7 +22,7 @@ def get_featured_album():
         return {'error': 'Unable to get album from database'}
 
     return {'album': album.to_dict()}
-
+    
 
 @album_routes.route('/new/<int:limit>')
 def get_new_albums(limit):
@@ -43,7 +43,7 @@ def get_most_liked_albums(limit):
     Returns list of most liked albums. Can specify the amount via limit
     """
 
-    albums = Album.query.order_by(Album.fav_users.count().desc()).limit(5).all()
+    albums = Album.query.order_by(Album.likers.count().desc()).limit(5).all()
 
     return {'albums': [album.to_dict() for album in albums]}
 
