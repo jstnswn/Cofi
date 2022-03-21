@@ -1,10 +1,10 @@
 from random import randint
-from app.models import db, User, Album
+from app.models import db, User, Song
 from app.seeds.users import users
 
-def add_favorites_to_albums(album):
+def add_favorites_to_songs(song):
     for user in users:
         flip = randint(0, 1)
 
         if flip == 1:
-            album.fav_users.append(user)
+            song.fav_users.append(user)

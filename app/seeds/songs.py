@@ -1,4 +1,6 @@
 from app.models import db, Song
+# from app.seeds.users import users
+from app.seeds.song_favorites import add_favorites_to_songs
 
 
 
@@ -664,6 +666,9 @@ songs = [
 
 def seed_songs():
     for song in songs:
+        # Add favorites
+        add_favorites_to_songs(song)
+
         db.session.add(song)
 
 
