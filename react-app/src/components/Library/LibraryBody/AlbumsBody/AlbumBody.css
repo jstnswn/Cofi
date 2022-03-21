@@ -10,7 +10,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
 
     margin: 0 7px;
-    
+
 }
 
 #library-body .library-album-body-header {
@@ -28,6 +28,7 @@
     font-family: var(--main-font);
     color: var(--text-main-white);
     margin: 10px;
+    width: 210px;
 }
 
 .album-item-container {
@@ -42,6 +43,16 @@
     position: relative;
     font-size: 4vw;
 } */
+
+.album-item-container .tile-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.album-item-container .icon-container {
+    padding: 5px;
+}
+
 
 .album-item-container .tile-image-container  .tile-art {
     object-fit: cover;

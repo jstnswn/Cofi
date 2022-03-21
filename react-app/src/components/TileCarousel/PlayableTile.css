@@ -34,6 +34,30 @@
     cursor: pointer;
 }
 
+
+.playable-tile .tile-footer{
+    /* border: red 1px solid; */
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.playable-tile .info-container {
+    /* border: green 1px solid; */
+}
+
+.playable-tile .icon-container {
+    /* border: blue 1px solid; */
+    padding: 5px;
+    /* justify-self: flex-end; */
+
+}
+
+.playable-tile .icon-container:hover {
+    /* opacity: 1; */
+}
+
+
 .item-title,
 .tile-artist {
     padding: 1px;

@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setSong } from '../../store/active';
 import './SongPlayer.css';
 
 export default function SongPlayer({ song }) {
     const dispatch = useDispatch();
+
+    const user = useSelector(({ session }) => session.user);
+    const likedSongIds = user.liked.song_ids;
+
     const [showOverlay, setShowOverlay] = useState(false);
 
     const playSong = () => dispatch(setSong(song));
+
+    const likeIconClass = likedSongIds.includes(song.id)
+        ? 'fas fa-heart'
+        : 'far fa-heart';
 
     return (
         <div
@@ -25,8 +33,13 @@ export default function SongPlayer({ song }) {
             </div>
             {/* {showOverlay && ( */}
             <div className='song-player-overlay' onClick={playSong}>
-                <p className='song-title'>{song.title}</p>
-                <p className='song-artist'>{song.artist.name}</p>
+                <i className={`${likeIconClass} heart`}></i>
+
+                {/* <div> */}
+                    <p className='song-title'>{song.title}</p>
+                    <p className='song-artist'>{song.artist.name}</p>
+
+                {/* </div> */}
             </div>
 
             {/* )} */}
