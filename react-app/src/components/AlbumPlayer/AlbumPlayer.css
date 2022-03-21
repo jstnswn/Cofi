@@ -94,6 +94,12 @@
   position: relative;
 }
 
+.album-player-song-box .song-options {
+  /* border: yellow 1px solid; */
+  position: absolute;
+  /* right: 0; */
+}
+
 .player-song-title {
   padding-bottom: 3px;
 }

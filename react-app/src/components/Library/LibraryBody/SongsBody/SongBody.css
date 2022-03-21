@@ -101,7 +101,7 @@
 
 .library-songs-body-container .list-box {
     width: 100%;
-    grid-template-columns: 35% 35% 25% 5%;
+    grid-template-columns: 35% 35% 17% 10% 3%;
     display: grid;
     position: relative;
     padding-left: 10px;
@@ -121,7 +121,16 @@
 
 .library-songs-body-container .album-list {
     grid-column-start: 3;
+}
 
+.library-songs-body-container .heart {
+    grid-column-start: 4;
+    /* border: red 1px solid; */
+    /* margin-right: auto;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto; */
+    margin: auto;
 }
 
 .library-songs-body-container .list-box:hover {
@@ -129,6 +138,7 @@
 }
 
 .library-songs-body-container .song-options {
+    grid-column-start: 5;
     color: var(--text-secondary-white);
     margin-top: auto;
     margin-bottom: auto;

@@ -14,8 +14,6 @@ import SongConfirmDelete from './SongConfirmDelete';
 export default function SongItem({ song }) {
     // console.log('song', song)
     const user = useSelector(({ session }) => session.user);
-
-
     const album = song.album;
 
     const dispatch = useDispatch();
@@ -37,6 +35,12 @@ export default function SongItem({ song }) {
     const closeConfirmSingle = () => setShowSingleConfirm(false);
     const openChangeAlbum = () => setShowChangeAlbum(true);
     const closeChangeAlbum = () => setShowChangeAlbum(false);
+
+    const likedSongIds = user.liked.song_ids;
+    const likeIconClass = likedSongIds.includes(song.id)
+        ? 'fas fa-heart'
+        : 'far fa-heart';
+
 
 
     const playSong = () => {
@@ -100,6 +104,7 @@ export default function SongItem({ song }) {
                 {album ? <p className='item' onClick={() => history.push(`/library/${user.username}/albums/${album.id}`)}>{album.title}</p> : <p className='item'>--</p>}
 
             </div>
+            <i className={`${likeIconClass} heart`}></i>
             <i className={`fa-solid fa-ellipsis song-options ${hovered ? 'active' : ''}`} onClick={openDropdown}></i>
 
             {showMenu && (
