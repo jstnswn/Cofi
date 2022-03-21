@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSong } from '../../store/active';
+import { createSongLike, deleteSongLike } from '../../store/session';
 
 export default function AlbumPlayerSongs({ song, idx }) {
     const dispatch = useDispatch();
@@ -13,7 +14,9 @@ export default function AlbumPlayerSongs({ song, idx }) {
     useEffect(() => {
         if (!showOptions) return;
 
-        const hideOptions = () => setShowOptions(false);
+        const hideOptions = (e) => {
+            if (!e.target.classList.contains('dd')) setShowOptions(false);
+        };
 
         document.addEventListener('click', hideOptions);
 
@@ -25,15 +28,27 @@ export default function AlbumPlayerSongs({ song, idx }) {
     const likedSongIds = user.liked.song_ids;
     // idx may be needed for edit options later on
 
-    const likeIconClass = likedSongIds.includes(song.id)
-        ? 'fas fa-heart'
-        : 'far fa-heart';
+    const likeSong = () => dispatch(createSongLike(song.id));
+    const unlikeSong = () => dispatch(deleteSongLike(song.id));
+
+    let likeIconClass;
+    let toggleLike;
+
+    // const likeIconClass = likedSongIds.includes(song.id)
+    //     ? 'fas fa-heart'
+    //     : 'far fa-heart';
+
+    if (likedSongIds.includes(song.id)) {
+        likeIconClass = 'fas fa-heart';
+        toggleLike = unlikeSong;
+    } else {
+        likeIconClass = 'far fa-heart';
+        toggleLike = likeSong;
+    }
 
     const playSong = () => {
         dispatch(setSong(song))
     };
-
-
 
     return (
         <div
@@ -48,8 +63,8 @@ export default function AlbumPlayerSongs({ song, idx }) {
                 <i className='fa-solid fa-ellipsis' onClick={seeOptions}></i>
 
             {showOptions && (
-                <div className='song-options'>
-                    <i className={likeIconClass}></i>
+                <div className='song-options dd'>
+                        <i onClick={toggleLike} className={`${likeIconClass} dd`}></i>
                 </div>
             )}
             </div>
