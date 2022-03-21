@@ -1,8 +1,8 @@
 from .db import db
 from datetime import datetime
 
-album_likes = db.Table(
-    'album_likes',
+album_favorites = db.Table(
+    'album_favorites',
     db.Column('user_from_id', db.Integer, db.ForeignKey(
         'users.id'), primary_key=True),
     db.Column('album_id', db.Integer, db.ForeignKey(
