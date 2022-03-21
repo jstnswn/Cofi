@@ -5,7 +5,7 @@ import './PlayableTile.css';
 
 export default function PlayableTile({ item, option }) {
     const dispatch = useDispatch()
-    const [isShown, setIsShown] = useState();
+    const [hovered, setHovered] = useState();
 
     const song = option === 'songs'
         ? item
@@ -18,17 +18,23 @@ export default function PlayableTile({ item, option }) {
     return (
         <div
             className='playable-tile'
-            onMouseEnter={() => setIsShown(true)}
-            onMouseLeave={() => setIsShown(false)}
-         >
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+        >
             <div className='tile-image-container' onClick={playSong}>
 
                 <img alt='content art' className='tile-art' src={item.image_url} />
 
             </div>
-            <div>
-                <div className='item-title'>{item.title}</div>
-                <div className='tile-artist'>{item.artist?.name}</div>
+            <div className='tile-footer'>
+                <div className='info-container'>
+                    <div className='item-title'>{item.title}</div>
+                    <div className='tile-artist'>{item.artist?.name}</div>
+
+                </div>
+                <div className='icon-container'>
+                    {hovered && <i className='far fa-heart'></i>}
+                </div>
             </div>
         </div>
     )
