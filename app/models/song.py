@@ -33,7 +33,7 @@ class Song(db.Model):
             'image_url': self.image_url,
             'track_number': self.track_number,
             'private': self.private,
-            'likers': [liker.s_to_dict() for liker in self.likers]
+            'fav_users': [liker.s_to_dict() for liker in self.fav_users]
         }
 
 
@@ -48,5 +48,5 @@ class Song(db.Model):
             'image_url': self.image_url,
             'track_number': self.track_number,
             'private': self.private,
-            'likers': [liker.s_to_dict() for liker in self.likers]
+            'fav_users': [liker.s_to_dict() for liker in self.fav_users]
         }
