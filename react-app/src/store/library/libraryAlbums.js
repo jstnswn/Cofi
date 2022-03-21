@@ -209,12 +209,9 @@ export default function reducer(state = initialState, action) {
 
         case REMOVE_ALBUM_SONG:
             stateCopy = { ...state };
-            console.log('state: ', stateCopy);
-            console.log('albumId', action.albumId)
             albumSongs = stateCopy.byIds[action.albumId].songs;
-                idx = albumSongs.findIndex(song => song.id === action.songId);
-                albumSongs.splice(idx, 1);
-
+            idx = albumSongs.findIndex(song => song.id === action.songId);
+            albumSongs.splice(idx, 1);
             return stateCopy;
 
         default:

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, FileField
+from wtforms import StringField, BooleanField, FileField, IntegerField
 from wtforms.validators import DataRequired, Length, ValidationError
 from app.models import Song, Artist
 
@@ -14,9 +14,11 @@ def artist_exists(form, field):
 class SongForm(FlaskForm):
     title = StringField('title', validators=[
         DataRequired('Song title is required')])
-    artist = StringField('artist', validators=[
-        DataRequired('Artist is required'),
-        Length(max=50, message='Artist name must be less than 50 characters')])
+    artist = StringField('artist')
+    album_id = IntegerField('album_id')
+    # artist = StringField('artist', validators=[
+    #     DataRequired('Artist is required'),
+    #     Length(max=50, message='Artist name must be less than 50 characters')])
 
     #TODO song validation
     # song = FileField('song', validators=[DataRequired()])

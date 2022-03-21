@@ -94,13 +94,13 @@ def upload_song():
 
     song_url = song_upload['url']
 
-
     new_song = Song(
         title=form.title.data,
         user_id=current_user_id,
         artist_id=artist_id,
         song_url=song_url,
-        image_url=form.image_url.data
+        image_url=form.image_url.data,
+        album_id=form.album_id.data
     )
 
     db.session.add(new_song)
