@@ -9,6 +9,7 @@ class Playlist(db.Model):
     title = db.Column(db.String(50), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     private = db.Column(db.Boolean, default=False)
+    image_url = db.Column(db.String(500))
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     user = db.relationship('User', back_populates='playlists')
