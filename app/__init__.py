@@ -44,7 +44,7 @@ app.register_blueprint(album_routes, url_prefix='/api/albums')
 app.register_blueprint(image_routes, url_prefix='/api/images')
 app.register_blueprint(song_like_routes, url_prefix='/api/song_likes')
 app.register_blueprint(album_like_routes, url_prefix='/api/album_likes')
-app.register_blueprint(playlist_routes, url_prefix='/playlists')
+app.register_blueprint(playlist_routes, url_prefix='/api/playlists')
 db.init_app(app)
 Migrate(app, db)
 

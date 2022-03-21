@@ -18,6 +18,6 @@ class Playlist(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'title': self.name,
+            'title': self.title,
             'songs': [song.a_to_dict() for song in self.songs]
         }
