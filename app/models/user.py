@@ -1,8 +1,8 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from .song_like import song_likes
-from .album_like import album_likes
+from .song_favorites import song_favorites
+from .album_favorites import album_favorites
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -14,8 +14,8 @@ class User(db.Model, UserMixin):
 
     albums = db.relationship('Album', back_populates='user')
     songs = db.relationship('Song', back_populates='user')
-    liked_songs = db.relationship('Song', back_populates='likers', secondary=song_likes)
-    liked_albums = db.relationship('Album', back_populates='likers', secondary=album_likes)
+    favorite_songs = db.relationship('Song', back_populates='fav_users', secondary=song_favorites)
+    favorite_albums = db.relationship('Album', back_populates='fav_users', secondary=album_favorites)
 
     @property
     def password(self):

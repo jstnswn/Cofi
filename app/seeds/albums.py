@@ -1,7 +1,7 @@
 from app.models import db, Album
 from app.seeds.songs import songs
-from app.seeds.users import users
-from app.seeds.album_likes import add_likers_to_albums
+# from app.seeds.users import users
+from app.seeds.album_favorites import add_favorites_to_albums
 
 albums = [
     Album( #1
@@ -91,8 +91,8 @@ def seed_albums():
     # albums[0].likers.append(demo)
 
     for album in albums:
-        # Add likes
-        add_likers_to_albums(album, users)
+        # Add favorites
+        add_favorites_to_albums(album)
 
         db.session.add(album)
 
