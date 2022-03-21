@@ -2,6 +2,12 @@
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 
+const ADD_SONG_LIKE = 'session/ADD_SONG_LIKE';
+const REMOVE_SONG_LIKE = 'session/REMOVE_SONG_LIKE';
+const ADD_ALBUM_LIKE = 'session/ADD_ALBUM_LIKE';
+const REMOVE_ALBUM_LIKE = 'session/REMOVE_ALBUM_LIKE';
+
+
 const setUser = (user) => ({
   type: SET_USER,
   payload: user
@@ -11,7 +17,33 @@ const removeUser = () => ({
   type: REMOVE_USER,
 })
 
-const initialState = { user: null };
+const addSongLike = (songId) => {
+  return {
+    type: ADD_SONG_LIKE,
+    songId,
+  };
+};
+
+const removeSongLike = (songId) => {
+  return {
+    type: REMOVE_SONG_LIKE,
+    songId
+  };
+};
+
+const addAlbumLike = (albumId) => {
+  return {
+    type: ADD_ALBUM_LIKE,
+    albumId
+  };
+};
+
+const removeAlbumLike = (albumId) => {
+  return {
+    type: REMOVE_ALBUM_LIKE,
+    albumId
+  }
+}
 
 export const authenticate = () => async (dispatch) => {
   const response = await fetch('/api/auth/', {
@@ -28,32 +60,6 @@ export const authenticate = () => async (dispatch) => {
     dispatch(setUser(data));
   }
 }
-
-// export const loginDemo = () => async dispatch => {
-//   const response = await fetch('/api/auth/login-demo', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//       email: 'demo@aa.io',
-//       password: 'password'
-//     })
-//   });
-
-//   if (response.ok) {
-//     const data = await response.json();
-//     dispatch(setUser(data))
-//     return null;
-//   } else if (response.status < 500) {
-//     const data = await response.json();
-//     if (data.errors) {
-//       return data.errors;
-//     }
-//   } else {
-//     return ['An error occurred. Please try again.']
-//   }
-// };
 
 export const login = (email, password) => async (dispatch) => {
   const response = await fetch('/api/auth/login', {
@@ -123,7 +129,47 @@ export const signUp = (username, email, password) => async (dispatch) => {
   }
 }
 
+export const createSongLike = (songId) => async dispatch => {
+  const res = await fetch(`/api/song_likes/songs/${songId}`, { method: 'POST' });
+
+  if (res.ok) {
+    dispatch(addSongLike(songId))
+  }
+};
+
+export const deleteSongLike = (songId) => async dispatch => {
+  const res = await fetch(`/api/song_likes/songs/${songId}`, { method: 'DELETE' });
+
+  if (res.ok) {
+    dispatch(removeSongLike(songId))
+  }
+};
+
+export const createAlbumLike = (albumId) => async dispatch => {
+  const res = await fetch(`/api/album_likes/albums/${albumId}`, { method: 'POST' });
+
+  if (res.ok) {
+    dispatch(addAlbumLike(albumId))
+  }
+};
+
+export const deleteAlbumLike = (albumId) => async dispatch => {
+  const res = await fetch(`/api/album_likes/albums/${albumId}`, { method: 'DELETE' });
+
+  if (res.ok) {
+    dispatch(removeAlbumLike(albumId))
+  }
+};
+
+
+const initialState = { user: null };
+
 export default function reducer(state = initialState, action) {
+  let stateCopy;
+  let songLikes;
+  let albumLikes;
+  let idx;
+
   switch (action.type) {
     case SET_USER:
       return { user: action.payload }
@@ -131,5 +177,33 @@ export default function reducer(state = initialState, action) {
       return { user: null }
     default:
       return state;
+
+    case ADD_SONG_LIKE:
+      stateCopy = {...state};
+      songLikes = state.user.liked.song_ids;
+      songLikes.push(action.songId);
+      return stateCopy;
+
+    case REMOVE_SONG_LIKE:
+      stateCopy = {...state};
+      songLikes = state.user.liked.song_ids;
+      idx = songLikes.findIndex(id => id === action.songId);
+      songLikes.splice(idx, 1);
+
+      return stateCopy;
+
+    case ADD_ALBUM_LIKE:
+      stateCopy = { ...state };
+      albumLikes = state.user.liked.album_ids;
+      albumLikes.push(action.albumId);
+      return stateCopy;
+
+    case REMOVE_ALBUM_LIKE:
+      stateCopy = { ...state };
+      albumLikes = state.user.liked.album_ids;
+      idx = albumLikes.findIndex(id => id === action.albumId);
+      albumLikes.splice(idx, 1);
+
+      return stateCopy;
   }
 }
