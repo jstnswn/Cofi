@@ -51,6 +51,10 @@ export default function SongItem({ song }) {
 
     };
 
+    // const moveToNewAlbum = () => {
+
+    // };
+
     const updateSongAlbum = async (song, toAlbumId) => {
         closeConfirmSingle();
         closeChangeAlbum();

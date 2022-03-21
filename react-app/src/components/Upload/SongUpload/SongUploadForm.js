@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadHome, loadHomeAlbums, loadNewSong } from '../../../store/home';
-import { uploadSong } from '../../../store/library/librarySongs';
+import { createAlbumAndSong, uploadSong } from '../../../store/library/librarySongs';
 
 export default function SongUploadForm({ closeModal }) {
     const dispatch = useDispatch();
 
     const userAlbums = useSelector(({ session }) => session.user.albums);
+    // const albumLibrary = userAlbums.reduce((acc, album) => {
+    //     acc[album.title] = album.id;
+    //     return acc;
+    // }, {});
 
     const [title, setTitle] = useState('');
     const [artist, setArtist] = useState('');
     const [song, setSong] = useState(null);
     const [image, setImage] = useState(null);
     const [albumInput, setAlbumInput] = useState('')
-    const [albumName, setAlbumName] = useState('');
+    const [albumTitle, setAlbumTitle] = useState('');
     // const [imageUrl, setImageUrl] = useState(null)
     // const [ImageError, setImageError] = useState(null);
     const [isPrivate, setIsPrivate] = useState(false);
@@ -33,6 +37,24 @@ export default function SongUploadForm({ closeModal }) {
             song,
             image,
             private: isPrivate
+        }
+
+        if (albumTitle) {
+            payload.albumTitle = albumTitle;
+            dispatch(createAlbumAndSong(payload))
+                .then((song) => dispatch(loadNewSong(song)))
+                .then(() => setDisableSubmit(false))
+                .then(() => closeModal(e))
+                .catch(errors => setErrors(errors.errors))
+                .then(() => dispatch(loadHomeAlbums()))
+
+            return;
+        }
+        else if (albumInput) {
+            // const albumId = albumLibrary[albumInput];
+            // console.log('albumInput ', albumInput);
+            // console.log('library: ', albumLibrary)
+            payload.albumId = albumInput;
         }
 
         dispatch(uploadSong(payload))
@@ -76,8 +98,8 @@ export default function SongUploadForm({ closeModal }) {
                 <label>New album name</label>
                 <input
                     type='text'
-                    value={albumName}
-                    onChange={e => setAlbumName(e.target.value)}
+                    value={albumTitle}
+                    onChange={e => setAlbumTitle(e.target.value)}
                 />
             </>
         )

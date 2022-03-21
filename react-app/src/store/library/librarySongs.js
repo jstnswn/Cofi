@@ -1,5 +1,5 @@
 import { getImageUrl, normalize, orderIds } from "../utils";
-import { getLibraryAlbums, loadAlbumSong, removeAlbumSong } from "./libraryAlbums";
+import { createAlbum, getLibraryAlbums, loadAlbumSong, removeAlbumSong } from "./libraryAlbums";
 
 // Action Creators
 const LOAD_SONGS = 'library/LOAD_SONGS';
@@ -42,7 +42,7 @@ export const uploadSong = (payload) => async dispatch => {
     formData.append('song', payload.song);
     formData.append('private', payload.private);
     formData.append('image_url', payload.image_url);
-
+    formData.append('album_id', payload.albumId);
 
     const res = await fetch('/api/songs', {
         method: 'POST',
@@ -140,6 +140,23 @@ export const getLibrarySongsArray = (state) => {
     const orderedIds = state.library.songs.order;
     return orderedIds.map(id => state.library.songs.byIds[id]);
 }
+
+// Bulk Actions
+export const createAlbumAndSong = (payload) => async dispatch => {
+    const {title: songTitle, albumTitle, artist, song, image } = payload;
+    const albumPayload = {
+        title: albumTitle,
+        artist,
+        image,
+        // private
+    };
+    return dispatch(createAlbum(albumPayload))
+        .then((album) =>{
+            payload.albumId = album.id
+            console.log("promise", payload)
+            return dispatch(uploadSong(payload))
+        })
+};
 
 const initialState = {
     byIds: {},
