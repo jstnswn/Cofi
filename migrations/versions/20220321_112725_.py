@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 4ddf01fd479f
+Revision ID: 930f408d5552
 Revises: 
-Create Date: 2022-03-21 09:56:04.399209
+Create Date: 2022-03-21 11:27:25.621076
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4ddf01fd479f'
+revision = '930f408d5552'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -46,11 +46,11 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('album_likes',
-    sa.Column('user_from_id', sa.Integer(), nullable=False),
+    sa.Column('from_user_id', sa.Integer(), nullable=False),
     sa.Column('album_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['album_id'], ['albums.id'], ),
-    sa.ForeignKeyConstraint(['user_from_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('user_from_id', 'album_id')
+    sa.ForeignKeyConstraint(['from_user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('from_user_id', 'album_id')
     )
     op.create_table('songs',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -69,11 +69,11 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('song_likes',
-    sa.Column('user_from_id', sa.Integer(), nullable=False),
+    sa.Column('from_user_id', sa.Integer(), nullable=False),
     sa.Column('song_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['from_user_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['song_id'], ['songs.id'], ),
-    sa.ForeignKeyConstraint(['user_from_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('user_from_id', 'song_id')
+    sa.PrimaryKeyConstraint('from_user_id', 'song_id')
     )
     # ### end Alembic commands ###
 
