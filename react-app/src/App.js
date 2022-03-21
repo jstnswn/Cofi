@@ -52,8 +52,13 @@ function App() {
           <Home />
         </ProtectedRoute>
       </Switch>
-      <MainSidebar />
-      <Player />
+      {user && (
+        <>
+          <MainSidebar />
+          <Player />
+        </>
+
+      )}
     </BrowserRouter>
   );
 }
