@@ -4,7 +4,7 @@ import { getImageUrl, normalize, orderIds } from "../utils";
 import { getLibrarySongs } from "./librarySongs";
 
 
-const LOAD_ALBUMS = 'librarye/LOAD_ALBUMS';
+const LOAD_ALBUMS = 'library/LOAD_ALBUMS';
 const LOAD_ALBUM = 'library/LOAD_ALBUM';
 const REMOVE_ALBUM = 'library/REMOVE_ALBUM';
 
@@ -163,6 +163,14 @@ export default function reducer(state = initialState, action) {
                 order: [action.album.id, ...state.order]
             }
 
+        // case LOAD_ALBUM_SONG:
+        //     stateCopy = {...state}
+        //     albumSongs = stateCopy.byIds[action.albumId].songs;
+        //     albumSongs.unshift(action.song);
+
+        //     return stateCopy;
+
+
         case LOAD_ALBUMS:
             normalizedData = normalize(action.albums)
             orderedIds = orderIds(action.albums)
@@ -186,16 +194,23 @@ export default function reducer(state = initialState, action) {
 
         case LOAD_ALBUM_SONG:
             stateCopy = {...state};
-            albumSongs = stateCopy.byIds[action.albumId].songs;
-                idx = albumSongs.findIndex(song => song.id === action.song.id);
 
-                if (idx > -1) albumSongs.splice(idx, 1, action.song);
-                else albumSongs = [action.song, ...albumSongs];
+            albumSongs = stateCopy.byIds[action.albumId].songs;
+            idx = albumSongs.findIndex(song => song.id === action.song.id);
+
+            if (idx > -1) albumSongs.splice(idx, 1, action.song);
+            // else albumSongs = [action.song, albumSongs];
+            albumSongs.push(action.song)
+
+            // console.log(2, albumSongs)
+            // stateCopy.byIds[action.albumId].songs = albumSongs;
 
             return stateCopy;
 
         case REMOVE_ALBUM_SONG:
             stateCopy = { ...state };
+            console.log('state: ', stateCopy);
+            console.log('albumId', action.albumId)
             albumSongs = stateCopy.byIds[action.albumId].songs;
                 idx = albumSongs.findIndex(song => song.id === action.songId);
                 albumSongs.splice(idx, 1);

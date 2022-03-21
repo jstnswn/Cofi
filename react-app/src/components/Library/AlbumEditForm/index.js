@@ -13,8 +13,6 @@ export default function AlbumEditForm({ closeModal, album }) {
     const [disableSubmit, setDisableSubmit] = useState(false);
     const [error, setError] = useState('');
 
-    // const album = useSelector(({ library }) => library.albums.byIds[albumId])
-
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (disableSubmit) return;
@@ -49,10 +47,7 @@ export default function AlbumEditForm({ closeModal, album }) {
         //     return
         // }
         setImageUrl(dataUrl)
-        console.log(1)
         setImage(file);
-        console.log(2)
-        // setFileError(null);
     }
 
     const setFile = (file) => {
@@ -85,10 +80,10 @@ export default function AlbumEditForm({ closeModal, album }) {
             <div className='form-content'>
                 <input
                     type='file'
-                    // value={image}
                     onChange={e => setFile(e.target.files[0])}
                     ref={imageInputRef}
                     style={{display: 'none'}}
+                    accept='image/png, image/jpeg, image/png, image/jpeg'
                 />
                 <label>Title</label>
                 <input

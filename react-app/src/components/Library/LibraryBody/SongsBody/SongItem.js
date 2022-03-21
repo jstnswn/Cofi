@@ -51,11 +51,11 @@ export default function SongItem({ song }) {
 
     };
 
-    const updateSongAlbum = async (songId, toAlbumId, fromAlbumId) => {
+    const updateSongAlbum = async (song, toAlbumId) => {
         closeConfirmSingle();
         closeChangeAlbum();
 
-        dispatch(patchSongAlbum(songId, toAlbumId, fromAlbumId))
+        dispatch(patchSongAlbum(song, toAlbumId))
     };
 
     const openDropdown = () => setShowMenu(true);

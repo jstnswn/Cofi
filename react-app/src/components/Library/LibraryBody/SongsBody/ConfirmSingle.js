@@ -11,7 +11,7 @@ export default function ConfirmSingle({ closeModal, song, update }) {
             <div className='confirm-message-box'>
 
                 <p>Remove <span className='song-name'>{song.title}</span> from It's album?</p>
-                <button onClick={() => update(song.id)}>Yes</button>
+                <button onClick={() => update(song)}>Yes</button>
 
             </div>
         </div>
