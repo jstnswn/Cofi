@@ -42,7 +42,9 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'albums': [album.u_to_dict() for album in self.albums],
             # 'songs': [song.to_dict() for song in self.songs],
-            'liked_song_ids': [song.id for song in self.liked_songs],
-            'liked_album_ids': [album.id for album in self.liked_albums]
+            'liked': {
+                'song_ids': [song.id for song in self.liked_songs],
+                'album_ids': [album.id for album in self.liked_albums]
+            }
             # 'liked_songs': self.liked_songs
         }
