@@ -75,7 +75,10 @@ export default function SongItem({ song, option, playlistId }) {
 
     };
 
-    const addSongToPlaylist = (playlistId) => dispatch(addToPlaylist(song, playlistId))
+    const addSongToPlaylist = (playlistId) => {
+        dispatch(addToPlaylist(song, playlistId));
+        closePlaylists();
+    };
     const removeSongFromPlaylist = () => dispatch(removeFromPlaylist(song.id, playlistId))
 
     const updateSongAlbum = async (song, toAlbumId) => {
@@ -92,7 +95,7 @@ export default function SongItem({ song, option, playlistId }) {
 
         const closeDropdown = () => setShowMenu(false);
 
-        const scrollContainer = document.querySelector('.library-songs-body-container');
+        const scrollContainer = document.querySelector('.library-body-container');
 
         document.addEventListener('click', closeDropdown);
         scrollContainer.addEventListener('scroll', closeDropdown);
