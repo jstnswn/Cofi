@@ -89,6 +89,46 @@
     border-radius: 3px;
     color: var(--text-main-white);
     padding-left: 10px;
+    width: 260px;
+
+    height: 40px;
+    margin-bottom: -5px;
+}
+
+.update-form.album .input-container {
+    position: relative;
+}
+
+.word-counter-container {
+    width: 62px;
+    height: 28px;
+    /* justify-self: flex-end; */
+    /* margin-top: -50px; */
+    align-self: flex-end;
+    /* border: red 1px solid; */
+}
+
+.update-form.album .word-counter {
+    /* position: absolute; */
+    /* border: blue 1px solid; */
+    right: 0;
+    bottom: 0;
+    padding: 5px;
+    border-radius: 5px;
+    /* background-color: var(--accent-orange); */
+    background-color: rgba(128, 128, 128, 0.719);
+    font-size: 14px;
+    /* display: flex; */
+    /* justify-content: flex-end; */
+}
+
+
+.update-form.album .word-counter.active {
+    color: red;
+}
+
+.update-form.album .word-counter {
+
 }
 
 .update-form.album .form-content input:focus {
@@ -112,6 +152,7 @@
     font-weight: bold;
     font-size: 13px;
     align-self: flex-end;
+    /* margin-top: 5px; */
 
     /* border: solid 1px */
 }

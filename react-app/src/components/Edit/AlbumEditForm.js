@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { patchAlbum } from '../../store/library/libraryAlbums';
 import './EditForm.css'
@@ -10,12 +10,19 @@ export default function AlbumEditForm({ closeModal, album }) {
     const [title, setTitle] = useState(album.title);
     const [imageUrl, setImageUrl] = useState(album.image_url);
     const [showOverlay, setShowOverlay] = useState(false);
-    const [disableSubmit, setDisableSubmit] = useState(false);
-    const [error, setError] = useState('');
+    const [error, setError] = useState(false);
+
+
+    useEffect(() => {
+        setError(false)
+
+        if (title.length >= 50) setError(true);
+
+    }, [title])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if (disableSubmit) return;
+        if (error) return;
 
         const payload = {
             image,
@@ -36,16 +43,6 @@ export default function AlbumEditForm({ closeModal, album }) {
     const handleFileReader = (e, file) => {
         const dataUrl = e.target.result;
 
-        // const allowedFileTypes = ['png', 'jpg', 'jpeg'];
-        // const stopIdx = dataUrl.indexOf(';');
-        // const fileType = dataUrl.slice(11, stopIdx)
-
-        // if (!allowedFileTypes.includes(fileType)) {
-        //     setImage(null)
-        //     setImageUrl(null);
-        //     setFileError('Must upload a PNG, JPG, or JPEG image.')
-        //     return
-        // }
         setImageUrl(dataUrl)
         setImage(file);
     }
@@ -86,16 +83,28 @@ export default function AlbumEditForm({ closeModal, album }) {
                     accept='image/png, image/jpeg, image/png, image/jpeg'
                 />
                 <label>Title</label>
-                <input
-                    type='text'
-                    value={title}
-                    onChange={e => setTitle(e.target.value)}
-                />
+                {/* <div className='input-container'> */}
+                    <input
+                        type='text'
+                        value={title}
+                        onChange={e => setTitle(e.target.value)}
+                        // style={{color: title.length >= 50 ? 'red' : 'white'}}
+                    />
+                    <div className='word-counter-container'>
+                        {title.length > 45 && (
+                            <div className={`word-counter ${error ? 'active' : ''}`}>{title.length}/50</div>
+                            )}
+
+                    </div>
+                {/* </div> */}
 
                 {/* <div className='confirm-message-box'> */}
 
                     {/* <p>Remove <span className='song-name'>{}</span> and all of it's songs?</p> */}
-                    <button >Update</button>
+                    <button
+                        style={{ opacity: error ? .5 : 1 }}
+                        // disable={true}
+                    >Update</button>
 
                 {/* </div> */}
 
