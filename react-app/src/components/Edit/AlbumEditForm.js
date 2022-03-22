@@ -67,9 +67,7 @@ export default function AlbumEditForm({ closeModal, album }) {
 
     return (
         <form className='update-form album' onSubmit={handleSubmit}>
-
             <i onClick={closeModal} className='fal fa-times close-icon'></i>
-
             <img
                 alt='song artwork'
                 src={imageUrl}
@@ -90,7 +88,7 @@ export default function AlbumEditForm({ closeModal, album }) {
                     type='file'
                     onChange={e => setFile(e.target.files[0])}
                     ref={imageInputRef}
-                    style={{display: 'none'}}
+                    style={{ display: 'none' }}
                     accept='image/png, image/jpeg, image/png, image/jpeg'
                 />
                 <label>Title</label>
@@ -99,14 +97,10 @@ export default function AlbumEditForm({ closeModal, album }) {
                         type='text'
                         value={title}
                         onChange={e => setTitle(e.target.value)}
-                        // style={{color: title.length >= 50 ? 'red' : 'white'}}
                     />
-                    {/* <div className='word-counter-container'> */}
-                        {title.length > 45 && (
-                            <div className={`word-counter ${error.title ? 'active' : ''}`}>{title.length}/50</div>
-                            )}
-
-                    {/* </div> */}
+                    {title.length > 45 && (
+                        <div className={`word-counter ${error.title ? 'active' : ''}`}>{title.length}/50</div>
+                    )}
                 </div>
 
                 <label>Artist</label>
@@ -116,21 +110,16 @@ export default function AlbumEditForm({ closeModal, album }) {
                         value={artist}
                         onChange={e => setArtist(e.target.value)}
                     />
-                        {artist.length > 45 && (
-                            <div className={`word-counter ${error.artist ? 'active' : ''}`}>{artist.length}/50</div>
-                        )}
-
+                    {artist.length > 45 && (
+                        <div className={`word-counter ${error.artist ? 'active' : ''}`}>{artist.length}/50</div>
+                    )}
                 </div>
-
-
-                    <button
-                        style={{
-                            opacity: disableSubmit ? .5 : 1,
-                            cursor: disableSubmit ? 'default' : 'pointer'
-                        }}
-                    >Update</button>
-
-
+                <button
+                    style={{
+                        opacity: disableSubmit ? .5 : 1,
+                        cursor: disableSubmit ? 'default' : 'pointer'
+                    }}
+                >Update</button>
             </div>
         </form>
     )

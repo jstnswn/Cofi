@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { patchPlaylist } from '../../store/playlists';
 import './EditForm.css'
@@ -10,8 +10,20 @@ export default function PlaylistEditForm({ closeModal, playlist}) {
     const [title, setTitle] = useState(playlist.title);
     const [imageUrl, setImageUrl] = useState(playlist.image_url);
     const [showOverlay, setShowOverlay] = useState(false);
+    const [error, setErrors] = useState({});
     const [disableSubmit, setDisableSubmit] = useState(false);
-    const [error, setError] = useState('');
+
+    useEffect(() => {
+        setErrors({})
+        setDisableSubmit(false);
+        const errors = {};
+
+        if (title.length >= 50) errors.title = true;
+
+        setErrors(errors);
+
+        if (errors.title) setDisableSubmit(true);
+    }, [title])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -41,7 +53,6 @@ export default function PlaylistEditForm({ closeModal, playlist}) {
     }
 
     const setFile = (file) => {
-        console.log('set file, file', file)
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = (e) => handleFileReader(e, file);
@@ -49,9 +60,7 @@ export default function PlaylistEditForm({ closeModal, playlist}) {
 
     return (
         <form className='update-form album' onSubmit={handleSubmit}>
-
             <i onClick={closeModal} className='fal fa-times close-icon'></i>
-
             <img
                 alt='song artwork'
                 src={imageUrl}
@@ -76,12 +85,23 @@ export default function PlaylistEditForm({ closeModal, playlist}) {
                     accept='image/png, image/jpeg, image/png, image/jpeg'
                 />
                 <label>Title</label>
-                <input
-                    type='text'
-                    value={title}
-                    onChange={e => setTitle(e.target.value)}
-                />
-                <button >Update</button>
+                <div className='input-container'>
+                    <input
+                        type='text'
+                        value={title}
+                        onChange={e => setTitle(e.target.value)}
+                    />
+                    {title.length > 45 && (
+                        <div className={`word-counter ${error.title ? 'active' : ''}`}>{title.length}/50</div>
+                    )}
+                </div>
+
+                <button
+                    style={{
+                        opacity: disableSubmit ? .5 : 1,
+                        cursor: disableSubmit ? 'default' : 'pointer'
+                    }}
+                >Update</button>
             </div>
         </form>
     )
