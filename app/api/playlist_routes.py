@@ -56,18 +56,24 @@ def add_song_to_playlist(playlist_id, song_id):
 
 @playlist_routes.route('/<int:playlist_id>', methods=['PATCH'])
 def patch_playlist(playlist_id):
-    form = PlaylistForm()
     playlist = Playlist.query.get(playlist_id)
 
-    playlist.title = form.title.data
-    playlist.private = form.private.data
+    form = PlaylistForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
 
-    if form.image_url.data:
-        playlist.image_url = form.image_url.data
+    if form.validate_on_submit():
 
-    db.session.commit()
+        playlist.title = form.title.data
+        playlist.private = form.private.data
 
-    return {'playlist': playlist.to_dict()}, 201
+        if form.image_url.data:
+            playlist.image_url = form.image_url.data
+
+        db.session.commit()
+
+        return {'playlist': playlist.to_dict()}, 201
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 @playlist_routes.route('/<int:playlist_id>/songs/<int:song_id>', methods=['DELETE'])

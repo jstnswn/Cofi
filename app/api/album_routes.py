@@ -22,7 +22,7 @@ def get_featured_album():
         return {'error': 'Unable to get album from database'}
 
     return {'album': album.to_dict()}
-    
+
 
 @album_routes.route('/new/<int:limit>')
 def get_new_albums(limit):
@@ -97,14 +97,19 @@ def delete_album(album_id):
 @album_routes.route('/<int:album_id>', methods=['PATCH'])
 def update_album(album_id):
 
+    form = AlbumForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     album = Album.query.get(album_id)
-    data = request.json
 
-    album.title = data['title']
+    if form.validate_on_submit():
+        artist_id = get_or_make_artist_id(form.artist.data)
+        album.artist_id = artist_id
+        album.title = form.title.data
 
-    if 'image_url' in data:
-        album.image_url = data['image_url']
+        if form.image_url.data:
+            album.image_url = form.image_url.data
 
-    db.session.commit()
+        db.session.commit()
+        return {'album': album.to_dict()}, 201
 
-    return {'album': album.to_dict()}, 201
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400

@@ -131,8 +131,9 @@ export const patchPlaylist = (payload) => async dispatch => {
         const data = await res.json()
         dispatch(loadPlaylist(data.playlist))
     } else {
-        const error = await res.json();
-        return error.error;
+        const errors = await res.json();
+        console.log(errors.erros);
+        return errors.errors;
     }
 };
 

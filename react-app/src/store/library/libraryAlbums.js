@@ -91,9 +91,9 @@ export const createAlbum = (payload) => async dispatch => {
 };
 
 export const patchAlbum = (payload) => async dispatch => {
-    const { title, image, albumId } = payload;
+    const { title, image, albumId, artist } = payload;
 
-    const body = {title};
+    const body = {title, artist};
     if (image) {
         const imageUrl = await getImageUrl(image);
         body.image_url = imageUrl
@@ -114,6 +114,7 @@ export const patchAlbum = (payload) => async dispatch => {
         return data.album;
     } else {
         const errors = await res.json();
+        console.log(errors.errors)
         return errors.errors;
     }
 

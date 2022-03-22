@@ -8,25 +8,36 @@ export default function AlbumEditForm({ closeModal, album }) {
 
     const [image, setImage] = useState(null);
     const [title, setTitle] = useState(album.title);
+    const [artist, setArtist] = useState(album.artist.name);
     const [imageUrl, setImageUrl] = useState(album.image_url);
     const [showOverlay, setShowOverlay] = useState(false);
-    const [error, setError] = useState(false);
+    const [error, setErrors] = useState({});
+    const [disableSubmit, setDisableSubmit] = useState(false);
 
 
     useEffect(() => {
-        setError(false)
+        setErrors({})
+        setDisableSubmit(false);
+        const errors = {};
 
-        if (title.length >= 50) setError(true);
+        if (title.length >= 50) errors.title = true;
+        if (artist.length >= 50) errors.artist = true;
 
-    }, [title])
+        // console.log('error: ', error)
+
+        setErrors(errors);
+
+        if (Object.keys(errors).length) setDisableSubmit(true);
+    }, [title, artist])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if (error) return;
+        if (disableSubmit) return;
 
         const payload = {
             image,
             title,
+            artist,
             albumId: album.id
         };
 
@@ -56,9 +67,7 @@ export default function AlbumEditForm({ closeModal, album }) {
 
     return (
         <form className='update-form album' onSubmit={handleSubmit}>
-
             <i onClick={closeModal} className='fal fa-times close-icon'></i>
-
             <img
                 alt='song artwork'
                 src={imageUrl}
@@ -79,35 +88,38 @@ export default function AlbumEditForm({ closeModal, album }) {
                     type='file'
                     onChange={e => setFile(e.target.files[0])}
                     ref={imageInputRef}
-                    style={{display: 'none'}}
+                    style={{ display: 'none' }}
                     accept='image/png, image/jpeg, image/png, image/jpeg'
                 />
                 <label>Title</label>
-                {/* <div className='input-container'> */}
+                <div className='input-container'>
                     <input
                         type='text'
                         value={title}
                         onChange={e => setTitle(e.target.value)}
-                        // style={{color: title.length >= 50 ? 'red' : 'white'}}
                     />
-                    <div className='word-counter-container'>
-                        {title.length > 45 && (
-                            <div className={`word-counter ${error ? 'active' : ''}`}>{title.length}/50</div>
-                            )}
+                    {title.length > 45 && (
+                        <div className={`word-counter ${error.title ? 'active' : ''}`}>{title.length}/50</div>
+                    )}
+                </div>
 
-                    </div>
-                {/* </div> */}
-
-                {/* <div className='confirm-message-box'> */}
-
-                    {/* <p>Remove <span className='song-name'>{}</span> and all of it's songs?</p> */}
-                    <button
-                        style={{ opacity: error ? .5 : 1 }}
-                        // disable={true}
-                    >Update</button>
-
-                {/* </div> */}
-
+                <label>Artist</label>
+                <div className='input-container'>
+                    <input
+                        type='text'
+                        value={artist}
+                        onChange={e => setArtist(e.target.value)}
+                    />
+                    {artist.length > 45 && (
+                        <div className={`word-counter ${error.artist ? 'active' : ''}`}>{artist.length}/50</div>
+                    )}
+                </div>
+                <button
+                    style={{
+                        opacity: disableSubmit ? .5 : 1,
+                        cursor: disableSubmit ? 'default' : 'pointer'
+                    }}
+                >Update</button>
             </div>
         </form>
     )
