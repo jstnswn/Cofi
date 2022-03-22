@@ -4,7 +4,8 @@ import { matchPath, useHistory, useLocation } from 'react-router-dom';
 import { Modal } from '../../../context/Modal';
 import { deleteLibraryAlbum } from '../../../store/library/libraryAlbums';
 import { deletePlaylist } from '../../../store/playlists';
-import AlbumEditForm from '../AlbumEditForm';
+import AlbumEditForm from '../../Edit/AlbumEditForm';
+import PlaylistEditForm from '../../Edit/PlaylistEditForm';
 import ConfirmDelete from './ConfirmDelete';
 // import HeaderDropdown from './HeaderDropdown';
 import './LibraryHeader.css';
@@ -116,7 +117,10 @@ export default function LibraryHeader({ libraryItems }) {
 
                 {showEdit && (
                     <Modal onClose={closeEditForm}>
-                        <AlbumEditForm closeModal={closeEditForm} album={libraryItems.albums.byIds[idParam]}/>
+                        {inPlaylist
+                            ? <PlaylistEditForm closeModal={closeEditForm} playlist={playlists[idParam]}/>
+                            : <AlbumEditForm closeModal={closeEditForm} album={libraryItems.albums.byIds[idParam]}/>
+                        }
                     </Modal>
                 )}
             </div>

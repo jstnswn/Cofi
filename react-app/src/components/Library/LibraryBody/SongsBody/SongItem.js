@@ -123,7 +123,7 @@ export default function SongItem({ song, option, playlistId }) {
                 {album ? <p className='item' onClick={() => history.push(`/library/${user.username}/albums/${album.id}`)}>{album.title}</p> : <p className='item'>--</p>}
 
             </div>
-            <i onClick={toggleLike} className={`${likeIconClass} heart`}></i>
+            <i onClick={toggleLike} className={`${likeIconClass} heart ${hovered ? 'active' : ''}`}></i>
             <i className={`fa-solid fa-ellipsis song-options ${hovered ? 'active' : ''}`} onClick={openDropdown}></i>
 
             {showMenu && (

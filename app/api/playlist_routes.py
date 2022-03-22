@@ -61,7 +61,9 @@ def patch_playlist(playlist_id):
 
     playlist.title = form.title.data
     playlist.private = form.private.data
-    playlist.image_url = form.image_url.data
+
+    if form.image_url.data:
+        playlist.image_url = form.image_url.data
 
     db.session.commit()
 
