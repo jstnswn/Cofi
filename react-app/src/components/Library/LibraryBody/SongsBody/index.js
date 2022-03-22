@@ -11,13 +11,11 @@ export default function SongsBody({ option }) {
     const libraryItems = useSelector(({ library }) => library);
     const playlists = useSelector(({ playlists }) => playlists);
     let songs;
-    console.log('playlistID', playlistId)
 
     if (albumId) {
         songs = sortSongsArray(libraryItems.albums.byIds[albumId].songs)
     } else if (playlistId) {
         songs = playlists[playlistId].songs
-        console.log('songs: ', songs)
     } else {
         songs = orderContent(libraryItems.songs);
     }
@@ -32,7 +30,7 @@ export default function SongsBody({ option }) {
 
             <div className='library-body-container'>
                 <div className='library-songs-body-container'>
-                    {songs.map((song, idx) => <SongItem key={idx} song={song} option={option}/>)}
+                    {songs.map((song, idx) => <SongItem key={idx} playlistId={playlistId} song={song} option={option}/>)}
                 </div>
 
             </div>

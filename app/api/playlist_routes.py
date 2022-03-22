@@ -11,7 +11,7 @@ playlist_routes = Blueprint('playlists', __name__)
 def get_user_playlists():
     current_user_id = current_user.get_id()
 
-    playlists = Playlist.query.filter(Playlist.user_id==current_user_id).all()
+    playlists = Playlist.query.filter(Playlist.user_id==current_user_id).order_by(Playlist.id.desc()).all()
 
     if not playlists:
         return {'error': 'Unable to get playlists from the database'}, 400
@@ -61,7 +61,9 @@ def patch_playlist(playlist_id):
 
     playlist.title = form.title.data
     playlist.private = form.private.data
-    playlist.image_url = form.image_url.data
+
+    if form.image_url.data:
+        playlist.image_url = form.image_url.data
 
     db.session.commit()
 
@@ -79,7 +81,7 @@ def remove_song_from_playlist(playlist_id, song_id):
     playlist.songs.remove(song)
 
     db.session.commit()
-    return {'playlist': playlist}, 200
+    return {'playlist': playlist.to_dict()}, 200
 
 @playlist_routes.route('/<int:playlist_id>', methods=['DELETE'])
 def delete_playlist(playlist_id):

@@ -1,7 +1,9 @@
 import React from 'react'
 import '../LibraryBody/SongsBody/SongConfirmDelete.css'
 
-export default function AlbumConfirmDelete({ album, closeModal, deleteAlbum }) {
+export default function ConfirmDelete({ album, closeModal, remove }) {
+
+    // console.log('album', album)
 
     return (
         <div className='confirm-delete-container'>
@@ -12,8 +14,8 @@ export default function AlbumConfirmDelete({ album, closeModal, deleteAlbum }) {
 
             <div className='confirm-message-box'>
 
-                <p>Remove <span className='song-name'>{album?.title}</span> and all of it's songs?</p>
-                <button onClick={deleteAlbum}>Yes</button>
+                <p>Remove <span className='song-name'>{album?.title}</span>?</p>
+                <button onClick={remove}>Yes</button>
 
             </div>
         </div>

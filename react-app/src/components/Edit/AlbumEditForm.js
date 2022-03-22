@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { patchAlbum } from '../../../store/library/libraryAlbums';
-import './AlbumEditForm.css'
+import { patchAlbum } from '../../store/library/libraryAlbums';
+import './EditForm.css'
 
 export default function AlbumEditForm({ closeModal, album }) {
     const dispatch = useDispatch();

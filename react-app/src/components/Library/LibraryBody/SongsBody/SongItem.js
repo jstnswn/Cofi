@@ -5,7 +5,7 @@ import { Modal } from '../../../../context/Modal';
 import { setSong } from '../../../../store/active';
 import { loadHome } from '../../../../store/home';
 import { deleteLibrarySong, patchSongAlbum } from '../../../../store/library/librarySongs';
-import { addToPlaylist } from '../../../../store/playlists';
+import { addToPlaylist, removeFromPlaylist } from '../../../../store/playlists';
 import { createSongLike, deleteSongLike } from '../../../../store/session';
 import SongEditForm from '../../SongEditForm.js/index.js';
 import AlbumList from './AlbumList';
@@ -14,8 +14,8 @@ import ConfirmSingle from './ConfirmSingle';
 import PlaylistList from './PlaylistList';
 import SongConfirmDelete from './SongConfirmDelete';
 
-export default function SongItem({ song, option }) {
-    console.log('song', song)
+export default function SongItem({ song, option, playlistId }) {
+    // console.log('song', option)
     const user = useSelector(({ session }) => session.user);
     const album = song.album;
 
@@ -50,9 +50,6 @@ export default function SongItem({ song, option }) {
     let likeIconClass;
     let toggleLike;
 
-    // const likeIconClass = likedSongIds.includes(song.id)
-    //     ? 'fas fa-heart'
-    //     : 'far fa-heart';
     if (likedSongIds.includes(song.id)) {
         likeIconClass = 'fas fa-heart';
         toggleLike = unlikeSong;
@@ -70,12 +67,17 @@ export default function SongItem({ song, option }) {
     const deleteSong = async () => {
         closeConfirmDel();
 
-      dispatch(deleteLibrarySong(song.id, album?.id))
-        .then(() => dispatch(loadHome()))
+        dispatch(deleteLibrarySong(song.id, album?.id))
+            .then(() => dispatch(loadHome()))
 
     };
 
-    const addSongToPlaylist = (playlistId) => dispatch(addToPlaylist(song, playlistId))
+    const addSongToPlaylist = (playlistId) => {
+        dispatch(addToPlaylist(song, playlistId));
+        closePlaylists();
+    };
+
+    const removeSongFromPlaylist = () => dispatch(removeFromPlaylist(song.id, playlistId))
 
     const updateSongAlbum = async (song, toAlbumId) => {
         closeConfirmSingle();
@@ -91,7 +93,7 @@ export default function SongItem({ song, option }) {
 
         const closeDropdown = () => setShowMenu(false);
 
-        const scrollContainer = document.querySelector('.library-songs-body-container');
+        const scrollContainer = document.querySelector('.library-body-container');
 
         document.addEventListener('click', closeDropdown);
         scrollContainer.addEventListener('scroll', closeDropdown);
@@ -102,7 +104,6 @@ export default function SongItem({ song, option }) {
         };
 
     }, [showMenu])
-
 
 
     return (
@@ -122,53 +123,53 @@ export default function SongItem({ song, option }) {
                 {album ? <p className='item' onClick={() => history.push(`/library/${user.username}/albums/${album.id}`)}>{album.title}</p> : <p className='item'>--</p>}
 
             </div>
-            <i onClick={toggleLike} className={`${likeIconClass} heart`}></i>
+            <i onClick={toggleLike} className={`${likeIconClass} heart ${hovered ? 'active' : ''}`}></i>
             <i className={`fa-solid fa-ellipsis song-options ${hovered ? 'active' : ''}`} onClick={openDropdown}></i>
 
             {showMenu && (
                 <div className='library-list-dropdown'>
                     <ul>
-                        <li onClick={openEditMenu}>Edit Song</li>
-                        <li onClick={openConfirmDel}>Delete Song</li>
-                        {album && <li onClick={openConfirmSingle}>Make Single</li>}
-
-                        <li
-                            // onMouseEnter={openChangeAlbum}
-                            // onMouseLeave={handleMouseLeave}
-                            onClick={openChangeAlbum}
-                        >Move to Album</li>
                         <li onClick={openPlaylists}>Add to Playlist</li>
+                       {option === 'playlist' && <li onClick={removeSongFromPlaylist}>Remove from Playlist</li>}
+                        {option !== 'playlist' && (
+                            <>
+                            <li onClick={openEditMenu}>Edit Song</li>
+                            <li onClick={openConfirmDel}>Delete Song</li>
+                                {album && <li onClick={openConfirmSingle}>Make Single</li>}
+                                <li onClick={openChangeAlbum}>Move to Album</li>
+                            </>
+                        )}
                     </ul>
                 </div>
             )}
 
             {showEditMenu && (
                 <Modal onClose={closeEditMenu}>
-                    <SongEditForm closeModal={closeEditMenu} song={song} album={album}/>
+                    <SongEditForm closeModal={closeEditMenu} song={song} album={album} />
                 </Modal>
             )}
 
             {showConfirmDel && (
                 <Modal onClose={closeConfirmDel}>
-                    <SongConfirmDelete closeModal={closeConfirmDel} deleteSong={deleteSong} song={song}/>
+                    <SongConfirmDelete closeModal={closeConfirmDel} deleteSong={deleteSong} song={song} />
                 </Modal>
             )}
 
             {showSingleConfirm && (
                 <Modal onClose={closeConfirmSingle}>
-                    <ConfirmSingle closeModal={closeConfirmSingle} song={song} update={updateSongAlbum}/>
+                    <ConfirmSingle closeModal={closeConfirmSingle} song={song} update={updateSongAlbum} />
                 </Modal>
             )}
 
             {showChangeAlbum && (
                 <Modal onClose={closeChangeAlbum}>
-                    <AlbumList song={song} closeModal={closeChangeAlbum} update={updateSongAlbum}/>
+                    <AlbumList song={song} closeModal={closeChangeAlbum} update={updateSongAlbum} />
                 </Modal>
             )}
 
             {showPlaylists && (
                 <Modal onClose={closePlaylists}>
-                    <PlaylistList song={song} addSongToPlaylist={addSongToPlaylist}/>
+                    <PlaylistList song={song} addSongToPlaylist={addSongToPlaylist} />
                 </Modal>
             )}
         </div>

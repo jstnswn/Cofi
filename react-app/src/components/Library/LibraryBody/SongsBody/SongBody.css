@@ -151,6 +151,16 @@
     display: block;
 }
 
+.library-songs-body-container .heart {
+    color: var(--text-main-white);
+    display: none;
+}
+
+.library-songs-body-container .heart.active {
+    display: block;
+}
+
+
 .library-list-dropdown {
     position: absolute;
     top: 25px;
