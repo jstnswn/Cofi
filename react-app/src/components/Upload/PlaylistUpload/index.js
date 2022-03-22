@@ -9,7 +9,7 @@ export default function PlaylistUploadModal() {
     const openModal = (e) => setShowModal(true);
 
     const closeModal = (e) => {
-        // if (e) e.stopPropagation()
+        if (e) e.stopPropagation()
         setShowModal(false);
     }
 
