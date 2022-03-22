@@ -79,6 +79,7 @@ export default function SongItem({ song, option, playlistId }) {
         dispatch(addToPlaylist(song, playlistId));
         closePlaylists();
     };
+
     const removeSongFromPlaylist = () => dispatch(removeFromPlaylist(song.id, playlistId))
 
     const updateSongAlbum = async (song, toAlbumId) => {
@@ -108,7 +109,6 @@ export default function SongItem({ song, option, playlistId }) {
     }, [showMenu])
 
 
-
     return (
         <div
             className='list-box'
@@ -135,12 +135,7 @@ export default function SongItem({ song, option, playlistId }) {
                         <li onClick={openEditMenu}>Edit Song</li>
                         <li onClick={openConfirmDel}>Delete Song</li>
                         {album && <li onClick={openConfirmSingle}>Make Single</li>}
-
-                        <li
-                            // onMouseEnter={openChangeAlbum}
-                            // onMouseLeave={handleMouseLeave}
-                            onClick={openChangeAlbum}
-                        >Move to Album</li>
+                        <li onClick={openChangeAlbum}>Move to Album</li>
                         <li onClick={openPlaylists}>Add to Playlist</li>
                         <li onClick={removeSongFromPlaylist}>Remove from Playlist</li>
                     </ul>

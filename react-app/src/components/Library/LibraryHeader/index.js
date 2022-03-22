@@ -9,28 +9,39 @@ import AlbumConfirmDelete from './AlbumConfirmDelete';
 import './LibraryHeader.css';
 
 export default function LibraryHeader({ libraryItems }) {
+    // Refactor to a avoid prop drilling libraryItems
+
     const dispatch = useDispatch();
     const [showDropdown, setShowDropdown] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
 
+    const user = useSelector(({ session }) => session.user);
+    const playlists = useSelector(({ playlists }) => playlists);
+
     const location = useLocation();
     const history = useHistory();
-    const user = useSelector(({ session }) => session.user);
     const match = matchPath(location.pathname, {
-        path: '/library/:user/albums/:albumId'
+        path: '/library/:user/:section/:id'
     });
 
-    const albumIdParam = match?.params?.albumId;
+    const idParam = match?.params?.id;
     const userParam = match?.params?.user;
+    const sectionParam = match?.params?.section;
     let headerUrl;
     let headerTitle
     let editOption;
 
-    if (albumIdParam) {
+    if (idParam) {
+        if (sectionParam === 'playlists') {
+            console.log('hope', sectionParam)
+            headerUrl = playlists[idParam].image_url;
+            headerTitle = playlists[idParam].title;
+        } else {
+            headerUrl = libraryItems.albums.byIds[idParam].image_url;
+            headerTitle = libraryItems.albums.byIds[idParam].title;
+        }
 
-        headerUrl = libraryItems.albums.byIds[albumIdParam].image_url;
-        headerTitle = libraryItems.albums.byIds[albumIdParam].title;
     } else {
         headerUrl = 'https://cofi-bucket.s3.amazonaws.com/art-seeds/escapade.png';
         headerTitle = 'Your Collection'
@@ -58,7 +69,7 @@ export default function LibraryHeader({ libraryItems }) {
 
     const deleteAlbum = async () => {
         closeConfirmMenu();
-        dispatch(deleteLibraryAlbum(Number(albumIdParam)));
+        dispatch(deleteLibraryAlbum(Number(idParam)));
         history.goBack();
     };
 
@@ -73,7 +84,7 @@ export default function LibraryHeader({ libraryItems }) {
             </div>
             <div className='header-title-container'>
                 <h2 className='library-header-title'>{headerTitle}
-                    {albumIdParam && userParam === user.username && (
+                    {idParam && userParam === user.username && (
                         <span><i onClick={openDropdown} className='fas fa-ellipsis-h libary-header-edit'></i></span>)}
                 </h2>
 
@@ -89,13 +100,13 @@ export default function LibraryHeader({ libraryItems }) {
 
                 {showConfirm && (
                     <Modal onClose={closeConfirmMenu}>
-                        <AlbumConfirmDelete closeModal={closeConfirmMenu} deleteAlbum={deleteAlbum} album={libraryItems.albums.byIds[albumIdParam]} />
+                        <AlbumConfirmDelete closeModal={closeConfirmMenu} deleteAlbum={deleteAlbum} album={libraryItems.albums.byIds[idParam]} />
                     </Modal>
                 )}
 
                 {showEdit && (
                     <Modal onClose={closeEditForm}>
-                        <AlbumEditForm closeModal={closeEditForm} album={libraryItems.albums.byIds[albumIdParam]}/>
+                        <AlbumEditForm closeModal={closeEditForm} album={libraryItems.albums.byIds[idParam]}/>
                     </Modal>
                 )}
             </div>
