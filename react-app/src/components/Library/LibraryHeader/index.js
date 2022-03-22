@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { matchPath, useHistory, useLocation } from 'react-router-dom';
 import { Modal } from '../../../context/Modal';
 import { deleteLibraryAlbum } from '../../../store/library/libraryAlbums';
+import { deletePlaylist } from '../../../store/playlists';
 import AlbumEditForm from '../AlbumEditForm';
-import AlbumConfirmDelete from './AlbumConfirmDelete';
+import ConfirmDelete from './ConfirmDelete';
 // import HeaderDropdown from './HeaderDropdown';
 import './LibraryHeader.css';
 
@@ -28,12 +29,13 @@ export default function LibraryHeader({ libraryItems }) {
     const idParam = match?.params?.id;
     const userParam = match?.params?.user;
     const sectionParam = match?.params?.section;
+    const inPlaylist = sectionParam === 'playlists';
     let headerUrl;
     let headerTitle
     let editOption;
 
     if (idParam) {
-        if (sectionParam === 'playlists') {
+        if (inPlaylist) {
             console.log('hope', sectionParam)
             headerUrl = playlists[idParam].image_url;
             headerTitle = playlists[idParam].title;
@@ -67,9 +69,15 @@ export default function LibraryHeader({ libraryItems }) {
     const closeEditForm = () => setShowEdit(false);
 
 
-    const deleteAlbum = async () => {
+    const removeAlbum = async () => {
         closeConfirmMenu();
         dispatch(deleteLibraryAlbum(Number(idParam)));
+        history.goBack();
+    };
+
+    const removePlaylist = async () => {
+        closeConfirmMenu();
+        dispatch(deletePlaylist(idParam));
         history.goBack();
     };
 
@@ -92,7 +100,7 @@ export default function LibraryHeader({ libraryItems }) {
                     <div className='library-list-dropdown album'>
                         <ul>
                             {/* <li onClick={openEditMenu}>Edit Song</li> */}
-                            <li onClick={openConfirmMenu}>Remove Album</li>
+                            <li onClick={openConfirmMenu}>{inPlaylist ? 'Remove Playlist' : 'Remove Album'}</li>
                             <li onClick={openEditForm}>Edit Details</li>
                         </ul>
                     </div>
@@ -100,7 +108,10 @@ export default function LibraryHeader({ libraryItems }) {
 
                 {showConfirm && (
                     <Modal onClose={closeConfirmMenu}>
-                        <AlbumConfirmDelete closeModal={closeConfirmMenu} deleteAlbum={deleteAlbum} album={libraryItems.albums.byIds[idParam]} />
+                        <ConfirmDelete
+                            closeModal={closeConfirmMenu}
+                            remove={inPlaylist ? removePlaylist : removeAlbum}
+                            album={inPlaylist ? playlists[idParam] : libraryItems.albums.byIds[idParam]}/>
                     </Modal>
                 )}
 

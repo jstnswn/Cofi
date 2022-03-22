@@ -136,6 +136,18 @@ export const patchPlaylist = (payload) => async dispatch => {
     }
 };
 
+export const deletePlaylist = (playlistId) => async dispatch => {
+    const res = await fetch(`/api/playlists/${playlistId}`, { method: 'DELETE' });
+
+    if (res.ok) {
+        // const data = await res.json()
+        dispatch(removePlaylist(playlistId));
+    } else {
+        const error = await res.json();
+        return error.error;
+    }
+};
+
 // Helper Functions
 
 export const getPlaylistsArray = (state) => Object.values(state.playlists);
