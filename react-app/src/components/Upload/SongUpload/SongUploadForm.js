@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadHome, loadHomeAlbums, loadNewSong } from '../../../store/home';
 import { createAlbumAndSong, uploadSong } from '../../../store/library/librarySongs';
@@ -23,6 +23,7 @@ export default function SongUploadForm({ closeModal }) {
     const [isPrivate, setIsPrivate] = useState(false);
     const [disableSubmit, setDisableSubmit] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
@@ -92,6 +93,21 @@ export default function SongUploadForm({ closeModal }) {
     //     setSong(file);
     // };
 
+    const musicFileRef = useRef(null);
+
+
+    const fileInputContent = (
+        <div
+            className='file-input-body'
+            onClick={() => musicFileRef.current.click()}
+        >
+            {/* <i className='fas fa-music music-icon'></i> */}
+            <i className={`fal fa-music-alt music-icon icon ${isHovered ? 'active' : ''}`}></i>
+            {isHovered && <p className='file-message'>Choose Audio File</p>}
+        </div>
+    );
+
+
     const albumOption = albumInput === 'create new'
         ? (
             <>
@@ -121,51 +137,74 @@ export default function SongUploadForm({ closeModal }) {
 
     return (
         <form className='song-upload-form form' onSubmit={handleSubmit}>
-            <label>Title</label>
-            <input
-                type='text'
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-            />
-            <label>Artist</label>
-            <input
-                type='text'
-                value={artist}
-                onChange={e => setArtist(e.target.value)}
-            />
-            {albumOption}
-            <div className='upload-form radio-container'>
-                <label>Private</label>
-                <input
-                    type='radio'
-                    onChange={e => setIsPrivate(true)}
-                    value={true}
-                    checked={isPrivate === true ? true : false}
-                />
-                <label>Public</label>
-                <input
-                    type='radio'
-                    onChange={e => setIsPrivate(false)}
-                    value={false}
-                    checked={isPrivate === false ? true : false}
-                />
+            <i onClick={closeModal} className='fal fa-times close-icon'></i>
+
+            <div
+                className='file-input-container'
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+
+                {fileInputContent}
+                <div className='file-input-footer'>
+                    
+                </div>
             </div>
-            <label>Song File</label>
-            <input
-                type='file'
-                onChange={e => setSong(e.target.files[0])}
-                accept='aduio/mpeg, audio/mp3'
-            />
-            <label>Song Art (optional)</label>
+            {/* <label>Song Art (optional)</label>
             <input
                 type='file'
                 onChange={e => setImage(e.target.files[0])}
                 accept='image/png, image/jpeg, image/png, image/jpeg'
-            />
+            /> */}
 
-            <button type='submit'>{isLoading ? 'Submitting...' : 'Submit'}</button>
+            <div className='form-content'>
+
+                <label>Title</label>
+                <input
+                    type='text'
+                    value={title}
+                    onChange={e => setTitle(e.target.value)}
+                />
+                <label>Artist</label>
+                <input
+                    type='text'
+                    value={artist}
+                    onChange={e => setArtist(e.target.value)}
+                />
+                {albumOption}
+                {/* <div className='upload-form radio-container'>
+                    <label>Private</label>
+                    <input
+                        type='radio'
+                        onChange={e => setIsPrivate(true)}
+                        value={true}
+                        checked={isPrivate === true ? true : false}
+                    />
+                    <label>Public</label>
+                    <input
+                        type='radio'
+                        onChange={e => setIsPrivate(false)}
+                        value={false}
+                        checked={isPrivate === false ? true : false}
+                    />
+                </div> */}
+                <button type='submit'>{isLoading ? 'Submitting...' : 'Submit'}</button>
+
+                <input
+                    type='file'
+                    onChange={e => setSong(e.target.files[0])}
+                    accept='aduio/mpeg, audio/mp3'
+                    ref={musicFileRef}
+                    style={{display: 'none'}}
+                />
+            </div>
+
+
         </form>
     )
 }
 
 // accept = 'image/png, image/jpeg, image/png, image/jpeg'
+
+
+{/* <i class="fas fa-file-audio"></i> */}
