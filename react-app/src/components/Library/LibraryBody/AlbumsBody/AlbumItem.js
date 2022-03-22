@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import { createAlbumLike, deleteAlbumLike } from '../../../../store/session';
 
-export default function AlbumItem({ album, idx, user }) {
+export default function AlbumItem({ album, idx, user, option }) {
     const dispatch = useDispatch()
     const history = useHistory();
     const [hovered, setHovered] = useState(false);
@@ -31,6 +31,11 @@ export default function AlbumItem({ album, idx, user }) {
         toggleLike = likeAlbum;
     }
 
+    const handleClick = () => {
+        if (option === 'album') history.push(`/library/${user.username}/albums/${album.id}`);
+        if (option === 'playlist') history.push(`/library/${user.username}/playlists/${album.id}`);
+    }
+
 
     return (
         <div
@@ -38,7 +43,7 @@ export default function AlbumItem({ album, idx, user }) {
             style={{
                 gridColumnStart: idx % 4 + 1
             }}
-            onClick={() => history.push(`/library/${user.username}/albums/${album.id}`)}
+            onClick={handleClick}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
@@ -50,10 +55,10 @@ export default function AlbumItem({ album, idx, user }) {
             <div className='tile-footer'>
                 <div className='info-container'>
                     <div className='song-title'>{album?.title}</div>
-                    <div className='tile-artist'>{album?.artist.name}</div>
+                    <div className='tile-artist'>{album?.artist?.name}</div>
                 </div>
                 <div className='icon-container'>
-                    {hovered && <i onClick={toggleLike} className={likeIconClass}></i>}
+                    {hovered && option !== 'playlist' && <i onClick={toggleLike} className={likeIconClass}></i>}
                 </div>
             </div>
 

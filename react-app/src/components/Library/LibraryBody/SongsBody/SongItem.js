@@ -14,8 +14,8 @@ import ConfirmSingle from './ConfirmSingle';
 import PlaylistList from './PlaylistList';
 import SongConfirmDelete from './SongConfirmDelete';
 
-export default function SongItem({ song }) {
-    // console.log('song', song)
+export default function SongItem({ song, option }) {
+    console.log('song', song)
     const user = useSelector(({ session }) => session.user);
     const album = song.album;
 
@@ -116,7 +116,7 @@ export default function SongItem({ song }) {
                 <img alt='cover art' className='list-image' src={album ? album.image_url : song.image_url} /> <span onClick={playSong} className='item'>{song.title}</span>
             </div>
             <div className='artist-list library-list'>
-                <p className='item'>{song.artist.name}</p>
+                {option !== 'playlist' && <p className='item'>{song.artist.name}</p>}
             </div>
             <div className='album-list library-list'>
                 {album ? <p className='item' onClick={() => history.push(`/library/${user.username}/albums/${album.id}`)}>{album.title}</p> : <p className='item'>--</p>}

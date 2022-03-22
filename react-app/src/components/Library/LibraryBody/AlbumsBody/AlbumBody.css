@@ -49,6 +49,11 @@
     justify-content: space-between;
 }
 
+/* Temp solution to avoid different sized playlist tiles (no artist name) */
+.tile-footer .info-container > div {
+    height: 18px;
+}
+
 .album-item-container .icon-container {
     padding: 5px;
 }

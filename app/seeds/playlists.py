@@ -5,22 +5,27 @@ playlists = [
     Playlist(#1
         title='Study Mix',
         user_id=1,
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/polar_art.png'
     ),
     Playlist(#2
         title='Eazy Steezy',
         user_id=1,
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/in-my-head-art.png'
     ),
     Playlist(#3
         title='Ambient',
         user_id=1,
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/azure-art.png'
     ),
     Playlist(#4
         title='Music to Walk to',
         user_id=1,
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/staring_through.png'
     ),
     Playlist(#5
         title='Sleepy',
         user_id=1,
+        image_url='https://cofi-bucket.s3.amazonaws.com/art-seeds/riverside-art.png'
     ),
 ]
 
