@@ -68,7 +68,6 @@ export default function AlbumUploadForm({ closeModal }) {
             className='album-upload form'
             onSubmit={handleSubmit}
         >
-
             <i onClick={closeModal} className='fal fa-times close-icon'></i>
 
             <div
@@ -76,7 +75,6 @@ export default function AlbumUploadForm({ closeModal }) {
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
             >
-
                 <div
                     className='file-input-body'
                     onClick={() => !imageUrl && imageFileRef.current.click()}
@@ -89,14 +87,6 @@ export default function AlbumUploadForm({ closeModal }) {
                 </div>
 
                 <div className='file-input-footer'>
-                    {/* <div>
-                        <i className='fal fa-file-music sm-icon'></i>
-                        <i className={`fal fa-check check sm-icon ${song ? 'active' : ''}`}></i>
-                    </div> */}
-                    {/* <div>
-                        <i className='fal fa-file-image sm-icon'></i>
-                        <i className={`fal fa-check check sm-icon ${image ? 'active' : ''}`}></i>
-                    </div> */}
                 </div>
             </div>
 
@@ -134,7 +124,7 @@ export default function AlbumUploadForm({ closeModal }) {
                     style={{ display: 'none' }}
                 />
 
-                <button 
+                <button
                     type='submit'
                     style={{
                         opacity: disableSubmit ? .5 : 1,

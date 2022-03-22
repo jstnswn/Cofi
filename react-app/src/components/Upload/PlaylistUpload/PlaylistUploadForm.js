@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { createPlaylist } from '../../../store/playlists';
 
@@ -7,7 +7,25 @@ export default function PlaylistUploadForm({ closeModal }) {
 
     const [title, setTitle] = useState('');
     const [image, setImage] = useState(null);
+    const [imageUrl, setImageUrl] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+    const [error, setError] = useState({});
+    const [disableSubmit, setDisableSubmit] = useState(false);
+
+
+    useEffect(() => {
+        setError({});
+        setDisableSubmit(false);
+        const errors = {};
+
+        if (title.length > 50) errors.title = true;
+
+        setError(errors);
+        if (Object.keys(errors).length) setDisableSubmit(true);
+
+    }, [title])
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,25 +37,79 @@ export default function PlaylistUploadForm({ closeModal }) {
             .then(() => closeModal())
     };
 
+    const handleImageFileReader = (e, file) => {
+        const dataUrl = e.target.result;
+
+        setImageUrl(dataUrl)
+        setImage(file);
+    }
+
+    const setImageFile = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e) => handleImageFileReader(e, file);
+    };
+
+    const imageFileRef = useRef(null);
+
     return (
         <form
             className='form'
             onSubmit={handleSubmit}
         >
-            <h2>Create a Playlist</h2>
-            <label>Title</label>
-            <input
-                type='text'
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-            />
-            <label>Artwork (optional)</label>
-            <input
-                type='file'
-                onChange={e => setImage(e.target.files[0])}
-                accept='image/png, image/jpeg, image/png, image/jpeg'
-            />
-            <button type='submit'>{isLoading ? 'Submitting...' : 'Submit'}</button>
+            {/* <h2>Create a Playlist</h2> */}
+            <i onClick={closeModal} className='fal fa-times close-icon'></i>
+
+            <div
+                className='file-input-container'
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+                <div
+                    className='file-input-body'
+                    onClick={() => !imageUrl && imageFileRef.current.click()}
+                >
+                    {!imageUrl
+                        ? <i className={`fal fa-image image-icon icon ${isHovered ? 'active' : ''}`}></i>
+                        : <img alt='Art preview' src={imageUrl} />
+                    }
+                    {isHovered && !imageUrl && <p className='file-message'>Choose Artwork (optional)</p>}
+                </div>
+
+                <div className='file-input-footer'>
+                </div>
+            </div>
+
+            <div className='form-content'>
+                <label>Title</label>
+                <div className='input-container'>
+                    <input
+                        type='text'
+                        value={title}
+                        onChange={e => setTitle(e.target.value)}
+                    />
+                    {title.length > 45 && (
+                        <div className={`word-counter ${error.title ? 'active' : ''}`}>{title.length}/50</div>
+                    )}
+                </div>
+                {/* <label>Artwork (optional)</label> */}
+                <input
+                    type='file'
+                    onChange={e => setImageFile(e.target.files[0])}
+                    accept='image/png, image/jpeg, image/png, image/jpeg'
+                    ref={imageFileRef}
+                    style={{ display: 'none' }}
+                />
+                <button
+                    type='submit'
+                    style={{
+                        opacity: disableSubmit ? .5 : 1,
+                        cursor: disableSubmit ? 'default' : 'pointer'
+                    }}
+                >{isLoading ? 'Submitting...' : 'Submit'}</button>
+
+            </div>
+
         </form>
     )
 }
