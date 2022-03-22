@@ -27,7 +27,7 @@ export default function LibrarySidebar() {
             </div>
             <div className='sidebar-button-container'>
                 <button className='sidebar-button' onClick={() => history.push(`/library/${user.username}/playlists`)}>Playlists</button>
-                <i className={`fas fa-circle-notch selector ${defaultActive} ${selection === 'playlists' ? 'active' : ''}`}></i>
+                <i className={`fas fa-circle-notch selector ${selection === 'playlists' ? 'active' : ''}`}></i>
             </div>
         </div>
     )

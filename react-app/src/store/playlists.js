@@ -96,14 +96,14 @@ export const addToPlaylist = (song, playlistId) => async dispatch => {
     }
 };
 
-export const removeFromPlaylist = (song, playlistId) => async dispatch => {
-    const res = await fetch(`/api/playlists/${playlistId}/songs/${song.id}`, {
+export const removeFromPlaylist = (songId, playlistId) => async dispatch => {
+    const res = await fetch(`/api/playlists/${playlistId}/songs/${songId}`, {
         method: 'DELETE'
     })
 
     if (res.ok) {
         // const data = await res.json()
-        dispatch(removeSongFromPlaylist(song, playlistId))
+        dispatch(removeSongFromPlaylist(songId, playlistId))
     } else {
         const error = await res.json();
         return error.error;
@@ -178,8 +178,10 @@ export default function reducer(state = initialState, action) {
         case REMOVE_SONG_FROM_PLAYLIST:
             stateCopy = { ...state }
             playlistSongs = stateCopy[action.playlistId].songs;
-            idx = playlistSongs.findIndex(song => song.id === action.playlistId);
+            const songIds = stateCopy[action.playlistId].song_ids;
+            idx = playlistSongs.findIndex(song => song.id === action.songId);
             playlistSongs.splice(idx, 1);
+            songIds.splice(idx, 1);
 
             return stateCopy;
 

@@ -79,7 +79,7 @@ def remove_song_from_playlist(playlist_id, song_id):
     playlist.songs.remove(song)
 
     db.session.commit()
-    return {'playlist': playlist}, 200
+    return {'playlist': playlist.to_dict()}, 200
 
 @playlist_routes.route('/<int:playlist_id>', methods=['DELETE'])
 def delete_playlist(playlist_id):

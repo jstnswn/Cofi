@@ -5,7 +5,7 @@ import { Modal } from '../../../../context/Modal';
 import { setSong } from '../../../../store/active';
 import { loadHome } from '../../../../store/home';
 import { deleteLibrarySong, patchSongAlbum } from '../../../../store/library/librarySongs';
-import { addToPlaylist } from '../../../../store/playlists';
+import { addToPlaylist, removeFromPlaylist } from '../../../../store/playlists';
 import { createSongLike, deleteSongLike } from '../../../../store/session';
 import SongEditForm from '../../SongEditForm.js/index.js';
 import AlbumList from './AlbumList';
@@ -14,8 +14,8 @@ import ConfirmSingle from './ConfirmSingle';
 import PlaylistList from './PlaylistList';
 import SongConfirmDelete from './SongConfirmDelete';
 
-export default function SongItem({ song, option }) {
-    console.log('song', song)
+export default function SongItem({ song, option, playlistId }) {
+    // console.log('song', option)
     const user = useSelector(({ session }) => session.user);
     const album = song.album;
 
@@ -76,6 +76,7 @@ export default function SongItem({ song, option }) {
     };
 
     const addSongToPlaylist = (playlistId) => dispatch(addToPlaylist(song, playlistId))
+    const removeSongFromPlaylist = () => dispatch(removeFromPlaylist(song.id, playlistId))
 
     const updateSongAlbum = async (song, toAlbumId) => {
         closeConfirmSingle();
@@ -138,6 +139,7 @@ export default function SongItem({ song, option }) {
                             onClick={openChangeAlbum}
                         >Move to Album</li>
                         <li onClick={openPlaylists}>Add to Playlist</li>
+                        <li onClick={removeSongFromPlaylist}>Remove from Playlist</li>
                     </ul>
                 </div>
             )}
