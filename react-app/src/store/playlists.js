@@ -136,6 +136,10 @@ export const patchPlaylist = (payload) => async dispatch => {
     }
 };
 
+// Helper Functions
+
+export const getPlaylistsArray = (state) => Object.values(state.playlists);
+
 const initialState = {};
 
 export default function reducer(state = initialState, action) {

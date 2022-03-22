@@ -51,7 +51,7 @@ def add_song_to_playlist(playlist_id, song_id):
     playlist.songs.append(song)
 
     db.session.commit()
-    return {'playlist': playlist}, 200
+    return {'playlist': playlist.to_dict()}, 200
 
 
 @playlist_routes.route('/<int:playlist_id>', methods=['PATCH'])

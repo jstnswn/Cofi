@@ -19,5 +19,6 @@ class Playlist(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'songs': [song.a_to_dict() for song in self.songs]
+            'songs': [song.a_to_dict() for song in self.songs],
+            'song_ids': [song.id for song in self.songs]
         }

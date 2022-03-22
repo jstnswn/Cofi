@@ -5,11 +5,13 @@ import { Modal } from '../../../../context/Modal';
 import { setSong } from '../../../../store/active';
 import { loadHome } from '../../../../store/home';
 import { deleteLibrarySong, patchSongAlbum } from '../../../../store/library/librarySongs';
+import { addToPlaylist } from '../../../../store/playlists';
 import { createSongLike, deleteSongLike } from '../../../../store/session';
 import SongEditForm from '../../SongEditForm.js/index.js';
 import AlbumList from './AlbumList';
 import ChangeAlbum from './AlbumList';
 import ConfirmSingle from './ConfirmSingle';
+import PlaylistList from './PlaylistList';
 import SongConfirmDelete from './SongConfirmDelete';
 
 export default function SongItem({ song }) {
@@ -27,6 +29,7 @@ export default function SongItem({ song }) {
     const [showEditMenu, setShowEditMenu] = useState(false);
     const [showSingleConfirm, setShowSingleConfirm] = useState(false)
     const [showChangeAlbum, setShowChangeAlbum] = useState(false);
+    const [showPlaylists, setShowPlaylists] = useState(false);
 
     const openEditMenu = () => setShowEditMenu(true);
     const closeEditMenu = () => setShowEditMenu(false);
@@ -36,6 +39,8 @@ export default function SongItem({ song }) {
     const closeConfirmSingle = () => setShowSingleConfirm(false);
     const openChangeAlbum = () => setShowChangeAlbum(true);
     const closeChangeAlbum = () => setShowChangeAlbum(false);
+    const openPlaylists = () => setShowPlaylists(true);
+    const closePlaylists = () => setShowPlaylists(false);
 
     const likeSong = () => dispatch(createSongLike(song.id));
     const unlikeSong = () => dispatch(deleteSongLike(song.id));
@@ -70,9 +75,7 @@ export default function SongItem({ song }) {
 
     };
 
-    // const moveToNewAlbum = () => {
-
-    // };
+    const addSongToPlaylist = (playlistId) => dispatch(addToPlaylist(song, playlistId))
 
     const updateSongAlbum = async (song, toAlbumId) => {
         closeConfirmSingle();
@@ -134,7 +137,7 @@ export default function SongItem({ song }) {
                             // onMouseLeave={handleMouseLeave}
                             onClick={openChangeAlbum}
                         >Move to Album</li>
-                        <li>Add to Playlist</li>
+                        <li onClick={openPlaylists}>Add to Playlist</li>
                     </ul>
                 </div>
             )}
@@ -160,6 +163,12 @@ export default function SongItem({ song }) {
             {showChangeAlbum && (
                 <Modal onClose={closeChangeAlbum}>
                     <AlbumList song={song} closeModal={closeChangeAlbum} update={updateSongAlbum}/>
+                </Modal>
+            )}
+
+            {showPlaylists && (
+                <Modal onClose={closePlaylists}>
+                    <PlaylistList song={song} addSongToPlaylist={addSongToPlaylist}/>
                 </Modal>
             )}
         </div>

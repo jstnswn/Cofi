@@ -23,6 +23,10 @@ export const normalize = (content) => {
     }, {})
 };
 
+// export const listSongIds = (songs) => {
+//     return songs.map(song => song.id)
+// };
+
 export const orderIds = (content) => {
     // const orderedIds = [];
     // for (let i = 0; i < content.length; i ++) {
