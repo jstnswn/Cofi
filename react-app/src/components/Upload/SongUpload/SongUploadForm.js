@@ -7,24 +7,34 @@ export default function SongUploadForm({ closeModal }) {
     const dispatch = useDispatch();
 
     const userAlbums = useSelector(({ session }) => session.user.albums);
-    // const albumLibrary = userAlbums.reduce((acc, album) => {
-    //     acc[album.title] = album.id;
-    //     return acc;
-    // }, {});
 
     const [title, setTitle] = useState('');
     const [artist, setArtist] = useState('');
     const [song, setSong] = useState(null);
     const [image, setImage] = useState(null);
+    const [imageUrl, setImageUrl] = useState(null);
     const [albumInput, setAlbumInput] = useState('')
     const [albumTitle, setAlbumTitle] = useState('');
-    // const [imageUrl, setImageUrl] = useState(null)
-    // const [ImageError, setImageError] = useState(null);
     const [isPrivate, setIsPrivate] = useState(false);
     const [disableSubmit, setDisableSubmit] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState({});
+
+
+    useEffect(() => {
+        setErrors({});
+        setDisableSubmit(false);
+        const errors = {};
+
+        if (title.length > 50) errors.title = true;
+        if (artist.length > 50) errors.artist = true;
+        if (albumTitle.length > 50) errors.albumTitle = true;
+
+        setErrors(errors);
+        if (Object.keys(errors).length) setDisableSubmit(true);
+
+    }, [title, artist, albumTitle])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -51,12 +61,7 @@ export default function SongUploadForm({ closeModal }) {
 
             return;
         }
-        else if (albumInput) {
-            // const albumId = albumLibrary[albumInput];
-            // console.log('albumInput ', albumInput);
-            // console.log('library: ', albumLibrary)
-            payload.albumId = albumInput;
-        }
+        else if (albumInput) payload.albumId = albumInput;
 
         dispatch(uploadSong(payload))
             .then((song) => dispatch(loadNewSong(song)))
@@ -67,71 +72,77 @@ export default function SongUploadForm({ closeModal }) {
     };
 
     const handleImageFileReader = (e, file) => {
-        // const dataUrl = e.target.result;
+        const dataUrl = e.target.result;
 
-        // const allowedFileTypes = ['png', 'jpg', 'jpeg'];
-        // const stopIdx = dataUrl.indexOf(';');
-        // const fileType = dataUrl.slice(11, stopIdx)
-
-        // if (!allowedFileTypes.includes(fileType)) {
-        //     setImage(null)
-        //     setImageUrl(null);
-        //     setImageError('Must upload a PNG, JPG, or JPEG image.')
-        //     return
-        // }
+        setImageUrl(dataUrl)
         setImage(file);
     }
 
-    // const setImageFile = (file) => {
-    //     const reader = new FileReader();
-    //     reader.readAsDataURL(file);
-    //     reader.onload = (e) => handleImageFileReader(e, file);
-    // };
-
-    // const handleFileChange = (e) => {
-    //     const file = e.target.files[0];
-    //     setSong(file);
-    // };
+    const setImageFile = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e) => handleImageFileReader(e, file);
+    };
 
     const musicFileRef = useRef(null);
+    const imageFileRef = useRef(null);
 
 
-    const fileInputContent = (
-        <div
-            className='file-input-body'
-            onClick={() => musicFileRef.current.click()}
-        >
-            {/* <i className='fas fa-music music-icon'></i> */}
-            <i className={`fal fa-music-alt music-icon icon ${isHovered ? 'active' : ''}`}></i>
-            {isHovered && <p className='file-message'>Choose Audio File</p>}
-        </div>
-    );
-
+    const fileInputContent = !song
+        ? (
+            <div
+                className='file-input-body'
+                onClick={() => musicFileRef.current.click()}
+            >
+                <i className={`fal fa-music-alt music-icon icon ${isHovered ? 'active' : ''}`}></i>
+                {isHovered && <p className='file-message'>Choose Audio File</p>}
+            </div>
+        )
+        : (
+            <div
+                className='file-input-body'
+                onClick={() => !imageUrl && imageFileRef.current.click()}
+            >
+                {!imageUrl
+                    ? <i className={`fal fa-image image-icon icon ${isHovered ? 'active' : ''}`}></i>
+                    : <img alt='Art preview' src={imageUrl} />
+                }
+                {isHovered && !imageUrl && <p className='file-message'>Choose Artwork (optional)</p>}
+            </div>
+        )
 
     const albumOption = albumInput === 'create new'
         ? (
             <>
                 <label>New album name</label>
+            <div className='input-container'>
                 <input
                     type='text'
                     value={albumTitle}
                     onChange={e => setAlbumTitle(e.target.value)}
                 />
+
+                {albumTitle.length > 45 && (
+                    <div className={`word-counter ${errors.albumTitle ? 'active' : ''}`}>{albumTitle.length}/50</div>
+                )}
+            </div>
+
             </>
         )
         : (
             <>
                 <label>Album</label>
-                <select
-                    value={albumInput}
-                    onChange={e => setAlbumInput(e.target.value)}
-                >
-                    <option>-Select an Album-</option>
-                    {userAlbums?.map((album, idx) => (
-                        <option key={idx} value={album.id}>{album.title}</option>
-                    ))}
-                    <option value='create new'>--Create a new album--</option>
-                </select>
+                    <select
+                        value={albumInput}
+                        onChange={e => setAlbumInput(e.target.value)}
+                    >
+                        <option>-Select an Album-</option>
+                        {userAlbums?.map((album, idx) => (
+                            <option key={idx} value={album.id}>{album.title}</option>
+                        ))}
+                        <option value='create new'>--Create a new album--</option>
+                    </select>
+
             </>
         )
 
@@ -147,30 +158,44 @@ export default function SongUploadForm({ closeModal }) {
 
                 {fileInputContent}
                 <div className='file-input-footer'>
-                    
+                    <div>
+                        <i className='fal fa-file-music sm-icon'></i>
+                        <i className={`fal fa-check check sm-icon ${song ? 'active' : ''}`}></i>
+                    </div>
+                    <div>
+                        <i className='fal fa-file-image sm-icon'></i>
+                        <i className={`fal fa-check check sm-icon ${image ? 'active' : ''}`}></i>
+                    </div>
                 </div>
             </div>
-            {/* <label>Song Art (optional)</label>
-            <input
-                type='file'
-                onChange={e => setImage(e.target.files[0])}
-                accept='image/png, image/jpeg, image/png, image/jpeg'
-            /> */}
+
+
 
             <div className='form-content'>
-
                 <label>Title</label>
-                <input
-                    type='text'
-                    value={title}
-                    onChange={e => setTitle(e.target.value)}
-                />
+                <div className='input-container'>
+
+                    <input
+                        type='text'
+                        value={title}
+                        onChange={e => setTitle(e.target.value)}
+                    />
+                    {title.length > 45 && (
+                        <div className={`word-counter ${errors.title ? 'active' : ''}`}>{title.length}/50</div>
+                    )}
+                </div>
                 <label>Artist</label>
-                <input
-                    type='text'
-                    value={artist}
-                    onChange={e => setArtist(e.target.value)}
-                />
+                <div className='input-container'>
+
+                    <input
+                        type='text'
+                        value={artist}
+                        onChange={e => setArtist(e.target.value)}
+                    />
+                    {artist.length > 45 && (
+                        <div className={`word-counter ${errors.artist ? 'active' : ''}`}>{artist.length}/50</div>
+                    )}
+                </div>
                 {albumOption}
                 {/* <div className='upload-form radio-container'>
                     <label>Private</label>
@@ -188,14 +213,29 @@ export default function SongUploadForm({ closeModal }) {
                         checked={isPrivate === false ? true : false}
                     />
                 </div> */}
-                <button type='submit'>{isLoading ? 'Submitting...' : 'Submit'}</button>
+                <button
+                    type='submit'
+                    style={{
+                        opacity: disableSubmit ? .5 : 1,
+                        cursor: disableSubmit ? 'default' : 'pointer'
+                    }} >{isLoading ? 'Submitting...' : 'Submit'}
+                </button>
 
+                {/* Hidden inputs */}
                 <input
                     type='file'
                     onChange={e => setSong(e.target.files[0])}
                     accept='aduio/mpeg, audio/mp3'
                     ref={musicFileRef}
-                    style={{display: 'none'}}
+                    style={{ display: 'none' }}
+                />
+
+                <input
+                    type='file'
+                    onChange={e => setImageFile(e.target.files[0])}
+                    accept='image/png, image/jpeg, image/png, image/jpeg'
+                    ref={imageFileRef}
+                    style={{ display: 'none' }}
                 />
             </div>
 
@@ -203,8 +243,3 @@ export default function SongUploadForm({ closeModal }) {
         </form>
     )
 }
-
-// accept = 'image/png, image/jpeg, image/png, image/jpeg'
-
-
-{/* <i class="fas fa-file-audio"></i> */}

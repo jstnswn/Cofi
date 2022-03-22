@@ -139,10 +139,6 @@
     color: red;
 }
 
-.update-form.album .word-counter {
-
-}
-
 .update-form.album .form-content input:focus {
     outline: none;
 }
