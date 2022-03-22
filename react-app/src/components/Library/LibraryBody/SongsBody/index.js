@@ -16,7 +16,6 @@ export default function SongsBody({ option }) {
         songs = sortSongsArray(libraryItems.albums.byIds[albumId].songs)
     } else if (playlistId) {
         songs = playlists[playlistId].songs
-        console.log('songs: ', songs)
     } else {
         songs = orderContent(libraryItems.songs);
     }

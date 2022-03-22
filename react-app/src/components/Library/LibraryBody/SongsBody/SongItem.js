@@ -50,9 +50,6 @@ export default function SongItem({ song, option, playlistId }) {
     let likeIconClass;
     let toggleLike;
 
-    // const likeIconClass = likedSongIds.includes(song.id)
-    //     ? 'fas fa-heart'
-    //     : 'far fa-heart';
     if (likedSongIds.includes(song.id)) {
         likeIconClass = 'fas fa-heart';
         toggleLike = unlikeSong;
@@ -70,8 +67,8 @@ export default function SongItem({ song, option, playlistId }) {
     const deleteSong = async () => {
         closeConfirmDel();
 
-      dispatch(deleteLibrarySong(song.id, album?.id))
-        .then(() => dispatch(loadHome()))
+        dispatch(deleteLibrarySong(song.id, album?.id))
+            .then(() => dispatch(loadHome()))
 
     };
 
@@ -132,43 +129,47 @@ export default function SongItem({ song, option, playlistId }) {
             {showMenu && (
                 <div className='library-list-dropdown'>
                     <ul>
-                        <li onClick={openEditMenu}>Edit Song</li>
-                        <li onClick={openConfirmDel}>Delete Song</li>
-                        {album && <li onClick={openConfirmSingle}>Make Single</li>}
-                        <li onClick={openChangeAlbum}>Move to Album</li>
                         <li onClick={openPlaylists}>Add to Playlist</li>
-                        <li onClick={removeSongFromPlaylist}>Remove from Playlist</li>
+                       {option === 'playlist' && <li onClick={removeSongFromPlaylist}>Remove from Playlist</li>}
+                        {option !== 'playlist' && (
+                            <>
+                            <li onClick={openEditMenu}>Edit Song</li>
+                            <li onClick={openConfirmDel}>Delete Song</li>
+                                {album && <li onClick={openConfirmSingle}>Make Single</li>}
+                                <li onClick={openChangeAlbum}>Move to Album</li>
+                            </>
+                        )}
                     </ul>
                 </div>
             )}
 
             {showEditMenu && (
                 <Modal onClose={closeEditMenu}>
-                    <SongEditForm closeModal={closeEditMenu} song={song} album={album}/>
+                    <SongEditForm closeModal={closeEditMenu} song={song} album={album} />
                 </Modal>
             )}
 
             {showConfirmDel && (
                 <Modal onClose={closeConfirmDel}>
-                    <SongConfirmDelete closeModal={closeConfirmDel} deleteSong={deleteSong} song={song}/>
+                    <SongConfirmDelete closeModal={closeConfirmDel} deleteSong={deleteSong} song={song} />
                 </Modal>
             )}
 
             {showSingleConfirm && (
                 <Modal onClose={closeConfirmSingle}>
-                    <ConfirmSingle closeModal={closeConfirmSingle} song={song} update={updateSongAlbum}/>
+                    <ConfirmSingle closeModal={closeConfirmSingle} song={song} update={updateSongAlbum} />
                 </Modal>
             )}
 
             {showChangeAlbum && (
                 <Modal onClose={closeChangeAlbum}>
-                    <AlbumList song={song} closeModal={closeChangeAlbum} update={updateSongAlbum}/>
+                    <AlbumList song={song} closeModal={closeChangeAlbum} update={updateSongAlbum} />
                 </Modal>
             )}
 
             {showPlaylists && (
                 <Modal onClose={closePlaylists}>
-                    <PlaylistList song={song} addSongToPlaylist={addSongToPlaylist}/>
+                    <PlaylistList song={song} addSongToPlaylist={addSongToPlaylist} />
                 </Modal>
             )}
         </div>

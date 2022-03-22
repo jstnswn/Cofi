@@ -1,3 +1,4 @@
+import { getPlaylists } from "../playlists";
 import { getImageUrl, normalize, orderIds } from "../utils";
 import { createAlbum, getLibraryAlbums, loadAlbumSong, removeAlbumSong } from "./libraryAlbums";
 
@@ -93,7 +94,8 @@ export const patchSong = (payload) => async dispatch => {
     if (res.ok) {
         const data = await res.json();
         dispatch(loadSong(data.song, payload.fromAlbumId));
-        if (payload.fromAlbumId) dispatch(loadAlbumSong(data.song, payload.fromAlbumId))
+        if (payload.fromAlbumId) dispatch(loadAlbumSong(data.song, payload.fromAlbumId));
+        dispatch(getPlaylists());
         //  if (payload.fromAlbumId) dispatch(getLibraryAlbums())
         return data.song;
     } else {
@@ -116,6 +118,7 @@ export const patchSongAlbum = (song, toAlbumId) => async dispatch => {
         dispatch(loadSong(data.song));
         if (song.album) dispatch(removeAlbumSong(song.id, song.album.id))
         if (toAlbumId) dispatch(loadAlbumSong(data.song, toAlbumId));
+        dispatch(getPlaylists());
 
     } else {
         const errors = await res.json();

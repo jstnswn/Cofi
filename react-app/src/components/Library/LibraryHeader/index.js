@@ -36,7 +36,6 @@ export default function LibraryHeader({ libraryItems }) {
 
     if (idParam) {
         if (inPlaylist) {
-            console.log('hope', sectionParam)
             headerUrl = playlists[idParam].image_url;
             headerTitle = playlists[idParam].title;
         } else {

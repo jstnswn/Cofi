@@ -11,7 +11,7 @@ playlist_routes = Blueprint('playlists', __name__)
 def get_user_playlists():
     current_user_id = current_user.get_id()
 
-    playlists = Playlist.query.filter(Playlist.user_id==current_user_id).all()
+    playlists = Playlist.query.filter(Playlist.user_id==current_user_id).order_by(Playlist.id.desc()).all()
 
     if not playlists:
         return {'error': 'Unable to get playlists from the database'}, 400
