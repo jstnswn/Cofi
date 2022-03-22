@@ -4,14 +4,20 @@ import './SongBody.css';
 import { useParams } from 'react-router-dom';
 import { orderContent, sortSongsArray } from '../../../utils';
 import { useSelector } from 'react-redux';
+import { getPlaylistsArray } from '../../../../store/playlists';
 
-export default function SongsBody() {
-    const { albumId } = useParams();
+export default function SongsBody({ option }) {
+    const { albumId, playlistId } = useParams();
     const libraryItems = useSelector(({ library }) => library);
+    const playlists = useSelector(({ playlists }) => playlists);
     let songs;
+    console.log('playlistID', playlistId)
 
     if (albumId) {
         songs = sortSongsArray(libraryItems.albums.byIds[albumId].songs)
+    } else if (playlistId) {
+        songs = playlists[playlistId].songs
+        console.log('songs: ', songs)
     } else {
         songs = orderContent(libraryItems.songs);
     }
@@ -26,7 +32,7 @@ export default function SongsBody() {
 
             <div className='library-body-container'>
                 <div className='library-songs-body-container'>
-                    {songs.map((song, idx) => <SongItem key={idx} song={song} />)}
+                    {songs.map((song, idx) => <SongItem key={idx} song={song} option={option}/>)}
                 </div>
 
             </div>

@@ -13,6 +13,7 @@ import Player from './components/Player';
 import { loadHome } from './store/home';
 import MainSidebar from './components/MainSidebar';
 import Library from './components/Library';
+import { getPlaylists } from './store/playlists';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -24,6 +25,7 @@ function App() {
     (async() => {
       await dispatch(authenticate());
       await dispatch(loadHome())
+      await dispatch(getPlaylists())
       setLoaded(true)
     })();
   }, [dispatch]);

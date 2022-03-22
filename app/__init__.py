@@ -14,6 +14,7 @@ from .api.album_routes import album_routes
 from .api.image_routes import image_routes
 from .api.song_likes import song_like_routes
 from .api.album_likes import album_like_routes
+from .api.playlist_routes import playlist_routes
 
 from .seeds import seed_commands
 
@@ -43,6 +44,7 @@ app.register_blueprint(album_routes, url_prefix='/api/albums')
 app.register_blueprint(image_routes, url_prefix='/api/images')
 app.register_blueprint(song_like_routes, url_prefix='/api/song_likes')
 app.register_blueprint(album_like_routes, url_prefix='/api/album_likes')
+app.register_blueprint(playlist_routes, url_prefix='/api/playlists')
 db.init_app(app)
 Migrate(app, db)
 

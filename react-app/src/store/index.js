@@ -5,12 +5,14 @@ import home from './home';
 // import library from './library';
 import library from './library'
 import active from './active';
+import playlists from './playlists';
 
 const rootReducer = combineReducers({
   session,
   home,
   library,
-  active
+  active,
+  playlists
 });
 
 

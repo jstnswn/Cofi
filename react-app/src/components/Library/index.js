@@ -8,6 +8,7 @@ import './Library.css';
 import LibraryHeader from './LibraryHeader';
 import LibrarySidebar from './LibrarySidebar';
 import SongsBody from './LibraryBody/SongsBody';
+import { getPlaylistsArray } from '../../store/playlists';
 // import SongsList from './SongsBody';
 
 export default function Library() {
@@ -16,9 +17,9 @@ export default function Library() {
     const libraryItems = useSelector(({ library }) => library);
 
     const albums = useSelector(getLibraryAlbumsArray);
+    const playlists = useSelector(getPlaylistsArray);
 
     const [isLoaded, setIsLoaded] = useState(false);
-
 
     useEffect(() => {
         (async () => {
@@ -28,23 +29,27 @@ export default function Library() {
 
     }, [dispatch])
 
-
-
     const routes = (
         <>
         <Switch>
 
             <Route path={`/library/${user.username}/albums`} exact={true}>
-                <AlbumsBody user={user} albums={albums} />
+                <AlbumsBody user={user} option='album'    />
             </Route>
             <Route path={`/library/${user.username}/songs`} exact={true}>
-                <SongsBody libraryItems={libraryItems} />
+                <SongsBody option='song'/>
             </Route>
             <Route path={`/library/${user.username}/albums/:albumId`}>
-                <SongsBody libraryItems={libraryItems}/>
+                <SongsBody  option='album'/>
+            </Route>
+            <Route path={`/library/${user.username}/playlists`} exact={true}>
+                <AlbumsBody user={user} option='playlist'   />
+            </Route>
+            <Route path={`/library/${user.username}/playlists/:playlistId`}>
+                <SongsBody option='playlist'/>
             </Route>
             <Route>
-                <SongsBody libraryItems={libraryItems} />
+                <SongsBody  />
             </Route>
 
         </Switch>

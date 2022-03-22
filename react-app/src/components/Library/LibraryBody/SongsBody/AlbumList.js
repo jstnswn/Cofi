@@ -4,7 +4,6 @@ import { getLibraryAlbumsArray } from '../../../../store/library/libraryAlbums';
 
 
 export default function AlbumList({ closeModal, song, update }) {
-    const dispatch = useDispatch();
     const libraryAlbums = useSelector(getLibraryAlbumsArray);
 
 

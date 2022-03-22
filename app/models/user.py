@@ -16,6 +16,7 @@ class User(db.Model, UserMixin):
     songs = db.relationship('Song', back_populates='user')
     liked_songs = db.relationship('Song', back_populates='likers', secondary=song_likes)
     liked_albums = db.relationship('Album', back_populates='likers', secondary=album_likes)
+    playlists = db.relationship('Playlist', back_populates='user')
 
     @property
     def password(self):
@@ -33,6 +34,20 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             # 'email': self.email
+        }
+
+    #profile User to_dict
+    def u_to_dict(self):
+        return {
+             'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'albums': [album.u_to_dict() for album in self.albums],
+            'playlists': [playlist.to_dict() for playlist in self.playlists],
+            'liked': {
+                'song_ids': [song.id for song in self.liked_songs],
+                'album_ids': [album.id for album in self.liked_albums]
+            }
         }
 
     def to_dict(self):
