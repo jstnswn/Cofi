@@ -4,8 +4,13 @@
     flex-direction: column;
     height: calc(470px - 50px);
     position: relative;
+    width: 100%;
     /* padding-right: 90px; */
     /* align-items: center; */
+}
+
+.libary-header-container {
+    width: 100%;
 }
 
 #library-header .header-image-container {
@@ -13,7 +18,8 @@
     align-self: center;
     padding: 0;
     overflow: hidden;
-    width: 800px;
+    max-width: 800px;
+    width: 100%;
     /* justify-self: center;
     align-self: center; */
     display: flex;
@@ -25,7 +31,8 @@
     object-fit: cover;
     max-width: calc(100vw - 200px);
     min-height: 420px;
-    max-width: 800px;
+    /* max-width: 800px; */
+    width: 100%;
 }
 
 .header-title-container {
