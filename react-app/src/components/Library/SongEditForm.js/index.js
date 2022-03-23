@@ -29,9 +29,8 @@ export default function SongEditForm({ closeModal, song, album }) {
         setDisableSubmit(false);
         const errors = {};
 
-        console.log('song file', songFile)
 
-        if (title.length > 50) errors.title = 'long';
+        if (title.length > 50) errors.title = true;
         if (artist.length > 50) errors.artist = true;
         if (albumTitle.length > 50) errors.albumTitle = true;
 
@@ -49,13 +48,6 @@ export default function SongEditForm({ closeModal, song, album }) {
         setDisableSubmit(true);
         setIsLoading(true);
 
-        // Display song upload area if no song is selected
-        if (!songFile) {
-            setIsHovered(true);
-            console.log('song FILEEEEEE', songFile)
-            return;
-        }
-
         const payload = {
             title,
             artist,
@@ -70,7 +62,6 @@ export default function SongEditForm({ closeModal, song, album }) {
 
 
         if (albumTitle) {
-            // payload.albumTitle = albumTitle
             const albumPayload = {
                 title: albumTitle,
                 artist,
