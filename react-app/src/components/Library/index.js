@@ -8,7 +8,7 @@ import './Library.css';
 import LibraryHeader from './LibraryHeader';
 import LibrarySidebar from './LibrarySidebar';
 import SongsBody from './LibraryBody/SongsBody';
-import { getPlaylistsArray } from '../../store/playlists';
+import { getPlaylists, getPlaylistsArray } from '../../store/playlists';
 // import SongsList from './SongsBody';
 
 export default function Library() {
@@ -24,6 +24,7 @@ export default function Library() {
     useEffect(() => {
         (async () => {
             await dispatch(loadLibrary())
+            await dispatch(getPlaylists());
             setIsLoaded(true);
         })()
 

@@ -5,6 +5,7 @@
     /* border: red 1px solid; */
     display: flex;
     /* align-items: center; */
+    color: var(--text-main-white);
 }
 
 .header-container {
