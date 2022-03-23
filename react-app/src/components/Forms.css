@@ -1,95 +1,207 @@
 .form {
-  display: flex;
-  flex-direction: column;
-  padding: 27px 0px;
-  justify-content: center;
-  border-radius: 5px;
-  font-family: var(--main-font);
-  background-color: var(--highlight-gray);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--main-gray);
+    border-radius: 5px;
+    padding: 20px;
+    position: relative;
 }
 
-.form h2 {
-  text-align: center;
+.form .form-content {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    font-family: var(--header-font);
 }
 
-.form label {
-  padding: 20px 30.8px 5px;
-}
-
-.form input,
-.form select,
-.form textarea,
-.form button {
-  height: 45px;
-  margin: 0 30px;
-  border-radius: 5px;
-  border: 1px solid var(--border-gray);
-}
-
-.form select {
-  padding: 10px;
-  margin-bottom: 33px;
-}
-
-.form textarea {
-  padding: 10px;
-}
-
-.form input {
-  padding-left: 10px;
-}
-
-.form label {
-    width: 425px;
+.form .form-content label{
     color: var(--text-main-white);
-    font-size: 16px;
+    padding-left: 5px;
+    margin: 0;
+    margin-top: 10px;
 }
 
-.form .radio-container {
- display: flex;
- align-items: center;
+.form .form-content input,
+.form .form-content select {
+    background-color: var(--dropdown-gray);
+    border: none;
+    border-radius: 3px;
+    color: var(--text-main-white);
+    padding-left: 10px;
+    width: 260px;
+    margin: 0;
+
+    height: 32px;
+
 }
 
-.form .radio-container input {
-  margin: 0px;
+.form .form-content input:focus {
+    outline: none;
 }
 
-/* .form > div {
-  display: flex;
-  flex-direction: column;
+/* .form.album .form-content * {
+    margin: 5px;
 } */
 
-input.upload {
-  height: 59px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: var(--border-gray) solid 1px;;
-  border-radius: 5px;
-  padding: 18px;
-}
 
 .form button {
-  cursor: pointer;
-  /* margin: 35px 0; */
-  margin-top: 35px;
-  width: 170px;
-  height: 36px;
-  border-radius: 5px;
-  border: none;
-  align-self: center;
-  background-color: var(--accent-orange);
-  font-family: var(--main-font);
-  color: var(--text-main-white);
-  font-size: 16px;
+    /* margin-top: 60px; */
+    width: 70px;
+    height: 27px;
+    font-family: var(--header-font);
+
+    color: var(--background-main-black);
+    background-color: var(--text-main-white);
+    border-radius: 15px;
+    border: none;
+    font-weight: bold;
+    font-size: 13px;
+    align-self: flex-end;
+    margin-top: 25px;
+    /* padding-top: 5px; */
+
+    /* border: solid 1px */
 }
 
-.add-images-form input {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: var(--border-gray) solid 1px;;
-  border-radius: 5px;
-  padding: 20px;
+.form .close-icon {
+    position: absolute;
+    font-size: 22px;
+    right: 16px;
+    top: 16px;
+    color: rgb(161, 161, 161);
+}
+
+.form .icon {
+    font-size: 60px;
+    color: rgb(105, 105, 105);
+}
+
+.form .icon.check.lg {
+    font-size: 60px;
+    color: rgb(15, 180, 15);
+}
+
+.form .icon.active {
+    color: var(--text-main-white)
+}
+
+.form .file-input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form .input-container {
+    position: relative;
+}
+
+.form .file-input-body {
+    position: relative;
+    height: 170px;
+    width: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 2px 2px 30px .2px rgba(0, 0, 0, 0.322);
+
+    /* border: red 3px solid; */
+}
+
+.word-counter-container {
+    width: 62px;
+    height: 28px;
+    align-self: flex-end;
+}
+
+.form .word-counter {
+    position: absolute;
+    /* border: blue 1px solid; */
+    right: 0;
+    bottom: -18px;
+    padding: 5px;
+    border-radius: 5px;
+    /* background-color: var(--accent-orange); */
+    background-color: rgba(128, 128, 128, 0.719);
+    font-size: 14px;
+    /* display: flex; */
+    /* justify-content: flex-end; */
+}
+
+
+.form .word-counter.active {
+    color: red;
+}
+
+.form .file-message {
+    position: absolute;
+    /* display: flex; */
+    /* flex-grow: 1; */
+    font-size: 14px;
+    bottom: 10px;
+    width: 150px;
+    text-align: center;
+    font-family: var(--main-font);
+    color: var(--text-main-white)
+
+    /* width: 100%; */
+    /* margin-right: 50%; */
+    /* margin-left: 50%; */
+    /* margin-right: auto;
+    margin-left: auto; */
+}
+
+.form .file-input-footer {
+    display: flex;
+    /* border: purple 1px solid; */
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 10px;
+    padding: 0 5px;
+    color: rgb(105, 105, 105);
+    font-size: 20px;
+    z-index: 1;
+    /* border: red 1px solid; */
+}
+
+/* .form .file-input-footer.edit {
+
+} */
+
+.form .file-input-footer > div {
+    /* border: red 2px solid; */
+    width: 70px;
+    /* border: green 1px solid; */
+}
+
+.form .file-input-footer.edit > div {
+    /* border: red 2px solid; */
+    width: 30px;
+    /* border: green 1px solid; */
+}
+
+.form .file-input-footer .sm-icon {
+    padding: 0 5px;
+}
+
+.form .file-input-footer.edit .sm-icon.active {
+    border-bottom: 1px solid rgb(105, 105, 105);
+}
+
+
+.form .file-input-footer .check {
+    color: rgb(15, 180, 15);
+    opacity: 0;
+}
+
+.form .file-input-footer .check.active {
+    opacity: 1;
+}
+
+.form .file-input-body img {
+    height: 170px;
+    width: 170px;
+    object-fit: cover;
 }

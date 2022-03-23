@@ -59,7 +59,6 @@ export default function AlbumEditForm({ closeModal, album }) {
     }
 
     const setFile = (file) => {
-        console.log('set file, file', file)
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = (e) => handleFileReader(e, file);

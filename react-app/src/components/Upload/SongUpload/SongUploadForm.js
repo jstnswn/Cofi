@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadHome, loadHomeAlbums, loadNewSong } from '../../../store/home';
 import { createAlbumAndSong, uploadSong } from '../../../store/library/librarySongs';
@@ -7,23 +7,34 @@ export default function SongUploadForm({ closeModal }) {
     const dispatch = useDispatch();
 
     const userAlbums = useSelector(({ session }) => session.user.albums);
-    // const albumLibrary = userAlbums.reduce((acc, album) => {
-    //     acc[album.title] = album.id;
-    //     return acc;
-    // }, {});
 
     const [title, setTitle] = useState('');
     const [artist, setArtist] = useState('');
-    const [song, setSong] = useState(null);
+    const [songFile, setSongFile] = useState(null);
     const [image, setImage] = useState(null);
+    const [imageUrl, setImageUrl] = useState(null);
     const [albumInput, setAlbumInput] = useState('')
     const [albumTitle, setAlbumTitle] = useState('');
-    // const [imageUrl, setImageUrl] = useState(null)
-    // const [ImageError, setImageError] = useState(null);
     const [isPrivate, setIsPrivate] = useState(false);
     const [disableSubmit, setDisableSubmit] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [errors, setErrors] = useState([]);
+    const [isHovered, setIsHovered] = useState(false);
+    const [errors, setErrors] = useState({});
+
+
+    useEffect(() => {
+        setErrors({});
+        setDisableSubmit(false);
+        const errors = {};
+
+        if (title.length > 50) errors.title = true;
+        if (artist.length > 50) errors.artist = true;
+        if (albumTitle.length > 50) errors.albumTitle = true;
+
+        setErrors(errors);
+        if (Object.keys(errors).length) setDisableSubmit(true);
+
+    }, [title, artist, albumTitle])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,7 +45,7 @@ export default function SongUploadForm({ closeModal }) {
         const payload = {
             title,
             artist,
-            song,
+            song: songFile,
             image,
             private: isPrivate
         }
@@ -42,7 +53,7 @@ export default function SongUploadForm({ closeModal }) {
         if (albumTitle) {
             payload.albumTitle = albumTitle;
             dispatch(createAlbumAndSong(payload))
-                .then((song) => dispatch(loadNewSong(song)))
+                .then((songFile) => dispatch(loadNewSong(songFile)))
                 .then(() => setDisableSubmit(false))
                 .then(() => closeModal(e))
                 .catch(errors => setErrors(errors.errors))
@@ -50,15 +61,10 @@ export default function SongUploadForm({ closeModal }) {
 
             return;
         }
-        else if (albumInput) {
-            // const albumId = albumLibrary[albumInput];
-            // console.log('albumInput ', albumInput);
-            // console.log('library: ', albumLibrary)
-            payload.albumId = albumInput;
-        }
+        else if (albumInput) payload.albumId = albumInput;
 
         dispatch(uploadSong(payload))
-            .then((song) => dispatch(loadNewSong(song)))
+            .then((songFile) => dispatch(loadNewSong(songFile)))
             .then(() => setDisableSubmit(false))
             .then(() => closeModal(e))
             .catch(errors => setErrors(errors.errors))
@@ -66,106 +72,175 @@ export default function SongUploadForm({ closeModal }) {
     };
 
     const handleImageFileReader = (e, file) => {
-        // const dataUrl = e.target.result;
+        const dataUrl = e.target.result;
 
-        // const allowedFileTypes = ['png', 'jpg', 'jpeg'];
-        // const stopIdx = dataUrl.indexOf(';');
-        // const fileType = dataUrl.slice(11, stopIdx)
-
-        // if (!allowedFileTypes.includes(fileType)) {
-        //     setImage(null)
-        //     setImageUrl(null);
-        //     setImageError('Must upload a PNG, JPG, or JPEG image.')
-        //     return
-        // }
+        setImageUrl(dataUrl)
         setImage(file);
     }
 
-    // const setImageFile = (file) => {
-    //     const reader = new FileReader();
-    //     reader.readAsDataURL(file);
-    //     reader.onload = (e) => handleImageFileReader(e, file);
-    // };
+    const setImageFile = (file) => {
+        if (!file) return;
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e) => handleImageFileReader(e, file);
+    };
 
-    // const handleFileChange = (e) => {
-    //     const file = e.target.files[0];
-    //     setSong(file);
-    // };
+    const musicFileRef = useRef(null);
+    const imageFileRef = useRef(null);
+
+
+    const fileInputContent = !songFile
+        ? (
+            <div
+                className='file-input-body'
+                onClick={() => musicFileRef.current.click()}
+            >
+                <i className={`fal fa-music-alt music-icon icon ${isHovered ? 'active' : ''}`}></i>
+                {isHovered && <p className='file-message'>Choose Audio File</p>}
+            </div>
+        )
+        : (
+            <div
+                className='file-input-body'
+                onClick={() => !imageUrl && imageFileRef.current.click()}
+            >
+                {!imageUrl
+                    ? <i className={`fal fa-image image-icon icon ${isHovered ? 'active' : ''}`}></i>
+                    : <img alt='Art preview' src={imageUrl} />
+                }
+                {isHovered && !imageUrl && <p className='file-message'>Choose Artwork (optional)</p>}
+            </div>
+        )
 
     const albumOption = albumInput === 'create new'
         ? (
             <>
                 <label>New album name</label>
+            <div className='input-container'>
                 <input
                     type='text'
                     value={albumTitle}
                     onChange={e => setAlbumTitle(e.target.value)}
                 />
+
+                {albumTitle.length > 45 && (
+                    <div className={`word-counter ${errors.albumTitle ? 'active' : ''}`}>{albumTitle.length}/50</div>
+                )}
+            </div>
+
             </>
         )
         : (
             <>
                 <label>Album</label>
-                <select
-                    value={albumInput}
-                    onChange={e => setAlbumInput(e.target.value)}
-                >
-                    <option>-Select an Album-</option>
-                    {userAlbums?.map((album, idx) => (
-                        <option key={idx} value={album.id}>{album.title}</option>
-                    ))}
-                    <option value='create new'>--Create a new album--</option>
-                </select>
+                    <select
+                        value={albumInput}
+                        onChange={e => setAlbumInput(e.target.value)}
+                    >
+                        <option>-Select an Album-</option>
+                        {userAlbums?.map((album, idx) => (
+                            <option key={idx} value={album.id}>{album.title}</option>
+                        ))}
+                        <option value='create new'>--Create a new album--</option>
+                    </select>
+
             </>
         )
 
     return (
-        <form className='song-upload-form form' onSubmit={handleSubmit}>
-            <label>Title</label>
-            <input
-                type='text'
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-            />
-            <label>Artist</label>
-            <input
-                type='text'
-                value={artist}
-                onChange={e => setArtist(e.target.value)}
-            />
-            {albumOption}
-            <div className='upload-form radio-container'>
-                <label>Private</label>
+        <form className='songFile-upload-form form' onSubmit={handleSubmit}>
+            <i onClick={closeModal} className='fal fa-times close-icon'></i>
+
+            <div
+                className='file-input-container'
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+
+                {fileInputContent}
+                <div className='file-input-footer'>
+                    <div>
+                        <i className='fal fa-file-music sm-icon'></i>
+                        <i className={`fal fa-check check sm-icon ${songFile ? 'active' : ''}`}></i>
+                    </div>
+                    <div>
+                        <i className='fal fa-file-image sm-icon'></i>
+                        <i className={`fal fa-check check sm-icon ${image ? 'active' : ''}`}></i>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div className='form-content'>
+                <label>Title</label>
+                <div className='input-container'>
+
+                    <input
+                        type='text'
+                        value={title}
+                        onChange={e => setTitle(e.target.value)}
+                    />
+                    {title.length > 45 && (
+                        <div className={`word-counter ${errors.title ? 'active' : ''}`}>{title.length}/50</div>
+                    )}
+                </div>
+                <label>Artist</label>
+                <div className='input-container'>
+
+                    <input
+                        type='text'
+                        value={artist}
+                        onChange={e => setArtist(e.target.value)}
+                    />
+                    {artist.length > 45 && (
+                        <div className={`word-counter ${errors.artist ? 'active' : ''}`}>{artist.length}/50</div>
+                    )}
+                </div>
+                {albumOption}
+                {/* <div className='upload-form radio-container'>
+                    <label>Private</label>
+                    <input
+                        type='radio'
+                        onChange={e => setIsPrivate(true)}
+                        value={true}
+                        checked={isPrivate === true ? true : false}
+                    />
+                    <label>Public</label>
+                    <input
+                        type='radio'
+                        onChange={e => setIsPrivate(false)}
+                        value={false}
+                        checked={isPrivate === false ? true : false}
+                    />
+                </div> */}
+
+                <button
+                    type='submit'
+                    style={{
+                        opacity: disableSubmit ? .5 : 1,
+                        cursor: disableSubmit ? 'default' : 'pointer'
+                    }} >{isLoading ? 'Submitting...' : 'Submit'}
+                </button>
+                {/* Hidden inputs */}
                 <input
-                    type='radio'
-                    onChange={e => setIsPrivate(true)}
-                    value={true}
-                    checked={isPrivate === true ? true : false}
+                    type='file'
+                    onChange={e => setSongFile(e.target.files[0])}
+                    accept='aduio/mpeg, audio/mp3'
+                    ref={musicFileRef}
+                    style={{ display: 'none' }}
                 />
-                <label>Public</label>
+
                 <input
-                    type='radio'
-                    onChange={e => setIsPrivate(false)}
-                    value={false}
-                    checked={isPrivate === false ? true : false}
+                    type='file'
+                    onChange={e => setImageFile(e.target.files[0])}
+                    accept='image/png, image/jpeg, image/png, image/jpeg'
+                    ref={imageFileRef}
+                    style={{ display: 'none' }}
                 />
             </div>
-            <label>Song File</label>
-            <input
-                type='file'
-                onChange={e => setSong(e.target.files[0])}
-                accept='aduio/mpeg, audio/mp3'
-            />
-            <label>Song Art (optional)</label>
-            <input
-                type='file'
-                onChange={e => setImage(e.target.files[0])}
-                accept='image/png, image/jpeg, image/png, image/jpeg'
-            />
 
-            <button type='submit'>{isLoading ? 'Submitting...' : 'Submit'}</button>
+
         </form>
     )
 }
-
-// accept = 'image/png, image/jpeg, image/png, image/jpeg'
