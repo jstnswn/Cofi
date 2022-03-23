@@ -205,3 +205,24 @@
     width: 170px;
     object-fit: cover;
 }
+
+.login-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /* border: red 1px solid; */
+}
+
+.login-buttons .demo {
+    background-color: var(--accent-orange);
+}
+
+.login-form .form-content{
+    margin: 0;
+}
+
+.form h2 {
+    margin-right: 20px;
+    font-family: var(--header-font);
+    color: var(--text-secondary-white)
+}
