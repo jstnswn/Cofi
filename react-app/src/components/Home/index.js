@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import AlbumPlayer from '../AlbumPlayer';
 import SongPlayer from '../SongPlayer';
 import './Home.css';
 import HomeSidebar from './HomeSidebar';
 import TileCarousel from '../TileCarousel';
-import { getNewAlbumsArray, getNewSongsArray, getTopAlbumsArray } from '../../store/home';
+import { getNewAlbumsArray, getNewSongsArray, getTopAlbumsArray, loadHome } from '../../store/home';
+import { getPlaylists } from '../../store/playlists';
 
 export default function Home() {
+    const dispatch = useDispatch();
+
     const [homeDisplay, setHomeDisplay] = useState('albums');
     const homeItems = useSelector(({ home }) => home);
     const newSongs = useSelector(getNewSongsArray);
@@ -16,9 +19,10 @@ export default function Home() {
     const featuredSongs = Object.values(homeItems.featuredSongs)
     const topAlbums = useSelector(getTopAlbumsArray);
 
-    // useEffect(() => {
-
-    // }, [])
+    useEffect(() => {
+        dispatch(getPlaylists());
+        dispatch(loadHome())
+    }, [dispatch])
 
     // console.log()
     let homeContent;

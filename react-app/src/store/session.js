@@ -1,3 +1,10 @@
+import { cleanActive } from "./active";
+import { cleanHome } from "./home";
+import { cleanLibraryAlbums } from "./library/libraryAlbums";
+import { cleanLibrarySongs } from "./library/librarySongs";
+import { getPlaylists } from "./playlists";
+import { wipeStore } from "./utils";
+
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
@@ -65,8 +72,7 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-
-    dispatch(setUser(data));
+    dispatch(setUser(data))
   }
 }
 
@@ -106,7 +112,13 @@ export const logout = () => async (dispatch) => {
   });
 
   if (response.ok) {
-    dispatch(removeUser());
+    await Promise.all([
+      dispatch(cleanLibrarySongs()),
+      dispatch(cleanLibraryAlbums()),
+      dispatch(cleanActive()),
+      dispatch(cleanHome()),
+      dispatch(removeUser()),
+    ])
   }
 };
 

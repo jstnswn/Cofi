@@ -8,7 +8,7 @@ const LOAD_TOP_ALBUMS = 'home/LOAD_TOP_ALBUMS';
 const LOAD_NEW_ALBUMS = 'home/LOAD_NEW_ALBUMS';
 const LOAD_NEW_ALBUM = 'home/LOAD_NEW_ALBUM';
 
-const CLEAN_STORE = 'home/CLEAN_STORE';
+const CLEAN_HOME = 'home/CLEAN_HOME';
 const CLEAN_ALBUMS = 'home/CLEAN_ALBUMS';
 
 // Action Creators
@@ -40,7 +40,6 @@ const loadNewAlbums = (albums) => {
     };
 };
 
-
 const loadTopAlbums = (albums) => {
     return {
         type: LOAD_TOP_ALBUMS,
@@ -55,7 +54,6 @@ export const loadNewAlbum = (album) => {
     };
 };
 
-
 const loadFeaturedSongs = (songs) => {
     return {
         type: LOAD_FEATURED_SONGS,
@@ -63,10 +61,9 @@ const loadFeaturedSongs = (songs) => {
     }
 };
 
-
-const cleanHome = () => {
+export const cleanHome = () => {
     return {
-        type: CLEAN_STORE
+        type: CLEAN_HOME
     };
 };
 
@@ -281,7 +278,7 @@ export default function reducer(state = initialState, action) {
                 }
             }
 
-        case CLEAN_STORE:
+        case CLEAN_HOME:
             return initialState;
 
         case CLEAN_ALBUMS:

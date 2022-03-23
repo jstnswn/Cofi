@@ -8,6 +8,8 @@ const LOAD_SONG = 'library/LOAD_SONG';
 const UPDATE_SONG = 'library/UPDATE_SONG';
 const REMOVE_SONG = 'library/REMOVE_SONG';
 
+const CLEAN_LIBRARY_SONGS = 'library/CLEAN_LIBRARY_SONGS';
+
 const loadSong = (song, albumId) => {
     return {
         type: LOAD_SONG,
@@ -31,6 +33,12 @@ const removeSong = (songId, albumId) => {
     };
 };
 
+
+export const cleanLibrarySongs = () => {
+    return {
+        type: CLEAN_LIBRARY_SONGS
+    };
+};
 
 
 // Thunks
@@ -230,6 +238,9 @@ export default function reducer(state = initialState, action) {
             // }
 
             return stateCopy;
+
+        case CLEAN_LIBRARY_SONGS:
+            return initialState;
 
         default:
             return state;

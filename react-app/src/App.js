@@ -24,12 +24,19 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      await dispatch(authenticate());
-      await dispatch(loadHome())
-      await dispatch(getPlaylists())
+      await dispatch(authenticate())
+        // .then(() => dispatch(getPlaylists()))
+      // await dispatch(loadHome())
+      // await dispatch(getPlaylists())
       setLoaded(true)
     })();
+
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (!user) return;
+  //   dispatch(getPlaylists())
+  // }, [user, dispatch])
 
   if (!loaded) {
     return null;
