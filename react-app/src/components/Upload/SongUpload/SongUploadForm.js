@@ -20,27 +20,44 @@ export default function SongUploadForm({ closeModal }) {
     const [isLoading, setIsLoading] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [errors, setErrors] = useState({});
+    const [showErrors, setShowErrors] = useState(false);
 
 
     useEffect(() => {
         setErrors({});
         setDisableSubmit(false);
+        setShowErrors(false);
         const errors = {};
 
-        if (title.length > 50) errors.title = true;
-        if (artist.length > 50) errors.artist = true;
-        if (albumTitle.length > 50) errors.albumTitle = true;
+
+        if (title.length > 50) errors.title = 'long';
+        if (title.length === 0) errors.title = 'short';
+        if (artist.length > 50) errors.artist = 'long';
+        if (artist.length === 0) errors.artist = 'short';
+        if (albumTitle.length > 50) errors.albumTitle = 'long';
+        if (albumInput === 'create new' && albumTitle.length === 0) errors.albumTitle = 'short';
+        if (!songFile) errors.song = 'none';
 
         setErrors(errors);
         if (Object.keys(errors).length) setDisableSubmit(true);
 
-    }, [title, artist, albumTitle])
+    }, [title, artist, albumTitle, songFile, albumInput])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setShowErrors(true)
+
+        if (!songFile) {
+            setIsHovered(true);
+            return;
+        }
+
         if (disableSubmit) return;
         setDisableSubmit(true);
+
         setIsLoading(true);
+
+
 
         const payload = {
             title,
@@ -119,7 +136,7 @@ export default function SongUploadForm({ closeModal }) {
             <div className='input-container'>
                 <input
                     type='text'
-                    value={albumTitle}
+                    value={showErrors && !albumTitle ? 'Album must have a title!' : albumTitle}
                     onChange={e => setAlbumTitle(e.target.value)}
                 />
 
@@ -178,7 +195,7 @@ export default function SongUploadForm({ closeModal }) {
 
                     <input
                         type='text'
-                        value={title}
+                        value={showErrors && !title ? 'Song must have a title!' : title}
                         onChange={e => setTitle(e.target.value)}
                     />
                     {title.length > 45 && (
@@ -190,7 +207,7 @@ export default function SongUploadForm({ closeModal }) {
 
                     <input
                         type='text'
-                        value={artist}
+                        value={showErrors && !artist ? 'Song must have an artist!' : artist}
                         onChange={e => setArtist(e.target.value)}
                     />
                     {artist.length > 45 && (

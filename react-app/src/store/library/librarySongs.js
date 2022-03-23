@@ -53,6 +53,8 @@ export const uploadSong = (payload) => async dispatch => {
     if (res.ok) {
         const data = await res.json();
         dispatch(loadSong(data.song));
+
+        if (payload.albumId) dispatch(loadAlbumSong(data.song, payload.albumId));
         return data.song;
     } else {
         const errors = await res.json();
@@ -96,9 +98,12 @@ export const patchSong = (payload) => async dispatch => {
     if (res.ok) {
         const data = await res.json();
         dispatch(loadSong(data.song, payload.fromAlbumId));
-        if (payload.fromAlbumId) dispatch(loadAlbumSong(data.song, payload.fromAlbumId));
+        // if (payload.fromAlbumId) {
+
+        //     dispatch(loadAlbumSong(data.song, payload.fromAlbumId));
+        // }
         dispatch(getPlaylists());
-        //  if (payload.fromAlbumId) dispatch(getLibraryAlbums())
+        if (payload.fromAlbumId || payload.toAlbumId) dispatch(getLibraryAlbums())
         return data.song;
     } else {
         const errors = await res.json();
@@ -159,7 +164,6 @@ export const createAlbumAndSong = (payload) => async dispatch => {
     return dispatch(createAlbum(albumPayload))
         .then((album) =>{
             payload.albumId = album.id
-            console.log("promise", payload)
             return dispatch(uploadSong(payload))
         })
 };

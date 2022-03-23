@@ -12,14 +12,16 @@ export default function PlaylistUploadForm({ closeModal }) {
     const [isHovered, setIsHovered] = useState(false);
     const [error, setError] = useState({});
     const [disableSubmit, setDisableSubmit] = useState(false);
-
+    const [showError, setShowError] = useState(false);
 
     useEffect(() => {
         setError({});
         setDisableSubmit(false);
+        setShowError(false);
         const errors = {};
 
-        if (title.length > 50) errors.title = true;
+        if (title.length > 50) errors.title = 'long';
+        if (title.length === 0) errors.title = 'short';
 
         setError(errors);
         if (Object.keys(errors).length) setDisableSubmit(true);
@@ -29,6 +31,8 @@ export default function PlaylistUploadForm({ closeModal }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setShowError(true);
+        if (disableSubmit) return;
         setIsLoading(true);
 
         const payload = { title, image }
@@ -85,7 +89,7 @@ export default function PlaylistUploadForm({ closeModal }) {
                 <div className='input-container'>
                     <input
                         type='text'
-                        value={title}
+                        value={showError && !title ? 'Playlist must have a title!' : title}
                         onChange={e => setTitle(e.target.value)}
                     />
                     {title.length > 45 && (

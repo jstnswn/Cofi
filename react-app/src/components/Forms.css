@@ -205,3 +205,55 @@
     width: 170px;
     object-fit: cover;
 }
+
+
+.signup-form {
+    /* width: 555px; */
+    padding-right: 30px;
+    padding-bottom: 30px;
+}
+
+.signup-form .input-container input {
+    width: 360px;
+}
+
+.signup-form label,
+.login-form label {
+    padding: 4px;
+    /* border: red 1px solid; */
+}
+
+
+.login-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    /* border: red 1px solid; */
+}
+
+.login-buttons .demo {
+    background-color: var(--accent-orange);
+}
+
+.login-form .form-content
+.signup-form .form-content {
+    margin: 0;
+    border: red 1px solid;
+}
+
+.form h2 {
+    margin-right: 20px;
+    font-family: var(--header-font);
+    color: var(--text-secondary-white)
+}
+
+.signup-form h2 {
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.form p {
+    margin-top: 3px;
+    margin-bottom: 0;
+    color: var(--accent-orange)
+}

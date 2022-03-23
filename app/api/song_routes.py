@@ -6,6 +6,7 @@ from random import randint
 from app.aws import (
     upload_file_to_s3, allowed_image_file, allowed_song_file, get_unique_filename)
 from .utils import get_or_make_artist_id
+from app.api.auth_routes import validation_errors_to_error_messages
 
 song_routes = Blueprint('songs', __name__)
 
@@ -129,38 +130,42 @@ def update_song(song_id):
     song = Song.query.get(song_id)
 
     form = SongForm()
-    current_user_id = current_user.get_id()
-    artist_id = get_or_make_artist_id(form.artist.data)
+    # current_user_id = current_user.get_id()
 
-     # Song upload if new file present
-    if 'song' in request.files:
+    if form.validate_on_submit:
+        artist_id = get_or_make_artist_id(form.artist.data)
 
-        song_file = request.files['song']
+        # Song upload if new file present
+        if 'song' in request.files:
 
-        if not allowed_song_file(song_file.filename):
-            return {'errors': 'file type not permitted'}, 400
+            song_file = request.files['song']
 
-        song_file.filename = get_unique_filename(song_file.filename)
+            if not allowed_song_file(song_file.filename):
+                return {'errors': 'file type not permitted'}, 400
 
-        song_upload = upload_file_to_s3(song_file)
+            song_file.filename = get_unique_filename(song_file.filename)
 
-        if 'url' not in song_upload:
-            return song_upload, 400
+            song_upload = upload_file_to_s3(song_file)
 
-        # song_url = song_upload['url']
-        song.song_url = song_upload['url']
+            if 'url' not in song_upload:
+                return song_upload, 400
+
+            # song_url = song_upload['url']
+            song.song_url = song_upload['url']
 
 
-    if form.image_url.data:
-        song.image_url = form.image_url.data
+        if form.image_url.data:
+            song.image_url = form.image_url.data
 
-    song.album_id = form.album_id.data
-    song.title=form.title.data
-    song.artist_id=artist_id
+        song.album_id = form.album_id.data
+        song.title=form.title.data
+        song.artist_id=artist_id
 
-    db.session.commit()
+        db.session.commit()
 
-    return {'song': song.to_dict()}, 201
+        return {'song': song.to_dict()}, 201
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @song_routes.route('/<int:song_id>/albums/<int:album_id>', methods=['PATCH'])
 def update_song_album(song_id, album_id):
