@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadHome } from '../../../store/home';
 import { patchSong } from '../../../store/library/librarySongs';
-import { getLibraryAlbumsArray } from '../../../store/library/libraryAlbums';
+import { createAlbum, getLibraryAlbumsArray } from '../../../store/library/libraryAlbums';
 
 
 export default function SongEditForm({ closeModal, song, album }) {
@@ -14,10 +14,8 @@ export default function SongEditForm({ closeModal, song, album }) {
     const [image, setImage] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
     const [songFile, setSongFile] = useState(null);
-    // const [albumId, setAlbumId] = useState(album ? album.id : -1);
     const [albumTitle, setAlbumTitle] = useState('')
     const [albumInput, setAlbumInput] = useState(album ? album.id : '')
-    // const [albumName]
     const [artist, setArtist] = useState(song.artist.name);
     const [isPrivate, setPrivate] = useState(song.private);
     const [disableSubmit, setDisableSubmit] = useState(false);
@@ -26,9 +24,22 @@ export default function SongEditForm({ closeModal, song, album }) {
     const [errors, setErrors] = useState([]);
     const [inputToggle, setInputToggle] = useState('image');
 
+    useEffect(() => {
+        setErrors({});
+        setDisableSubmit(false);
+        const errors = {};
+
+        if (title.length > 50) errors.title = true;
+        if (artist.length > 50) errors.artist = true;
+        if (albumTitle.length > 50) errors.albumTitle = true;
+
+        setErrors(errors);
+        if (Object.keys(errors).length) setDisableSubmit(true);
+
+    }, [title, artist, albumTitle])
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (disableSubmit) return;
         setDisableSubmit(true);
@@ -45,14 +56,37 @@ export default function SongEditForm({ closeModal, song, album }) {
             // toAlbumId: albumInput
         };
 
-        if (typeof albumInput === 'number') payload.toAlbumId = albumInput;
-        else payload.toAlbumId = null;
+
+
+        if (albumTitle) {
+            // payload.albumTitle = albumTitle
+            const albumPayload = {
+                title: albumTitle,
+                artist,
+                image
+            }
+
+            dispatch(createAlbum(albumPayload))
+                .then((album) => {
+                    payload.toAlbumId = album.id
+                    dispatch(patchSong(payload))
+                })
+                .then(() => setDisableSubmit(false))
+                .then(() => closeModal(e))
+                .then(() => dispatch(loadHome()))
+                .catch(errors => setErrors(errors.errors))
+
+            return
+        }
+
+        if (isNaN(albumInput)) payload.toAlbumId = null;
+        else payload.toAlbumId = payload.toAlbumId = albumInput;
 
         dispatch(patchSong(payload))
             .then(() => setDisableSubmit(false))
             .then(() => closeModal(e))
-            .catch(errors => setErrors(errors.errors))
             .then(() => dispatch(loadHome()))
+            .catch(errors => setErrors(errors.errors))
     };
 
     const handleImageFileReader = (e, file) => {
@@ -74,25 +108,16 @@ export default function SongEditForm({ closeModal, song, album }) {
 
     const fileInputContent = inputToggle !== 'image'
         ? (
-            <div
-                className='file-input-body'
-                onClick={() => musicFileRef.current.click()}
-            >
+            <div className='file-input-body' onClick={() => musicFileRef.current.click()}>
                 {!songFile
-                    ?
-                        <i className={`fal fa-music-alt music-icon icon ${isHovered ? 'active' : ''}`}></i>
-
-                        : <i className='fal fa-check check icon lg'></i>
-                    }
-
+                    ? <i className={`fal fa-music-alt music-icon icon ${isHovered ? 'active' : ''}`}></i>
+                    : <i className='fal fa-check check icon lg'></i>
+                }
                     {isHovered && !songFile && <p className='file-message'>Choose Audio File</p>}
             </div>
         )
         : (
-            <div
-                className='file-input-body'
-                onClick={() => imageFileRef.current.click()}
-            >
+            <div className='file-input-body' onClick={() => imageFileRef.current.click()}>
                 {!imageUrl
                     ? <i className={`fal fa-image image-icon icon ${isHovered ? 'active' : ''}`}></i>
                     : <img alt='Art preview' src={imageUrl} />
@@ -117,24 +142,18 @@ export default function SongEditForm({ closeModal, song, album }) {
                         <div className={`word-counter ${errors.albumTitle ? 'active' : ''}`}>{albumTitle.length}/50</div>
                     )}
                 </div>
-
             </>
         )
         : (
             <>
                 <label>Album</label>
-                <select
-                    // defaultValue={{value: albumId}}
-                    value={albumInput}
-                    onChange={e => setAlbumInput(e.target.value)}
-                >
+                <select value={albumInput} onChange={e => setAlbumInput(e.target.value)}>
                     {!album && <option></option>}
                     {userAlbums?.map((album, idx) => (
                         <option key={idx} value={album.id}>{album.title}</option>
                     ))}
                     <option value='create new'>--Create a new album--</option>
                 </select>
-
             </>
         )
 
@@ -144,7 +163,6 @@ export default function SongEditForm({ closeModal, song, album }) {
             onSubmit={handleSubmit}
         >
             {/* <h2>Edit Song</h2> */}
-
             <i onClick={closeModal} className='fal fa-times close-icon'></i>
 
             <div
@@ -174,7 +192,9 @@ export default function SongEditForm({ closeModal, song, album }) {
                         value={title}
                         onChange={e => setTitle(e.target.value)}
                     />
-
+                    {title.length > 45 && (
+                        <div className={`word-counter ${errors.title ? 'active' : ''}`}>{title.length}/50</div>
+                    )}
                 </div>
 
                 <label>Artist</label>
@@ -184,7 +204,9 @@ export default function SongEditForm({ closeModal, song, album }) {
                         value={artist}
                         onChange={e => setArtist(e.target.value)}
                     />
-
+                    {artist.length > 45 && (
+                        <div className={`word-counter ${errors.artist ? 'active' : ''}`}>{artist.length}/50</div>
+                    )}
                 </div>
                 {albumOption}
                 {/* <label>Album</label>

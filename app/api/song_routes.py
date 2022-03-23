@@ -154,6 +154,7 @@ def update_song(song_id):
     if form.image_url.data:
         song.image_url = form.image_url.data
 
+    song.album_id = form.album_id.data
     song.title=form.title.data
     song.artist_id=artist_id
 

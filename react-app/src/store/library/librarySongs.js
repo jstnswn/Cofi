@@ -72,11 +72,13 @@ export const getLibrarySongs = () => async dispatch => {
     }
 };
 
+// May not need fromAlbumId
 export const patchSong = (payload) => async dispatch => {
     const formData = new FormData();
     formData.append('title', payload.title);
     formData.append('artist', payload.artist);
     formData.append('private', payload.private);
+    formData.append('album_id', payload.toAlbumId);
     if (payload.song) formData.append('song', payload.song);
 
     let imageUrl;
@@ -103,6 +105,7 @@ export const patchSong = (payload) => async dispatch => {
         return errors.errors;
     }
 };
+
 
 export const patchSongAlbum = (song, toAlbumId) => async dispatch => {
     // console.log('albumID', toAlbumId)
