@@ -6,7 +6,7 @@ export default function PlaylistList({ song, addSongToPlaylist }) {
     const playlists = useSelector(getPlaylistsArray);
     // const playlistIds = playlists.map(playlist => playlist.id);
 
-    // console.log('playlistIDS', playlistIds)
+    console.log('playlistIDS', playlists)
     return (
         <ul className='album-list-modal'>
             {playlists.map((playlist, idx) => (
