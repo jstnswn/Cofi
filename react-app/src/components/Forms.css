@@ -206,9 +206,17 @@
     object-fit: cover;
 }
 
+
+.signup-form label,
+.login-form label {
+    padding: 4px;
+    /* border: red 1px solid; */
+}
+
+
 .login-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
     /* border: red 1px solid; */
 }
@@ -217,8 +225,10 @@
     background-color: var(--accent-orange);
 }
 
-.login-form .form-content{
+.login-form .form-content
+.signup-form .form-content {
     margin: 0;
+    border: red 1px solid;
 }
 
 .form h2 {

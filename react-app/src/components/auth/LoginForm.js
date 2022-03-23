@@ -57,12 +57,6 @@ const LoginForm = () => {
 
       </div>
       <div className='form-content'>
-        {/* <div> */}
-        {/* {errors.map((error, idx) => (
-            <div key={idx}>{error}</div>
-          ))} */}
-        {/* </div> */}
-        {/* <div> */}
         <label htmlFor='email'>Email</label>
         <div className='input-container'>
           <input
@@ -89,14 +83,10 @@ const LoginForm = () => {
 
           {passErrors.map((error, idx) => <div key={idx}>{error}</div>)}
         </div>
-        {/* </div> */}
-        {/* <div> */}
 
         <div className='login-buttons'>
           <button type='submit'>Login</button>
 
-
-          {/* </div> */}
           <button className='demo' onClick={loginDemoUser}>Demo</button>
         </div>
 
