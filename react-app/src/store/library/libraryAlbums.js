@@ -1,5 +1,6 @@
 // import { getLibrarySongs } from "../librarySongs";
 import SongEditForm from "../../components/Library/SongEditForm.js";
+import { loadUserAlbum } from "../session.js";
 import { getImageUrl, normalize, orderIds } from "../utils";
 import { getLibrarySongs } from "./librarySongs";
 
@@ -58,7 +59,7 @@ export const getLibraryAlbums = () => async dispatch => {
 
     if (res.ok) {
         const data = await res.json()
-        dispatch(loadAlbums(data.albums))
+        dispatch(loadAlbums(data.albums));
     } else {
         const error = await res.json();
         return error.error;
@@ -83,6 +84,7 @@ export const createAlbum = (payload) => async dispatch => {
     if (res.ok) {
         const data = await res.json();
         dispatch(loadAlbum(data.album));
+        dispatch(loadUserAlbum(data.album))
         return data.album;
     } else {
         const errors = await res.json();
@@ -108,7 +110,8 @@ export const patchAlbum = (payload) => async dispatch => {
     if (res.ok) {
         const data = await res.json();
         dispatch(loadAlbum(data.album));
-        dispatch(getLibrarySongs())
+        dispatch(loadUserAlbum(data.album));
+        dispatch(getLibrarySongs());
         // if (payload.fromAlbumId) dispatch(loadAlbumSong(data.song, payload.fromAlbumId))
         //  if (payload.fromAlbumId) dispatch(getLibraryAlbums())
         return data.album;
