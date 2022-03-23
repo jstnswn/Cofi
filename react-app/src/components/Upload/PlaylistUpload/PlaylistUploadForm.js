@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { createPlaylist } from '../../../store/playlists';
+import { popupMessage } from '../../utils';
 
 export default function PlaylistUploadForm({ closeModal }) {
     const dispatch = useDispatch();
@@ -39,6 +40,7 @@ export default function PlaylistUploadForm({ closeModal }) {
 
         dispatch(createPlaylist(payload))
             .then(() => closeModal())
+            .then(() => popupMessage('Playlist created.'))
     };
 
     const handleImageFileReader = (e, file) => {

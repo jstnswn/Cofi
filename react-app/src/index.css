@@ -16,7 +16,9 @@
     --main-font: 'Open Sans', sans-serif;
     --box-shadow: 1px 3px 15px 2px rgba(8, 8, 8, 0.192);
     --dropdown-gray: rgb(54, 54, 54);
-  }
+
+    --toastify-color-success: rgb(160, 31, 9);
+}
 
 
 body {
@@ -62,4 +64,9 @@ li{
 /* #root {
     width: 100%;
 } */
+
+.toastify-progress {
+    color: black;
+    background-color: black;
+}
 

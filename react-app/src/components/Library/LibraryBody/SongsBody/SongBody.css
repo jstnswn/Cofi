@@ -67,7 +67,7 @@
     margin-right: auto;
     margin-left: auto;
 
-    max-width: 880px;
+    max-width: 900px;
 
     /* border: green 2px solid; */
 
@@ -83,8 +83,20 @@
     padding: 8px 10px;
     display: flex;
     align-items: center;
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
+    /* width: 200px; */
     /* padding-left: 20px; */
     /* height: 100px; */
+}
+
+.library-list p,
+.library-list span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
 }
 
 .library-list .list-image {

@@ -31,28 +31,29 @@ export default function Library() {
 
     const routes = (
         <>
-        <Switch>
+            <Switch>
 
-            <Route path={`/library/${user.username}/albums`} exact={true}>
-                <AlbumsBody user={user} option='album'    />
-            </Route>
-            <Route path={`/library/${user.username}/songs`} exact={true}>
-                <SongsBody option='song'/>
-            </Route>
-            <Route path={`/library/${user.username}/albums/:albumId`}>
-                <SongsBody  option='album'/>
-            </Route>
-            <Route path={`/library/${user.username}/playlists`} exact={true}>
-                <AlbumsBody user={user} option='playlist'   />
-            </Route>
-            <Route path={`/library/${user.username}/playlists/:playlistId`}>
-                <SongsBody option='playlist'/>
-            </Route>
-            <Route>
-                <SongsBody  />
-            </Route>
+                <Route path={`/library/${user.username}/albums`} exact={true}>
+                    <AlbumsBody user={user} option='album' />
+                </Route>
+                <Route path={`/library/${user.username}/songs`} exact={true}>
+                    <SongsBody option='song' />
+                </Route>
+                <Route path={`/library/${user.username}/albums/:albumId`} exact={true}>
+                    <SongsBody option='album' />
+                </Route>
+                <Route path={`/library/${user.username}/playlists`} exact={true}>
+                    <AlbumsBody user={user} option='playlist' />
+                </Route>
+                <Route path={`/library/${user.username}/playlists/:playlistId`} exact={true}>
+                    <SongsBody option='playlist' />
+                </Route >
+                {/* <Route >
+                    <SongsBody option='song' />
+                </Route> */}
 
-        </Switch>
+
+            </Switch>
         </>
     )
 
@@ -62,7 +63,7 @@ export default function Library() {
                 <LibraryHeader libraryItems={libraryItems} />
                 <div id='library-body'>
 
-                        {routes}
+                    {routes}
 
 
                 </div>

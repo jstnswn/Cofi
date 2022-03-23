@@ -1,9 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+
 import { loadHome, loadHomeAlbums, loadNewSong } from '../../../store/home';
 import { createAlbumAndSong, uploadSong } from '../../../store/library/librarySongs';
+import { popupMessage } from '../../utils';
+
 
 export default function SongUploadForm({ closeModal }) {
+
     const dispatch = useDispatch();
 
     const userAlbums = useSelector(({ session }) => session.user.albums);
@@ -30,11 +34,11 @@ export default function SongUploadForm({ closeModal }) {
         const errors = {};
 
 
-        if (title.length > 50) errors.title = 'long';
+        if (title.length > 35) errors.title = 'long';
         if (title.length === 0) errors.title = 'short';
-        if (artist.length > 50) errors.artist = 'long';
+        if (artist.length > 35) errors.artist = 'long';
         if (artist.length === 0) errors.artist = 'short';
-        if (albumTitle.length > 50) errors.albumTitle = 'long';
+        if (albumTitle.length > 35) errors.albumTitle = 'long';
         if (albumInput === 'create new' && albumTitle.length === 0) errors.albumTitle = 'short';
         if (!songFile) errors.song = 'none';
 
@@ -76,6 +80,7 @@ export default function SongUploadForm({ closeModal }) {
                 .then(() => closeModal(e))
                 .catch(errors => setErrors(errors.errors))
                 .then(() => dispatch(loadHomeAlbums()))
+                .then(() => popupMessage('Song uploaded.'))
 
             return;
         }
@@ -85,8 +90,10 @@ export default function SongUploadForm({ closeModal }) {
             .then((songFile) => dispatch(loadNewSong(songFile)))
             .then(() => setDisableSubmit(false))
             .then(() => closeModal(e))
-            .catch(errors => setErrors(errors.errors))
             .then(() => dispatch(loadHomeAlbums()))
+            .then(() => popupMessage('Song uploaded.'))
+            .catch(errors => setErrors(errors.errors))
+
     };
 
     const handleImageFileReader = (e, file) => {
@@ -141,8 +148,8 @@ export default function SongUploadForm({ closeModal }) {
                     onChange={e => setAlbumTitle(e.target.value)}
                 />
 
-                {albumTitle.length > 45 && (
-                    <div className={`word-counter ${errors.albumTitle ? 'active' : ''}`}>{albumTitle.length}/50</div>
+                {albumTitle.length > 30 && (
+                    <div className={`word-counter ${errors.albumTitle ? 'active' : ''}`}>{albumTitle.length}/35</div>
                 )}
             </div>
 
@@ -150,7 +157,7 @@ export default function SongUploadForm({ closeModal }) {
         )
         : (
             <>
-                <label>Album</label>
+                <label>Album (optional)</label>
                     <select
                         value={albumInput}
                         onChange={e => setAlbumInput(e.target.value)}
@@ -199,8 +206,8 @@ export default function SongUploadForm({ closeModal }) {
                         value={showErrors && !title ? 'Song must have a title!' : title}
                         onChange={e => setTitle(e.target.value)}
                     />
-                    {title.length > 45 && (
-                        <div className={`word-counter ${errors.title ? 'active' : ''}`}>{title.length}/50</div>
+                    {title.length > 30 && (
+                        <div className={`word-counter ${errors.title ? 'active' : ''}`}>{title.length}/35</div>
                     )}
                 </div>
                 <label>Artist</label>
@@ -211,8 +218,8 @@ export default function SongUploadForm({ closeModal }) {
                         value={showErrors && !artist ? 'Song must have an artist!' : artist}
                         onChange={e => setArtist(e.target.value)}
                     />
-                    {artist.length > 45 && (
-                        <div className={`word-counter ${errors.artist ? 'active' : ''}`}>{artist.length}/50</div>
+                    {artist.length > 30 && (
+                        <div className={`word-counter ${errors.artist ? 'active' : ''}`}>{artist.length}/35</div>
                     )}
                 </div>
                 {albumOption}
