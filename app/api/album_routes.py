@@ -3,7 +3,7 @@ from app.api.utils import get_or_make_artist_id
 from flask import Blueprint, request
 from flask_login import current_user
 from random import randint
-from app.models import Album, db
+from app.models import Album, db, User
 from app.forms.album_form import AlbumForm
 from app.api.auth_routes import validation_errors_to_error_messages
 
@@ -42,8 +42,13 @@ def get_most_liked_albums(limit):
     """
     Returns list of most liked albums. Can specify the amount via limit
     """
+    def by_length(e):
+        return len(e.likers)
 
-    albums = Album.query.order_by(Album.likers.count().desc()).limit(5).all()
+    albums = Album.query.all()
+
+    # Sort by most likers. Rework for time complexity
+    albums.sort(reverse=True, key=by_length)
 
     return {'albums': [album.to_dict() for album in albums]}
 

@@ -5,7 +5,7 @@ import SongPlayer from '../SongPlayer';
 import './Home.css';
 import HomeSidebar from './HomeSidebar';
 import TileCarousel from '../TileCarousel';
-import { getNewAlbumsArray, getNewSongsArray } from '../../store/home';
+import { getNewAlbumsArray, getNewSongsArray, getTopAlbumsArray } from '../../store/home';
 
 export default function Home() {
     const [homeDisplay, setHomeDisplay] = useState('albums');
@@ -14,6 +14,7 @@ export default function Home() {
     const newAlbums = useSelector(getNewAlbumsArray);
     const featuredAlbum = homeItems.featuredAlbum;
     const featuredSongs = Object.values(homeItems.featuredSongs)
+    const topAlbums = useSelector(getTopAlbumsArray);
 
     // useEffect(() => {
 
@@ -27,9 +28,9 @@ export default function Home() {
                 <h2>Featured Album</h2>
                 <AlbumPlayer album={featuredAlbum} />
                 <h2>New Albums</h2>
-                <TileCarousel content={newAlbums} option='albums'/>
+                <TileCarousel content={newAlbums} option='albums' identifier='newAlbums'/>
                 <h2>Top Albums</h2>
-                <TileCarousel content={newAlbums} option='albums'/>
+                <TileCarousel content={topAlbums} option='albums'identifier='topAlbums'/>
             </>
         )
     } else if (homeDisplay === 'songs') {

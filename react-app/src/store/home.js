@@ -4,6 +4,7 @@ const LOAD_NEW_SONG = 'home/NEW_LOAD_SONG';
 const LOAD_NEW_SONGS = 'home/LOAD_NEW_SONGS';
 const LOAD_FEATURED_SONGS = 'home/LOAD_FEATURED_SONGS';
 const LOAD_FEATURED_ALBUM = 'home/LOAD_FEATURED_ALBUM';
+const LOAD_TOP_ALBUMS = 'home/LOAD_TOP_ALBUMS';
 const LOAD_NEW_ALBUMS = 'home/LOAD_NEW_ALBUMS';
 const LOAD_NEW_ALBUM = 'home/LOAD_NEW_ALBUM';
 
@@ -39,6 +40,14 @@ const loadNewAlbums = (albums) => {
     };
 };
 
+
+const loadTopAlbums = (albums) => {
+    return {
+        type: LOAD_TOP_ALBUMS,
+        albums
+    }
+};
+
 export const loadNewAlbum = (album) => {
     return {
         type: LOAD_NEW_ALBUM,
@@ -53,6 +62,7 @@ const loadFeaturedSongs = (songs) => {
         songs
     }
 };
+
 
 const cleanHome = () => {
     return {
@@ -124,9 +134,26 @@ export const getFeaturedAlbum = () => async dispatch => {
     }
 }
 
+export const getTopAlbums = (amount) => async dispatch => {
+    if (!amount) amount = 15;
+    const res = await fetch(`/api/albums/top/${amount}`);
+
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(loadTopAlbums(data.albums));
+    } else {
+        const error = await res.json();
+        return error.error;
+    }
+};
+
 // Helper Functions
 // export const getNewSongsArray = state => Object.values(state.home.newSongs);
 // export const getFeaturedAlbumArray = state => Object.values(state.home.featuredAlbum);
+export const getTopAlbumsArray = state => {
+    const orderedIds = state.home.topAlbums.order;
+    return orderedIds.map(id => state.home.topAlbums.byIds[id]);
+}
 
 export const getNewSongsArray = (state) => {
     const orderedIds = state.home.newSongs.order;
@@ -146,6 +173,7 @@ export const loadHome = () => async dispatch => {
         dispatch(getNewSongs()),
         dispatch(getFeaturedAlbum()),
         dispatch(getNewAlbums()),
+        dispatch(getTopAlbums())
     ]);
 };
 
@@ -154,6 +182,7 @@ export const loadHomeAlbums = () => async dispatch => {
         dispatch(cleanHomeAlbums()),
         dispatch(getFeaturedAlbum()),
         dispatch(getNewAlbums()),
+        dispatch(getTopAlbums())
     ])
 };
 
@@ -161,6 +190,10 @@ export const loadHomeAlbums = () => async dispatch => {
 const initialState = {
     featuredAlbum: {},
     newAlbums: {
+        byIds: {},
+        order: []
+    },
+    topAlbums: {
         byIds: {},
         order: []
     },
@@ -234,6 +267,17 @@ export default function reducer(state = initialState, action) {
                         [action.album.id]: action.album
                     },
                     order: [action.album.id, ...state.newAlbums.order]
+                }
+            }
+
+        case LOAD_TOP_ALBUMS:
+            normalizedData = normalize(action.albums);
+            orderedIds = orderIds(action.albums);
+            return {
+                ...state,
+                topAlbums: {
+                    byIds: normalizedData,
+                    order: orderedIds
                 }
             }
 
