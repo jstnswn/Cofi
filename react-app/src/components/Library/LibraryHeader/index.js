@@ -91,23 +91,26 @@ export default function LibraryHeader({ libraryItems }) {
                         className='library-header-image'
                         src={headerUrl}
                     />
+                    <div className='header-title-container'>
+                        
+                        <h2 className='library-header-title'>{headerTitle}
+                            {idParam && userParam === user.username && (
+                                <span><i onClick={openDropdown} className='fas fa-ellipsis-h libary-header-edit'></i></span>)}
+                        </h2>
+
+                        {showDropdown && (
+                            <div className='library-list-dropdown album'>
+                                <ul>
+                                    {/* <li onClick={openEditMenu}>Edit Song</li> */}
+                                    <li onClick={openConfirmMenu}>{inPlaylist ? 'Remove Playlist' : 'Remove Album'}</li>
+                                    <li onClick={openEditForm}>Edit Details</li>
+                                </ul>
+                            </div>
+                        )}
+
+                    </div>
                 </div>
-                <div className='header-title-container'>
-                    <h2 className='library-header-title'>{headerTitle}
-                        {idParam && userParam === user.username && (
-                            <span><i onClick={openDropdown} className='fas fa-ellipsis-h libary-header-edit'></i></span>)}
-                    </h2>
-
-                    {showDropdown && (
-                        <div className='library-list-dropdown album'>
-                            <ul>
-                                {/* <li onClick={openEditMenu}>Edit Song</li> */}
-                                <li onClick={openConfirmMenu}>{inPlaylist ? 'Remove Playlist' : 'Remove Album'}</li>
-                                <li onClick={openEditForm}>Edit Details</li>
-                            </ul>
-                        </div>
-                    )}
-
+            {/* </div> */}
                     {showConfirm && (
                         <Modal onClose={closeConfirmMenu}>
                             <ConfirmDelete
@@ -125,8 +128,6 @@ export default function LibraryHeader({ libraryItems }) {
                             }
                         </Modal>
                     )}
-                </div>
-            {/* </div> */}
 
         </div>
     )
