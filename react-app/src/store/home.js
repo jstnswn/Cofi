@@ -74,7 +74,6 @@ export const getFeaturedSongs = () => async dispatch => {
 
     if (res.ok) {
         const data = await res.json();
-        console.log('featured songs thunk: ', data.songs)
 
         dispatch(loadFeaturedSongs(data.songs));
 

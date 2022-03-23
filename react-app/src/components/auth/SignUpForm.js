@@ -5,7 +5,7 @@ import { signUp } from '../../store/session';
 import { formatError } from './utils';
 
 const SignUpForm = () => {
-  const [errors, setErrors] = useState(['empty fields']);
+  const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -50,6 +50,7 @@ const SignUpForm = () => {
       setRepeatPassError('Passwords do not match');
     } else {
       resetErrors();
+
     }
   };
 
@@ -142,9 +143,9 @@ const SignUpForm = () => {
 
         <button
           type='submit'
-          style={{
-            opacity: errors.length ? .5 : 1
-          }}
+          // style={{
+          //   opacity: errors.length ? .5 : 1
+          // }}
           >Sign Up</button>
       </div>
     </form>
