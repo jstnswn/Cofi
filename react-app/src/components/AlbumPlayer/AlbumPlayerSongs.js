@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Modal } from '../../context/Modal';
 import { setSong } from '../../store/active';
+import { addToPlaylist } from '../../store/playlists';
 import { createSongLike, deleteSongLike } from '../../store/session';
+import PlaylistList from '../Library/LibraryBody/SongsBody/PlaylistList';
 
 export default function AlbumPlayerSongs({ song, idx }) {
     const dispatch = useDispatch();
     const user = useSelector(({ session }) => session.user);
 
     const [showOptions, setShowOptions] = useState(false);
+    const [showPlaylists, setShowPlaylists] = useState(false);
 
-    const seeOptions = () => setShowOptions(true);
+    const seeOptions = (e) => {
+        e.stopPropagation();
+        setShowOptions(true);
+    }
 
     useEffect(() => {
         if (!showOptions) return;
@@ -23,27 +30,44 @@ export default function AlbumPlayerSongs({ song, idx }) {
         return () => document.removeEventListener('click', hideOptions);
     }, [showOptions])
 
+    const openPlaylists = (e) => {
+        e.stopPropagation();
+        setShowPlaylists(true);
+    };
 
+    const addSongToPlaylist = (playlistId) => {
+        dispatch(addToPlaylist(song, playlistId));
+        setShowPlaylists(false);
+    };
 
     const likedSongIds = user.liked.song_ids;
     // idx may be needed for edit options later on
 
-    const likeSong = () => dispatch(createSongLike(song.id));
-    const unlikeSong = () => dispatch(deleteSongLike(song.id));
+    const likeSong = (e) => {
+        e.stopPropagation();
+        dispatch(createSongLike(song.id));
+    }
+    const unlikeSong = (e) => {
+        e.stopPropagation();
+        dispatch(deleteSongLike(song.id));
+    }
 
     let likeIconClass;
     let toggleLike;
+    let likeText;
 
     // const likeIconClass = likedSongIds.includes(song.id)
     //     ? 'fas fa-heart'
     //     : 'far fa-heart';
 
     if (likedSongIds.includes(song.id)) {
-        likeIconClass = 'fas fa-heart';
+        likeIconClass = 'fas fa-heart icon';
         toggleLike = unlikeSong;
+        likeText = 'Unlike';
     } else {
-        likeIconClass = 'far fa-heart';
+        likeIconClass = 'far fa-heart icon';
         toggleLike = likeSong;
+        likeText = 'Like';
     }
 
     const playSong = () => {
@@ -62,13 +86,19 @@ export default function AlbumPlayerSongs({ song, idx }) {
             <div className='song-options-container'>
                 <i className='fa-solid fa-ellipsis' onClick={seeOptions}></i>
 
-            {showOptions && (
-                <div className='song-options dd'>
-                        <i onClick={toggleLike} className={`${likeIconClass} dd`}></i>
-                </div>
-            )}
+                {showOptions && (
+                    <ul className='song-options dd'>
+                        <li onClick={toggleLike} className='dd'>{likeText}<span  className={`${likeIconClass} dd`}></span></li>
+                        <li onClick={openPlaylists} className='dd'>Add to playlist<span className='fad fa-list-music icon'></span></li>
+                    </ul>
+                )}
             </div>
 
+                {showPlaylists && (
+                    <Modal onClose={() => setShowPlaylists(false)}>
+                        <PlaylistList song={song} addSongToPlaylist={addSongToPlaylist}/>
+                    </Modal>
+                )}
         </div>
     )
 }

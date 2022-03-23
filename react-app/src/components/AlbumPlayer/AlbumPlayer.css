@@ -108,3 +108,49 @@
   color: gray;
   font-size: .8em;
 }
+
+.album-player-song-box .song-options {
+     position: absolute;
+    top: 10px;
+    right: 0;
+    z-index: 1;
+    padding: 0;
+    background-color: var(--main-gray);
+    border-radius: 5px;
+    /* border: red 1px solid; */
+    /* padding: 9px; */
+    /* z-index: 10; */
+
+}
+
+.album-player-song-box .song-options .icon {
+  padding-left: 15px;
+  font-size: 15px;
+  margin-top: auto;
+  margin-bottom: auto;
+
+}
+
+.album-player-song-box .song-options ul {
+    padding: 0;
+}
+
+.album-player-song-box .song-options li {
+    padding: 3px 10px;
+    font-family: var(--main-font);
+    color: var(--text-secondary-white);
+    text-align: center;
+    /* width: 120px; */
+    /* margin: 5px 0; */
+    cursor: pointer;
+
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+
+    /* border: red 1px solid; */
+}
+
+.album-player-song-box .song-options li:hover {
+    background-color: var(--background-secondary-dark-gray);
+}

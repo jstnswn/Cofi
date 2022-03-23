@@ -47,6 +47,7 @@ export default function SongUploadForm({ closeModal }) {
         e.preventDefault();
         setShowErrors(true)
 
+        // Display song upload area if no song is selected
         if (!songFile) {
             setIsHovered(true);
             return;

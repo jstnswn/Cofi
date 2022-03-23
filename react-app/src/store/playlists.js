@@ -160,6 +160,7 @@ export default function reducer(state = initialState, action) {
     let normalizedData;
     let playlistSongs;
     let idx;
+    let songIds;
 
     switch (action.type) {
         case LOAD_PLAYLISTS:
@@ -185,13 +186,15 @@ export default function reducer(state = initialState, action) {
             stateCopy = {...state}
             playlistSongs = stateCopy[action.playlistId].songs;
             playlistSongs.push(action.song);
+            songIds = stateCopy[action.playlistId].song_ids;
+            songIds.push(action.song.id);
 
             return stateCopy;
 
         case REMOVE_SONG_FROM_PLAYLIST:
             stateCopy = { ...state }
             playlistSongs = stateCopy[action.playlistId].songs;
-            const songIds = stateCopy[action.playlistId].song_ids;
+            songIds = stateCopy[action.playlistId].song_ids;
             idx = playlistSongs.findIndex(song => song.id === action.songId);
             playlistSongs.splice(idx, 1);
             songIds.splice(idx, 1);
