@@ -207,6 +207,16 @@
 }
 
 
+.signup-form {
+    /* width: 555px; */
+    padding-right: 30px;
+    padding-bottom: 30px;
+}
+
+.signup-form .input-container input {
+    width: 360px;
+}
+
 .signup-form label,
 .login-form label {
     padding: 4px;
@@ -235,4 +245,15 @@
     margin-right: 20px;
     font-family: var(--header-font);
     color: var(--text-secondary-white)
+}
+
+.signup-form h2 {
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.form p {
+    margin-top: 3px;
+    margin-bottom: 0;
+    color: var(--accent-orange)
 }

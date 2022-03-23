@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
@@ -6,7 +6,6 @@ import { formatError } from './utils';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
-  const [errorrs, setErrorrs] = useState({});
   const [passErrors, setPassErrors] = useState([]);
   const [emailErrors, setEmailErrors] = useState([]);
   const [email, setEmail] = useState('');
@@ -15,18 +14,32 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const resetErrors = () => {
+    setEmailErrors([]);
+    setPassErrors([]);
+  }
+
+
+  useEffect(() => {
+    if (!errors.length) return;
+    resetErrors();
+
+    for (let error of errors) {
+      const formatted = formatError(error);
+      if (error.includes('credentials')) setPassErrors(prev => [formatted, ...prev]);
+      if (error.includes('Email')) setEmailErrors(prev => [formatted, ...prev]);
+    }
+  }, [errors])
+
+
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
-      for (let error of data) {
-        const formatted = formatError(error);
-        if (error.includes('credentials')) setPassErrors(prev => [formatted, ...prev]);
-        if (error.includes('Email')) setEmailErrors(prev => [formatted, ...prev]);
-      }
+
       setErrors(data);
     }
-    // if (!errors.length) return <Redirect to='/' />;
+
     if (!errors.length) history.push('/')
   };
 
@@ -67,7 +80,7 @@ const LoginForm = () => {
             onChange={updateEmail}
             required
           />
-          {emailErrors.map((error, idx) => <div key={idx}>{error}</div>)}
+          {emailErrors.map((error, idx) => <p key={idx}>{error}</p>)}
 
         </div>
         <label htmlFor='password'>Password</label>
@@ -81,7 +94,7 @@ const LoginForm = () => {
             required
           />
 
-          {passErrors.map((error, idx) => <div key={idx}>{error}</div>)}
+          {passErrors.map((error, idx) => <p key={idx}>{error}</p>)}
         </div>
 
         <div className='login-buttons'>
