@@ -56,6 +56,7 @@ export default function AlbumUploadForm({ closeModal }) {
     }
 
     const setImageFile = (file) => {
+        if (!file) return;
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = (e) => handleImageFileReader(e, file);

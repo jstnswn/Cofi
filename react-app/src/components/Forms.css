@@ -77,6 +77,11 @@
     color: rgb(105, 105, 105);
 }
 
+.form .icon.check.lg {
+    font-size: 60px;
+    color: rgb(15, 180, 15);
+}
+
 .form .icon.active {
     color: var(--text-main-white)
 }
@@ -158,16 +163,33 @@
     color: rgb(105, 105, 105);
     font-size: 20px;
     z-index: 1;
+    /* border: red 1px solid; */
 }
+
+/* .form .file-input-footer.edit {
+
+} */
 
 .form .file-input-footer > div {
     /* border: red 2px solid; */
     width: 70px;
+    /* border: green 1px solid; */
+}
+
+.form .file-input-footer.edit > div {
+    /* border: red 2px solid; */
+    width: 30px;
+    /* border: green 1px solid; */
 }
 
 .form .file-input-footer .sm-icon {
     padding: 0 5px;
 }
+
+.form .file-input-footer.edit .sm-icon.active {
+    border-bottom: 1px solid rgb(105, 105, 105);
+}
+
 
 .form .file-input-footer .check {
     color: rgb(15, 180, 15);

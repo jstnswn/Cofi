@@ -10,7 +10,7 @@ export default function SongUploadForm({ closeModal }) {
 
     const [title, setTitle] = useState('');
     const [artist, setArtist] = useState('');
-    const [song, setSong] = useState(null);
+    const [songFile, setSongFile] = useState(null);
     const [image, setImage] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
     const [albumInput, setAlbumInput] = useState('')
@@ -45,7 +45,7 @@ export default function SongUploadForm({ closeModal }) {
         const payload = {
             title,
             artist,
-            song,
+            song: songFile,
             image,
             private: isPrivate
         }
@@ -53,7 +53,7 @@ export default function SongUploadForm({ closeModal }) {
         if (albumTitle) {
             payload.albumTitle = albumTitle;
             dispatch(createAlbumAndSong(payload))
-                .then((song) => dispatch(loadNewSong(song)))
+                .then((songFile) => dispatch(loadNewSong(songFile)))
                 .then(() => setDisableSubmit(false))
                 .then(() => closeModal(e))
                 .catch(errors => setErrors(errors.errors))
@@ -64,7 +64,7 @@ export default function SongUploadForm({ closeModal }) {
         else if (albumInput) payload.albumId = albumInput;
 
         dispatch(uploadSong(payload))
-            .then((song) => dispatch(loadNewSong(song)))
+            .then((songFile) => dispatch(loadNewSong(songFile)))
             .then(() => setDisableSubmit(false))
             .then(() => closeModal(e))
             .catch(errors => setErrors(errors.errors))
@@ -79,6 +79,7 @@ export default function SongUploadForm({ closeModal }) {
     }
 
     const setImageFile = (file) => {
+        if (!file) return;
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = (e) => handleImageFileReader(e, file);
@@ -88,7 +89,7 @@ export default function SongUploadForm({ closeModal }) {
     const imageFileRef = useRef(null);
 
 
-    const fileInputContent = !song
+    const fileInputContent = !songFile
         ? (
             <div
                 className='file-input-body'
@@ -147,7 +148,7 @@ export default function SongUploadForm({ closeModal }) {
         )
 
     return (
-        <form className='song-upload-form form' onSubmit={handleSubmit}>
+        <form className='songFile-upload-form form' onSubmit={handleSubmit}>
             <i onClick={closeModal} className='fal fa-times close-icon'></i>
 
             <div
@@ -160,7 +161,7 @@ export default function SongUploadForm({ closeModal }) {
                 <div className='file-input-footer'>
                     <div>
                         <i className='fal fa-file-music sm-icon'></i>
-                        <i className={`fal fa-check check sm-icon ${song ? 'active' : ''}`}></i>
+                        <i className={`fal fa-check check sm-icon ${songFile ? 'active' : ''}`}></i>
                     </div>
                     <div>
                         <i className='fal fa-file-image sm-icon'></i>
@@ -213,6 +214,7 @@ export default function SongUploadForm({ closeModal }) {
                         checked={isPrivate === false ? true : false}
                     />
                 </div> */}
+
                 <button
                     type='submit'
                     style={{
@@ -220,11 +222,10 @@ export default function SongUploadForm({ closeModal }) {
                         cursor: disableSubmit ? 'default' : 'pointer'
                     }} >{isLoading ? 'Submitting...' : 'Submit'}
                 </button>
-
                 {/* Hidden inputs */}
                 <input
                     type='file'
-                    onChange={e => setSong(e.target.files[0])}
+                    onChange={e => setSongFile(e.target.files[0])}
                     accept='aduio/mpeg, audio/mp3'
                     ref={musicFileRef}
                     style={{ display: 'none' }}

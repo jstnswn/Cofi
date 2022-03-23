@@ -107,7 +107,6 @@ export default function PlaylistUploadForm({ closeModal }) {
                         cursor: disableSubmit ? 'default' : 'pointer'
                     }}
                 >{isLoading ? 'Submitting...' : 'Submit'}</button>
-
             </div>
 
         </form>
