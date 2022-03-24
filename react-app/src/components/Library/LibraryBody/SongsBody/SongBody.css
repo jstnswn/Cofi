@@ -57,7 +57,9 @@
 }
 
 #library-body .library-songs-body-container {
-    height: calc(100vh - 660px);
+    /* height: calc(100vh - 660px); */
+    height: calc(100vh - 560px);
+    /* height: 100%; */
     font-family: var(--main-font);
     font-size: 16px;
     /* position: relative; */
@@ -181,15 +183,15 @@
 .library-list-dropdown {
     position: absolute;
     top: 25px;
-    right: 0;
+    right: 15px;
     z-index: 1;
     padding: 0;
     background-color: var(--background-secondary-dark-gray);
     border-radius: 5px;
 }
 
-.last-list-box .library-list-dropdown {
-    top: -50px;
+.last .library-list-dropdown {
+    top: -120px;
 }
 
 .library-list-dropdown ul {
