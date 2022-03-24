@@ -59,7 +59,6 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
         toggleLike = likeSong;
     }
 
-
     const playSong = () => {
         dispatch(setSong(song));
     };
@@ -119,7 +118,8 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
                 <img alt='cover art' className='list-image' src={album ? album.image_url : song.image_url} /> <span className='item'>{song.title}</span>
             </div>
             <div className='artist-list library-list title'>
-                {option !== 'playlist' && <p className='item'>{song.artist.name}</p>}
+                {/* {option !== 'playlist' && <p className='item'>{song.artist.name}</p>} */}
+                <p className='item'>{song.artist.name}</p>
             </div>
             <div className='album-list library-list title'>
                 {album ? <p className='item' onClick={() => history.push(`/library/${user.username}/albums/${album.id}`)}>{album.title}</p> : <p className='item'>--</p>}

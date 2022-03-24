@@ -194,23 +194,14 @@ export default function reducer(state = initialState, action) {
             stateCopy = { ...state };
             stateCopy.byIds[action.song.id] = action.song;
             orderArray = stateCopy.order;
-            idx = orderArray.findIndex(id => id === action.song.id);
+            // idx = orderArray.findIndex(id => id === action.song.id);
 
-            if (idx > -1) {
-                orderArray.splice(idx, 1, action.song.id);
-            } else {
-                orderArray = [action.song.id, ...orderArray];
+            if (!orderArray.includes(action.song.id)) {
+                orderArray.unshift(action.song.id)
             }
-
+            
             stateCopy.order = orderArray;
 
-            // if (action.albumId) {
-            //     albumSongs = stateCopy.byIds[action.albumId].songs;
-            //     const idx = albumSongs.findIndex(song => song.id === action.song.id);
-
-            //     if (idx > -1) albumSongs.splice(idx, 1, action.song);
-            //     else albumSongs = [action.song, ...albumSongs];
-            // }
 
             return stateCopy;
 

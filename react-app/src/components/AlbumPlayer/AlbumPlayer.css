@@ -66,9 +66,22 @@
   height: 78%;
 }
 
-.album-player-songs-container::-webkit-scrollbar {
+/* .album-player-songs-container::-webkit-scrollbar {
   display: none;
+} */
+
+.album-player-songs-container::-webkit-scrollbar {
+    background-color: var(--background-main-black)
 }
+
+.album-player-songs-container::-webkit-scrollbar-thumb {
+    background-color: rgb(37, 37, 37);
+    border: 3px solid transparent;
+    border-radius: 9px;
+    background-clip: content-box;
+
+}
+
 
 .album-player-song-box {
   padding: 2px 45px 2px 25px;

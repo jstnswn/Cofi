@@ -12,6 +12,7 @@ export default function AlbumPlayer({ album }) {
 
             <AlbumPlayerAlbum album={album}/>
 
+                {/* <div className='album-player scroll-wrapper'></div> */}
             <div className='album-player-songs-container'>
                 {songs?.map((song, idx) => (
                     <AlbumPlayerSongs key={idx} song={song} idx={idx} last={last}/>

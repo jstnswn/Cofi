@@ -19,7 +19,6 @@ export const popupMessage = (message) => {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 2000,
         style: { backgroundColor: '#202626', color: '#c5ccd3' },
-        progressClassName: 'toastify-progress',
         progressStyle: { backgroundColor: 'rgb(160, 31, 9)' }
     });
 

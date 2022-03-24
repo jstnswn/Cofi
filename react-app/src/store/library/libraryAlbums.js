@@ -167,14 +167,14 @@ export default function reducer(state = initialState, action) {
 
     switch (action.type) {
         case LOAD_ALBUM:
-            return {
-                ...state,
-                byIds: {
-                    ...state.byIds,
-                    [action.album.id]: action.album
-                },
-                order: [action.album.id, ...state.order]
+            stateCopy = {...state};
+            stateCopy.byIds[action.album.id] = action.album;
+
+            if (!stateCopy.order.includes(action.album.id)) {
+                stateCopy.order.unshift(action.album.id)
             }
+
+            return stateCopy;
 
         // case LOAD_ALBUM_SONG:
         //     stateCopy = {...state}

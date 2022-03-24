@@ -37,10 +37,6 @@ body {
     box-sizing: border-box;
 }
 
-#root {
-    /* border: red 3px solid; */
-    /* max-width: 100vw; */
-}
 
 button {
     cursor: pointer;
@@ -64,9 +60,3 @@ li{
 /* #root {
     width: 100%;
 } */
-
-.toastify-progress {
-    color: black;
-    background-color: black;
-}
-

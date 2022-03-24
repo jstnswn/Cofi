@@ -14,22 +14,22 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const resetErrors = () => {
-    setEmailErrors([]);
-    setPassErrors([]);
-  }
+  // const resetErrors = () => {
+  //   setEmailErrors([]);
+  //   setPassErrors([]);
+  // }
 
 
-  useEffect(() => {
-    if (!errors.length) return;
-    resetErrors();
+  // useEffect(() => {
+  //   if (!errors.length) return;
+  //   // resetErrors();
 
-    for (let error of errors) {
-      const formatted = formatError(error);
-      if (error.includes('credentials')) setPassErrors(prev => [formatted, ...prev]);
-      if (error.includes('Email')) setEmailErrors(prev => [formatted, ...prev]);
-    }
-  }, [errors])
+  //   for (let error of errors) {
+  //     const formatted = formatError(error);
+  //     if (error.includes('credentials')) setPassErrors(prev => [formatted, ...prev]);
+  //     if (error.includes('Email')) setEmailErrors(prev => [formatted, ...prev]);
+  //   }
+  // }, [errors])
 
 
   const onLogin = async (e) => {
@@ -67,9 +67,9 @@ const LoginForm = () => {
     <form className='login-form form' onSubmit={onLogin}>
       <div className='file-input-container'>
         <h2>Log In</h2>
-
       </div>
       <div className='form-content'>
+        {errors.length > 0 && <p>{formatError(errors[0])}</p>}
         <label htmlFor='email'>Email</label>
         <div className='input-container'>
           <input
@@ -80,7 +80,7 @@ const LoginForm = () => {
             onChange={updateEmail}
             required
           />
-          {emailErrors.map((error, idx) => <p key={idx}>{error}</p>)}
+          {/* {emailErrors.map((error, idx) => <p key={idx}>{error}</p>)} */}
 
         </div>
         <label htmlFor='password'>Password</label>
@@ -94,7 +94,7 @@ const LoginForm = () => {
             required
           />
 
-          {passErrors.map((error, idx) => <p key={idx}>{error}</p>)}
+          {/* {passErrors.map((error, idx) => <p key={idx}>{error}</p>)} */}
         </div>
 
         <div className='login-buttons'>

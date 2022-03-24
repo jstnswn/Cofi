@@ -2,21 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Modal } from '../../context/Modal';
 import { setSong } from '../../store/active';
-import { addToPlaylist } from '../../store/playlists';
+import { addToPlaylist, getPlaylistsArray } from '../../store/playlists';
 import { createSongLike, deleteSongLike } from '../../store/session';
 import PlaylistList from '../Library/LibraryBody/SongsBody/PlaylistList';
 
 export default function AlbumPlayerSongs({ song, idx, last }) {
     const dispatch = useDispatch();
     const user = useSelector(({ session }) => session.user);
+    const playlists = useSelector(getPlaylistsArray);
 
     const [showOptions, setShowOptions] = useState(false);
     const [showPlaylists, setShowPlaylists] = useState(false);
 
+
+    // song - options - container
+
     const seeOptions = (e) => {
         e.stopPropagation();
         setShowOptions(true);
-    }
+    };
 
     useEffect(() => {
         if (!showOptions) return;
@@ -32,7 +36,7 @@ export default function AlbumPlayerSongs({ song, idx, last }) {
 
     const openPlaylists = (e) => {
         e.stopPropagation();
-        setShowPlaylists(true);
+        if (playlists.length) setShowPlaylists(true);
     };
 
     const addSongToPlaylist = (playlistId) => {
@@ -46,6 +50,7 @@ export default function AlbumPlayerSongs({ song, idx, last }) {
     const likeSong = (e) => {
         e.stopPropagation();
         dispatch(createSongLike(song.id));
+        // setTimeout(() => setShowOptions(false))
     }
     const unlikeSong = (e) => {
         e.stopPropagation();
@@ -89,7 +94,7 @@ export default function AlbumPlayerSongs({ song, idx, last }) {
                 {showOptions && (
                     <ul className='song-options dd'>
                         <li onClick={toggleLike} className='dd'>{likeText}<span  className={`${likeIconClass} dd`}></span></li>
-                        <li onClick={openPlaylists} className='dd'>Add to playlist<span className='fad fa-list-music icon'></span></li>
+                        {playlists.length > 0 && <li onClick={openPlaylists} className='dd'>Add to playlist<span className='fad fa-list-music icon'></span></li>}
                     </ul>
                 )}
             </div>
