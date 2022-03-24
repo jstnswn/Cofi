@@ -57,13 +57,31 @@
   margin: 0; */
 }
 
+.album-player.scroll-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 20px 0;
+
+}
+
 .album-player-songs-container {
-  overflow-y: scroll;
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 78%;
+  height: 100%;
+  overflow-y: scroll;
+  /* border: var(--border-gray) .5px solid;
+  border-radius: 6px; */
+}
+
+.album-player-songs-wrapper {
+  /* padding: 10px 0; */
+
+
+  height: 100%;
+  width: 100%;
+
 }
 
 /* .album-player-songs-container::-webkit-scrollbar {
@@ -71,7 +89,9 @@
 } */
 
 .album-player-songs-container::-webkit-scrollbar {
-    background-color: var(--background-main-black)
+    /* background-color: var(--background-main-black); */
+    background-color: #0c0f0fa2;
+    border-radius: 9px;
 }
 
 .album-player-songs-container::-webkit-scrollbar-thumb {
