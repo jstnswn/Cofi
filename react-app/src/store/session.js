@@ -2,7 +2,7 @@ import { cleanActive } from "./active";
 import { cleanHome } from "./home";
 import { cleanLibraryAlbums } from "./library/libraryAlbums";
 import { cleanLibrarySongs } from "./library/librarySongs";
-import { getPlaylists } from "./playlists";
+import { cleanPlaylists, getPlaylists } from "./playlists";
 import { wipeStore } from "./utils";
 
 // constants
@@ -117,6 +117,7 @@ export const logout = () => async (dispatch) => {
       dispatch(cleanLibraryAlbums()),
       dispatch(cleanActive()),
       dispatch(cleanHome()),
+      dispatch(cleanPlaylists()),
       dispatch(removeUser()),
     ])
   }

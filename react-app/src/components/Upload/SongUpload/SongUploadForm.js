@@ -91,7 +91,7 @@ export default function SongUploadForm({ closeModal }) {
             .then(() => setDisableSubmit(false))
             .then(() => closeModal(e))
             .then(() => dispatch(loadHomeAlbums()))
-            .then(() => popupMessage('Song uploaded.'))
+            .then(() => popupMessage('Song uploaded'))
             .catch(errors => setErrors(errors.errors))
 
     };
@@ -128,6 +128,7 @@ export default function SongUploadForm({ closeModal }) {
             <div
                 className='file-input-body'
                 onClick={() => !imageUrl && imageFileRef.current.click()}
+                style={{cursor: !imageUrl ? 'pointer' : 'default'}}
             >
                 {!imageUrl
                     ? <i className={`fal fa-image image-icon icon ${isHovered ? 'active' : ''}`}></i>

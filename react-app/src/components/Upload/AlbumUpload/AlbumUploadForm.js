@@ -57,7 +57,7 @@ export default function AlbumUploadForm({ closeModal }) {
         await dispatch(createAlbum(payload))
             .then((album) => dispatch(loadHomeAlbum(album)))
             .then(() => closeModal())
-            .then(() => popupMessage('Album Created.'))
+            .then(() => popupMessage('Album Created'))
     };
 
     const handleImageFileReader = (e, file) => {
@@ -91,6 +91,7 @@ export default function AlbumUploadForm({ closeModal }) {
                 <div
                     className='file-input-body'
                     onClick={() => !imageUrl && imageFileRef.current.click()}
+                    style={{cursor: !imageUrl ? 'pointer' : 'default'}}
                 >
                     {!imageUrl
                         ? <i className={`fal fa-image image-icon icon ${isHovered ? 'active' : ''}`}></i>

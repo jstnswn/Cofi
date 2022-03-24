@@ -15,7 +15,7 @@ export const sortSongsArray = (items) => {
 toast.configure();
 export const popupMessage = (message) => {
 
-   return toast.success(message, {
+   return toast.success(`${message} in Library.`, {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 2000,
         style: { backgroundColor: '#202626', color: '#c5ccd3' },
