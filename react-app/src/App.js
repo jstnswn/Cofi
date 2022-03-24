@@ -15,6 +15,7 @@ import MainSidebar from './components/MainSidebar';
 import Library from './components/Library';
 import { getPlaylists } from './store/playlists';
 import Splash from './components/Splash';
+import ErrorPage from './ErrorPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -63,14 +64,19 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path={`/library/:${user?.username}`}>
           <Library />
+          <MainSidebar />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <Home />
+          <MainSidebar />
         </ProtectedRoute>
+        <Route>
+          <ErrorPage />
+        </Route>
       </Switch>
       {user && (
         <>
-          <MainSidebar />
+          {/* <MainSidebar /> */}
           <Player />
         </>
 
