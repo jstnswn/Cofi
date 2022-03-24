@@ -1,6 +1,7 @@
 const SET_CURRENT_SONG = 'active/SET_CURRENT_SONG';
 const REMOVE_CURRENT_SONG = 'active/REMOVE_CURRENT_SONG';
 const TOGGLE_PLAY = 'active/TOGGLE_PLAY';
+const CLEAN_ACTIVE = 'active/CLEAN_ACTIVE';
 
 export const setSong = (song) => {
     return {
@@ -12,6 +13,12 @@ export const setSong = (song) => {
 export const togglePlay = () => {
     return {
         type: TOGGLE_PLAY
+    };
+};
+
+export const cleanActive = () => {
+    return {
+        type: CLEAN_ACTIVE
     };
 };
 
@@ -35,9 +42,13 @@ const activeMusicReducer = (state = initialState, action) => {
                 ...state,
                 isPlaying: !state.isPlaying
             }
+        case CLEAN_ACTIVE:
+            return initialState;
+            
         default:
             return state
     }
+
 };
 
 export default activeMusicReducer;

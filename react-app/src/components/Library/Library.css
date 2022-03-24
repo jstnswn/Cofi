@@ -26,10 +26,11 @@
     height: calc(100vh - 560px);
 
     width: 100%;
+    /* height: 100%; */
 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
 
 }
 
@@ -37,6 +38,7 @@
     width: 100%;
 
     overflow-y: scroll;
+    position: relative;
 
     /* display: flex;
     justify-content: center; */

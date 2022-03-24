@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
+
 import { loadNewAlbum as loadHomeAlbum } from '../../../store/home';
 import { createAlbum } from '../../../store/library/libraryAlbums';
+import { popupMessage } from '../../utils';
+
+
 
 export default function AlbumUploadForm({ closeModal }) {
     const dispatch = useDispatch();
@@ -24,9 +28,9 @@ export default function AlbumUploadForm({ closeModal }) {
         setShowErrors(false);
         const errors = {};
 
-        if (title.length > 50) errors.title = 'long';
+        if (title.length > 35) errors.title = 'long';
         if (title.length === 0) errors.title = 'short';
-        if (artist.length > 50) errors.artist = 'long';
+        if (artist.length > 35) errors.artist = 'long';
         if (artist.length === 0) errors.artist = 'short';
 
         setErrors(errors);
@@ -36,6 +40,8 @@ export default function AlbumUploadForm({ closeModal }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+
         setShowErrors(true);
         if (disableSubmit) return;
         setDisableSubmit(true);
@@ -51,6 +57,7 @@ export default function AlbumUploadForm({ closeModal }) {
         await dispatch(createAlbum(payload))
             .then((album) => dispatch(loadHomeAlbum(album)))
             .then(() => closeModal())
+            .then(() => popupMessage('Album Created'))
     };
 
     const handleImageFileReader = (e, file) => {
@@ -84,6 +91,7 @@ export default function AlbumUploadForm({ closeModal }) {
                 <div
                     className='file-input-body'
                     onClick={() => !imageUrl && imageFileRef.current.click()}
+                    style={{cursor: !imageUrl ? 'pointer' : 'default'}}
                 >
                     {!imageUrl
                         ? <i className={`fal fa-image image-icon icon ${isHovered ? 'active' : ''}`}></i>
@@ -105,8 +113,8 @@ export default function AlbumUploadForm({ closeModal }) {
                         value={showErrors && !title ? 'Album must have a title!' : title}
                         onChange={e => setTitle(e.target.value)}
                     />
-                    {title.length > 45 && (
-                        <div className={`word-counter ${errors.title ? 'active' : ''}`}>{title.length}/50</div>
+                    {title.length > 30 && (
+                        <div className={`word-counter ${errors.title ? 'active' : ''}`}>{title.length}/35</div>
                     )}
                 </div>
 
@@ -117,8 +125,8 @@ export default function AlbumUploadForm({ closeModal }) {
                         value={showErrors && !artist ? 'Album must have an artist!' : artist}
                         onChange={e => setArtist(e.target.value)}
                     />
-                    {artist.length > 45 && (
-                        <div className={`word-counter ${errors.artist ? 'active' : ''}`}>{artist.length}/50</div>
+                    {artist.length > 30 && (
+                        <div className={`word-counter ${errors.artist ? 'active' : ''}`}>{artist.length}/35</div>
                     )}
                 </div>
 

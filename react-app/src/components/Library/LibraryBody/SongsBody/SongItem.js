@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Modal } from '../../../../context/Modal';
@@ -14,7 +14,7 @@ import ConfirmSingle from './ConfirmSingle';
 import PlaylistList from './PlaylistList';
 import SongConfirmDelete from './SongConfirmDelete';
 
-export default function SongItem({ song, option, playlistId }) {
+export default function SongItem({ song, option, playlistId, idx, last }) {
     // console.log('song', option)
     const user = useSelector(({ session }) => session.user);
     const album = song.album;
@@ -58,7 +58,6 @@ export default function SongItem({ song, option, playlistId }) {
         likeIconClass = 'far fa-heart';
         toggleLike = likeSong;
     }
-
 
     const playSong = () => {
         dispatch(setSong(song));
@@ -105,21 +104,27 @@ export default function SongItem({ song, option, playlistId }) {
 
     }, [showMenu])
 
+    // const parent = document.querySelector('.library-body-container')
+
+    // select the bottom 3 items of the list to display dropdown upwards.
+    const bottomOfList = idx > last - 3;
+
 
     return (
         <div
-            className='list-box'
+            className={`list-box ${bottomOfList  ? 'last' : ''}`}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
 
-            <div className='song-list library-list'>
-                <img alt='cover art' className='list-image' src={album ? album.image_url : song.image_url} /> <span onClick={playSong} className='item'>{song.title}</span>
+            <div className='song-list library-list' onClick={playSong}>
+                <img alt='cover art' className='list-image' src={album ? album.image_url : song.image_url} /> <span className='item'>{song.title}</span>
             </div>
-            <div className='artist-list library-list'>
-                {option !== 'playlist' && <p className='item'>{song.artist.name}</p>}
+            <div className='artist-list library-list title'>
+                {/* {option !== 'playlist' && <p className='item'>{song.artist.name}</p>} */}
+                <p className='item'>{song.artist.name}</p>
             </div>
-            <div className='album-list library-list'>
+            <div className='album-list library-list title'>
                 {album ? <p className='item' onClick={() => history.push(`/library/${user.username}/albums/${album.id}`)}>{album.title}</p> : <p className='item'>--</p>}
 
             </div>

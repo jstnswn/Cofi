@@ -57,18 +57,51 @@
   margin: 0; */
 }
 
+.album-player.scroll-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 20px 0;
+
+}
+
 .album-player-songs-container {
-  overflow-y: scroll;
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 78%;
+  height: 100%;
+  overflow-y: scroll;
+  /* border: var(--border-gray) .5px solid;
+  border-radius: 6px; */
 }
 
-.album-player-songs-container::-webkit-scrollbar {
-  display: none;
+.album-player-songs-wrapper {
+  /* padding: 10px 0; */
+
+
+  height: 100%;
+  width: 100%;
+
 }
+
+/* .album-player-songs-container::-webkit-scrollbar {
+  display: none;
+} */
+
+.album-player-songs-container::-webkit-scrollbar {
+    /* background-color: var(--background-main-black); */
+    background-color: #0c0f0fa2;
+    border-radius: 9px;
+}
+
+.album-player-songs-container::-webkit-scrollbar-thumb {
+    background-color: rgb(37, 37, 37);
+    border: 3px solid transparent;
+    border-radius: 9px;
+    background-clip: content-box;
+
+}
+
 
 .album-player-song-box {
   padding: 2px 45px 2px 25px;
@@ -94,11 +127,9 @@
   position: relative;
 }
 
-.album-player-song-box .song-options {
-  /* border: yellow 1px solid; */
-  position: absolute;
-  /* right: 0; */
-}
+
+
+
 
 .player-song-title {
   padding-bottom: 3px;
@@ -110,9 +141,9 @@
 }
 
 .album-player-song-box .song-options {
-     position: absolute;
+    position: absolute;
     top: 10px;
-    right: 0;
+    right: 50px;
     z-index: 1;
     padding: 0;
     background-color: var(--main-gray);
@@ -122,6 +153,11 @@
     /* z-index: 10; */
 
 }
+
+.album-player-song-box.last .song-options {
+  top: -30px;
+}
+
 
 .album-player-song-box .song-options .icon {
   padding-left: 15px;

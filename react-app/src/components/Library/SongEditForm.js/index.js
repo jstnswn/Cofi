@@ -29,10 +29,9 @@ export default function SongEditForm({ closeModal, song, album }) {
         setDisableSubmit(false);
         const errors = {};
 
-
-        if (title.length > 50) errors.title = true;
-        if (artist.length > 50) errors.artist = true;
-        if (albumTitle.length > 50) errors.albumTitle = true;
+        if (title.length > 35) errors.title = true;
+        if (artist.length > 35) errors.artist = true;
+        if (albumTitle.length > 35) errors.albumTitle = true;
 
 
 
@@ -120,11 +119,11 @@ export default function SongEditForm({ closeModal, song, album }) {
         )
         : (
             <div className='file-input-body' onClick={() => imageFileRef.current.click()}>
-                {!imageUrl
-                    ? <i className={`fal fa-image image-icon icon ${isHovered ? 'active' : ''}`}></i>
-                    : <img alt='Art preview' src={imageUrl} />
-                }
-                {isHovered && !imageUrl && <p className='file-message'>Choose Artwork (optional)</p>}
+
+
+                    <img alt='Art preview' src={!imageUrl ? song.image_url : imageUrl} />
+
+                {isHovered && !imageUrl && <p className='file-message'>Choose Artwork</p>}
             </div>
         )
 
@@ -140,8 +139,8 @@ export default function SongEditForm({ closeModal, song, album }) {
                         onChange={e => setAlbumTitle(e.target.value)}
                     />
 
-                    {albumTitle.length > 45 && (
-                        <div className={`word-counter ${errors.albumTitle ? 'active' : ''}`}>{albumTitle.length}/50</div>
+                    {albumTitle.length > 30 && (
+                        <div className={`word-counter ${errors.albumTitle ? 'active' : ''}`}>{albumTitle.length}/35</div>
                     )}
                 </div>
             </>
@@ -190,24 +189,26 @@ export default function SongEditForm({ closeModal, song, album }) {
                 <label>Song Name</label>
                 <div className='input-container'>
                     <input
+                        required
                         type='type'
                         value={title}
                         onChange={e => setTitle(e.target.value)}
                     />
-                    {title.length > 45 && (
-                        <div className={`word-counter ${errors.title ? 'active' : ''}`}>{title.length}/50</div>
+                    {title.length > 30 && (
+                        <div className={`word-counter ${errors.title ? 'active' : ''}`}>{title.length}/35</div>
                     )}
                 </div>
 
                 <label>Artist</label>
                 <div className='input-container'>
                     <input
+                        required
                         type='text'
                         value={artist}
                         onChange={e => setArtist(e.target.value)}
                     />
-                    {artist.length > 45 && (
-                        <div className={`word-counter ${errors.artist ? 'active' : ''}`}>{artist.length}/50</div>
+                    {artist.length > 30 && (
+                        <div className={`word-counter ${errors.artist ? 'active' : ''}`}>{artist.length}/35</div>
                     )}
                 </div>
                 {albumOption}
@@ -248,14 +249,14 @@ export default function SongEditForm({ closeModal, song, album }) {
                 <input
                     type='file'
                     onChange={e => setSongFile(e.target.files[0])}
-                    accepted='aduio/mpeg, audio/mp3'
+                    accept='aduio/mpeg, audio/mp3'
                     ref={musicFileRef}
                     style={{ display: 'none' }}
                 />
                 <input
                     type='file'
                     onChange={e => setImageFile(e.target.files[0])}
-                    accepted='image/png, image/jpeg, image/jpg'
+                    accept='image/png, image/jpeg, image/jpg'
                     ref={imageFileRef}
                     style={{ display: 'none' }}
                 />

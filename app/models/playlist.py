@@ -6,7 +6,7 @@ class Playlist(db.Model):
     __tablename__ = 'playlists'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50), nullable=False)
+    title = db.Column(db.String(35), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     private = db.Column(db.Boolean, default=False)
     image_url = db.Column(db.String(500))

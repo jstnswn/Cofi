@@ -16,8 +16,13 @@ export default function NavBar() {
       <>
         <NavLink className='library-link' activeClassName='selected' to={`/library/${user.username}`}>Library</NavLink>
         {/* <SongUploadModal /> */}
+        {/* <div className='about-links'> */}
+        <a href='https://github.com/jstnswn' target='_blank' rel='noopener noreferrer'><i className='fab fa-github about-icons'></i></a>
+        <a href='https://www.linkedin.com/in/jstnswn/' target='_blank' rel='noopener noreferrer'><i className='fab fa-linkedin about-icons'></i></a>
+
+        {/* </div> */}
         <div className='nav-icon-container'>
-          <NotificationButton />
+          {/* <NotificationButton /> */}
           <ProfileButton user={user}/>
         </div>
       </>

@@ -7,6 +7,8 @@ const REMOVE_PLAYLIST = 'playlists/REMOVE_PLAYLIST';
 const ADD_SONG_TO_PLAYLIST = 'playlists/ADD_SONG_TO_PLAYLIST';
 const REMOVE_SONG_FROM_PLAYLIST = 'playlists/REMOVE_SONG_FROM_PLAYLIST';
 
+const CLEAN_PLAYLISTS = 'playlists/CLEAN_PLAYLISTS';
+
 // Action Creators
 const loadPlaylists = (playlists) => {
     return {
@@ -42,6 +44,12 @@ const removeSongFromPlaylist = (songId, playlistId) => {
         type: REMOVE_SONG_FROM_PLAYLIST,
         songId,
         playlistId
+    };
+};
+
+export const cleanPlaylists = () => {
+    return {
+        type: CLEAN_PLAYLISTS
     };
 };
 
@@ -200,6 +208,9 @@ export default function reducer(state = initialState, action) {
             songIds.splice(idx, 1);
 
             return stateCopy;
+
+        case CLEAN_PLAYLISTS:
+            return initialState;
 
         default:
             return state

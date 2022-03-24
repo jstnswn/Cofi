@@ -13,6 +13,9 @@ const REMOVE_ALBUM_SONG = 'library/REMOVE_ALBUM_SONG';
 const LOAD_ALBUM_SONG = 'library/LOAD_ALBUM_SONG';
 
 
+const CLEAN_LIBRARY_ALBUMS = 'library/CLEAN_LIBRARY_ALBUMS';
+
+
 // Action Creators
 
 
@@ -50,8 +53,14 @@ export const loadAlbumSong = (song, albumId) => {
         type: LOAD_ALBUM_SONG,
         song,
         albumId,
-    }
-}
+    };
+};
+
+export const cleanLibraryAlbums = () => {
+    return {
+        type: CLEAN_LIBRARY_ALBUMS
+    };
+};
 
 // Thunks
 export const getLibraryAlbums = () => async dispatch => {
@@ -158,14 +167,14 @@ export default function reducer(state = initialState, action) {
 
     switch (action.type) {
         case LOAD_ALBUM:
-            return {
-                ...state,
-                byIds: {
-                    ...state.byIds,
-                    [action.album.id]: action.album
-                },
-                order: [action.album.id, ...state.order]
+            stateCopy = {...state};
+            stateCopy.byIds[action.album.id] = action.album;
+
+            if (!stateCopy.order.includes(action.album.id)) {
+                stateCopy.order.unshift(action.album.id)
             }
+
+            return stateCopy;
 
         // case LOAD_ALBUM_SONG:
         //     stateCopy = {...state}
@@ -217,6 +226,9 @@ export default function reducer(state = initialState, action) {
             idx = albumSongs.findIndex(song => song.id === action.songId);
             albumSongs.splice(idx, 1);
             return stateCopy;
+
+        case CLEAN_LIBRARY_ALBUMS:
+            return initialState;
 
         default:
             return state;

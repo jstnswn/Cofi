@@ -14,6 +14,8 @@ import { loadHome } from './store/home';
 import MainSidebar from './components/MainSidebar';
 import Library from './components/Library';
 import { getPlaylists } from './store/playlists';
+import Splash from './components/Splash';
+import ErrorPage from './ErrorPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -22,13 +24,20 @@ function App() {
   const user = useSelector(({ session }) => session.user);
 
   useEffect(() => {
-    (async() => {
-      await dispatch(authenticate());
-      await dispatch(loadHome())
-      await dispatch(getPlaylists())
+    (async () => {
+      await dispatch(authenticate())
+        // .then(() => dispatch(getPlaylists()))
+      // await dispatch(loadHome())
+      // await dispatch(getPlaylists())
       setLoaded(true)
     })();
+
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (!user) return;
+  //   dispatch(getPlaylists())
+  // }, [user, dispatch])
 
   if (!loaded) {
     return null;
@@ -44,19 +53,30 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
+        {!user && (
+          <Route path='/' exact={true}>
+            <Splash />
+          </Route>
+        )}
+
         <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+          <UsersList />
         </ProtectedRoute>
-        <ProtectedRoute path={`/library/${user?.username}`}>
+        <ProtectedRoute path={`/library`}>
           <Library />
+          <MainSidebar />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <Home />
+          <MainSidebar />
         </ProtectedRoute>
+        <Route>
+          <ErrorPage />
+        </Route>
       </Switch>
       {user && (
         <>
-          <MainSidebar />
+          {/* <MainSidebar /> */}
           <Player />
         </>
 

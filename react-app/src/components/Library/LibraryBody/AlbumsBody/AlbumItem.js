@@ -23,7 +23,7 @@ export default function AlbumItem({ album, idx, user, option }) {
     let toggleLike;
 
 
-    if (likedAlbumIds.includes(album.id)) {
+    if (likedAlbumIds?.includes(album.id)) {
         likeIconClass = 'fas fa-heart';
         toggleLike = unlikeAlbum;
     } else {

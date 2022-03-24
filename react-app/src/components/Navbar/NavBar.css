@@ -45,13 +45,14 @@
     width: 8em;
     display: flex;
     /* flex-direction: column; */
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: center;
     /* margin: 0; */
 }
 
 #navbar .profile-icon,
 #navbar .notifications-icon {
-    font-size: 23px;
+    font-size: 30px;
 }
 
 .login-container {
@@ -104,9 +105,21 @@
 }
 
 .profile-dropdown-box i {
-    font-size: 18px;
+    font-size: 12px;
 }
 
 .profile-dropdown-single {
     padding-right: 30px;
+}
+
+/* .about-links {
+    width: 170px;
+    display: flex;
+    justify-content: space-between;
+} */
+
+.about-icons {
+    font-size: 30px;
+    color: var(--text-main-white)
+
 }

@@ -1,3 +1,9 @@
+import { cleanActive } from "./active";
+import { cleanHome } from "./home";
+import { cleanLibraryAlbums } from "./library/libraryAlbums";
+import { cleanLibrarySongs } from "./library/librarySongs";
+
+
 export const getImageUrl = async (image) => {
     const formData = new FormData();
     formData.append('image', image);
@@ -35,3 +41,12 @@ export const orderIds = (content) => {
     // return orderedIds;
     return content.map(item => item.id)
 }
+
+// export const wipeStore = async () =>  async dispatch => {
+//     Promise.all([
+//         dispatch(cleanLibrarySongs()),
+//         dispatch(cleanLibraryAlbums()),
+//         dispatch(cleanActive()),
+//         dispatch(cleanHome())
+//     ]);
+// };

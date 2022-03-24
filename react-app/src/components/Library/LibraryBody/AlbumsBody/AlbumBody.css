@@ -1,7 +1,7 @@
 #library-body .library-albums-body-container {
     display: grid;
 
-    height: calc(100vh - 660px);
+    max-height: calc(100vh - 660px);
     font-family: var(--main-font);
     font-size: 16px;
     /* margin-top: 50px; */
@@ -13,12 +13,32 @@
 
 }
 
+#library-body .library-albums-body-container.empty {
+    display: block;
+}
+
 #library-body .library-album-body-header {
     border-bottom: 2px solid var(--border-gray);
     height: 50px;
 }
 
+.placeholder-message.album {
+    /* position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 500px;
+    z-index: 20; */
+}
 
+.info-container .song-title,
+.info-container .tile-artist {
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    max-width: 120px;
+}
 
 .album-item-container {
     align-self: flex-end;
@@ -29,6 +49,9 @@
     color: var(--text-main-white);
     margin: 10px;
     width: 210px;
+
+
+
 }
 
 .album-item-container {

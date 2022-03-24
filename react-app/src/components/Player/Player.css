@@ -80,28 +80,38 @@
     bottom: 5px;
     border-radius: 5px;
     display: flex;
-    justify-content: center;
-    width: 220px;
+    justify-content: flex-start;
+    width: 270px;
     padding: 5px 0;
-}
+    margin-left: 70px;
+  }
 
 .rhap_main-controls {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 
 
 .current-song-artwork {
-    height: 80px;
-    width: 80px;
+  height: 70px;
+    width: 70px;
     object-fit: cover;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
-.current-song-info {
+  .current-song-info {
     /* align-items: flex-end; */
     align-self: flex-end;
     padding-left: 8px;
     padding-bottom: 2px;
+  }
+
+  .current-song-info * {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 180px;
 }
 
 .current-song-info p {

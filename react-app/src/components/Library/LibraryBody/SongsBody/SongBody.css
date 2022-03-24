@@ -57,17 +57,19 @@
 }
 
 #library-body .library-songs-body-container {
-    height: calc(100vh - 660px);
+    /* height: calc(100vh - 660px); */
+    height: calc(100vh - 560px);
+    /* height: 100%; */
     font-family: var(--main-font);
     font-size: 16px;
-    position: relative;
+    /* position: relative; */
 
     /* max-width: 1100px; */
 
     margin-right: auto;
     margin-left: auto;
 
-    max-width: 880px;
+    max-width: 900px;
 
     /* border: green 2px solid; */
 
@@ -83,8 +85,20 @@
     padding: 8px 10px;
     display: flex;
     align-items: center;
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
+    /* width: 200px; */
     /* padding-left: 20px; */
     /* height: 100px; */
+}
+
+.library-list p,
+.library-list span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
 }
 
 .library-list .list-image {
@@ -96,6 +110,11 @@
 
 .library-list .item {
     margin: 0;
+}
+
+.library-list.song-list,
+.library-list.album-list,
+.list-box i {
     cursor: pointer;
 }
 
@@ -164,11 +183,15 @@
 .library-list-dropdown {
     position: absolute;
     top: 25px;
-    right: 0;
+    right: 15px;
     z-index: 1;
     padding: 0;
     background-color: var(--background-secondary-dark-gray);
     border-radius: 5px;
+}
+
+.last .library-list-dropdown {
+    top: -120px;
 }
 
 .library-list-dropdown ul {
@@ -223,4 +246,20 @@
 .album-list-modal .new-album {
     /* border: red 10px solid; */
     border-bottom: 1px solid gray;
+}
+
+.placeholder-message {
+    color: var(--text-secondary-white);
+    /* margin-right: auto;
+    margin-left: auto; */
+    width: 100%;
+    /* border: red 1px solid; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.placeholder-message * {
+    margin: 20px;
 }

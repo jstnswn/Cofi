@@ -90,6 +90,7 @@ export default function PlaylistEditForm({ closeModal, playlist}) {
                         type='text'
                         value={title}
                         onChange={e => setTitle(e.target.value)}
+                        required
                     />
                     {title.length > 45 && (
                         <div className={`word-counter ${error.title ? 'active' : ''}`}>{title.length}/50</div>

@@ -16,7 +16,7 @@ export default function AlbumPlayerAlbum({ album }) {
     let likeIconClass;
     let toggleLike;
 
-    if (likedAlbumIds.includes(album.id)) {
+    if (likedAlbumIds.includes(album?.id)) {
         likeIconClass = 'fas fa-heart';
         toggleLike = unlikeAlbum;
     } else {
@@ -34,7 +34,7 @@ export default function AlbumPlayerAlbum({ album }) {
                 <img
                     className='album-player-image'
                     alt='album cover'
-                    src={album.image_url}
+                    src={album?.image_url}
                 />
                 <div className='icon-container'>
                     {hovered && <i onClick={toggleLike} className={likeIconClass}></i>}

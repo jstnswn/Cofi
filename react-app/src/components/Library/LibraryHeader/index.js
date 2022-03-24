@@ -40,8 +40,8 @@ export default function LibraryHeader({ libraryItems }) {
             headerUrl = playlists[idParam].image_url;
             headerTitle = playlists[idParam].title;
         } else {
-            headerUrl = libraryItems.albums.byIds[idParam].image_url;
-            headerTitle = libraryItems.albums.byIds[idParam].title;
+            headerUrl = libraryItems.albums.byIds[idParam]?.image_url;
+            headerTitle = libraryItems.albums.byIds[idParam]?.title;
         }
 
     } else {
@@ -83,47 +83,51 @@ export default function LibraryHeader({ libraryItems }) {
 
     return (
         <div id='library-header'>
-            <div className='header-image-container'>
-                <img
-                    alt='library cover'
-                    className='library-header-image'
-                    src={headerUrl}
-                />
-            </div>
-            <div className='header-title-container'>
-                <h2 className='library-header-title'>{headerTitle}
-                    {idParam && userParam === user.username && (
-                        <span><i onClick={openDropdown} className='fas fa-ellipsis-h libary-header-edit'></i></span>)}
-                </h2>
+            {/* <div className='library-header-container'> */}
 
-                {showDropdown && (
-                    <div className='library-list-dropdown album'>
-                        <ul>
-                            {/* <li onClick={openEditMenu}>Edit Song</li> */}
-                            <li onClick={openConfirmMenu}>{inPlaylist ? 'Remove Playlist' : 'Remove Album'}</li>
-                            <li onClick={openEditForm}>Edit Details</li>
-                        </ul>
+                <div className='header-image-container'>
+                    <img
+                        alt='library cover'
+                        className='library-header-image'
+                        src={headerUrl}
+                    />
+                    <div className='header-title-container'>
+
+                        <h2 className='library-header-title'>{headerTitle}
+                            {idParam && userParam === user.username && (
+                                <span><i onClick={openDropdown} className='fas fa-ellipsis-h libary-header-edit'></i></span>)}
+                        </h2>
+
+                        {showDropdown && (
+                            <div className='library-list-dropdown album'>
+                                <ul>
+                                    {/* <li onClick={openEditMenu}>Edit Song</li> */}
+                                    <li onClick={openConfirmMenu}>{inPlaylist ? 'Remove Playlist' : 'Remove Album'}</li>
+                                    <li onClick={openEditForm}>Edit Details</li>
+                                </ul>
+                            </div>
+                        )}
+
                     </div>
-                )}
+                </div>
+            {/* </div> */}
+                    {showConfirm && (
+                        <Modal onClose={closeConfirmMenu}>
+                            <ConfirmDelete
+                                closeModal={closeConfirmMenu}
+                                remove={inPlaylist ? removePlaylist : removeAlbum}
+                                album={inPlaylist ? playlists[idParam] : libraryItems.albums.byIds[idParam]} />
+                        </Modal>
+                    )}
 
-                {showConfirm && (
-                    <Modal onClose={closeConfirmMenu}>
-                        <ConfirmDelete
-                            closeModal={closeConfirmMenu}
-                            remove={inPlaylist ? removePlaylist : removeAlbum}
-                            album={inPlaylist ? playlists[idParam] : libraryItems.albums.byIds[idParam]}/>
-                    </Modal>
-                )}
-
-                {showEdit && (
-                    <Modal onClose={closeEditForm}>
-                        {inPlaylist
-                            ? <PlaylistEditForm closeModal={closeEditForm} playlist={playlists[idParam]}/>
-                            : <AlbumEditForm closeModal={closeEditForm} album={libraryItems.albums.byIds[idParam]}/>
-                        }
-                    </Modal>
-                )}
-            </div>
+                    {showEdit && (
+                        <Modal onClose={closeEditForm}>
+                            {inPlaylist
+                                ? <PlaylistEditForm closeModal={closeEditForm} playlist={playlists[idParam]} />
+                                : <AlbumEditForm closeModal={closeEditForm} album={libraryItems.albums.byIds[idParam]} />
+                            }
+                        </Modal>
+                    )}
 
         </div>
     )

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSong } from '../../store/active';
+import { createSongLike, deleteSongLike } from '../../store/session';
 import './SongPlayer.css';
 
 export default function SongPlayer({ song }) {
@@ -11,11 +12,31 @@ export default function SongPlayer({ song }) {
 
     const [showOverlay, setShowOverlay] = useState(false);
 
-    const playSong = () => dispatch(setSong(song));
+    const playSong = (e) => {
+        e.stopPropagation();
+        dispatch(setSong(song));
+    }
 
-    const likeIconClass = likedSongIds.includes(song.id)
-        ? 'fas fa-heart'
-        : 'far fa-heart';
+    // const likeIconClass = likedSongIds.includes(song.id)
+    //     ? 'fas fa-heart'
+    //     : 'far fa-heart';
+
+    const likeSong = (e) => {
+        e.stopPropagation();
+        dispatch(createSongLike(song.id));
+    }
+    const unlikeSong = () => dispatch(deleteSongLike(song.id));
+
+    let likeIconClass;
+    let toggleLike;
+
+    if (likedSongIds.includes(song.id)) {
+        likeIconClass = 'fas fa-heart';
+        toggleLike = unlikeSong;
+    } else {
+        likeIconClass = 'far fa-heart';
+        toggleLike = likeSong;
+    }
 
     return (
         <div
@@ -33,7 +54,7 @@ export default function SongPlayer({ song }) {
             </div>
             {/* {showOverlay && ( */}
             <div className='song-player-overlay' onClick={playSong}>
-                <i className={`${likeIconClass} heart`}></i>
+                <i onClick={toggleLike} className={`${likeIconClass} heart`}></i>
 
                 {/* <div> */}
                     <p className='song-title'>{song.title}</p>
