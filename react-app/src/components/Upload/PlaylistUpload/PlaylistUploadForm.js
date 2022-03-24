@@ -63,7 +63,7 @@ export default function PlaylistUploadForm({ closeModal }) {
             className='form'
             onSubmit={handleSubmit}
         >
-            <p className='wait-message loading playlist'>Loading... Please don't close the menu</p>
+            {/* <p className='wait-message loading playlist'>Loading... Please don't close the menu</p> */}
             {/* <h2>Create a Playlist</h2> */}
             <i onClick={closeModal} className='fal fa-times close-icon'></i>
 

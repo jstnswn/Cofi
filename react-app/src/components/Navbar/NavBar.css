@@ -41,6 +41,14 @@
 
 }
 
+.user-dropdown {
+    cursor: default;
+}
+
+.profile-dropdown-box.logout {
+    cursor: pointer;
+}
+
 .nav-icon-container {
     width: 8em;
     display: flex;
