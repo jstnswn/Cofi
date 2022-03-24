@@ -87,3 +87,14 @@ App Academy capstone project
 8. Open another terminal and change directory into /react-app and run the React app
 
           npm start
+          
+# Home Page
+[![home-features.png](https://i.postimg.cc/KcHNJBpT/Screen-Shot-2022-03-24-at-2-43-41-AM.png)](https://postimg.cc/w3DLBypx)
+
+# Library Page Songs
+
+[![library.png](https://i.postimg.cc/Y09pdJ91/Screen-Shot-2022-03-24-at-2-39-46-AM.png)](https://postimg.cc/1nkht7Dt)
+
+# Library Page Albums
+
+[![library.png](https://i.postimg.cc/HkxyJkCt/Screen-Shot-2022-03-24-at-1-34-23-AM.png)](https://postimg.cc/N53MSYFy)
