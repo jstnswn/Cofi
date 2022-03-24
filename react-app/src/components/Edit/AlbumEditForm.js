@@ -88,7 +88,7 @@ export default function AlbumEditForm({ closeModal, album }) {
                     onChange={e => setFile(e.target.files[0])}
                     ref={imageInputRef}
                     style={{ display: 'none' }}
-                    accept='image/png, image/jpeg, image/png, image/jpeg'
+                    accept='image/png, image/jpeg, image/jpg'
                 />
                 <label>Title</label>
                 <div className='input-container'>

@@ -270,8 +270,6 @@ export default function SongEditForm({ closeModal, song, album }) {
                     }} >{isLoading ? 'Submitting...' : 'Submit'}
                 </button>
 
-
-
             </div>
         </form>
     )

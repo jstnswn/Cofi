@@ -134,7 +134,7 @@ export default function AlbumUploadForm({ closeModal }) {
                 <input
                     type='file'
                     onChange={e => setImageFile(e.target.files[0])}
-                    accept='image/png, image/jpeg, image/png, image/jpeg'
+                    accept='image/png, image/jpeg, image/jpg'
                     ref={imageFileRef}
                     style={{ display: 'none' }}
                 />
