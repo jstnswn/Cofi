@@ -236,3 +236,19 @@
     /* border: red 10px solid; */
     border-bottom: 1px solid gray;
 }
+
+.placeholder-message {
+    color: var(--text-secondary-white);
+    /* margin-right: auto;
+    margin-left: auto; */
+    width: 100%;
+    /* border: red 1px solid; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.placeholder-message * {
+    margin: 20px;
+}

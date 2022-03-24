@@ -11,21 +11,50 @@ export default function AlbumsBody({ user, option }) {
     const albums = orderContent(library.albums);
     // const albums = Object.values(library.albums.byIds);
 
+    console.log('albums', albums, option)
+
+    let emptyClassName;
+
+    if ((option === 'album' && !albums.length) ||
+        (option === 'playlist' && !playlists.length)) {
+        emptyClassName = 'empty';
+    }
+
+
+
+
     return (
         <>
-                <div className='library-album-body-header'></div>
+            <div className='library-album-body-header'></div>
             <div className='library-body-container'>
 
-                <div className='library-albums-body-container'>
+                <div className={`library-albums-body-container ${emptyClassName}`}>
 
-                    { option === 'album'
-                        ? albums.map((album, idx) => (
-                            <AlbumItem user={user} key={idx} album={album} idx={idx} option={option}/>
-                        ))
-                        : playlists.map((album, idx) => (
-                            <AlbumItem user={user} key={idx} album={album} idx={idx} option={option}/>
-                        ))
-                }
+                    {option === 'album'
+                        ? (
+                            albums.length > 0
+                                ? albums.map((album, idx) => (
+                                    <AlbumItem user={user} key={idx} album={album} idx={idx} option={option} />))
+                                : (
+                                    <div className='placeholder-message album'>
+                                        <h3>You don't have any albums in your library,</h3>
+                                        <h4>Create a new album and fill up your collection!</h4>
+                                    </div>
+                                )
+                        )
+
+                        : (
+                            playlists.length > 0
+                                ? playlists.map((album, idx) => (
+                                    <AlbumItem user={user} key={idx} album={album} idx={idx} option={option} />))
+                                : (
+                                    <div className='placeholder-message album'>
+                                        <h3>You don't have any playlists.</h3>
+                                        <h4>Create a new playlists, then navigate to songs to fill it up!</h4>
+                                    </div>
+                                )
+                        )
+                    }
                 </div>
             </div>
         </>
