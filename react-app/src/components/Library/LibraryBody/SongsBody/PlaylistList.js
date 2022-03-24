@@ -14,6 +14,7 @@ export default function PlaylistList({ song, addSongToPlaylist }) {
                     onClick={(e) => {e.stopPropagation(); addSongToPlaylist(playlist.id)}}
                     key={idx}>{playlist.title}</li>
             ))}
+            {playlists.length === 0 && <li style={{cursor: 'default'}}>You don't have any playlists.</li>}
         </ul>
     )
 }
