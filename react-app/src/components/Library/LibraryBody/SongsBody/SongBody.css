@@ -10,6 +10,7 @@
     display: grid;
     color: var(--text-secondary-white);
     height: 50px;
+    /* align-sel; */
 
     /* max-width: 1100px; */
 
@@ -123,7 +124,7 @@
     grid-template-columns: 35% 35% 17% 10% 3%;
     display: grid;
     position: relative;
-    padding-left: 10px;
+    padding-left: 20px;
     /* padding-left: 10%; */
     /* height: 10px; */
 }

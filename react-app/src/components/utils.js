@@ -19,7 +19,7 @@ export const popupMessage = (message) => {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 2000,
         style: { backgroundColor: '#202626', color: '#c5ccd3' },
-        progressStyle: { backgroundColor: 'rgb(160, 31, 9)' }
+       progressStyle: { backgroundColor: 'rgb(160, 31, 9)', color: 'rgb(15, 180, 15)'}
     });
 
 
