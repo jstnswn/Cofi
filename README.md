@@ -1,5 +1,7 @@
 # Cofi
-App Academy capstone project
+
+App Academy capstone project.
+Co-fi is a music application inspried by SoundCloud and Spotify with a minimalist approach and lofi-genre theme. Co-fi v1.0.0 is a web music player that allows users to upload, edit, and listen to their own or other user's music. Future editions aim to allow users to create music "sessions" where all participant's music players will be synced to the same playlist.
 
 [Visit the site live here!](https://co-fi.herokuapp.com/)
 
@@ -92,6 +94,12 @@ App Academy capstone project
           
 # Home Page
 [![home-features.png](https://i.postimg.cc/CK9PP24W/Screen-Shot-2022-03-24-at-2-49-39-AM.png)](https://postimg.cc/wtcQ30ZV)
+
+On the home page users can toggle between albums and songs to see their respective featured and new content. "Featured" is randomly chosesn content from the 10 most recent uploads. On this page, users can play music from the caterogires provided, like songs/albums, and add songs from the album player into a previously created playlist.
+
+# Library
+
+From the library, users can view, edit, and remove content that they have uploaded.
 
 # Library Page Songs
 
