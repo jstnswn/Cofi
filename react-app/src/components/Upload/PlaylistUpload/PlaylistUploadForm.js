@@ -21,7 +21,7 @@ export default function PlaylistUploadForm({ closeModal }) {
         setShowError(false);
         const errors = {};
 
-        if (title.length > 50) errors.title = 'long';
+        if (title.length > 35) errors.title = 'long';
         if (title.length === 0) errors.title = 'short';
 
         setError(errors);
@@ -95,8 +95,8 @@ export default function PlaylistUploadForm({ closeModal }) {
                         value={showError && !title ? 'Playlist must have a title!' : title}
                         onChange={e => setTitle(e.target.value)}
                     />
-                    {title.length > 45 && (
-                        <div className={`word-counter ${error.title ? 'active' : ''}`}>{title.length}/50</div>
+                    {title.length > 30 && (
+                        <div className={`word-counter ${error.title ? 'active' : ''}`}>{title.length}/35</div>
                     )}
                 </div>
                 {/* <label>Artwork (optional)</label> */}

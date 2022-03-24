@@ -18,7 +18,7 @@
     font-size: 24px;
     font-family: var(--header-font);
     color: var(--text-main-white);
-    margin-top: 80px;
-    margin-bottom: 30px;
+    margin-top: 2em;
+    margin-bottom: 1em;
     /* height: 100%; */
 }

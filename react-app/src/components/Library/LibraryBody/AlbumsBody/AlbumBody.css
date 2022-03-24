@@ -30,7 +30,15 @@
     z-index: 20; */
 }
 
+.info-container .song-title,
+.info-container .tile-artist {
 
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    max-width: 120px;
+}
 
 .album-item-container {
     align-self: flex-end;
@@ -41,6 +49,9 @@
     color: var(--text-main-white);
     margin: 10px;
     width: 210px;
+
+
+
 }
 
 .album-item-container {
