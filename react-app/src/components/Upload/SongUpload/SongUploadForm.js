@@ -91,7 +91,7 @@ export default function SongUploadForm({ closeModal }) {
             .then(() => setDisableSubmit(false))
             .then(() => closeModal(e))
             .then(() => dispatch(loadHomeAlbums()))
-            .then(() => popupMessage('Song uploaded'))
+            .then(() => popupMessage('Song uploaded to Library'))
             .catch(errors => setErrors(errors.errors))
 
     };
@@ -175,6 +175,7 @@ export default function SongUploadForm({ closeModal }) {
 
     return (
         <form className='songFile-upload-form form' onSubmit={handleSubmit}>
+            {isLoading && <p className='wait-message loading song'>Loading... Please don't close the menu</p>}
             <i onClick={closeModal} className='fal fa-times close-icon'></i>
 
             <div

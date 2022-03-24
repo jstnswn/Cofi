@@ -1,5 +1,6 @@
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
 
 export const orderContent = (content) => {
     const { order, byIds } = content;
@@ -15,11 +16,14 @@ export const sortSongsArray = (items) => {
 toast.configure();
 export const popupMessage = (message) => {
 
-   return toast.success(`${message} in Library.`, {
+   return toast.success(message, {
         position: toast.POSITION.TOP_RIGHT,
-        autoClose: 2000,
+        autoClose: 1700,
         style: { backgroundColor: '#202626', color: '#c5ccd3' },
-       progressStyle: { backgroundColor: 'rgb(160, 31, 9)', color: 'rgb(15, 180, 15)'}
+        hideProgressBar: true,
+        transition: Slide,
+
+    //    progressStyle: { backgroundColor: 'rgb(160, 31, 9'}
     });
 
 

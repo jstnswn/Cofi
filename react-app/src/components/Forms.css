@@ -241,7 +241,7 @@
 .login-form .form-content
 .signup-form .form-content {
     margin: 0;
-    border: red 1px solid;
+    /* border: red 1px solid; */
 }
 
 .form h2 {
@@ -259,4 +259,29 @@
     margin-top: 3px;
     margin-bottom: 0;
     color: var(--accent-orange)
+}
+
+.wait-message.loading {
+    color: gray;
+    font-family: var(--main-font);
+    position: absolute;
+    bottom: 3px;
+    /* left: -10; */
+    font-size: 15px;
+    /* margin-left: auto;
+    margin-right: auto; */
+    /* margin-left: 50%;
+    margin-right: 50%; */
+    width: 100%;
+}
+
+.wait-message.loading.playlist {
+    text-align: center;
+
+}
+
+.wait-message.loading.song,
+.wait-message.loading.playlist {
+    /* margin-right: 100px; */
+    /* border: red 1px solid; */
 }

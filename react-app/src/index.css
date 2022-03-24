@@ -17,9 +17,17 @@
     --box-shadow: 1px 3px 15px 2px rgba(8, 8, 8, 0.192);
     --dropdown-gray: rgb(54, 54, 54);
 
-    --toastify-color-success: rgb(160, 31, 9);
+    /* --toastify-color-success: rgb(160, 31, 9); */
+
 }
 
+.Toastify__progress-bar {
+    opacity: 0;
+}
+
+.Toastify__progress-bar--rtl {
+    opacity: 0;
+}
 
 body {
     /* position: relative; */
