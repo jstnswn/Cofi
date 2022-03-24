@@ -285,3 +285,7 @@
     /* margin-right: 100px; */
     /* border: red 1px solid; */
 }
+
+.close-icon {
+    cursor: pointer;
+}

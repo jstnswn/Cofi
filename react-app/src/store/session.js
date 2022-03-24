@@ -15,6 +15,7 @@ const ADD_ALBUM_LIKE = 'session/ADD_ALBUM_LIKE';
 const REMOVE_ALBUM_LIKE = 'session/REMOVE_ALBUM_LIKE';
 
 const ADD_USER_ALBUM = 'session/ADD_USER_ALBUM';
+const REMOVE_USER_ALBUM = 'session/REMOVE_USER_ALBUM';
 
 
 const setUser = (user) => ({
@@ -60,6 +61,13 @@ export const loadUserAlbum = (album) => {
     album
   }
 };
+
+export const removeUserAlbum = (albumId) => {
+  return {
+    type: REMOVE_USER_ALBUM,
+    albumId
+  }
+}
 
 export const authenticate = () => async (dispatch) => {
   const response = await fetch('/api/auth/', {
@@ -234,6 +242,15 @@ export default function reducer(state = initialState, action) {
           ...state.user,
           albums: [...state.user.albums, action.album]
         }
-      }
+      };
+
+    case REMOVE_USER_ALBUM:
+      stateCopy = {...state};
+      const albums = stateCopy.user.albums;
+      idx = albums.findIndex(album => album.id === action.albumId);
+      albums.splice(idx, 1);
+      // delete stateCopy.user.albums[action.albumId];
+
+      return stateCopy;
   }
 }
