@@ -3,7 +3,6 @@ import '../LibraryBody/SongsBody/SongConfirmDelete.css'
 
 export default function ConfirmDelete({ album, closeModal, remove }) {
 
-    console.log('album', album)
     const hasSongs = album?.songs?.length > 0;
 
     return (

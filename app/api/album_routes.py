@@ -15,8 +15,10 @@ def get_featured_album():
     """
     Returns a random album from 10 most recent
     """
-    id = randint(1, 10)
-    album = Album.query.get(id)
+    id = randint(1, 3)
+    # album = Album.query.get(id)
+    albums = Album.query.all()
+    album = albums[id]
 
     if not album:
         return {'error': 'Unable to get album from database'}
