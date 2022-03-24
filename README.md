@@ -89,11 +89,11 @@ App Academy capstone project
           npm start
           
 # Home Page
-[![home-features.png](https://i.postimg.cc/KcHNJBpT/Screen-Shot-2022-03-24-at-2-43-41-AM.png)](https://postimg.cc/w3DLBypx)
+[![home-features.png](https://i.postimg.cc/CK9PP24W/Screen-Shot-2022-03-24-at-2-49-39-AM.png)](https://postimg.cc/wtcQ30ZV)
 
 # Library Page Songs
 
-[![library.png](https://i.postimg.cc/Y09pdJ91/Screen-Shot-2022-03-24-at-2-39-46-AM.png)](https://postimg.cc/1nkht7Dt)
+[![library.png](https://i.postimg.cc/cHQmDLCn/Screen-Shot-2022-03-24-at-2-48-44-AM.png)](https://postimg.cc/XGYdq3wj)
 
 # Library Page Albums
 
