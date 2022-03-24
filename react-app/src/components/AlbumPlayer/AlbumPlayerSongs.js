@@ -14,9 +14,6 @@ export default function AlbumPlayerSongs({ song, idx, last }) {
     const [showOptions, setShowOptions] = useState(false);
     const [showPlaylists, setShowPlaylists] = useState(false);
 
-
-    // song - options - container
-
     const seeOptions = (e) => {
         e.stopPropagation();
         setShowOptions(true);
@@ -45,12 +42,10 @@ export default function AlbumPlayerSongs({ song, idx, last }) {
     };
 
     const likedSongIds = user.liked.song_ids;
-    // idx may be needed for edit options later on
 
     const likeSong = (e) => {
         e.stopPropagation();
         dispatch(createSongLike(song.id));
-        // setTimeout(() => setShowOptions(false))
     }
     const unlikeSong = (e) => {
         e.stopPropagation();
@@ -60,10 +55,6 @@ export default function AlbumPlayerSongs({ song, idx, last }) {
     let likeIconClass;
     let toggleLike;
     let likeText;
-
-    // const likeIconClass = likedSongIds.includes(song.id)
-    //     ? 'fas fa-heart'
-    //     : 'far fa-heart';
 
     if (likedSongIds.includes(song.id)) {
         likeIconClass = 'fas fa-heart icon';

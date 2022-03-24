@@ -63,8 +63,6 @@ export default function PlaylistUploadForm({ closeModal }) {
             className='form'
             onSubmit={handleSubmit}
         >
-            {/* <p className='wait-message loading playlist'>Loading... Please don't close the menu</p> */}
-            {/* <h2>Create a Playlist</h2> */}
             <i onClick={closeModal} className='fal fa-times close-icon'></i>
 
             <div
@@ -100,7 +98,6 @@ export default function PlaylistUploadForm({ closeModal }) {
                         <div className={`word-counter ${error.title ? 'active' : ''}`}>{title.length}/35</div>
                     )}
                 </div>
-                {/* <label>Artwork (optional)</label> */}
                 <input
                     type='file'
                     onChange={e => setImageFile(e.target.files[0])}

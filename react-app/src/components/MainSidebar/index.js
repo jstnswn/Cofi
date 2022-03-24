@@ -1,6 +1,5 @@
 import React from 'react';
 import AlbumUploadModal from '../Upload/AlbumUpload';
-import AlbumUploadForm from '../Upload/AlbumUpload/AlbumUploadForm';
 import PlaylistUploadModal from '../Upload/PlaylistUpload';
 import SongUploadModal from '../Upload/SongUpload';
 import './MainSidebar.css';

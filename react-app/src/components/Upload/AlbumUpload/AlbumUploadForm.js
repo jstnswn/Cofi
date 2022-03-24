@@ -81,7 +81,6 @@ export default function AlbumUploadForm({ closeModal }) {
             className='album-upload form'
             onSubmit={handleSubmit}
         >
-            {/* {isLoading && <p className='wait-message loading album'>Loading... Please don't close the menu</p>} */}
             <i onClick={closeModal} className='fal fa-times close-icon'></i>
 
             <div
@@ -106,7 +105,6 @@ export default function AlbumUploadForm({ closeModal }) {
             </div>
 
             <div className='form-content'>
-                {/* <h2>Create New Album</h2> */}
                 <label>Title</label>
                 <div className='input-container'>
                     <input

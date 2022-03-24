@@ -14,14 +14,11 @@ export default function AlbumPlayer({ album }) {
 
             <div className='album-player scroll-wrapper'>
 
-                {/* <div className='album-player-songs-wrapper'> */}
                     <div className='album-player-songs-container'>
                         {songs?.map((song, idx) => (
                             <AlbumPlayerSongs key={idx} song={song} idx={idx} last={last} />
                         ))}
                     </div>
-
-                {/* </div> */}
             </div>
 
         </div>

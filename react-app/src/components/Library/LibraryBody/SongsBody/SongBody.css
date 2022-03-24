@@ -2,32 +2,15 @@
 
 
 #library-body .library-song-body-header {
-    /* display: flex; */
-    /* flex-direction: row; */
-    /* justify-content: center; */
     border-bottom: 2px solid var(--border-gray);
     grid-template-columns: 35% 35% 25% 5%;
     display: grid;
     color: var(--text-secondary-white);
     height: 50px;
-    /* align-sel; */
-
-    /* max-width: 1100px; */
-
 
     width: 100%;
 
     max-width: 880px;
-
-
-    /* padding-left: 10%; */
-    /* margin-right: 10%; */
-    /* max-width: 880px; */
-    /* padding-left: 5%; */
-
-    /* border: blue 2px solid; */
-
-
 }
 
 .library-song-body-header .song-title.column-title {
@@ -50,23 +33,12 @@
     color: gray;
     padding-left: 10px;
 
-    /* text-align: center; */
-
-    /* margin-right: 10%; */
-    /* margin-left: 19%; */
-    /* padding-left: 10px; */
 }
 
 #library-body .library-songs-body-container {
-    /* height: calc(100vh - 660px); */
     height: calc(100vh - 560px);
-    /* height: 100%; */
     font-family: var(--main-font);
     font-size: 16px;
-    /* position: relative; */
-
-    /* max-width: 1100px; */
-
 
     margin-right: auto;
     margin-left: auto;
@@ -75,16 +47,9 @@
 
 
 
-
     min-height: 300px;
 
-    /* border: green 2px solid; */
-
-
-
 }
-
-
 
 
 .library-list {
@@ -92,12 +57,6 @@
     padding: 8px 10px;
     display: flex;
     align-items: center;
-    /* overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; */
-    /* width: 200px; */
-    /* padding-left: 20px; */
-    /* height: 100px; */
 }
 
 .library-list p,
@@ -131,8 +90,6 @@
     display: grid;
     position: relative;
     padding-left: 20px;
-    /* padding-left: 10%; */
-    /* height: 10px; */
 }
 
 .library-songs-body-container .song-list {
@@ -151,11 +108,6 @@
 
 .library-songs-body-container .heart {
     grid-column-start: 4;
-    /* border: red 1px solid; */
-    /* margin-right: auto;
-    margin-left: auto;
-    margin-top: auto;
-    margin-bottom: auto; */
     margin: auto;
 }
 
@@ -220,28 +172,17 @@
 
 
 .album-list-modal {
-    /* border: red 10px solid; */
-
     background-color: var(--background-secondary-dark-gray);
-    /* top: 0; */
-    /* right: 110px; */
-    /* z-index: 1; */
     height: 100%;
     margin: 0;
-    /* display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start; */
     padding: 10px;
     border-radius: 5px;
 }
 
 .album-list-modal li {
-    /* border: rgb(0, 255, 85) 1px solid; */
     font-family: var(--main-font);
     color: var(--text-secondary-white);
     width: 100%;
-    /* margin: 7px; */
     padding: 5px 20px 5px 10px;
     cursor: pointer;
 }
@@ -251,16 +192,12 @@
 }
 
 .album-list-modal .new-album {
-    /* border: red 10px solid; */
     border-bottom: 1px solid gray;
 }
 
 .placeholder-message {
     color: var(--text-secondary-white);
-    /* margin-right: auto;
-    margin-left: auto; */
     width: 100%;
-    /* border: red 1px solid; */
     display: flex;
     flex-direction: column;
     align-items: center;

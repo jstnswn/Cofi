@@ -1,4 +1,3 @@
-// import { getLibrarySongs } from "../librarySongs";
 import { loadUserAlbum, removeUserAlbum } from "../session.js";
 import { getImageUrl, normalize, orderIds } from "../utils";
 import { getLibrarySongs } from "./librarySongs";
@@ -16,8 +15,6 @@ const CLEAN_LIBRARY_ALBUMS = 'library/CLEAN_LIBRARY_ALBUMS';
 
 
 // Action Creators
-
-
 const loadAlbum = (album) => {
     return {
         type: LOAD_ALBUM,
@@ -143,14 +140,12 @@ export const deleteLibraryAlbum = (albumId) => async dispatch => {
 
 
 // Helper Functions
-
 export const getLibraryAlbumsArray = (state) => {
     const orderedIds = state.library.albums.order;
     return orderedIds.map(id => state.library.albums.byIds[id]);
 }
 
 // Reducer
-
 const initialState = {
     byIds: {},
     order: []
@@ -211,11 +206,7 @@ export default function reducer(state = initialState, action) {
             idx = albumSongs.findIndex(song => song.id === action.song.id);
 
             if (idx > -1) albumSongs.splice(idx, 1, action.song);
-            // else albumSongs = [action.song, albumSongs];
             albumSongs.push(action.song)
-
-            // console.log(2, albumSongs)
-            // stateCopy.byIds[action.albumId].songs = albumSongs;
 
             return stateCopy;
 

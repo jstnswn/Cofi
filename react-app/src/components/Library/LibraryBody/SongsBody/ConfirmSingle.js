@@ -6,8 +6,6 @@ export default function ConfirmSingle({ closeModal, song, update }) {
 
             <i onClick={closeModal} className='fal fa-times close-icon'></i>
 
-            {/* <img alt='song artworko' src={song.image_url} /> */}
-
             <div className='confirm-message-box'>
 
                 <p>Remove <span className='song-name'>{song.title}</span> from It's album?</p>

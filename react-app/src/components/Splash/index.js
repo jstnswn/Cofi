@@ -2,7 +2,6 @@ import React from 'react';
 import './Splash.css';
 import image from '../../assets/headphones.png'
 
-
 export default function Splash() {
     return (
         <div className='splash-container'>

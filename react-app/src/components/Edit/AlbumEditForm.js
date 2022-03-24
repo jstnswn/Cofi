@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { patchAlbum } from '../../store/library/libraryAlbums';
 import './EditForm.css'
 
@@ -22,8 +22,6 @@ export default function AlbumEditForm({ closeModal, album }) {
 
         if (title.length > 35) errors.title = true;
         if (artist.length > 35) errors.artist = true;
-
-        // console.log('error: ', error)
 
         setErrors(errors);
 

@@ -1,10 +1,8 @@
 #home-wrapper {
     margin-top: 50px;
-    /* margin-bottom: 90px; */
     width: 100vw;
     display: grid;
     grid-template-columns: calc(100vw - 200px) 200px;
-    /* height: 100%; */
     height: calc(100vh - 140px);
 }
 
@@ -13,7 +11,7 @@
     padding: 0 60px;
     height: 100%;
 
-    
+
     margin-bottom: 90px;
 }
 
@@ -23,5 +21,4 @@
     color: var(--text-main-white);
     margin-top: 2em;
     margin-bottom: 1em;
-    /* height: 100%; */
 }

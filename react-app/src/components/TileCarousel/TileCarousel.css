@@ -1,6 +1,5 @@
 .carousel-container {
   position: relative;
-  /* width: 94%; */
   width: 100%;
 }
 
@@ -10,8 +9,6 @@
   border-radius: 5px;
   display: flex;
   overflow-x: scroll;
-
-  /* height: 250px; */
 }
 
 .tile-carousel::-webkit-scrollbar {

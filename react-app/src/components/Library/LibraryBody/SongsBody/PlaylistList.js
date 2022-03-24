@@ -5,7 +5,6 @@ import { getPlaylistsArray } from '../../../../store/playlists'
 export default function PlaylistList({ song, addSongToPlaylist }) {
     const playlists = useSelector(getPlaylistsArray);
 
-
     return (
         <ul className='album-list-modal'>
             {playlists.map((playlist, idx) => (

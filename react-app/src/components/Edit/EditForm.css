@@ -11,14 +11,11 @@
 
 .update-form.album .image-container {
     display: flex;
-    /* margin-right: auto;
-    margin-left: auto; */
     justify-content: center;
     align-items: center;
 }
 
 .update-form.album img {
-    /* padding-right: 20px; */
     height: 170px;
     width: 170px;
     object-fit: cover;
@@ -35,13 +32,8 @@
     background-color: rgba(0, 0, 0, 0.644);
     color: var(--text-main-white);
     font-family: var(--header-font);
-    /* display: hidden; */
     pointer-events: none;
 }
-
-/* .update-form.album  .image-overlay:hover {
-    display: flex;
-} */
 
 .update-form.album  .image-overlay i {
     font-size: 30px;
@@ -88,7 +80,6 @@
 .update-form.album .form-content input {
     background-color: var(--dropdown-gray);
     border: none;
-    /* height: 25px; */
     border-radius: 3px;
     color: var(--text-main-white);
     padding-left: 10px;
@@ -107,12 +98,6 @@
     position: relative;
 
 }
-/*
-.update-form.album .form-content input:last-of-type {
-    margin-top: 100px;
-
-} */
-
 
 .word-counter-container {
     width: 62px;
@@ -122,16 +107,12 @@
 
 .update-form.album .word-counter {
     position: absolute;
-    /* border: blue 1px solid; */
     right: 0;
     bottom: -18px;
     padding: 5px;
     border-radius: 5px;
-    /* background-color: var(--accent-orange); */
     background-color: rgba(128, 128, 128, 0.719);
     font-size: 14px;
-    /* display: flex; */
-    /* justify-content: flex-end; */
 }
 
 
@@ -148,7 +129,6 @@
 }
 
 .update-form.album button {
-    /* margin-top: 60px; */
     width: 70px;
     height: 27px;
     font-family: var(--header-font);
@@ -160,8 +140,4 @@
     font-weight: bold;
     font-size: 13px;
     align-self: flex-end;
-    /* margin-top: 5px; */
-    /* padding-top: 5px; */
-
-    /* border: solid 1px */
 }

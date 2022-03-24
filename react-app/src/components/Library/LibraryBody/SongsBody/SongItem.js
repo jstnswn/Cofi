@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Modal } from '../../../../context/Modal';
 import { setSong } from '../../../../store/active';
 import { loadHome } from '../../../../store/home';
@@ -9,19 +9,16 @@ import { addToPlaylist, removeFromPlaylist } from '../../../../store/playlists';
 import { createSongLike, deleteSongLike } from '../../../../store/session';
 import SongEditForm from '../../SongEditForm.js/index.js';
 import AlbumList from './AlbumList';
-import ChangeAlbum from './AlbumList';
 import ConfirmSingle from './ConfirmSingle';
 import PlaylistList from './PlaylistList';
 import SongConfirmDelete from './SongConfirmDelete';
 
 export default function SongItem({ song, option, playlistId, idx, last }) {
-    // console.log('song', option)
     const user = useSelector(({ session }) => session.user);
     const album = song.album;
 
     const dispatch = useDispatch();
     const history = useHistory();
-    const params = useParams();
 
     const [hovered, setHovered] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
@@ -46,6 +43,8 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
     const unlikeSong = () => dispatch(deleteSongLike(song.id));
 
     const likedSongIds = user.liked.song_ids;
+
+    // console.log('likedSongsIDs', likedSongIds);
 
     let likeIconClass;
     let toggleLike;
@@ -104,9 +103,6 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
 
     }, [showMenu])
 
-    // const parent = document.querySelector('.library-body-container')
-
-    // select the bottom 3 items of the list to display dropdown upwards.
     const bottomOfList = idx > last - 2;
 
     return (
@@ -120,7 +116,6 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
                 <img alt='cover art' className='list-image' src={album ? album.image_url : song.image_url} /> <span className='item'>{song.title}</span>
             </div>
             <div className='artist-list library-list title'>
-                {/* {option !== 'playlist' && <p className='item'>{song.artist.name}</p>} */}
                 <p className='item'>{song.artist.name}</p>
             </div>
             <div className='album-list library-list title'>

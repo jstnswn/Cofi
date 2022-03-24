@@ -17,10 +17,6 @@ export default function SongPlayer({ song }) {
         dispatch(setSong(song));
     };
 
-    // const likeIconClass = likedSongIds.includes(song.id)
-    //     ? 'fas fa-heart'
-    //     : 'far fa-heart';
-
     const likeSong = (e) => {
         e.stopPropagation();
         dispatch(createSongLike(song.id));
@@ -53,19 +49,13 @@ export default function SongPlayer({ song }) {
                     onClick={playSong}
                 />
             </div>
-            {/* {showOverlay && ( */}
             <div className='song-player-overlay' onClick={playSong}>
                 <i onClick={toggleLike} className={`${likeIconClass} heart`}></i>
 
-                {/* <div> */}
                     <p className='song-title'>{song.title}</p>
                     <p className='song-artist'>{song.artist.name}</p>
 
-                {/* </div> */}
             </div>
-
-            {/* )} */}
-
         </div>
     )
 }

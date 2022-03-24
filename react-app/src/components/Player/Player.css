@@ -101,7 +101,6 @@
 }
 
   .current-song-info {
-    /* align-items: flex-end; */
     align-self: flex-end;
     padding-left: 8px;
     padding-bottom: 2px;

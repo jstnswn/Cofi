@@ -9,7 +9,6 @@ export default function AlbumsBody({ user, option }) {
     const library = useSelector(({ library }) => library);
     const playlists = useSelector(getPlaylistsArray);
     const albums = orderContent(library.albums);
-    // const albums = Object.values(library.albums.byIds);
 
     let emptyClassName;
 
@@ -17,9 +16,6 @@ export default function AlbumsBody({ user, option }) {
         (option === 'playlist' && !playlists.length)) {
         emptyClassName = 'empty';
     }
-
-
-
 
     return (
         <>

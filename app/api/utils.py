@@ -11,7 +11,6 @@ def get_or_make_artist_id(name):
         db.session.add(artist)
         db.session.flush()
         artist_id = artist.id
-        # db.session.commit()
 
     return artist_id
 

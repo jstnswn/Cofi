@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loadHome, loadHomeAlbums, loadNewSong } from '../../../store/home';
+import { loadNewSong } from '../../../store/home';
 import { createAlbumAndSong, uploadSong } from '../../../store/library/librarySongs';
 import { popupMessage } from '../../utils';
 

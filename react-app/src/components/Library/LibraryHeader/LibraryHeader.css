@@ -3,10 +3,7 @@
     display: flex;
     flex-direction: column;
     height: calc(470px - 50px);
-    /* position: relative; */
     width: 100%;
-    /* padding-right: 90px; */
-    /* align-items: center; */
 }
 
 .libary-header-container {
@@ -17,15 +14,11 @@
     justify-self: center;
     align-self: center;
     padding: 0;
-    /* overflow: hidden; */
     max-width: 800px;
     width: 100%;
-    /* justify-self: center;
-    align-self: center; */
     display: flex;
     justify-content: center;
     position: relative;
-    /* margin-bottom: 50px; */
     height: 100%;
 }
 
@@ -33,7 +26,6 @@
     object-fit: cover;
     max-width: calc(100vw - 200px);
     min-height: 420px;
-    /* max-width: 800px; */
     width: 100%;
 }
 
@@ -63,9 +55,6 @@
 .library-header-title span {
     margin-left: 10px;
     cursor: pointer;
-    /* display: flex;
-    flex-direction: row;
-    width: 30px; */
 }
 
 .library-header-title span i {
@@ -75,6 +64,4 @@
     border-radius: 5px;
     color: var(--text-secondary-white)
 
-    /* margin-left: auto;
-    margin-right: auto; */
 }
