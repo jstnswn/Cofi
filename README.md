@@ -99,12 +99,16 @@ On the home page users can toggle between albums and songs to see their respecti
 
 # Library
 
-From the library, users can view, edit, and remove content that they have uploaded.
+From the library, users can view, edit, and remove content that they have uploaded. Users can toggle between their songs, albums, and playlists by using the right sidebar selector.
 
 # Library Page Songs
 
 [![library.png](https://i.postimg.cc/cHQmDLCn/Screen-Shot-2022-03-24-at-2-48-44-AM.png)](https://postimg.cc/XGYdq3wj)
 
+This section displays the user's uploaded songs. Here they can remove the song, or make edits to the song by hovering over the song item and clicking the ellipsis on the far right.
+
 # Library Page Albums
 
 [![library.png](https://i.postimg.cc/HkxyJkCt/Screen-Shot-2022-03-24-at-1-34-23-AM.png)](https://postimg.cc/N53MSYFy)
+
+This section displays the user's uploaded albums. Clicking on an album will display the album's song contents. After an album is clicked on, the header will change to display the album's artwork. The user can make changes to the album by clicking the ellipsis by the album's title in the header.
