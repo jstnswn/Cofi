@@ -109,9 +109,6 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
     // select the bottom 3 items of the list to display dropdown upwards.
     const bottomOfList = idx > last - 2;
 
-    console.log('idx: ', idx)
-
-
     return (
         <div
             className={`list-box ${last > 3 && bottomOfList  ? 'last' : ''}`}

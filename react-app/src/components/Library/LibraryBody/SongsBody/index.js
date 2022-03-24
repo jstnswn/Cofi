@@ -47,8 +47,6 @@ export default function SongsBody({ option }) {
     }
 
     const last = songs?.length - 1;
-    console.log('last: ', last)
-
 
     return (
         <>
