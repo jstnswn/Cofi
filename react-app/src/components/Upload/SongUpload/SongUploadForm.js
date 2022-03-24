@@ -78,9 +78,9 @@ export default function SongUploadForm({ closeModal }) {
                 .then((songFile) => dispatch(loadNewSong(songFile)))
                 .then(() => setDisableSubmit(false))
                 .then(() => closeModal(e))
-                .catch(errors => setErrors(errors.errors))
-                .then(() => dispatch(loadHomeAlbums()))
                 .then(() => popupMessage('Song uploaded.'))
+                .catch(errors => setErrors(errors.errors))
+                // .then(() => dispatch(loadHomeAlbums()))
 
             return;
         }
@@ -90,9 +90,9 @@ export default function SongUploadForm({ closeModal }) {
             .then((songFile) => dispatch(loadNewSong(songFile)))
             .then(() => setDisableSubmit(false))
             .then(() => closeModal(e))
-            .then(() => dispatch(loadHomeAlbums()))
             .then(() => popupMessage('Song uploaded to Library'))
             .catch(errors => setErrors(errors.errors))
+            // .then(() => dispatch(loadHomeAlbums()))
 
     };
 

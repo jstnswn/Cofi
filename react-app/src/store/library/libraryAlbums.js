@@ -137,10 +137,9 @@ export const deleteLibraryAlbum = (albumId) => async dispatch => {
     if (res.ok) {
         dispatch(removeAlbum(albumId));
         dispatch(removeUserAlbum(albumId));
-        dispatch(getLibrarySongs());
+        dispatch(getLibrarySongs('wipe'));
     }
 };
-
 
 
 // Helper Functions

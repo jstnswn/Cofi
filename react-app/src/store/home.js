@@ -71,7 +71,8 @@ const cleanHomeAlbums = () => {
     return {
         type: CLEAN_ALBUMS
     }
-}
+};
+
 
 // Thunks
 

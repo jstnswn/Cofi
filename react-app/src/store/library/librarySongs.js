@@ -199,7 +199,7 @@ export default function reducer(state = initialState, action) {
             if (!orderArray.includes(action.song.id)) {
                 orderArray.unshift(action.song.id)
             }
-            
+
             stateCopy.order = orderArray;
 
 

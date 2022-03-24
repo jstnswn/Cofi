@@ -3,7 +3,7 @@ import '../LibraryBody/SongsBody/SongConfirmDelete.css'
 
 export default function ConfirmDelete({ album, closeModal, remove }) {
 
-    // console.log('album', album)
+    const hasSongs = album?.songs?.length > 0;
 
     return (
         <div className='confirm-delete-container'>
@@ -14,7 +14,7 @@ export default function ConfirmDelete({ album, closeModal, remove }) {
 
             <div className='confirm-message-box'>
 
-                <p>Remove <span className='song-name'>{album?.title}</span>?</p>
+                <p>Remove <span className='song-name'>{album?.title}</span>{hasSongs && ' and all of it\'s songs'}?</p>
                 <button onClick={remove}>Yes</button>
 
             </div>
