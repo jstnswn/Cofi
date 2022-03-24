@@ -107,12 +107,11 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
     // const parent = document.querySelector('.library-body-container')
 
     // select the bottom 3 items of the list to display dropdown upwards.
-    const bottomOfList = idx > last - 3;
-
+    const bottomOfList = idx > last - 2;
 
     return (
         <div
-            className={`list-box ${bottomOfList  ? 'last' : ''}`}
+            className={`list-box ${last > 3 && bottomOfList  ? 'last' : ''}`}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >

@@ -1,6 +1,5 @@
 // import { getLibrarySongs } from "../librarySongs";
-import SongEditForm from "../../components/Library/SongEditForm.js";
-import { loadUserAlbum } from "../session.js";
+import { loadUserAlbum, removeUserAlbum } from "../session.js";
 import { getImageUrl, normalize, orderIds } from "../utils";
 import { getLibrarySongs } from "./librarySongs";
 
@@ -137,6 +136,7 @@ export const deleteLibraryAlbum = (albumId) => async dispatch => {
 
     if (res.ok) {
         dispatch(removeAlbum(albumId));
+        dispatch(removeUserAlbum(albumId));
         dispatch(getLibrarySongs());
     }
 };

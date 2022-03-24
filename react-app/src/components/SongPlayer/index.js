@@ -15,7 +15,7 @@ export default function SongPlayer({ song }) {
     const playSong = (e) => {
         e.stopPropagation();
         dispatch(setSong(song));
-    }
+    };
 
     // const likeIconClass = likedSongIds.includes(song.id)
     //     ? 'fas fa-heart'
@@ -24,7 +24,8 @@ export default function SongPlayer({ song }) {
     const likeSong = (e) => {
         e.stopPropagation();
         dispatch(createSongLike(song.id));
-    }
+    };
+
     const unlikeSong = () => dispatch(deleteSongLike(song.id));
 
     let likeIconClass;

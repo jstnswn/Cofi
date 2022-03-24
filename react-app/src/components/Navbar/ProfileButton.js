@@ -22,8 +22,6 @@ export default function ProfileButton({ user }) {
     }, [showMenu])
 
 
-
-
   return (
     <div className='profile-button-container'>
           <i className='fa-solid fa-circle-user profile-icon' onClick={openMenu}></i>

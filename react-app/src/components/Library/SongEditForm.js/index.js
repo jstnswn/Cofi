@@ -163,6 +163,7 @@ export default function SongEditForm({ closeModal, song, album }) {
             className='song-edit-form form'
             onSubmit={handleSubmit}
         >
+            {isLoading && songFile && <p className='wait-message loading song'>Loading... Please don't close the menu</p>}
             {/* <h2>Edit Song</h2> */}
             <i onClick={closeModal} className='fal fa-times close-icon'></i>
 
@@ -268,8 +269,6 @@ export default function SongEditForm({ closeModal, song, album }) {
                         cursor: disableSubmit ? 'default' : 'pointer'
                     }} >{isLoading ? 'Submitting...' : 'Submit'}
                 </button>
-
-
 
             </div>
         </form>

@@ -48,7 +48,6 @@ export default function SongsBody({ option }) {
 
     const last = songs?.length - 1;
 
-
     return (
         <>
             <div className='library-song-body-header'>

@@ -9,9 +9,9 @@ const LogoutButton = () => {
   };
 
   return (
-    <div className='profile-dropdown-box logout dd'>
-      <i className='fas fa-sign-out' onClick={onLogout}></i>
-      <div onClick={onLogout}>Logout</div>
+    <div onClick={onLogout} className='profile-dropdown-box logout dd'>
+      <i className='fas fa-sign-out'></i>
+      <div >Logout</div>
     </div>
   )
 };

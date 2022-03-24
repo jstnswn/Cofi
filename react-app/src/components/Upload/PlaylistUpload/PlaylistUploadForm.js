@@ -40,7 +40,7 @@ export default function PlaylistUploadForm({ closeModal }) {
 
         dispatch(createPlaylist(payload))
             .then(() => closeModal())
-            .then(() => popupMessage('Playlist created'))
+            .then(() => popupMessage('Playlist created in Library'))
     };
 
     const handleImageFileReader = (e, file) => {
@@ -63,6 +63,7 @@ export default function PlaylistUploadForm({ closeModal }) {
             className='form'
             onSubmit={handleSubmit}
         >
+            {/* <p className='wait-message loading playlist'>Loading... Please don't close the menu</p> */}
             {/* <h2>Create a Playlist</h2> */}
             <i onClick={closeModal} className='fal fa-times close-icon'></i>
 
@@ -103,7 +104,7 @@ export default function PlaylistUploadForm({ closeModal }) {
                 <input
                     type='file'
                     onChange={e => setImageFile(e.target.files[0])}
-                    accept='image/png, image/jpeg, image/png, image/jpeg'
+                    accept='image/png, image/jpeg, image/jpg'
                     ref={imageFileRef}
                     style={{ display: 'none' }}
                 />
