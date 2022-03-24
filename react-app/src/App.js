@@ -62,7 +62,7 @@ function App() {
         <ProtectedRoute path='/users' exact={true} >
           <UsersList />
         </ProtectedRoute>
-        <ProtectedRoute path={`/library/:${user?.username}`}>
+        <ProtectedRoute path={`/library`}>
           <Library />
           <MainSidebar />
         </ProtectedRoute>

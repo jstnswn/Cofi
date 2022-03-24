@@ -189,6 +189,7 @@ export default function SongEditForm({ closeModal, song, album }) {
                 <label>Song Name</label>
                 <div className='input-container'>
                     <input
+                        required
                         type='type'
                         value={title}
                         onChange={e => setTitle(e.target.value)}
@@ -201,6 +202,7 @@ export default function SongEditForm({ closeModal, song, album }) {
                 <label>Artist</label>
                 <div className='input-container'>
                     <input
+                        required
                         type='text'
                         value={artist}
                         onChange={e => setArtist(e.target.value)}

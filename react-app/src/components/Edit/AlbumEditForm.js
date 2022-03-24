@@ -20,8 +20,8 @@ export default function AlbumEditForm({ closeModal, album }) {
         setDisableSubmit(false);
         const errors = {};
 
-        if (title.length >= 50) errors.title = true;
-        if (artist.length >= 50) errors.artist = true;
+        if (title.length > 35) errors.title = true;
+        if (artist.length > 35) errors.artist = true;
 
         // console.log('error: ', error)
 
@@ -95,10 +95,11 @@ export default function AlbumEditForm({ closeModal, album }) {
                     <input
                         type='text'
                         value={title}
+                        required
                         onChange={e => setTitle(e.target.value)}
                     />
-                    {title.length > 45 && (
-                        <div className={`word-counter ${error.title ? 'active' : ''}`}>{title.length}/50</div>
+                    {title.length > 30 && (
+                        <div className={`word-counter ${error.title ? 'active' : ''}`}>{title.length}/35</div>
                     )}
                 </div>
 
@@ -107,10 +108,11 @@ export default function AlbumEditForm({ closeModal, album }) {
                     <input
                         type='text'
                         value={artist}
+                        required
                         onChange={e => setArtist(e.target.value)}
                     />
-                    {artist.length > 45 && (
-                        <div className={`word-counter ${error.artist ? 'active' : ''}`}>{artist.length}/50</div>
+                    {artist.length > 30 && (
+                        <div className={`word-counter ${error.artist ? 'active' : ''}`}>{artist.length}/35</div>
                     )}
                 </div>
                 <button

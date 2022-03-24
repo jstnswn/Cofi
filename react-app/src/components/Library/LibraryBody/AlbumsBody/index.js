@@ -11,8 +11,6 @@ export default function AlbumsBody({ user, option }) {
     const albums = orderContent(library.albums);
     // const albums = Object.values(library.albums.byIds);
 
-    console.log('albums', albums, option)
-
     let emptyClassName;
 
     if ((option === 'album' && !albums.length) ||

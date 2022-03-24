@@ -37,6 +37,7 @@
     width: 100%;
 
     overflow-y: scroll;
+    position: relative;
 
     /* display: flex;
     justify-content: center; */

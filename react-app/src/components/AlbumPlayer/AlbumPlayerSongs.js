@@ -6,7 +6,7 @@ import { addToPlaylist } from '../../store/playlists';
 import { createSongLike, deleteSongLike } from '../../store/session';
 import PlaylistList from '../Library/LibraryBody/SongsBody/PlaylistList';
 
-export default function AlbumPlayerSongs({ song, idx }) {
+export default function AlbumPlayerSongs({ song, idx, last }) {
     const dispatch = useDispatch();
     const user = useSelector(({ session }) => session.user);
 
@@ -76,7 +76,7 @@ export default function AlbumPlayerSongs({ song, idx }) {
 
     return (
         <div
-            className='album-player-song-box'
+            className={`album-player-song-box ${last === idx ? 'last' : ''}`}
             onClick={playSong}
         >
             <div className='album-song-details'>

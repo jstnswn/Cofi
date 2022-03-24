@@ -40,8 +40,8 @@ export default function LibraryHeader({ libraryItems }) {
             headerUrl = playlists[idParam].image_url;
             headerTitle = playlists[idParam].title;
         } else {
-            headerUrl = libraryItems.albums.byIds[idParam].image_url;
-            headerTitle = libraryItems.albums.byIds[idParam].title;
+            headerUrl = libraryItems.albums.byIds[idParam]?.image_url;
+            headerTitle = libraryItems.albums.byIds[idParam]?.title;
         }
 
     } else {
@@ -92,7 +92,7 @@ export default function LibraryHeader({ libraryItems }) {
                         src={headerUrl}
                     />
                     <div className='header-title-container'>
-                        
+
                         <h2 className='library-header-title'>{headerTitle}
                             {idParam && userParam === user.username && (
                                 <span><i onClick={openDropdown} className='fas fa-ellipsis-h libary-header-edit'></i></span>)}

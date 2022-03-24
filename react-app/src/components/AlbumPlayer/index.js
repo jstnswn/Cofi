@@ -6,6 +6,7 @@ import './AlbumPlayer.css';
 export default function AlbumPlayer({ album }) {
     const songs = album ? album.songs : [];
 
+    const last = songs?.length - 1;
     return (
         <div id='album-player'>
 
@@ -13,7 +14,7 @@ export default function AlbumPlayer({ album }) {
 
             <div className='album-player-songs-container'>
                 {songs?.map((song, idx) => (
-                    <AlbumPlayerSongs key={idx} song={song} idx={idx} />
+                    <AlbumPlayerSongs key={idx} song={song} idx={idx} last={last}/>
                 ))}
             </div>
 

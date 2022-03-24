@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import SongItem from './SongItem';
 import './SongBody.css';
-import { useParams } from 'react-router-dom';
+import { Redirect, useHistory, useParams } from 'react-router-dom';
 import { orderContent, sortSongsArray } from '../../../utils';
 import { useSelector } from 'react-redux';
 import { getPlaylistsArray } from '../../../../store/playlists';
@@ -10,7 +10,23 @@ export default function SongsBody({ option }) {
     const { albumId, playlistId } = useParams();
     const libraryItems = useSelector(({ library }) => library);
     const playlists = useSelector(({ playlists }) => playlists);
+    const user = useSelector(({ session }) => session.user);
     let songs;
+
+    const scrollContainer = useRef(null)
+
+    const history = useHistory();
+
+    const albumIds = libraryItems.albums.order;
+
+    if (albumId && !albumIds.includes(Number(albumId))) {
+        return <Redirect to={`/library/${user.username}/songs`} />
+    }
+
+    if (playlistId && !playlists[Number(playlistId)]) {
+        return <Redirect to={`/library/${user.username}/songs`} />
+    }
+
 
     let placeholderWord;
     let placeholderMessage;
@@ -30,6 +46,9 @@ export default function SongsBody({ option }) {
         placeholderMessage = 'Upload some music and fill up your library!'
     }
 
+    const last = songs?.length - 1;
+
+
     return (
         <>
             <div className='library-song-body-header'>
@@ -38,9 +57,9 @@ export default function SongsBody({ option }) {
                 <p className='song-album column-title'>Album</p>
             </div>
 
-            <div className='library-body-container'>
+            <div ref={scrollContainer} className='library-body-container'>
                 <div className='library-songs-body-container'>
-                    {songs.map((song, idx) => <SongItem key={idx} playlistId={playlistId} song={song} option={option}/>)}
+                    {songs.map((song, idx) => <SongItem key={idx} idx={idx} playlistId={playlistId} song={song} option={option} last={last}/>)}
                     {songs.length === 0 && (
                         <div className='placeholder-message'>
                             <h3>You don't have any songs in your {placeholderWord}.</h3>
