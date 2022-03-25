@@ -30,6 +30,7 @@ body {
     margin: 0;
 }
 
+
 * {
     box-sizing: border-box;
 }
@@ -38,6 +39,7 @@ body {
 button {
     cursor: pointer;
 }
+
 
 a {
     text-decoration: none;
@@ -50,4 +52,3 @@ li{
 .fa-heart {
     cursor: pointer;
 }
-

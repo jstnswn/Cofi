@@ -18,7 +18,7 @@
 
 
 
-    border: pink 2px solid;
+    /* border: pink 2px solid; */
     min-height: 172px;
 }
 
@@ -30,7 +30,7 @@
     justify-content: center;
     align-items: center;
 
-    border: blue 2px solid;
+    /* border: blue 2px solid; */
 }
 
 #main-sidebar .content-container > div {
@@ -59,7 +59,8 @@
     flex-direction: column;
 
 
-    /* border: green 3px solid; */
 
-    grid-template-rows: calc(0.35 * (100vh - 140px)) calc(0.65 * (100vh - 140px));
+    /* navbar + player = 140px */
+    /* 50px to adjust for library song body header */
+    grid-template-rows: calc((0.4 * (100vh - 140px)) + 50px)  calc((0.6 * (100vh - 140px)) - 50px);
 }

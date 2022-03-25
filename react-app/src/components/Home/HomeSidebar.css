@@ -21,13 +21,15 @@
 }
 
 .sidebar-button-container {
-    margin: 5px;
+    padding: 5px;
+    width: 100%;
+    padding-left: 15px;
     /* padding-left: 3px; */
 }
 
-.bottom-sidebar > div:first-of-type {
-    /* padding-left: 10px; */
-}
+/* .bottom-sidebar > div:first-of-type {
+    padding-left: 10px;
+} */
 
 .sidebar-button-container .selector {
     color: var(--main-gray);

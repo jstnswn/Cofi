@@ -22,7 +22,9 @@
 
 
     display: grid;
-    grid-template-rows: calc(0.35 * (100vh - 140px)) calc(0.65 * (100vh - 140px));
+
+    /* navbar + player = 140px */
+    grid-template-rows: calc(0.40 * (100vh - 140px)) calc(0.60 * (100vh - 140px));
 }
 
 
