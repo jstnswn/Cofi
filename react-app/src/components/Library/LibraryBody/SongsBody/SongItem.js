@@ -14,7 +14,8 @@ import PlaylistList from './PlaylistList';
 import SongConfirmDelete from './SongConfirmDelete';
 
 export default function SongItem({ song, option, playlistId, idx, last }) {
-    const user = useSelector(({ session }) => session.user);
+    const session = useSelector(({ session }) => session);
+    const user = session.user;
     const album = song.album;
 
     const dispatch = useDispatch();
@@ -42,6 +43,7 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
     const likeSong = () => dispatch(createSongLike(song.id));
     const unlikeSong = () => dispatch(deleteSongLike(song.id));
 
+    // const likedItems = user.liked;
     const likedSongIds = user.liked.song_ids;
 
     // console.log('likedSongsIDs', likedSongIds);
