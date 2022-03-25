@@ -107,7 +107,7 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
 
     const bottomOfList = idx >= last - 1;
 
-    console.log('idx, last', idx, last)
+    // console.log('idx, last', idx, last)
 
     return (
         <div

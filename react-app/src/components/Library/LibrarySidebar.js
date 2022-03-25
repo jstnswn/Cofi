@@ -17,17 +17,24 @@ export default function LibrarySidebar() {
 
     return (
         <div className='sidebar bottom-sidebar'>
-            <div className='sidebar-button-container'>
-                <button className='sidebar-button' onClick={() => history.push(`/library/${user.username}/albums`)}>Albums</button>
-                <i className={`fas fa-circle-notch selector ${selection === 'albums' ? 'active' : ''}`}></i>
+            <div>
+                <div className='sidebar-button-container'>
+                    <button className='sidebar-button' onClick={() => history.push(`/library/${user.username}/albums`)}>Albums</button>
+                    <i className={`fas fa-circle-notch selector ${selection === 'albums' ? 'active' : ''}`}></i>
+                </div>
+                <div className='sidebar-button-container'>
+                    <button className='sidebar-button' onClick={() => history.push(`/library/${user.username}/songs`)}>Songs</button>
+                    <i className={`fas fa-circle-notch selector ${defaultActive} ${selection === 'songs' ? 'active' : ''}`}></i>
+                </div>
+                <div className='sidebar-button-container'>
+                    <button className='sidebar-button' onClick={() => history.push(`/library/${user.username}/playlists`)}>Playlists</button>
+                    <i className={`fas fa-circle-notch selector ${selection === 'playlists' ? 'active' : ''}`}></i>
+                </div>
             </div>
-            <div className='sidebar-button-container'>
-                <button className='sidebar-button' onClick={() => history.push(`/library/${user.username}/songs`)}>Songs</button>
-                <i className={`fas fa-circle-notch selector ${defaultActive} ${selection === 'songs' ? 'active' : ''}`}></i>
-            </div>
-            <div className='sidebar-button-container'>
-                <button className='sidebar-button' onClick={() => history.push(`/library/${user.username}/playlists`)}>Playlists</button>
-                <i className={`fas fa-circle-notch selector ${selection === 'playlists' ? 'active' : ''}`}></i>
+
+            <div className='content-toggle-container'>
+                {/* <p onClick={() => history.push(`/library/${user.username}/songs/`)}>Owned</p> */}
+                <p onClick={() => history.push(`${location.pathname}/liked`)}>Liked</p>
             </div>
         </div>
     )

@@ -13,6 +13,16 @@ export const sortSongsArray = (items) => {
     return sorted;
 };
 
+export const getOrderedLiked = (likedIdsArr, contentIdsObj) => {
+    const result = new Array(likedIdsArr.length);
+
+    for (let i = likedIdsArr.length - 1; i > -1; i--) {
+        result[i] = contentIdsObj[likedIdsArr[i]];
+    }
+
+    return result;
+};
+
 toast.configure();
 export const popupMessage = (message) => {
 
@@ -23,6 +33,4 @@ export const popupMessage = (message) => {
         hideProgressBar: true,
         transition: Slide,
     });
-
-
 };

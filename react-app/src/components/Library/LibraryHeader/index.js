@@ -10,8 +10,8 @@ import ConfirmDelete from './ConfirmDelete';
 import './LibraryHeader.css';
 
 export default function LibraryHeader({ libraryItems }) {
-
     const dispatch = useDispatch();
+
     const [showDropdown, setShowDropdown] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
@@ -22,17 +22,19 @@ export default function LibraryHeader({ libraryItems }) {
     const location = useLocation();
     const history = useHistory();
     const match = matchPath(location.pathname, {
-        path: '/library/:user/:section/:id'
+        path: '/library/:user/:section/:id/'
     });
 
     const idParam = match?.params?.id;
     const userParam = match?.params?.user;
     const sectionParam = match?.params?.section;
+    const likedParam = location.pathname.split('/')[4] === 'liked';
     const inPlaylist = sectionParam === 'playlists';
+
     let headerUrl;
     let headerTitle
-
-    if (idParam) {
+    // if idParam (4th url space) and idParam is not a number
+    if (idParam && !isNaN(Number(idParam))) {
         if (inPlaylist) {
             headerUrl = playlists[idParam].image_url;
             headerTitle = playlists[idParam].title;
@@ -42,8 +44,12 @@ export default function LibraryHeader({ libraryItems }) {
         }
 
     } else {
+        if (likedParam) {
+            if (sectionParam === 'albums') headerTitle = 'Liked Albums';
+            else if (sectionParam === 'songs') headerTitle = 'Liked Songs';
+        }
+        else headerTitle = 'Your Collection'
         headerUrl = 'https://cofi-bucket.s3.amazonaws.com/art-seeds/escapade.png';
-        headerTitle = 'Your Collection'
     }
 
     useEffect(() => {

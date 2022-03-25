@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import SongItem from './SongItem';
 import './SongBody.css';
 import { Redirect, useParams } from 'react-router-dom';
-import { orderContent, sortSongsArray } from '../../../utils';
+import { getOrderedLiked, orderContent, sortSongsArray } from '../../../utils';
 import { useSelector } from 'react-redux';
 
 export default function SongsBody({ option }) {
@@ -10,6 +10,7 @@ export default function SongsBody({ option }) {
     const libraryItems = useSelector(({ library }) => library);
     const playlists = useSelector(({ playlists }) => playlists);
     const user = useSelector(({ session }) => session.user);
+    const likedIds = user.liked.song_ids;
     let songs;
 
     const scrollContainer = useRef(null)
@@ -27,8 +28,14 @@ export default function SongsBody({ option }) {
 
     let placeholderWord;
     let placeholderMessage;
+    if (option === 'liked') {
+        placeholderWord = 'liked collection';
+        placeholderMessage = 'Liked songs will be displayed here.'
 
-    if (albumId) {
+        songs = getOrderedLiked(likedIds, libraryItems.songs.byIds)
+    }
+
+    else if (albumId) {
         songs = sortSongsArray(libraryItems.albums.byIds[albumId].songs);
         placeholderWord = 'album';
         placeholderMessage = 'Pick songs to move to album, or upload new music.'

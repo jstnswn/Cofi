@@ -42,6 +42,9 @@ export default function Library() {
                 <Route path={`/library/${user.username}/songs`} exact={true}>
                     <SongsBody option='song' />
                 </Route>
+                <Route path={`/library/${user.username}/albums/liked`} exact={true}>
+                    <AlbumsBody option='liked' />
+                </Route>
                 <Route path={`/library/${user.username}/albums/:albumId`} exact={true}>
                     <SongsBody option='album' />
                 </Route>
@@ -55,9 +58,18 @@ export default function Library() {
                     <Redirect to={`/library/${user.username}/songs`}/>
                 </Route>
 
+                <Route path={`/library/${user.username}/songs/liked`} exact={true}>
+                    <SongsBody option='liked'/>
+                </Route>
+                <Route path={`/library/${user.username}/albums/liked`} exact={true}>
+                    <AlbumsBody option='liked'/>
+                </Route>
+
                 <Route path='/library'>
                     <Redirect to={`/library/${user.username}/songs`} />
                 </Route>
+
+
 
             </Switch>
         </>

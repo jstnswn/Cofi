@@ -2,18 +2,27 @@ import React from 'react'
 import AlbumItem from './AlbumItem';
 import './AlbumBody.css';
 import { useSelector } from 'react-redux';
-import { orderContent } from '../../../utils';
+import { getOrderedLiked, orderContent } from '../../../utils';
 import { getPlaylistsArray } from '../../../../store/playlists';
 
-export default function AlbumsBody({ user, option }) {
+export default function AlbumsBody({  option }) {
     const library = useSelector(({ library }) => library);
+    const user = useSelector(({ session }) => session.user);
     const playlists = useSelector(getPlaylistsArray);
-    const albums = orderContent(library.albums);
+    const likedIds = user?.liked.album_ids;
+
+
+    let albums;
+    if (option === 'liked') {
+        const likedAlbums = getOrderedLiked(likedIds, library.albums.byIds);
+        albums = likedAlbums;
+
+    } else {
+        albums = orderContent(library.albums);
+    }
 
     let emptyClassName;
-
-    if ((option === 'album' && !albums.length) ||
-        (option === 'playlist' && !playlists.length)) {
+    if ((option === 'album' && !albums.length) || (option === 'playlist' && !playlists.length)) {
         emptyClassName = 'empty';
     }
 
@@ -24,7 +33,7 @@ export default function AlbumsBody({ user, option }) {
 
                 <div className={`library-albums-body-container ${emptyClassName}`}>
 
-                    {option === 'album'
+                    {option === 'album' || option === 'liked'
                         ? (
                             albums.length > 0
                                 ? albums.map((album, idx) => (
