@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import './LibrarySidebar.css'
 
 export default function LibrarySidebar() {
@@ -8,8 +8,18 @@ export default function LibrarySidebar() {
     const location = useLocation();
     const user = useSelector(({ session }) => session.user);
 
-
+    const likedParam = location.pathname.split('/')[4] === 'liked';
     const selection = location.pathname.split('/')[3];
+
+    const toggleOffLiked = () => {
+        if (!likedParam) return;
+        history.push(location.pathname.split('/').slice(0, 4).join('/'));
+    };
+
+    const toggleOnLiked = () => {
+        if (likedParam) return;
+        history.push(`${location.pathname}/liked`)
+    }
 
     const defaultActive = selection
         ? ''
@@ -33,8 +43,11 @@ export default function LibrarySidebar() {
             </div>
 
             <div className='content-toggle-container'>
-                {/* <p onClick={() => history.push(`/library/${user.username}/songs/`)}>Owned</p> */}
-                <p onClick={() => history.push(`${location.pathname}/liked`)}>Liked</p>
+                {/* <p onClick={toggleOffLiked}>Owned</p>
+                <p onClick={toggleOnLiked}>Liked</p> */}
+                <NavLink to={`/library/${user.username}/${selection}`}>Owned</NavLink>
+                <NavLink to={`/library/${user.username}/${selection}/liked`}>Liked</NavLink>
+
             </div>
         </div>
     )
