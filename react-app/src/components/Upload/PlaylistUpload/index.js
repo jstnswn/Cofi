@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Modal } from '../../../context/Modal';
-import SongUploadForm from '../SongUpload/SongUploadForm';
 import PlaylistUploadForm from './PlaylistUploadForm';
 
 export default function PlaylistUploadModal() {

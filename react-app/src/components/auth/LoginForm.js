@@ -6,31 +6,11 @@ import { formatError } from './utils';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
-  const [passErrors, setPassErrors] = useState([]);
-  const [emailErrors, setEmailErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
-
-  // const resetErrors = () => {
-  //   setEmailErrors([]);
-  //   setPassErrors([]);
-  // }
-
-
-  // useEffect(() => {
-  //   if (!errors.length) return;
-  //   // resetErrors();
-
-  //   for (let error of errors) {
-  //     const formatted = formatError(error);
-  //     if (error.includes('credentials')) setPassErrors(prev => [formatted, ...prev]);
-  //     if (error.includes('Email')) setEmailErrors(prev => [formatted, ...prev]);
-  //   }
-  // }, [errors])
-
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -47,8 +27,6 @@ const LoginForm = () => {
     e.preventDefault()
     dispatch(login('demo@aa.io', 'password'))
       .then(() => history.push('/'))
-
-
   }
 
   const updateEmail = (e) => {
@@ -80,7 +58,6 @@ const LoginForm = () => {
             onChange={updateEmail}
             required
           />
-          {/* {emailErrors.map((error, idx) => <p key={idx}>{error}</p>)} */}
 
         </div>
         <label htmlFor='password'>Password</label>
@@ -93,8 +70,6 @@ const LoginForm = () => {
             onChange={updatePassword}
             required
           />
-
-          {/* {passErrors.map((error, idx) => <p key={idx}>{error}</p>)} */}
         </div>
 
         <div className='login-buttons'>

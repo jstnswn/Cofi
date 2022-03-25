@@ -7,7 +7,6 @@ import { createAlbum, getLibraryAlbumsArray } from '../../../store/library/libra
 
 export default function SongEditForm({ closeModal, song, album }) {
     const dispatch = useDispatch();
-    const libraryAlbums = useSelector(getLibraryAlbumsArray);
     const userAlbums = useSelector(({ session }) => session.user.albums);
 
     const [title, setTitle] = useState(song.title);
@@ -164,7 +163,6 @@ export default function SongEditForm({ closeModal, song, album }) {
             onSubmit={handleSubmit}
         >
             {isLoading && songFile && <p className='wait-message loading song'>Loading... Please don't close the menu</p>}
-            {/* <h2>Edit Song</h2> */}
             <i onClick={closeModal} className='fal fa-times close-icon'></i>
 
             <div
@@ -177,11 +175,9 @@ export default function SongEditForm({ closeModal, song, album }) {
                 <div className='file-input-footer edit'>
                     <div>
                         <i onClick={() => setInputToggle('song')} className={`fal fa-music-alt sm-icon toggle ${inputToggle === 'song' ? 'active' : ''}`}></i>
-                        {/* <i className={`fal fa-check check sm-icon ${song ? 'active' : ''}`}></i> */}
                     </div>
                     <div>
                         <i onClick={() => setInputToggle('image')} className={`fal fa-image sm-icon toggle ${inputToggle === 'image' ? 'active' : ''}`}></i>
-                        {/* <i className={`fal fa-check check sm-icon ${image ? 'active' : ''}`}></i> */}
                     </div>
                 </div>
             </div>

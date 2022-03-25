@@ -115,9 +115,6 @@ def upload_song():
 def delete_song(song_id):
     song = Song.query.get(song_id)
 
-    # if not song:
-    #     return {'error': 'Song to deleted was not found.'}, 400
-
     db.session.delete(song)
     db.session.commit()
 
@@ -130,12 +127,10 @@ def update_song(song_id):
     song = Song.query.get(song_id)
 
     form = SongForm()
-    # current_user_id = current_user.get_id()
 
     if form.validate_on_submit:
         artist_id = get_or_make_artist_id(form.artist.data)
 
-        # Song upload if new file present
         if 'song' in request.files:
 
             song_file = request.files['song']
@@ -150,7 +145,6 @@ def update_song(song_id):
             if 'url' not in song_upload:
                 return song_upload, 400
 
-            # song_url = song_upload['url']
             song.song_url = song_upload['url']
 
 

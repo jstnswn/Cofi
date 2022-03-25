@@ -1,6 +1,4 @@
 .confirm-delete-container  {
-    /* width: 400px; */
-    /* height: 250px; */
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -12,14 +10,11 @@
 
 .confirm-delete-container .image-container {
     display: flex;
-    /* margin-right: auto;
-    margin-left: auto; */
     justify-content: center;
     align-items: center;
 }
 
 .confirm-delete-container img {
-    /* padding-right: 20px; */
     height: 170px;
     width: 170px;
     object-fit: cover;
@@ -50,7 +45,6 @@
     border: none;
     font-weight: bold;
     font-size: 15px;
-    /* border: solid 1px */
 }
 
 .confirm-delete-container .close-icon {

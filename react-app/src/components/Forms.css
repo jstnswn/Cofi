@@ -40,11 +40,6 @@
     outline: none;
 }
 
-/* .form.album .form-content * {
-    margin: 5px;
-} */
-
-
 .form button {
     /* margin-top: 60px; */
     width: 95px;
@@ -109,8 +104,6 @@
     box-shadow: 2px 2px 30px .2px rgba(0, 0, 0, 0.322);
 
     cursor: pointer;
-
-    /* border: red 3px solid; */
 }
 
 .word-counter-container {
@@ -121,16 +114,12 @@
 
 .form .word-counter {
     position: absolute;
-    /* border: blue 1px solid; */
     right: 0;
     bottom: -18px;
     padding: 5px;
     border-radius: 5px;
-    /* background-color: var(--accent-orange); */
     background-color: rgba(128, 128, 128, 0.719);
     font-size: 14px;
-    /* display: flex; */
-    /* justify-content: flex-end; */
 }
 
 
@@ -140,8 +129,6 @@
 
 .form .file-message {
     position: absolute;
-    /* display: flex; */
-    /* flex-grow: 1; */
     font-size: 14px;
     bottom: 10px;
     width: 150px;
@@ -149,16 +136,10 @@
     font-family: var(--main-font);
     color: var(--text-main-white)
 
-    /* width: 100%; */
-    /* margin-right: 50%; */
-    /* margin-left: 50%; */
-    /* margin-right: auto;
-    margin-left: auto; */
 }
 
 .form .file-input-footer {
     display: flex;
-    /* border: purple 1px solid; */
     width: 100%;
     justify-content: space-around;
     margin-top: 10px;
@@ -166,23 +147,14 @@
     color: rgb(105, 105, 105);
     font-size: 20px;
     z-index: 1;
-    /* border: red 1px solid; */
 }
 
-/* .form .file-input-footer.edit {
-
-} */
-
 .form .file-input-footer > div {
-    /* border: red 2px solid; */
     width: 70px;
-    /* border: green 1px solid; */
 }
 
 .form .file-input-footer.edit > div {
-    /* border: red 2px solid; */
     width: 30px;
-    /* border: green 1px solid; */
 }
 
 .form .file-input-footer .sm-icon {
@@ -211,7 +183,6 @@
 
 
 .signup-form {
-    /* width: 555px; */
     padding-right: 30px;
     padding-bottom: 30px;
 }
@@ -223,7 +194,6 @@
 .signup-form label,
 .login-form label {
     padding: 4px;
-    /* border: red 1px solid; */
 }
 
 
@@ -231,7 +201,6 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
-    /* border: red 1px solid; */
 }
 
 .login-buttons .demo {
@@ -241,7 +210,6 @@
 .login-form .form-content
 .signup-form .form-content {
     margin: 0;
-    /* border: red 1px solid; */
 }
 
 .form h2 {
@@ -266,24 +234,13 @@
     font-family: var(--main-font);
     position: absolute;
     bottom: 3px;
-    /* left: -10; */
     font-size: 15px;
-    /* margin-left: auto;
-    margin-right: auto; */
-    /* margin-left: 50%;
-    margin-right: 50%; */
     width: 100%;
 }
 
 .wait-message.loading.playlist {
     text-align: center;
 
-}
-
-.wait-message.loading.song,
-.wait-message.loading.playlist {
-    /* margin-right: 100px; */
-    /* border: red 1px solid; */
 }
 
 .close-icon {

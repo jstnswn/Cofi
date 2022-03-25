@@ -1,28 +1,46 @@
 #main-sidebar {
-    /* border: red 1px solid; */
-    height: 470px;
-    position: absolute;
+    /* height: 470px; */
+    /* position: absolute; */
+    /* border: red 3px solid; */
+    grid-column-start: 2;
     top: 50px;
-    right: 0;
+    /* right: 0; */
     width: 200px;
     border-left: 2px solid var(--border-gray);
     border-bottom: 2px solid var(--border-gray);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 125px;
+    /* padding-top: 125px; */
     font-family: var(--header-font);
+
+    grid-row-start: 1;
+
+
+
+    /* border: pink 2px solid; */
+    min-height: 172px;
 }
 
-#main-sidebar > div {
+#main-sidebar .content-container {
+    height: 100%;
+    width: 100%;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* border: blue 2px solid; */
+}
+
+#main-sidebar .content-container > div {
     color: gray;
     display: flex;
     align-items: center;
 
 }
 
-#main-sidebar > div p {
+#main-sidebar .content-container > div p {
     cursor: pointer;
 }
 
@@ -30,4 +48,19 @@
     font-size: 24px;
     color: gray;
     margin: 10px;
+}
+
+.sidebar-container {
+    display: grid;
+    /* height: 100%; */
+    /* height: calc(100vh - 140px); */
+
+    height: 100%;
+    flex-direction: column;
+
+
+
+    /* navbar + player = 140px */
+    /* 50px to adjust for library song body header */
+    grid-template-rows: calc((0.4 * (100vh - 140px)) + 50px)  calc((0.6 * (100vh - 140px)) - 50px);
 }

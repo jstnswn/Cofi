@@ -6,7 +6,7 @@ import { addToPlaylist, getPlaylistsArray } from '../../store/playlists';
 import { createSongLike, deleteSongLike } from '../../store/session';
 import PlaylistList from '../Library/LibraryBody/SongsBody/PlaylistList';
 
-export default function AlbumPlayerSongs({ song, idx, last }) {
+export default function AlbumPlayerSongs({ song, idx, last, openedMenu, setOpenedMenu, setToCloseMenu, toCloseMenu }) {
     const dispatch = useDispatch();
     const user = useSelector(({ session }) => session.user);
     const playlists = useSelector(getPlaylistsArray);
@@ -14,13 +14,22 @@ export default function AlbumPlayerSongs({ song, idx, last }) {
     const [showOptions, setShowOptions] = useState(false);
     const [showPlaylists, setShowPlaylists] = useState(false);
 
-
-    // song - options - container
-
-    const seeOptions = (e) => {
+    const seeOptions = async (e) => {
         e.stopPropagation();
+
+        // Check if prev menu is open,
+            // if so, close that menu first
+        if (typeof openedMenu === 'number') {
+            setToCloseMenu(openedMenu)
+        }
+
         setShowOptions(true);
+        setOpenedMenu(idx);
     };
+
+    useEffect(() => {
+        if (toCloseMenu === idx) setShowOptions(false)
+    }, [toCloseMenu, openedMenu, idx])
 
     useEffect(() => {
         if (!showOptions) return;
@@ -45,12 +54,10 @@ export default function AlbumPlayerSongs({ song, idx, last }) {
     };
 
     const likedSongIds = user.liked.song_ids;
-    // idx may be needed for edit options later on
 
     const likeSong = (e) => {
         e.stopPropagation();
         dispatch(createSongLike(song.id));
-        // setTimeout(() => setShowOptions(false))
     }
     const unlikeSong = (e) => {
         e.stopPropagation();
@@ -60,10 +67,6 @@ export default function AlbumPlayerSongs({ song, idx, last }) {
     let likeIconClass;
     let toggleLike;
     let likeText;
-
-    // const likeIconClass = likedSongIds.includes(song.id)
-    //     ? 'fas fa-heart'
-    //     : 'far fa-heart';
 
     if (likedSongIds.includes(song.id)) {
         likeIconClass = 'fas fa-heart icon';

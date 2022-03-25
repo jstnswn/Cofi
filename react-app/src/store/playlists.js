@@ -96,7 +96,6 @@ export const addToPlaylist = (song, playlistId) => async dispatch => {
     });
 
     if (res.ok) {
-        // const data = await res.json()
         dispatch(addSongToPlaylist(song, playlistId))
     } else {
         const error = await res.json();
@@ -110,7 +109,6 @@ export const removeFromPlaylist = (songId, playlistId) => async dispatch => {
     })
 
     if (res.ok) {
-        // const data = await res.json()
         dispatch(removeSongFromPlaylist(songId, playlistId))
     } else {
         const error = await res.json();
@@ -149,7 +147,6 @@ export const deletePlaylist = (playlistId) => async dispatch => {
     const res = await fetch(`/api/playlists/${playlistId}`, { method: 'DELETE' });
 
     if (res.ok) {
-        // const data = await res.json()
         dispatch(removePlaylist(playlistId));
     } else {
         const error = await res.json();
@@ -158,7 +155,6 @@ export const deletePlaylist = (playlistId) => async dispatch => {
 };
 
 // Helper Functions
-
 export const getPlaylistsArray = (state) => Object.values(state.playlists);
 
 const initialState = {};

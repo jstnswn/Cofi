@@ -33,7 +33,6 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            # 'email': self.email
         }
 
     #profile User to_dict
@@ -56,10 +55,8 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'albums': [album.u_to_dict() for album in self.albums],
-            # 'songs': [song.to_dict() for song in self.songs],
             'liked': {
                 'song_ids': [song.id for song in self.liked_songs],
                 'album_ids': [album.id for album in self.liked_albums]
             }
-            # 'liked_songs': self.liked_songs
         }

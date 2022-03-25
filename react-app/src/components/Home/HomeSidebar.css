@@ -1,16 +1,15 @@
 #home-wrapper .bottom-sidebar {
     grid-column-start: 2;
-    height: calc(100vh - 560px);
+    /* height: calc(100vh - 560px); */
     width: 100%;
     display: flex;
     flex-direction: column;
     border-left: 2px solid var(--border-gray);
     padding-top: 50px;
-    margin-top: 470px;
+    /* margin-top: 470px; */
 }
 
 .sidebar-button {
-    /* padding: 10px; */
     background-color: rgba(0, 0, 0, 0);
     border: none;
     width: 65%;
@@ -22,8 +21,15 @@
 }
 
 .sidebar-button-container {
-    margin: 5px;
+    padding: 5px;
+    width: 100%;
+    padding-left: 15px;
+    /* padding-left: 3px; */
 }
+
+/* .bottom-sidebar > div:first-of-type {
+    padding-left: 10px;
+} */
 
 .sidebar-button-container .selector {
     color: var(--main-gray);

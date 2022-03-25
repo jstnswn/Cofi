@@ -4,11 +4,9 @@ import PlayableTile from './PlayableTile';
 import './TileCarousel.css'
 
 export default function TileCarousel({ content, option, identifier }) {
-    // Get initial number of albums in carousel
     const initial = content.length;
     const [difference, setDifference] = useState(initial);
 
-    // Start by targeting 8th div in carousel
     const [forwardTarget, setForwardTarget] = useState(8);
     const [backTarget, setBackTarget] = useState(0);
     const [prevDirection, setPrevDirection] = useState();

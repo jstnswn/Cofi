@@ -11,7 +11,6 @@ image_routes = Blueprint('images', __name__)
 def get_aws_image_url():
 
     if 'image' not in request.files:
-        # return {'errors': 'image required'}, 400
         return {'image_url': 'https://cofi-bucket.s3.amazonaws.com/art-seeds/song_cover.png'}, 200
 
     image = request.files['image']

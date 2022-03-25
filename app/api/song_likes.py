@@ -7,9 +7,7 @@ song_like_routes = Blueprint('song_likes', __name__)
 
 @song_like_routes.route('/songs/<int:song_id>', methods=['POST'])
 def like_album(song_id):
-    # data = request.json
     from_user_id = current_user.get_id()
-    # song_id = data['song_id']
 
     from_user = User.query.get(from_user_id)
     song = Song.query.get(song_id)
@@ -21,9 +19,7 @@ def like_album(song_id):
 
 @song_like_routes.route('/songs/<int:song_id>', methods=['DELETE'])
 def unlike_song(song_id):
-    # data = request.json
     user_from_id = current_user.get_id()
-    # song_id = data['song_id']
 
     from_user = User.query.get(user_from_id)
     song = Song.query.get(song_id)

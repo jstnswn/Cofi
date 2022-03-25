@@ -1,11 +1,14 @@
 #library-wrapper {
     margin-top: 50px;
+    /* margin-bottom: 90px; */
     width: 100vw;
     display: grid;
     grid-template-columns: calc(100vw - 200px) 200px;
-    height: 100%;
+    /* height: 100%; */
+    height: calc(100vh - 140px);
 
-    /* min-width: 1030px; */
+    min-height: 487px;
+    /* min-height: 1000px; */
 }
 
 #library-wrapper .main-wrapper {
@@ -14,31 +17,36 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    /* border: red 1px solid; */
-    height: calc(100vh - 140px);
+    /* height: calc(100vh - 140px); */
+    height: 100%;
 
+
+    display: grid;
+
+    /* navbar + player = 140px */
+    grid-template-rows: calc(0.40 * (100vh - 140px)) calc(0.60 * (100vh - 140px));
 }
 
 
 
 #library-body {
     grid-column-start: 1;
-    height: calc(100vh - 560px);
-
-    width: 100%;
+    /* height: calc(100vh - 560px); */
     height: 100%;
 
+
+    width: 100%;
+    /* height: calc(100% - 90px); */
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    /* margin-left: 40px; */
     padding-left: 40px;
 
 
+    /* margin-bottom: 90px; */
 
 
-    min-height: 400px;
+    /* min-height: 420px; */
 }
 
 #library-body .library-body-container {
@@ -49,8 +57,6 @@
 
     height: 100%;
 
-    /* display: flex;
-    justify-content: center; */
 }
 
 .library-body-container::-webkit-scrollbar {

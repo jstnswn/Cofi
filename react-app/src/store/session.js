@@ -2,8 +2,7 @@ import { cleanActive } from "./active";
 import { cleanHome } from "./home";
 import { cleanLibraryAlbums } from "./library/libraryAlbums";
 import { cleanLibrarySongs } from "./library/librarySongs";
-import { cleanPlaylists, getPlaylists } from "./playlists";
-import { wipeStore } from "./utils";
+import { cleanPlaylists } from "./playlists";
 
 // constants
 const SET_USER = 'session/SET_USER';
@@ -249,7 +248,6 @@ export default function reducer(state = initialState, action) {
       const albums = stateCopy.user.albums;
       idx = albums.findIndex(album => album.id === action.albumId);
       albums.splice(idx, 1);
-      // delete stateCopy.user.albums[action.albumId];
 
       return stateCopy;
   }

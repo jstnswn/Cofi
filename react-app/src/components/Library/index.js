@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { matchPath, Redirect, Route, Switch, useHistory, useLocation, useParams } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { loadLibrary } from '../../store/library';
 import { getLibraryAlbumsArray } from '../../store/library/libraryAlbums';
 import AlbumsBody from './LibraryBody/AlbumsBody';
@@ -9,16 +9,12 @@ import LibraryHeader from './LibraryHeader';
 import LibrarySidebar from './LibrarySidebar';
 import SongsBody from './LibraryBody/SongsBody';
 import { getPlaylists, getPlaylistsArray } from '../../store/playlists';
-import ErrorPage from '../../ErrorPage';
-// import SongsList from './SongsBody';
+import MainSidebar from '../MainSidebar';
 
 export default function Library() {
     const dispatch = useDispatch();
     const user = useSelector(({ session }) => session.user);
     const libraryItems = useSelector(({ library }) => library);
-
-    const albums = useSelector(getLibraryAlbumsArray);
-    const playlists = useSelector(getPlaylistsArray);
 
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -56,16 +52,12 @@ export default function Library() {
                     <SongsBody option='playlist' />
                 </Route>
                 <Route path={[`/library/${user.username}`, '/library']} exact={true}>
-                    {/* <SongsBody option='song'/> */}
                     <Redirect to={`/library/${user.username}/songs`}/>
-
                 </Route>
+
                 <Route path='/library'>
                     <Redirect to={`/library/${user.username}/songs`} />
                 </Route>
-                {/* <Rout>
-                    <ErrorPage />
-                </Rout> */}
 
             </Switch>
         </>
@@ -79,10 +71,13 @@ export default function Library() {
 
                     {routes}
 
-
                 </div>
             </div>
-            <LibrarySidebar />
+
+            <div className='sidebar-container'>
+                <MainSidebar />
+                <LibrarySidebar />
+            </div>
         </div>
     )
 }

@@ -2,7 +2,6 @@ from .db import db
 from datetime import datetime
 from .song_likes import song_likes
 from .playlist_songs import playlist_songs
-# from .album_song import album_songs
 
 class Song(db.Model):
     __tablename__ = 'songs'

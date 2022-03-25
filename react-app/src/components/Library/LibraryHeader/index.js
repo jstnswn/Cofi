@@ -7,11 +7,9 @@ import { deletePlaylist } from '../../../store/playlists';
 import AlbumEditForm from '../../Edit/AlbumEditForm';
 import PlaylistEditForm from '../../Edit/PlaylistEditForm';
 import ConfirmDelete from './ConfirmDelete';
-// import HeaderDropdown from './HeaderDropdown';
 import './LibraryHeader.css';
 
 export default function LibraryHeader({ libraryItems }) {
-    // Refactor to a avoid prop drilling libraryItems
 
     const dispatch = useDispatch();
     const [showDropdown, setShowDropdown] = useState(false);
@@ -33,7 +31,6 @@ export default function LibraryHeader({ libraryItems }) {
     const inPlaylist = sectionParam === 'playlists';
     let headerUrl;
     let headerTitle
-    let editOption;
 
     if (idParam) {
         if (inPlaylist) {
@@ -83,7 +80,6 @@ export default function LibraryHeader({ libraryItems }) {
 
     return (
         <div id='library-header'>
-            {/* <div className='library-header-container'> */}
 
                 <div className='header-image-container'>
                     <img
@@ -101,7 +97,6 @@ export default function LibraryHeader({ libraryItems }) {
                         {showDropdown && (
                             <div className='library-list-dropdown album'>
                                 <ul>
-                                    {/* <li onClick={openEditMenu}>Edit Song</li> */}
                                     <li onClick={openConfirmMenu}>{inPlaylist ? 'Remove Playlist' : 'Remove Album'}</li>
                                     <li onClick={openEditForm}>Edit Details</li>
                                 </ul>
@@ -110,7 +105,6 @@ export default function LibraryHeader({ libraryItems }) {
 
                     </div>
                 </div>
-            {/* </div> */}
                     {showConfirm && (
                         <Modal onClose={closeConfirmMenu}>
                             <ConfirmDelete

@@ -15,7 +15,6 @@ export default function Player() {
     let songUrl;
     let artworkUrl;
 
-    // const isPlaying = active.isPlaying
     if (active.currentSong) {
         songUrl = active.currentSong.song_url;
         artworkUrl = active.currentSong.album && location.pathname.includes('library')

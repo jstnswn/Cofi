@@ -128,9 +128,6 @@
 }
 
 
-
-
-
 .player-song-title {
   padding-bottom: 3px;
 }
@@ -148,10 +145,6 @@
     padding: 0;
     background-color: var(--main-gray);
     border-radius: 5px;
-    /* border: red 1px solid; */
-    /* padding: 9px; */
-    /* z-index: 10; */
-
 }
 
 .album-player-song-box.last .song-options {
@@ -176,15 +169,10 @@
     font-family: var(--main-font);
     color: var(--text-secondary-white);
     text-align: center;
-    /* width: 120px; */
-    /* margin: 5px 0; */
     cursor: pointer;
 
     display: flex;
-    /* flex-direction: column; */
     justify-content: space-between;
-
-    /* border: red 1px solid; */
 }
 
 .album-player-song-box .song-options li:hover {

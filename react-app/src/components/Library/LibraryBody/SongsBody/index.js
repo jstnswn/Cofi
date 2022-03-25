@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import SongItem from './SongItem';
 import './SongBody.css';
-import { Redirect, useHistory, useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import { orderContent, sortSongsArray } from '../../../utils';
 import { useSelector } from 'react-redux';
-import { getPlaylistsArray } from '../../../../store/playlists';
 
 export default function SongsBody({ option }) {
     const { albumId, playlistId } = useParams();
@@ -14,8 +13,6 @@ export default function SongsBody({ option }) {
     let songs;
 
     const scrollContainer = useRef(null)
-
-    const history = useHistory();
 
     const albumIds = libraryItems.albums.order;
 

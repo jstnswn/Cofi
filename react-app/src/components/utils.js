@@ -1,6 +1,6 @@
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Slide, Zoom, Flip, Bounce } from 'react-toastify';
+import { Slide } from 'react-toastify';
 
 export const orderContent = (content) => {
     const { order, byIds } = content;
@@ -22,8 +22,6 @@ export const popupMessage = (message) => {
         style: { backgroundColor: '#202626', color: '#c5ccd3' },
         hideProgressBar: true,
         transition: Slide,
-
-    //    progressStyle: { backgroundColor: 'rgb(160, 31, 9'}
     });
 
 

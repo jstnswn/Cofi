@@ -146,8 +146,6 @@ export const getTopAlbums = (amount) => async dispatch => {
 };
 
 // Helper Functions
-// export const getNewSongsArray = state => Object.values(state.home.newSongs);
-// export const getFeaturedAlbumArray = state => Object.values(state.home.featuredAlbum);
 export const getTopAlbumsArray = state => {
     const orderedIds = state.home.topAlbums.order;
     return orderedIds.map(id => state.home.topAlbums.byIds[id]);
@@ -200,8 +198,6 @@ const initialState = {
         byIds: {},
         order: []
     },
-    // update: false
-
 };
 
 export default function reducer(state = initialState, action) {

@@ -44,19 +44,10 @@
     justify-content: flex-end;
     align-items: center;
     cursor: pointer;
-    /* border:green 1px solid; */
 }
 
-/* .song-player-overlay > div {
-    border: blue 1px solid;
-    justify-self: flex-end;
-    align-self: flex-end;
-} */
 
 .song-player-overlay .heart{
-
-    /* justify-self: center; */
-    /* border: red 1px solid; */
     margin-bottom: 10px;
 }
 

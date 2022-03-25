@@ -5,7 +5,7 @@ import { createAlbum, getLibraryAlbums, loadAlbumSong, removeAlbumSong } from ".
 // Action Creators
 const LOAD_SONGS = 'library/LOAD_SONGS';
 const LOAD_SONG = 'library/LOAD_SONG';
-const UPDATE_SONG = 'library/UPDATE_SONG';
+// const UPDATE_SONG = 'library/UPDATE_SONG';
 const REMOVE_SONG = 'library/REMOVE_SONG';
 
 const CLEAN_LIBRARY_SONGS = 'library/CLEAN_LIBRARY_SONGS';
@@ -99,17 +99,12 @@ export const patchSong = (payload) => async dispatch => {
 
     const res = await fetch(`/api/songs/${payload.songId}`, {
         method: 'PATCH',
-        // headers: {'Content-Type': 'application/json'},
         body: formData
     });
 
     if (res.ok) {
         const data = await res.json();
         dispatch(loadSong(data.song, payload.fromAlbumId));
-        // if (payload.fromAlbumId) {
-
-        //     dispatch(loadAlbumSong(data.song, payload.fromAlbumId));
-        // }
         dispatch(getPlaylists());
         if (payload.fromAlbumId || payload.toAlbumId) dispatch(getLibraryAlbums())
         return data.song;
@@ -121,11 +116,8 @@ export const patchSong = (payload) => async dispatch => {
 
 
 export const patchSongAlbum = (song, toAlbumId) => async dispatch => {
-    // console.log('albumID', toAlbumId)
     const res = await fetch(`/api/songs/${song.id}/albums/${toAlbumId ? toAlbumId : 0}`, {
         method: 'PATCH',
-        // headers: {'Content-Type': 'application/json'},
-        // body: JSON.stringify({albumId})
     })
 
     if (res.ok) {
@@ -142,17 +134,14 @@ export const patchSongAlbum = (song, toAlbumId) => async dispatch => {
     }
 }
 
-
 export const deleteLibrarySong = (songId, albumId) => async dispatch => {
     const res = await fetch(`/api/songs/${songId}`, { method: 'DELETE' });
 
     if (res.ok) {
         dispatch(removeSong(songId, albumId));
         if (albumId) dispatch(removeAlbumSong(songId, albumId))
-        // if (albumId) dispatch(getLibraryAlbums())
     }
 };
-
 
 // Helper Functions
 export const getLibrarySongsArray = (state) => {
@@ -167,7 +156,6 @@ export const createAlbumAndSong = (payload) => async dispatch => {
         title: albumTitle,
         artist,
         image,
-        // private
     };
     return dispatch(createAlbum(albumPayload))
         .then((album) =>{
@@ -187,14 +175,13 @@ export default function reducer(state = initialState, action) {
     let stateCopy;
     let orderArray;
     let idx;
-    let albumSongs;
+    // let albumSongs;
 
     switch (action.type) {
         case LOAD_SONG:
             stateCopy = { ...state };
             stateCopy.byIds[action.song.id] = action.song;
             orderArray = stateCopy.order;
-            // idx = orderArray.findIndex(id => id === action.song.id);
 
             if (!orderArray.includes(action.song.id)) {
                 orderArray.unshift(action.song.id)
@@ -222,12 +209,6 @@ export default function reducer(state = initialState, action) {
             orderArray.splice(idx, 1);
 
             delete stateCopy.byIds[action.songId];
-            // if (action.albumId) {
-            //     albumSongs = stateCopy.albums.byIds[action.albumId].songs;
-            //     idx = albumSongs.findIndex(song => song.id === action.songId);
-            //     albumSongs.splice(idx, 1);
-            // }
-
             return stateCopy;
 
         case CLEAN_LIBRARY_SONGS:

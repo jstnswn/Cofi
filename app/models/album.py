@@ -1,6 +1,5 @@
 from .db import db
 from datetime import datetime
-# from .album_song import album_songs
 from .album_likes import album_likes
 
 class Album(db.Model):

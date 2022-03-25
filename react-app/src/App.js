@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
-import User from './components/User';
 import { authenticate } from './store/session';
 import Home from './components/Home';
 import NavBar from './components/Navbar';
 import Player from './components/Player';
-import { loadHome } from './store/home';
 import MainSidebar from './components/MainSidebar';
 import Library from './components/Library';
-import { getPlaylists } from './store/playlists';
 import Splash from './components/Splash';
 import ErrorPage from './ErrorPage';
 
@@ -64,11 +60,11 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path={`/library`}>
           <Library />
-          <MainSidebar />
+          {/* <MainSidebar /> */}
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <Home />
-          <MainSidebar />
+          {/* <MainSidebar /> */}
         </ProtectedRoute>
         <Route>
           <ErrorPage />
