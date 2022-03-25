@@ -1,7 +1,7 @@
 #main-sidebar {
     height: 470px;
     /* position: absolute; */
-    border: red 3px solid;
+    /* border: red 3px solid; */
     grid-column-start: 2;
     top: 50px;
     /* right: 0; */
@@ -38,5 +38,5 @@
     /* height: 100%; */
     height: calc(100vh - 140px);
     flex-direction: column;
-    border: green 3px solid;
+    /* border: green 3px solid; */
 }

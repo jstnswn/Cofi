@@ -9,6 +9,7 @@ import LibraryHeader from './LibraryHeader';
 import LibrarySidebar from './LibrarySidebar';
 import SongsBody from './LibraryBody/SongsBody';
 import { getPlaylists, getPlaylistsArray } from '../../store/playlists';
+import MainSidebar from '../MainSidebar';
 
 export default function Library() {
     const dispatch = useDispatch();
@@ -72,7 +73,11 @@ export default function Library() {
 
                 </div>
             </div>
-            <LibrarySidebar />
+
+            <div className='sidebar-container'>
+                <MainSidebar />
+                <LibrarySidebar />
+            </div>
         </div>
     )
 }

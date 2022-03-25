@@ -60,7 +60,7 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path={`/library`}>
           <Library />
-          <MainSidebar />
+          {/* <MainSidebar /> */}
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <Home />
