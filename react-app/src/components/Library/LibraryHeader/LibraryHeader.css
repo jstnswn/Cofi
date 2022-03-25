@@ -5,6 +5,11 @@
     /* height: calc(470px - 50px); */
     width: 100%;
     height: 100%;
+
+
+
+    border: pink 2px solid;
+    min-height: 172px;
 }
 
 .libary-header-container {

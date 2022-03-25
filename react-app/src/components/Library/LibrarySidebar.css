@@ -1,6 +1,8 @@
 #library-wrapper .bottom-sidebar {
     grid-column-start: 2;
-    height: calc(100vh - 560px);
+    grid-row-start: 2;
+
+    /* height: calc(100vh - 560px); */
 
     display: flex;
     flex-direction: column;
@@ -9,5 +11,6 @@
     padding-top: 50px;
     width: 200px;
 
-
+    border: green 2px solid;
+    min-height: 315px;
 }

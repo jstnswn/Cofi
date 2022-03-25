@@ -7,9 +7,8 @@
     /* height: 100%; */
     height: calc(100vh - 140px);
 
+    min-height: 487px;
     /* min-height: 1000px; */
-
-
 }
 
 #library-wrapper .main-wrapper {
