@@ -28,8 +28,10 @@
     align-items: center;
     padding-left: 40px;
 
+    margin-bottom: 90px;
 
-    min-height: 400px;
+
+    min-height: 420px;
 }
 
 #library-body .library-body-container {
