@@ -202,11 +202,16 @@ export default function reducer(state = initialState, action) {
         case LOAD_ALBUM_SONG:
             stateCopy = {...state};
 
-            albumSongs = stateCopy.byIds[action.albumId].songs;
-            idx = albumSongs.findIndex(song => song.id === action.song.id);
+            // If album exists, update it
+            if (stateCopy.byIds[action.albumId]) {
+                albumSongs = stateCopy.byIds[action.albumId].songs;
+                idx = albumSongs.findIndex(song => song.id === action.song.id);
 
-            if (idx > -1) albumSongs.splice(idx, 1, action.song);
-            albumSongs.push(action.song)
+                if (idx > -1) albumSongs.splice(idx, 1, action.song);
+
+                albumSongs.push(action.song)
+            }
+
 
             return stateCopy;
 
