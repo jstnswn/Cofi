@@ -7,6 +7,7 @@ import HomeSidebar from './HomeSidebar';
 import TileCarousel from '../TileCarousel';
 import { getNewAlbumsArray, getNewSongsArray, getTopAlbumsArray, loadHome } from '../../store/home';
 import { getPlaylists } from '../../store/playlists';
+import MainSidebar from '../MainSidebar';
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -59,7 +60,11 @@ export default function Home() {
                 {homeContent}
             </div>
 
-            <HomeSidebar setHomeDisplay={setHomeDisplay} homeDisplay={homeDisplay}/>
+            <div className='sidebar-container'>
+                <MainSidebar />
+
+                <HomeSidebar setHomeDisplay={setHomeDisplay} homeDisplay={homeDisplay}/>
+            </div>
         </div>
     )
 };

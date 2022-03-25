@@ -1,12 +1,12 @@
 #home-wrapper .bottom-sidebar {
     grid-column-start: 2;
-    height: calc(100vh - 560px);
+    /* height: calc(100vh - 560px); */
     width: 100%;
     display: flex;
     flex-direction: column;
     border-left: 2px solid var(--border-gray);
     padding-top: 50px;
-    margin-top: 470px;
+    /* margin-top: 470px; */
 }
 
 .sidebar-button {

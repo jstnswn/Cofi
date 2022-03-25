@@ -64,7 +64,7 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <Home />
-          <MainSidebar />
+          {/* <MainSidebar /> */}
         </ProtectedRoute>
         <Route>
           <ErrorPage />
