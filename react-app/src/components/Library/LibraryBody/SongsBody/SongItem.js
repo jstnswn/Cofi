@@ -105,13 +105,17 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
 
     }, [showMenu])
 
-    const bottomOfList = idx >= last - 1;
 
-    console.log('idx, last', idx, last)
+
+    const bottomOfList = last > 4
+        ? idx >= last - 2
+        : idx === last;
+
+    // console.log('idx, last', idx, last)
 
     return (
         <div
-            className={`list-box ${last >= 2 && bottomOfList  ? 'last' : ''}`}
+            className={`list-box ${last >= 4 && bottomOfList  ? 'last' : ''}`}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
