@@ -44,7 +44,8 @@
 #library-body {
     grid-column-start: 1;
     /* height: calc(100vh - 560px); */
-    height: calc(100% - 50px);
+    /* height: calc(100% - 50px); */
+    height: 100%;
 
     /* width: calc(100% - 50px); */
     /* height: calc(100% - 90px); */
