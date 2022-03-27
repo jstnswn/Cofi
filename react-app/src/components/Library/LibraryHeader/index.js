@@ -58,8 +58,6 @@ export default function LibraryHeader({ libraryItems }) {
         headerTitle = 'Your Collection'
     }
 
-
-
     const openDropdown = () => setShowDropdown(true);
 
     const openConfirmMenu = () => setShowConfirm(true);
