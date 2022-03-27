@@ -43,10 +43,12 @@ export default function LibraryHeader({ libraryItems }) {
 
     if (idParam) {
         if (inPlaylist) {
-            if (!playlists[idParam]) return <Redirect to='/' />
+            if (!playlists[idParam]) return <Redirect to='/library' />
             headerUrl = playlists[idParam].image_url;
             headerTitle = playlists[idParam].title;
         } else {
+            console.log('dfakdjfalksfas;')
+            if (!libraryItems.albums.byIds[idParam]) return <Redirect to='/library' />
             headerUrl = libraryItems.albums.byIds[idParam]?.image_url;
             headerTitle = libraryItems.albums.byIds[idParam]?.title;
         }
