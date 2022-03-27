@@ -7,6 +7,7 @@
     border-left: 2px solid var(--border-gray);
     padding-top: 50px;
     /* margin-top: 470px; */
+    height: 100%;
 }
 
 .sidebar-button {
@@ -24,6 +25,7 @@
     padding: 5px;
     width: 100%;
     padding-left: 15px;
+    /* height: 100%; */
     /* padding-left: 3px; */
 }
 

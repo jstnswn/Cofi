@@ -9,6 +9,11 @@
 
     margin: 0 7px;
 
+
+    height: 100%;
+    /* padding: 3px;  */
+
+    /* flex-grow: 1; */
 }
 
 #library-body .library-albums-body-container.empty {
@@ -40,6 +45,10 @@
     margin: 10px;
     width: 210px;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
 
 .album-item-container {
@@ -53,6 +62,8 @@
 .album-item-container .tile-footer {
     display: flex;
     justify-content: space-between;
+
+    width: 100%;
 }
 
 .tile-footer .info-container > div {
@@ -65,11 +76,75 @@
 
 .album-item-container .tile-image-container  .tile-art {
     object-fit: cover;
+    /* justify-self: center; */
     width: 190px;
     height: 190px;
+
 }
 
 .tile-art:hover {
     cursor: pointer;
 }
 
+@media only screen and (max-width: 1280px) {
+  .album-item-container {
+    width: 190px;
+  }
+
+  .album-item-container .tile-image-container  .tile-art {
+    width: 170px;
+    height: 170px;
+  }
+
+  .info-container .song-title,
+.info-container .tile-artist {
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    max-width: 100px;
+}
+}
+
+@media only screen and (max-width: 1210px) {
+  .album-item-container {
+    width: 170px;
+  }
+
+  .album-item-container .tile-image-container  .tile-art {
+    width: 150px;
+    height: 150px;
+  }
+
+  .info-container .song-title,
+.info-container .tile-artist {
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    max-width: 100px;
+}
+}
+
+@media only screen and (max-width: 1125px) {
+  .album-item-container {
+    width: 150px;
+  }
+
+  .album-item-container .tile-image-container  .tile-art {
+    width: 130px;
+    height: 130px;
+  }
+
+  .info-container .song-title,
+.info-container .tile-artist {
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    max-width: 80px;
+}
+}

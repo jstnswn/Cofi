@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { matchPath, useHistory, useLocation } from 'react-router-dom';
+import { matchPath, Redirect, useHistory, useLocation } from 'react-router-dom';
 import { Modal } from '../../../context/Modal';
 import { deleteLibraryAlbum } from '../../../store/library/libraryAlbums';
 import { deletePlaylist } from '../../../store/playlists';
@@ -10,7 +10,6 @@ import ConfirmDelete from './ConfirmDelete';
 import './LibraryHeader.css';
 
 export default function LibraryHeader({ libraryItems }) {
-
     const dispatch = useDispatch();
     const [showDropdown, setShowDropdown] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
@@ -25,27 +24,6 @@ export default function LibraryHeader({ libraryItems }) {
         path: '/library/:user/:section/:id'
     });
 
-    const idParam = match?.params?.id;
-    const userParam = match?.params?.user;
-    const sectionParam = match?.params?.section;
-    const inPlaylist = sectionParam === 'playlists';
-    let headerUrl;
-    let headerTitle
-
-    if (idParam) {
-        if (inPlaylist) {
-            headerUrl = playlists[idParam].image_url;
-            headerTitle = playlists[idParam].title;
-        } else {
-            headerUrl = libraryItems.albums.byIds[idParam]?.image_url;
-            headerTitle = libraryItems.albums.byIds[idParam]?.title;
-        }
-
-    } else {
-        headerUrl = 'https://cofi-bucket.s3.amazonaws.com/art-seeds/escapade.png';
-        headerTitle = 'Your Collection'
-    }
-
     useEffect(() => {
         if (!showDropdown) return;
 
@@ -55,7 +33,29 @@ export default function LibraryHeader({ libraryItems }) {
         return () => document.removeEventListener('click', closeDropdown);
     }, [showDropdown])
 
+    const idParam = match?.params?.id;
+    const userParam = match?.params?.user;
+    const sectionParam = match?.params?.section;
+    const inPlaylist = sectionParam === 'playlists';
+    let headerUrl;
+    let headerTitle
 
+    if (idParam) {
+        if (inPlaylist) {
+            if (!playlists[idParam]) return <Redirect to='/library' />
+            headerUrl = playlists[idParam].image_url;
+            headerTitle = playlists[idParam].title;
+        } else {
+
+            if (!libraryItems.albums.byIds[idParam]) return <Redirect to='/library' />
+            headerUrl = libraryItems.albums.byIds[idParam]?.image_url;
+            headerTitle = libraryItems.albums.byIds[idParam]?.title;
+        }
+
+    } else {
+        headerUrl = 'https://cofi-bucket.s3.amazonaws.com/art-seeds/escapade.png';
+        headerTitle = 'Your Collection'
+    }
 
     const openDropdown = () => setShowDropdown(true);
 

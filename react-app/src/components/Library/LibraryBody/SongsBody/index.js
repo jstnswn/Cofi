@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import SongItem from './SongItem';
 import './SongBody.css';
-import { Redirect, useParams } from 'react-router-dom';
+import { Redirect, useHistory, useParams } from 'react-router-dom';
 import { orderContent, sortSongsArray } from '../../../utils';
 import { useSelector } from 'react-redux';
 
@@ -10,6 +10,7 @@ export default function SongsBody({ option }) {
     const libraryItems = useSelector(({ library }) => library);
     const playlists = useSelector(({ playlists }) => playlists);
     const user = useSelector(({ session }) => session.user);
+    const history = useHistory()
     let songs;
 
     const scrollContainer = useRef(null)
@@ -19,6 +20,8 @@ export default function SongsBody({ option }) {
     if (albumId && !albumIds.includes(Number(albumId))) {
         return <Redirect to={`/library/${user.username}/songs`} />
     }
+
+
 
     if (playlistId && !playlists[Number(playlistId)]) {
         return <Redirect to={`/library/${user.username}/songs`} />

@@ -10,6 +10,7 @@
 
     /* border: pink 2px solid; */
     min-height: 172px;
+
 }
 
 .libary-header-container {
@@ -22,6 +23,7 @@
     padding: 0;
     max-width: 800px;
     width: 100%;
+    /* width: 50px; */
     display: flex;
     justify-content: center;
     position: relative;
@@ -45,6 +47,8 @@
     color: var(--text-secondary-white);
     font-family: var(--main-font);
     margin-left: 10px;
+
+    /* border: gray 3px solid; */
 }
 
 .library-header-title {
