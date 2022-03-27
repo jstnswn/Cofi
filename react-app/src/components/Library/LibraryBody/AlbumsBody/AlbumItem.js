@@ -34,6 +34,7 @@ export default function AlbumItem({ album, idx, user, option }) {
     const handleClick = () => {
         if (option === 'album') history.push(`/library/${user.username}/albums/${album.id}`);
         if (option === 'playlist') history.push(`/library/${user.username}/playlists/${album.id}`);
+        if (option === 'liked') history.push(`/album/${album.id}`);
     }
 
 

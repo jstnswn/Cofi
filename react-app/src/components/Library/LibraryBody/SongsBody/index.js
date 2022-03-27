@@ -13,7 +13,7 @@ export default function SongsBody({ option }) {
     const likedIds = user.liked.song_ids;
     let songs;
 
-    const scrollContainer = useRef(null)
+    const scrollContainer = useRef(null);
 
     const albumIds = libraryItems.albums.order;
 
@@ -24,7 +24,6 @@ export default function SongsBody({ option }) {
     if (playlistId && !playlists[Number(playlistId)]) {
         return <Redirect to={`/library/${user.username}/songs`} />
     }
-
 
     let placeholderWord;
     let placeholderMessage;

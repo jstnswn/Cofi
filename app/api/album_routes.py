@@ -65,7 +65,6 @@ def get_user_albums():
 
     return {'albums': [album.to_dict() for album in albums]}, 200
 
-
 @album_routes.route('', methods=['POST'])
 def create_album():
     current_user_id = current_user.get_id()

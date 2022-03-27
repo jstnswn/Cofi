@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import current_user
-from app.models import Song, Artist, db, song
+from app.models import Song, Artist, db, song, Album
 from app.forms.song_form import SongForm
 from random import randint
 from app.aws import (
@@ -69,6 +69,15 @@ def get_featured_songs():
             number_cashe.append(idx)
 
     return {'songs': [song.to_dict() for song in featured_songs]}, 200
+
+@song_routes.route('/<int:album_id>')
+def get_songs_by_album(album_id):
+    songs = Song.query.filter(Song.album_id==album_id).all()
+
+    if not songs:
+        return {'error': 'Unable to get songs from the database'}, 400
+
+    return {'songs': [song.to_dict() for song in songs]}, 200
 
 
 @song_routes.route('', methods=['POST'])
