@@ -30,6 +30,10 @@ body {
     margin: 0;
 }
 
+#root {
+    /* width: 100vw; */
+}
+
 
 * {
     box-sizing: border-box;
