@@ -76,7 +76,7 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
         dispatch(addToPlaylist(song, playlistId));
         closePlaylists();
     };
-
+    
     const removeSongFromPlaylist = () => dispatch(removeFromPlaylist(song.id, playlistId))
 
     const updateSongAlbum = async (song, toAlbumId) => {

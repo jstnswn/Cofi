@@ -12,7 +12,8 @@ import MainSidebar from './components/MainSidebar';
 import Library from './components/Library';
 import Splash from './components/Splash';
 import ErrorPage from './ErrorPage';
-import Album from './components/Album';
+import Album from './components/SongPage/Album';
+import SongPage from './components/SongPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -66,7 +67,7 @@ function App() {
           {/* <MainSidebar /> */}
         </ProtectedRoute>
         <ProtectedRoute path='/album/:albumId' exact={true}>
-          <Album />
+          <SongPage />
         </ProtectedRoute>
         <Route>
           <ErrorPage />

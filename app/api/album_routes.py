@@ -91,6 +91,15 @@ def create_album():
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+@album_routes.route('/<int:album_id>')
+def get_album_by_id(album_id):
+    album = Album.query.get(album_id)
+
+    if not album:
+        return {'error': 'Album found'}, 400
+
+    return {'album': album.to_dict()}, 200
+
 @album_routes.route('/<int:album_id>', methods=['DELETE'])
 def delete_album(album_id):
     album = Album.query.get(album_id)

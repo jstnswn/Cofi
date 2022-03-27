@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import { getAlbum } from '../../store/albums';
 import { orderContent } from '../utils';
 import Song from './Song';
 
-export default function Album() {
+export default function SongPage() {
     const dispatch = useDispatch();
     const [loaded, setLoaded] = useState();
     const { albumId } = useParams();
@@ -14,14 +14,6 @@ export default function Album() {
 
     const scrollContainer = useRef(null);
 
-    let songs;
-
-    console.log('albums: ', albums)
-
-    if (albums) {
-        songs = orderContent(albums[albumId]);
-    }
-
     useEffect(() => {
         (async () => {
             await dispatch(getAlbum(albumId))
@@ -29,11 +21,17 @@ export default function Album() {
         })()
     }, [dispatch, albumId])
 
+    let songs;
+
+    if (albums) {
+        songs = orderContent(albums[albumId]);
+    }
+
     if (!loaded) return null;
 
     const last = songs?.length - 1;
 
-    return loaded && (
+    return (
         <>
             <div className='library-song-body-header'>
                 <p className='song-title column-title'>Title</p>
