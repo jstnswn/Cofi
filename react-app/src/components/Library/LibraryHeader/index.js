@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { matchPath, useHistory, useLocation } from 'react-router-dom';
+import { matchPath, Redirect, useHistory, useLocation } from 'react-router-dom';
 import { Modal } from '../../../context/Modal';
 import { deleteLibraryAlbum } from '../../../store/library/libraryAlbums';
 import { deletePlaylist } from '../../../store/playlists';
@@ -25,6 +25,15 @@ export default function LibraryHeader({ libraryItems }) {
         path: '/library/:user/:section/:id'
     });
 
+    useEffect(() => {
+        if (!showDropdown) return;
+
+        const closeDropdown = () => setShowDropdown(false)
+        document.addEventListener('click', closeDropdown);
+
+        return () => document.removeEventListener('click', closeDropdown);
+    }, [showDropdown])
+
     const idParam = match?.params?.id;
     const userParam = match?.params?.user;
     const sectionParam = match?.params?.section;
@@ -34,6 +43,7 @@ export default function LibraryHeader({ libraryItems }) {
 
     if (idParam) {
         if (inPlaylist) {
+            if (!playlists[idParam]) return <Redirect to='/' />
             headerUrl = playlists[idParam].image_url;
             headerTitle = playlists[idParam].title;
         } else {
@@ -45,15 +55,6 @@ export default function LibraryHeader({ libraryItems }) {
         headerUrl = 'https://cofi-bucket.s3.amazonaws.com/art-seeds/escapade.png';
         headerTitle = 'Your Collection'
     }
-
-    useEffect(() => {
-        if (!showDropdown) return;
-
-        const closeDropdown = () => setShowDropdown(false)
-        document.addEventListener('click', closeDropdown);
-
-        return () => document.removeEventListener('click', closeDropdown);
-    }, [showDropdown])
 
 
 
