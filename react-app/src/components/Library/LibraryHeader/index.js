@@ -10,7 +10,6 @@ import ConfirmDelete from './ConfirmDelete';
 import './LibraryHeader.css';
 
 export default function LibraryHeader({ libraryItems }) {
-
     const dispatch = useDispatch();
     const [showDropdown, setShowDropdown] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
