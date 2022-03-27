@@ -17,7 +17,8 @@ export const getOrderedLiked = (likedIdsArr, contentIdsObj) => {
     const result = new Array(likedIdsArr.length);
 
     for (let i = likedIdsArr.length - 1; i > -1; i--) {
-        result[i] = contentIdsObj[likedIdsArr[i]];
+        const resultIdx = likedIdsArr.length - (i + 1);
+        result[resultIdx] = contentIdsObj[likedIdsArr[i]];
     }
 
     return result;

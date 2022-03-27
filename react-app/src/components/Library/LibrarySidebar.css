@@ -13,15 +13,41 @@
 
     /* border: green 2px solid; */
     min-height: 315px;
+
+    position: relative;
 }
 
 
 .content-toggle-container {
-    /* border: pink 3px solid; */
-    display: flex;
-}
+    /* display: flex; */
+    width: 100%;
+    /* padding-left: 35px; */
 
+    position: absolute;
+    top: 10px;
+    text-align: center;
+    /* margin-right: 50%;
+    margin-left: 50%; */
+}
+/*
 .content-toggle-container p {
     color: gray;
     padding: 10px;
+} */
+
+.content-toggle-container a {
+    font-family: var(--header-font);
+    color: gray;
+    padding-right: 12px;
+}
+
+.content-toggle-container span {
+    font-family: var(--header-font);
+    color: rgba(97, 97, 97, 0.678);
+    padding-right: 12px;
+    cursor: default;
+}
+
+.content-toggle-container a.active {
+    text-decoration: underline;
 }

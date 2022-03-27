@@ -12,18 +12,25 @@
 .sidebar-button {
     background-color: rgba(0, 0, 0, 0);
     border: none;
-    width: 65%;
-    margin-right: auto;
-    margin-left: auto;
+    /* width: 65%; */
+    /* margin-right: auto; */
+    /* margin-left: auto; */
     font-size: 24px;
     color: gray;
     font-family: var(--header-font);
+    /* border: red 1px solid; */
+
+    /* width: 200px */
+
+    padding: 0;
 }
 
 .sidebar-button-container {
     padding: 5px;
     width: 100%;
-    padding-left: 15px;
+    padding-left: 35px;
+
+
     /* padding-left: 3px; */
 }
 
@@ -37,4 +44,15 @@
 
 .sidebar-button-container .selector.active {
     color: var(--accent-orange)
+}
+
+.sidebar-button.active .selector {
+    color: var(--accent-orange)
+}
+
+
+.sidebar-button-container i {
+    font-size: 16px;
+    padding-left: 10px;
+    /* border: red 1px solid; */
 }

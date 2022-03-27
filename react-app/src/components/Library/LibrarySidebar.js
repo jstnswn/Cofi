@@ -11,44 +11,42 @@ export default function LibrarySidebar() {
     const likedParam = location.pathname.split('/')[4] === 'liked';
     const selection = location.pathname.split('/')[3];
 
-    const toggleOffLiked = () => {
-        if (!likedParam) return;
-        history.push(location.pathname.split('/').slice(0, 4).join('/'));
-    };
-
-    const toggleOnLiked = () => {
-        if (likedParam) return;
-        history.push(`${location.pathname}/liked`)
-    }
-
-    const defaultActive = selection
-        ? ''
-        : 'active'
 
     return (
         <div className='sidebar bottom-sidebar'>
+            <div className='content-toggle-container'>
+                <NavLink to={`/library/${user.username}/${selection}`} activeClassName='active' exact={true}>Owned</NavLink>
+                {selection !== 'playlists'
+                    ? <NavLink to={`/library/${user.username}/${selection}/liked`} activeClassName='active' exact={true}>Liked</NavLink>
+                    : <span>Liked</span>
+                }
+            </div>
+
             <div>
                 <div className='sidebar-button-container'>
-                    <button className='sidebar-button' onClick={() => history.push(`/library/${user.username}/albums`)}>Albums</button>
-                    <i className={`fas fa-circle-notch selector ${selection === 'albums' ? 'active' : ''}`}></i>
+                    {/* <button className='sidebar-button' onClick={() => history.push(`/library/${user.username}/albums`)}>Albums</button>
+                    <i className={`fas fa-circle-notch selector ${selection === 'albums' ? 'active' : ''}`}></i> */}
+                    <NavLink className='sidebar-button' activeClassName='active' to={`/library/${user.username}/albums${likedParam ? '/liked' : ''}`}>Albums
+                        <i className='fas fa-circle-notch selector'></i>
+                    </NavLink>
                 </div>
                 <div className='sidebar-button-container'>
-                    <button className='sidebar-button' onClick={() => history.push(`/library/${user.username}/songs`)}>Songs</button>
-                    <i className={`fas fa-circle-notch selector ${defaultActive} ${selection === 'songs' ? 'active' : ''}`}></i>
+                    {/* <button className='sidebar-button' onClick={() => history.push(`/library/${user.username}/songs`)}>Songs</button>
+                    <i className={`fas fa-circle-notch selector ${defaultActive} ${selection === 'songs' ? 'active' : ''}`}></i> */}
+                    <NavLink className='sidebar-button' activeClassName='active' to={`/library/${user.username}/songs${likedParam ? '/liked' : ''}`}>Songs
+                        <i className='fas fa-circle-notch selector'></i>
+                    </NavLink>
                 </div>
-                <div className='sidebar-button-container'>
-                    <button className='sidebar-button' onClick={() => history.push(`/library/${user.username}/playlists`)}>Playlists</button>
-                    <i className={`fas fa-circle-notch selector ${selection === 'playlists' ? 'active' : ''}`}></i>
-                </div>
+                {!likedParam && (
+                    <div className='sidebar-button-container'>
+                        <NavLink className='sidebar-button' activeClassName='active' to={`/library/${user.username}/playlists`}>Playlists
+                            <i className='fas fa-circle-notch selector'></i>
+                        </NavLink>
+                    </div>
+                )}
             </div>
 
-            <div className='content-toggle-container'>
-                {/* <p onClick={toggleOffLiked}>Owned</p>
-                <p onClick={toggleOnLiked}>Liked</p> */}
-                <NavLink to={`/library/${user.username}/${selection}`}>Owned</NavLink>
-                <NavLink to={`/library/${user.username}/${selection}/liked`}>Liked</NavLink>
 
-            </div>
         </div>
     )
 };
