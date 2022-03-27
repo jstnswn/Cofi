@@ -3,6 +3,7 @@
     width: 100vw;
     display: grid;
     grid-template-columns: calc(100vw - 200px) 200px;
+    /* grid-template- */
     height: calc(100vh - 140px);
 }
 

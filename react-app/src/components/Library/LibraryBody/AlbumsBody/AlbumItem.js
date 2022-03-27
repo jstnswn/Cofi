@@ -6,7 +6,7 @@ import { createAlbumLike, deleteAlbumLike } from '../../../../store/session';
 export default function AlbumItem({ album, idx, user, option }) {
     const dispatch = useDispatch()
     const history = useHistory();
-    const [hovered, setHovered] = useState(false);
+    const [hovered, setHovered] = useState(true);
 
     const likeAlbum = (e) => {
         e.stopPropagation();
