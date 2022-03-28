@@ -36,7 +36,6 @@ export default function TileCarousel({ content, option, identifier }) {
 
     }, [prevDirection, initial, difference, forwardTarget, backTarget, changeNum])
 
-    console.log(window.innerWidth);
     useEffect(() => {
         const updateWidth = () => {
             setScreenWidth(window.innerWidth)
