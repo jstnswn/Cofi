@@ -13,18 +13,29 @@ export default function TileCarousel({ content, option, identifier }) {
     const [changeNum, setChangeNum] = useState(8);
 
     useEffect(() => {
+        console.log(screenWidth)
         if (screenWidth <= 1190) {
             setChangeNum(8)
         } else if (screenWidth <= 1360) {
             setChangeNum(9)
-        } else if (screenWidth <= 1400) {
-            setChangeNum(11)
         } else {
-            setChangeNum(12)
+            setChangeNum(10)
         }
 
     }, [screenWidth])
 
+    // useEffect(() => {
+    //     if (screenWidth <= 1190) {
+    //         setChangeNum(8)
+    //     } else if (screenWidth <= 1360) {
+    //         setChangeNum(9)
+    //     } else if (screenWidth <= 1400) {
+    //         setChangeNum(11)
+    //     } else {
+    //         setChangeNum(12)
+    //     }
+
+    // }, [screenWidth])
 
 
     const [forwardTarget, setForwardTarget] = useState(changeNum);
