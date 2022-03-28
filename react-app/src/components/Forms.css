@@ -138,6 +138,25 @@
 
 }
 
+.form .file-message.art-edit {
+    background-color: rgba(0, 0, 0, 0.514);
+    border-radius: 6px;
+    width: 100%;
+    bottom: 0;
+
+    /* padding: 3px; */
+}
+
+.form .file-message p {
+    color: white;
+}
+
+.form .file-message.art-edit p:last-of-type {
+    /* color: white; */
+    font-size: 12px;
+    font-style: italic;
+}
+
 .form .file-input-footer {
     display: flex;
     width: 100%;
