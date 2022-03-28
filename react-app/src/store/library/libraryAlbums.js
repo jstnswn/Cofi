@@ -134,7 +134,7 @@ export const deleteLibraryAlbum = (albumId) => async dispatch => {
     if (res.ok) {
         dispatch(removeAlbum(albumId));
         dispatch(removeUserAlbum(albumId));
-        dispatch(getLibrarySongs('wipe'));
+        dispatch(getLibrarySongs('reload'));
     }
 };
 

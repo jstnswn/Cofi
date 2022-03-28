@@ -7,6 +7,8 @@
     position: relative;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 
+    /* align-items: flex-start; */
+
     margin: 0 7px;
 
 
@@ -109,37 +111,37 @@
 }
 
 @media only screen and (max-width: 1210px) {
-  .album-item-container {
-    width: 190px;
-  }
+    .album-item-container {
+        width: 190px;
+    }
 
-  .album-item-container .tile-image-container  .tile-art {
-    width: 180px;
-    height: 180px;
-  }
+    .album-item-container .tile-image-container  .tile-art {
+        width: 180px;
+        height: 180px;
+    }
 
-  .info-container .song-title,
-.info-container .tile-artist {
+    .info-container .song-title,
+    .info-container .tile-artist {
 
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
 
-    max-width: 100px;
-}
+        max-width: 100px;
+    }
 }
 
 @media only screen and (max-width: 1125px) {
-  .album-item-container {
-    width: 170px;
-  }
+    .album-item-container {
+        width: 170px;
+    }
 
-  .album-item-container .tile-image-container  .tile-art {
-    width: 155px;
-    height: 155px;
-  }
+    .album-item-container .tile-image-container  .tile-art {
+        width: 155px;
+        height: 155px;
+    }
 
-  .info-container .song-title,
+.info-container .song-title,
 .info-container .tile-artist {
 
     text-overflow: ellipsis;
