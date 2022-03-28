@@ -105,7 +105,7 @@ From the library, users can view, edit, and remove content that they have upload
 
 [![library.png](https://i.postimg.cc/cHQmDLCn/Screen-Shot-2022-03-24-at-2-48-44-AM.png)](https://postimg.cc/XGYdq3wj)
 
-This section displays the user's uploaded songs. Here they can remove the song, or make edits to the song by hovering over the song item and clicking the ellipsis on the far right.
+This section displays the user's uploaded songs. Here they can remove the song, or make edits to the song by hovering over the song item and clicking the ellipsis on the far right. Users can edit the song's title, artist, album, audio file, and artwork. A song's default artwork display is the artwork of the album it belongs to, therefor changed song artwork will only appear if the song becomes single / no longer belongs to an album.
 
 # Library Page Albums
 
