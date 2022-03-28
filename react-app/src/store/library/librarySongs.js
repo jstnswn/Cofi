@@ -18,10 +18,11 @@ const loadSong = (song, albumId) => {
     };
 };
 
-const loadSongs = (songs) => {
+const loadSongs = (songs, option) => {
     return {
         type: LOAD_SONGS,
-        songs
+        songs,
+        option
     };
 };
 
@@ -70,12 +71,12 @@ export const uploadSong = (payload) => async dispatch => {
     }
 };
 
-export const getLibrarySongs = () => async dispatch => {
+export const getLibrarySongs = (option) => async dispatch => {
     const res = await fetch('/api/songs/current_user');
 
     if (res.ok) {
         const data = await res.json()
-        dispatch(loadSongs(data.songs))
+        dispatch(loadSongs(data.songs, option))
     } else {
         const error = await res.json();
         return error.error;
@@ -195,6 +196,13 @@ export default function reducer(state = initialState, action) {
         case LOAD_SONGS:
             normalizedData = normalize(action.songs);
             orderedIds = orderIds(action.songs);
+
+            if (action.option === 'reload') {
+                return {
+                    byIds: normalizedData,
+                    order: orderedIds
+                }
+            }
             return {
                 ...state,
                 byIds: normalizedData,

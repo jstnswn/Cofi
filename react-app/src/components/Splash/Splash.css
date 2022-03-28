@@ -98,7 +98,7 @@
 .developer-box {
     font-family: var(--header-font);
     position: absolute;
-    bottom: 5px;
+    bottom: -25px;
     right: 7vw;
     font-weight: 400;
     color: var(--text-secondary-gray);
