@@ -13,7 +13,7 @@ export default function TileCarousel({ content, option, identifier }) {
     const [changeNum, setChangeNum] = useState(8);
 
     useEffect(() => {
-        console.log(screenWidth)
+        // console.log(screenWidth)
         if (screenWidth <= 1190) {
             setChangeNum(8)
         } else if (screenWidth <= 1360) {
@@ -50,8 +50,6 @@ export default function TileCarousel({ content, option, identifier }) {
     useEffect(() => {
         const updateWidth = () => {
             setScreenWidth(window.innerWidth)
-            console.log(window.innerWidth);
-            console.log(changeNum);
         };
         window.addEventListener('resize', updateWidth);
 
@@ -91,10 +89,10 @@ export default function TileCarousel({ content, option, identifier }) {
         });
 
         setBackTarget(prev => {
-            if (prev - changeNum <= 0) {
+            if (prev - 8 <= 0) {
                 return 0;
             } else {
-                return prev - changeNum;
+                return prev - 8;
             }
         })
         setPrevDirection('back');
