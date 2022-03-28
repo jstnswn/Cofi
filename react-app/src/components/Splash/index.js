@@ -24,14 +24,8 @@ export default function Splash() {
 
         <div className='bottom'>
                 <h2>Lofi Music. Together.</h2>
-                <h3>As background music, for studying, or inspriation. Listen, share, and enjoy lofi music.</h3>
+                <h3>As background music, for studying, or inspiration. Listen, share, and enjoy lofi music.</h3>
         </div>
-
         </div>
     )
 }
-
-{/* <div className='bottom'>
-    <h2>Music. Together.</h2>
-    <h3>As background music, for studying, or inspriation. Listen, share, and enjoy lofi music.</h3>
-</div> */}
