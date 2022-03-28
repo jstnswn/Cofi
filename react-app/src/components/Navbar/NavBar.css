@@ -60,7 +60,7 @@
 
 #navbar .profile-icon,
 #navbar .notifications-icon {
-    font-size: 30px;
+    font-size: 35px;
 }
 
 .login-container {
@@ -131,7 +131,7 @@
 } */
 
 .about-icons {
-    font-size: 30px;
+    font-size: 35px;
     color: var(--text-main-white)
 
 }
