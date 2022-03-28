@@ -10,6 +10,9 @@ export default function AlbumsBody({ user, option }) {
     const playlists = useSelector(getPlaylistsArray);
     const albums = orderContent(library.albums);
 
+    // Temp order:
+    const orderedPlaylists = [...playlists].reverse();
+
     let emptyClassName;
 
     if ((option === 'album' && !albums.length) ||
@@ -39,7 +42,7 @@ export default function AlbumsBody({ user, option }) {
 
                         : (
                             playlists.length > 0
-                                ? playlists.map((album, idx) => (
+                                ? orderedPlaylists.map((album, idx) => (
                                     <AlbumItem user={user} key={idx} album={album} idx={idx} option={option} />))
                                 : (
                                     <div className='placeholder-message album'>

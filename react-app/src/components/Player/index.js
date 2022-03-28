@@ -17,9 +17,10 @@ export default function Player() {
 
     if (active.currentSong) {
         songUrl = active.currentSong.song_url;
-        artworkUrl = active.currentSong.album && location.pathname.includes('library')
+        artworkUrl = active.currentSong.album /* && location.pathname.includes('library') */
             ? active.currentSong.album.image_url
             : active.currentSong.image_url
+        // artworkUrl =
     };
 
     const handleOnPlay = () => {

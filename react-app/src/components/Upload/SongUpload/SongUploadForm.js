@@ -134,7 +134,11 @@ export default function SongUploadForm({ closeModal }) {
                     ? <i className={`fal fa-image image-icon icon ${isHovered ? 'active' : ''}`}></i>
                     : <img alt='Art preview' src={imageUrl} />
                 }
-                {isHovered && !imageUrl && <p className='file-message'>Choose Artwork (optional)</p>}
+                {isHovered && !imageUrl && (
+                    <div className='file-message'>
+                        <p>Choose Artwork (optional)</p>
+                    </div>
+                )}
             </div>
         )
 
