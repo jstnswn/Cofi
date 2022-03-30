@@ -1,7 +1,7 @@
 # Cofi
 
 App Academy capstone project.
-Co-fi is a music application inspried by SoundCloud and Spotify with a minimalist approach and lofi-genre theme. Co-fi v1.0.0 is a web music player that allows users to upload, edit, and listen to their own or other user's music. Future editions aim to allow users to create music "sessions" where all participant's music players will be synced to the same playlist.
+Co-fi is a music application inspired by SoundCloud and Spotify with a minimalist approach and lofi-genre theme. Co-fi v1.0.0 is a web music player that allows users to upload, edit, and listen to their own or other user's music. Future editions aim to allow users to create music "sessions" where all participant's music players will be synced to the same playlist.
 
 [Visit the site live here!](https://co-fi.herokuapp.com/)
 
