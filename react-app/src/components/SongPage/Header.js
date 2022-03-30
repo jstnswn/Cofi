@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 export default function Header({ album }) {
     const dispatch = useDispatch();
 
+    console.log('songs', album)
+
     const [showDropdown, setShowDropdown] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
@@ -51,11 +53,11 @@ export default function Header({ album }) {
                 <img
                     alt='library cover'
                     className='library-header-image'
-                    // src={headerUrl}
+                    src={album.image_url}
                 />
                 <div className='header-title-container'>
 
-                    <h2 className='library-header-title'>{album}</h2>
+                    <h2 className='library-header-title'>{album.title}</h2>
 
                     {showDropdown && (
                         <div className='library-list-dropdown album'>

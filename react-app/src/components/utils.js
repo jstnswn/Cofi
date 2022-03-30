@@ -3,7 +3,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Slide } from 'react-toastify';
 
 export const orderContent = (content) => {
+    console.log('CONTENT: ', content)
     const { order, byIds } = content;
+    console.log('ORDER, BYID', order, byIds);
 
     return order.map(id => byIds[id])
 };
@@ -16,11 +18,11 @@ export const sortSongsArray = (items) => {
 export const getOrderedLiked = (likedIdsArr, contentIdsObj) => {
     const result = new Array(likedIdsArr.length);
 
+
     for (let i = likedIdsArr.length - 1; i > -1; i--) {
         const resultIdx = likedIdsArr.length - (i + 1);
         result[resultIdx] = contentIdsObj[likedIdsArr[i]];
     }
-
     return result;
 };
 
