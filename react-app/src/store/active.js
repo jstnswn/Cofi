@@ -1,5 +1,8 @@
+import { getAlbum } from "./albums";
+
 const SET_CURRENT_SONG = 'active/SET_CURRENT_SONG';
 // const REMOVE_CURRENT_SONG = 'active/REMOVE_CURRENT_SONG';
+const SET_QUEUE = 'active/SET_QUEUE';
 const TOGGLE_PLAY = 'active/TOGGLE_PLAY';
 const CLEAN_ACTIVE = 'active/CLEAN_ACTIVE';
 
@@ -7,6 +10,13 @@ export const setSong = (song) => {
     return {
         type: SET_CURRENT_SONG,
         song
+    };
+};
+
+export const setQueue = (songs) => {
+    return {
+        type: SET_QUEUE,
+        songs
     };
 };
 
@@ -22,6 +32,15 @@ export const cleanActive = () => {
     };
 };
 
+export const loadSongAndSetQueue = (song) => async dispatch => {
+    if (song.album) {
+        const songs = await dispatch(getAlbum(song.album.id));
+        const uniqueSongs = songs.filter(currSong => currSong.id !== song.id);
+        await dispatch(setQueue(uniqueSongs));
+    }
+    dispatch(setSong(song));
+};
+
 const initialState = {
     isPlaying: null,
     currentSong: null,
@@ -35,6 +54,12 @@ const activeMusicReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentSong: action.song
+            }
+
+        case SET_QUEUE:
+            return {
+                ...state,
+                queue: action.songs
             }
 
         case TOGGLE_PLAY:

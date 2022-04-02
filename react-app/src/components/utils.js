@@ -3,9 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Slide } from 'react-toastify';
 
 export const orderContent = (content) => {
-    console.log('CONTENT: ', content)
     const { order, byIds } = content;
-    console.log('ORDER, BYID', order, byIds);
 
     return order.map(id => byIds[id])
 };

@@ -9,8 +9,11 @@ import { useLocation } from 'react-router-dom';
 export default function Player() {
     const dispatch = useDispatch();
     const active = useSelector(({ active }) => active);
+    const queue = active.queue;
     const sessionUser = useSelector(({ session }) => session.user);
     const location = useLocation();
+
+    console.log('ACTIVE:')
 
     let songUrl;
     let artworkUrl;
@@ -38,6 +41,16 @@ export default function Player() {
             .classList.remove('active');
     }
 
+    const handleQueue = () => {
+        console.log(queue)
+        if (queue.length) {
+            const song = queue.pop();
+            // console.log('song', song)
+            // return song;
+            dispatch(playActions.setSong(song));
+        };
+    };
+
     return (
         <div className='player-container'>
             <div className='current-song-info-container'>
@@ -60,6 +73,7 @@ export default function Player() {
                 <AudioPlayer
                     src={songUrl} customAdditionalControls={[]}
                     onPlay={handleOnPlay}
+                    onEnded={handleQueue}
                     onPause={handleOnPause}
                     className='player'
                     layout='horizontal-reverse'

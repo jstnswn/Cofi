@@ -70,7 +70,7 @@ def get_featured_songs():
 
     return {'songs': [song.to_dict() for song in featured_songs]}, 200
 
-@song_routes.route('/<int:album_id>')
+@song_routes.route('/album/<int:album_id>')
 def get_songs_by_album(album_id):
     songs = Song.query.filter(Song.album_id==album_id).all()
 
