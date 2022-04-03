@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { createAlbumLike, deleteAlbumLike } from '../../store/session';
 
 export default function AlbumPlayerAlbum({ album }) {
+    const history = useHistory();
     const dispatch = useDispatch()
     const [hovered, setHovered] = useState(false);
 
@@ -35,6 +37,7 @@ export default function AlbumPlayerAlbum({ album }) {
                     className='album-player-image'
                     alt='album cover'
                     src={album?.image_url}
+                    onClick={() => history.push(`/album/${album.id}`)}
                 />
                 <div className='icon-container'>
                     {hovered && <i onClick={toggleLike} className={likeIconClass}></i>}

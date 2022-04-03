@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSong } from '../../store/active';
+import { loadSongAndSetQueue, setSong } from '../../store/active';
 import { createSongLike, deleteSongLike } from '../../store/session';
 import './SongPlayer.css';
 
@@ -14,7 +14,8 @@ export default function SongPlayer({ song }) {
 
     const playSong = (e) => {
         e.stopPropagation();
-        dispatch(setSong(song));
+        // dispatch(setSong(song));
+        dispatch(loadSongAndSetQueue(song));
     };
 
     const likeSong = (e) => {
