@@ -21,7 +21,7 @@ export default function Home() {
     const topAlbums = useSelector(getTopAlbumsArray);
 
     useEffect(() => {
-        // dispatch(getPlaylists());
+        dispatch(getPlaylists());
         dispatch(loadHome())
     }, [dispatch])
 

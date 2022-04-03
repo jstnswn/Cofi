@@ -14,7 +14,8 @@ export default function Song({ song, last, idx }) {
     const [showMenu, setShowMenu] = useState(false);
     const [showPlaylists, setShowPlaylists] = useState(false);
 
-    const user = useSelector(({ session }) => session.user);
+    const session = useSelector(({ session }) => session);
+    const user = session.user;
     const album = song.album;
 
     const bottomOfList = idx >= last - 1;
@@ -91,7 +92,7 @@ export default function Song({ song, last, idx }) {
             <i className={`fa-solid fa-ellipsis song-options ${hovered ? 'active' : ''}`} onClick={openDropdown}></i>
 
             {showMenu && (
-                <div className='library-list-dropdown'>
+                <div className='library-list-dropdown simple'>
                     <ul>
                        <li onClick={openPlaylists}>Add to playlist</li>
                     </ul>

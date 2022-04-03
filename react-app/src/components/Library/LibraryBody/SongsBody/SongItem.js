@@ -156,7 +156,7 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
             <i className={`fa-solid fa-ellipsis song-options ${hovered ? 'active' : ''}`} onClick={openDropdown}></i>
 
             {showMenu && (
-                <div className='library-list-dropdown'>
+                <div className={`library-list-dropdown ${option}`}>
                     <ul>
                         <li onClick={openPlaylists}>Add to Playlist</li>
                        {option === 'playlist' && <li onClick={removeSongFromPlaylist}>Remove from Playlist</li>}
