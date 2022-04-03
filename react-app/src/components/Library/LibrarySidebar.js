@@ -15,7 +15,7 @@ export default function LibrarySidebar() {
     return (
         <div className='sidebar bottom-sidebar'>
             <div className='content-toggle-container'>
-                <NavLink to={`/library/${user.username}/${selection}`} activeClassName='active' exact={true}>Owned</NavLink>
+                <NavLink to={`/library/${user.username}/${selection}`} activeClassName={!likedParam ? 'active' : ''} >Owned</NavLink>
                 {selection !== 'playlists'
                     ? <NavLink to={`/library/${user.username}/${selection}/liked`} activeClassName='active' exact={true}>Liked</NavLink>
                     : <span>Liked</span>
