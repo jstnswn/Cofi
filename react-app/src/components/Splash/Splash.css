@@ -2,49 +2,84 @@
     margin-top: 50px;
     height: calc(100vh - 50px);
     width: 100%;
-    display: flex;
+    display: grid;
     color: var(--text-main-white);
+    font-family: var(--header-font);
+
+    grid-template-rows: 30% 20% 40%;
+    /* grid-template-columns: 100%; */
+
+
 }
+
+.top {
+    /* border: red 2px solid; */
+    grid-row-start: 1;
+    /* height: 100%; */
+}
+
+.bottom {
+    /* border: red 2px solid; */
+    grid-row-start: 3;
+}
+
 
 .splash-container  .header-container {
     width: 100%;
-    margin-top: 15%;
-    height: 300px;
+    position: relative;
 
     border-top: gray 1px solid;
     border-bottom: gray 1px solid;
 
-    padding-left: 7%;
-    padding: -10px 0;
+    padding-left: 7vw;
+    /* padding: -10px 0; */
+
+    grid-row-start: 2;
+
+    /* border: green 2px solid; */
+    display: flex;
 }
 
 .splash-container  .left-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 60vw;
+    height: 100%;
+    /* justify-content: center; */
+    align-items: center;
+
 }
 
-.splash-container  .right-container {
+.splash-container h1 {
+    font-size: 110px;
+    margin-right: 20px;
+    color: var(--text-secondary-white);
+}
+
+/* .splash-container  .right-container {
     width: 40vw;
-}
+} */
 
-.splash-container  .top {
+.splash-container  .header-top {
     display: flex;
-    align-items: flex-end;
+    /* align-items: flex-end; */
     font-family: var(--header-font);
-    height: 152px;
+    /* height: 152px; */
     font-size: 30px;
     margin: 0;
-    margin-top: -15px
+    /* margin-top: -15px */
 }
 
-.splash-container  .top h1 {
-    margin-bottom: -5px;
+.header-container img {
+    margin-top: 20px;
 }
 
 .splash-container  .bottom {
+    padding-left: 7vw;
     font-family: var(--main-font);
-
+    grid-row-start: 3;
+    color: var(--text-secondary-gray);
+    /* border: green 3px solid; */
 }
 
 .splash-container  .bottom h2 {
@@ -55,9 +90,16 @@
     font-size: 18px;
 }
 
+
 .splash-container  .splash-logo {
     height: 180px;
-    width: 180px;
-    margin-bottom: -60px;
-    margin-left: 150px;
+}
+
+.developer-box {
+    font-family: var(--header-font);
+    position: absolute;
+    bottom: -25px;
+    right: 7vw;
+    font-weight: 400;
+    color: var(--text-secondary-gray);
 }

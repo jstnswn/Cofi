@@ -10,6 +10,8 @@
   z-index: 5;
   font-family: var(--main-font);
   background-color: rgb(25, 25, 25);
+
+  min-width: 1050px;
 }
 
 .rhap_container {

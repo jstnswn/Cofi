@@ -122,7 +122,13 @@ export default function SongEditForm({ closeModal, song, album }) {
 
                     <img alt='Art preview' src={!imageUrl ? song.image_url : imageUrl} />
 
-                {isHovered && !imageUrl && <p className='file-message'>Choose Artwork</p>}
+                {isHovered && !imageUrl &&  (
+                    <div className='file-message art-edit'>
+                        <p>Choose Artwork</p>
+                        <p>Displayed if track is a single</p>
+                    </div>
+
+                )}
             </div>
         )
 

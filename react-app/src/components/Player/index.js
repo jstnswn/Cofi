@@ -13,16 +13,15 @@ export default function Player() {
     const sessionUser = useSelector(({ session }) => session.user);
     const location = useLocation();
 
-    console.log('ACTIVE:')
-
     let songUrl;
     let artworkUrl;
 
     if (active.currentSong) {
         songUrl = active.currentSong.song_url;
-        artworkUrl = active.currentSong.album && location.pathname.includes('library')
+        artworkUrl = active.currentSong.album /* && location.pathname.includes('library') */
             ? active.currentSong.album.image_url
             : active.currentSong.image_url
+        // artworkUrl =
     };
 
     const handleOnPlay = () => {
@@ -42,11 +41,8 @@ export default function Player() {
     }
 
     const handleQueue = () => {
-        console.log(queue)
         if (queue.length) {
             const song = queue.pop();
-            // console.log('song', song)
-            // return song;
             dispatch(playActions.setSong(song));
         };
     };

@@ -28,10 +28,14 @@ export default function NavBar() {
       </>
     )
     : (
-      <div className='nav-auth-container'>
-      <LoginModal />
-      <SignupModal />
-      </div>
+      <>
+        <a href='https://github.com/jstnswn' target='_blank' rel='noopener noreferrer'><i className='fab fa-github about-icons'></i></a>
+        <a href='https://www.linkedin.com/in/jstnswn/' target='_blank' rel='noopener noreferrer'><i className='fab fa-linkedin about-icons'></i></a>
+        <div className='nav-auth-container'>
+          <LoginModal />
+          <SignupModal />
+        </div>
+      </>
     )
 
   return (

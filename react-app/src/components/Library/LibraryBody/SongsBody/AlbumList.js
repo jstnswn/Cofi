@@ -8,6 +8,7 @@ export default function AlbumList({ song, update }) {
 
     return (
         <ul className='album-list-modal'>
+            <li>Albums</li>
             {libraryAlbums.map((album, idx) => (
                 <li onClick={() => update(song, album.id)} key={idx}>{album.title}</li>
             ))}

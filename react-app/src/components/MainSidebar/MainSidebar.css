@@ -38,6 +38,12 @@
     display: flex;
     align-items: center;
 
+    transition: .5s;
+
+}
+
+#main-sidebar .content-container > div:hover {
+    color: white;
 }
 
 #main-sidebar .content-container > div p {

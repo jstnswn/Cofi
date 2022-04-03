@@ -7,6 +7,7 @@ export default function PlaylistList({ song, addSongToPlaylist }) {
 
     return (
         <ul className='album-list-modal'>
+            <li>Playlists</li>
             {playlists.map((playlist, idx) => (
                !playlist.song_ids.includes(song.id) &&
                 <li

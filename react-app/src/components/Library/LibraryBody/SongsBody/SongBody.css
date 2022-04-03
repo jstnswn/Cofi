@@ -188,8 +188,18 @@
     cursor: pointer;
 }
 
+.album-list-modal li:first-of-type {
+    border-bottom: 1px solid gray;
+    cursor: default;
+}
+
+
 .album-list-modal li:hover {
     background-color: var(--highlight-gray);
+}
+
+.album-list-modal li:first-of-type:hover {
+    background-color: var(--background-secondary-dark-gray);
 }
 
 .album-list-modal .new-album {

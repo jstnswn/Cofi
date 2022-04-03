@@ -66,7 +66,7 @@ export default function Library() {
 
                 <Route path='/library'>
                     <Redirect to={`/library/${user.username}/songs`} />
-                </Route>
+                </Route> 
 
 
 

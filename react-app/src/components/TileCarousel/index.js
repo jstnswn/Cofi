@@ -7,16 +7,54 @@ export default function TileCarousel({ content, option, identifier }) {
     const initial = content.length;
     const [difference, setDifference] = useState(initial);
 
-    const [forwardTarget, setForwardTarget] = useState(8);
     const [backTarget, setBackTarget] = useState(0);
     const [prevDirection, setPrevDirection] = useState();
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [changeNum, setChangeNum] = useState(8);
+
+    useEffect(() => {
+        // console.log(screenWidth)
+        if (screenWidth <= 1190) {
+            setChangeNum(8)
+        } else if (screenWidth <= 1360) {
+            setChangeNum(9)
+        } else {
+            setChangeNum(10)
+        }
+
+    }, [screenWidth])
+
+    // useEffect(() => {
+    //     if (screenWidth <= 1190) {
+    //         setChangeNum(8)
+    //     } else if (screenWidth <= 1360) {
+    //         setChangeNum(9)
+    //     } else if (screenWidth <= 1400) {
+    //         setChangeNum(11)
+    //     } else {
+    //         setChangeNum(12)
+    //     }
+
+    // }, [screenWidth])
+
+
+    const [forwardTarget, setForwardTarget] = useState(changeNum);
 
     useEffect(() => {
         setDifference(initial - forwardTarget);
-        if (prevDirection === 'forward') setBackTarget(forwardTarget - 8);
-        if (prevDirection === 'back') setForwardTarget(backTarget + 8);
+        if (prevDirection === 'forward') setBackTarget(forwardTarget - changeNum);
+        if (prevDirection === 'back') setForwardTarget(backTarget + changeNum);
 
-    }, [prevDirection, initial, difference, forwardTarget, backTarget])
+    }, [prevDirection, initial, difference, forwardTarget, backTarget, changeNum])
+
+    useEffect(() => {
+        const updateWidth = () => {
+            setScreenWidth(window.innerWidth)
+        };
+        window.addEventListener('resize', updateWidth);
+
+        return () => window.removeEventListener('resive', updateWidth)
+    }, [])
 
     const scrollRight = (e) => {
         e.preventDefault()
@@ -33,7 +71,7 @@ export default function TileCarousel({ content, option, identifier }) {
             if (difference <= initial - prev) {
                 return initial - 1;
             } else {
-                return prev + 8;
+                return prev + changeNum;
             }
         })
         setPrevDirection('forward');

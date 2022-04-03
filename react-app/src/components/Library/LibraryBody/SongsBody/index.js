@@ -21,6 +21,8 @@ export default function SongsBody({ option }) {
         return <Redirect to={`/library/${user.username}/songs`} />
     }
 
+
+
     if (playlistId && !playlists[Number(playlistId)]) {
         return <Redirect to={`/library/${user.username}/songs`} />
     }

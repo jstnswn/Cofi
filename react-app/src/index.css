@@ -1,5 +1,6 @@
 /* TODO Add site wide styles */
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Open+Sans:wght@300&family=Overlock:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;600;700&&family=Open+Sans:wght@300&family=Overlock:wght@400;700;900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&family=Lato:wght@300;400;700&family=Oleo+Script&display=swap'); */
 :root {
     --background-main-black: #0d1111;
     --background-secondary-dark-gray: #111616;
@@ -28,6 +29,10 @@
 body {
     background-color: var(--background-main-black);
     margin: 0;
+}
+
+#root {
+    /* width: 100vw; */
 }
 
 

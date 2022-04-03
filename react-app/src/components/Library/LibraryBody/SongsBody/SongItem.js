@@ -29,19 +29,43 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
     const [showChangeAlbum, setShowChangeAlbum] = useState(false);
     const [showPlaylists, setShowPlaylists] = useState(false);
 
-    const openEditMenu = () => setShowEditMenu(true);
+    const openEditMenu = () => {
+        setShowEditMenu(true);
+        setHovered(false);
+    }
     const closeEditMenu = () => setShowEditMenu(false);
-    const openConfirmDel = () => setShowConfirmDel(true);
+    const openConfirmDel = () => {
+        setShowConfirmDel(true);
+        setHovered(false);
+    }
     const closeConfirmDel = () => setShowConfirmDel(false);
-    const openConfirmSingle = () => setShowSingleConfirm(true);
+    const openConfirmSingle = () => {
+        setShowSingleConfirm(true);
+        setHovered(false)
+    }
     const closeConfirmSingle = () => setShowSingleConfirm(false);
-    const openChangeAlbum = () => setShowChangeAlbum(true);
+    const openChangeAlbum = () => {
+        setShowChangeAlbum(true);
+        setHovered(false);
+    }
     const closeChangeAlbum = () => setShowChangeAlbum(false);
-    const openPlaylists = () => setShowPlaylists(true);
+    const openPlaylists = () => {
+        setShowPlaylists(true);
+        setHovered(false);
+    }
     const closePlaylists = () => setShowPlaylists(false);
 
     const likeSong = () => dispatch(createSongLike(song.id));
     const unlikeSong = () => dispatch(deleteSongLike(song.id));
+
+    useEffect(() => {
+        if (hovered) return;
+
+        const unHover = setHovered(false);
+        document.addEventListener('mousedown', unHover);
+
+        return () => document.removeEventListener('click', unHover);
+    }, [hovered])
 
     // const likedItems = user.liked;
     const likedSongIds = user.liked.song_ids;
@@ -76,7 +100,7 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
         dispatch(addToPlaylist(song, playlistId));
         closePlaylists();
     };
-    
+
     const removeSongFromPlaylist = () => dispatch(removeFromPlaylist(song.id, playlistId))
 
     const updateSongAlbum = async (song, toAlbumId) => {
@@ -105,13 +129,15 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
 
     }, [showMenu])
 
-    const bottomOfList = idx >= last - 1;
+    const bottomOfList = last > 4
+        ? idx >= last - 2
+        : idx === last;
 
     // console.log('idx, last', idx, last)
 
     return (
         <div
-            className={`list-box ${last >= 2 && bottomOfList  ? 'last' : ''}`}
+            className={`list-box ${last >= 4 && bottomOfList  ? 'last' : ''}`}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
