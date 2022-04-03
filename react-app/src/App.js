@@ -12,6 +12,8 @@ import MainSidebar from './components/MainSidebar';
 import Library from './components/Library';
 import Splash from './components/Splash';
 import ErrorPage from './ErrorPage';
+import Album from './components/SongPage/Album';
+import SongPage from './components/SongPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -35,9 +37,7 @@ function App() {
   //   dispatch(getPlaylists())
   // }, [user, dispatch])
 
-  if (!loaded) {
-    return null;
-  }
+  if (!loaded) return null;
 
   return (
     <BrowserRouter>
@@ -65,6 +65,9 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <Home />
           {/* <MainSidebar /> */}
+        </ProtectedRoute>
+        <ProtectedRoute path='/album/:albumId' exact={true}>
+          <SongPage />
         </ProtectedRoute>
         <Route>
           <ErrorPage />

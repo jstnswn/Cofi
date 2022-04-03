@@ -27,10 +27,9 @@ export default function Library() {
 
     }, [dispatch])
 
-    useEffect(() => {
+    // useEffect(() => {
 
-    }, [])
-
+    // }, [])
 
     const routes = (
         <>
@@ -41,6 +40,9 @@ export default function Library() {
                 </Route>
                 <Route path={`/library/${user.username}/songs`} exact={true}>
                     <SongsBody option='song' />
+                </Route>
+                <Route path={`/library/${user.username}/albums/liked`} exact={true}>
+                    <AlbumsBody option='liked' />
                 </Route>
                 <Route path={`/library/${user.username}/albums/:albumId`} exact={true}>
                     <SongsBody option='album' />
@@ -55,9 +57,18 @@ export default function Library() {
                     <Redirect to={`/library/${user.username}/songs`}/>
                 </Route>
 
-                {/* <Route path='/library'>
+                <Route path={`/library/${user.username}/songs/liked`} exact={true}>
+                    <SongsBody option='liked'/>
+                </Route>
+                <Route path={`/library/${user.username}/albums/liked`} exact={true}>
+                    <AlbumsBody option='liked'/>
+                </Route>
+
+                <Route path='/library'>
                     <Redirect to={`/library/${user.username}/songs`} />
-                </Route> */}
+                </Route> 
+
+
 
             </Switch>
         </>

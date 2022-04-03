@@ -129,8 +129,6 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
 
     }, [showMenu])
 
-
-
     const bottomOfList = last > 4
         ? idx >= last - 2
         : idx === last;

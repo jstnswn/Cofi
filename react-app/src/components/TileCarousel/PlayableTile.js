@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSong } from '../../store/active';
+import { loadSongAndSetQueue, setSong } from '../../store/active';
 import { createAlbumLike, createSongLike, deleteAlbumLike, deleteSongLike } from '../../store/session';
 import './PlayableTile.css';
 
@@ -46,7 +46,9 @@ export default function PlayableTile({ item, option }) {
 
 
     const playSong = () => {
-        if (song) dispatch(setSong(song));
+        // if (song) dispatch(setSong(song));
+        // console.log('fdkafjdalkfjdalk')
+        if (song) dispatch(loadSongAndSetQueue(song));
     }
 
     return (

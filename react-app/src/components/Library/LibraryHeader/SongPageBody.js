@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { matchPath, Redirect, useHistory, useLocation } from 'react-router-dom';
+import { matchPath, useHistory, useLocation } from 'react-router-dom';
 import { Modal } from '../../../context/Modal';
 import { deleteLibraryAlbum } from '../../../store/library/libraryAlbums';
 import { deletePlaylist } from '../../../store/playlists';
@@ -25,15 +25,6 @@ export default function LibraryHeader({ libraryItems }) {
         path: '/library/:user/:section/:id/'
     });
 
-    useEffect(() => {
-        if (!showDropdown) return;
-
-        const closeDropdown = () => setShowDropdown(false)
-        document.addEventListener('click', closeDropdown);
-
-        return () => document.removeEventListener('click', closeDropdown);
-    }, [showDropdown])
-
     const idParam = match?.params?.id;
     const userParam = match?.params?.user;
     const sectionParam = match?.params?.section;
@@ -45,12 +36,9 @@ export default function LibraryHeader({ libraryItems }) {
     // if idParam (4th url space) and idParam is not a number
     if (idParam && !isNaN(Number(idParam))) {
         if (inPlaylist) {
-            if (!playlists[idParam]) return <Redirect to='/library' />
             headerUrl = playlists[idParam].image_url;
             headerTitle = playlists[idParam].title;
         } else {
-
-            if (!libraryItems.albums.byIds[idParam]) return <Redirect to='/library' />
             headerUrl = libraryItems.albums.byIds[idParam]?.image_url;
             headerTitle = libraryItems.albums.byIds[idParam]?.title;
         }
@@ -63,6 +51,17 @@ export default function LibraryHeader({ libraryItems }) {
         else headerTitle = 'Your Collection'
         headerUrl = 'https://cofi-bucket.s3.amazonaws.com/art-seeds/escapade.png';
     }
+
+    useEffect(() => {
+        if (!showDropdown) return;
+
+        const closeDropdown = () => setShowDropdown(false)
+        document.addEventListener('click', closeDropdown);
+
+        return () => document.removeEventListener('click', closeDropdown);
+    }, [showDropdown])
+
+
 
     const openDropdown = () => setShowDropdown(true);
 

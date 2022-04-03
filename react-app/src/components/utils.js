@@ -6,11 +6,22 @@ export const orderContent = (content) => {
     const { order, byIds } = content;
 
     return order.map(id => byIds[id])
-}
+};
 
 export const sortSongsArray = (items) => {
     const sorted = items.sort((a, b) => b.track_number - a.track_number);
     return sorted;
+};
+
+export const getOrderedLiked = (likedIdsArr, contentIdsObj) => {
+    const result = new Array(likedIdsArr.length);
+
+
+    for (let i = likedIdsArr.length - 1; i > -1; i--) {
+        const resultIdx = likedIdsArr.length - (i + 1);
+        result[resultIdx] = contentIdsObj[likedIdsArr[i]];
+    }
+    return result;
 };
 
 toast.configure();
@@ -23,6 +34,4 @@ export const popupMessage = (message) => {
         hideProgressBar: true,
         transition: Slide,
     });
-
-
 };
