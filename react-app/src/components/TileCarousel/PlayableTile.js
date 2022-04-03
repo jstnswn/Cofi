@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { loadSongAndSetQueue, setSong } from '../../store/active';
 import { createAlbumLike, createSongLike, deleteAlbumLike, deleteSongLike } from '../../store/session';
 import './PlayableTile.css';
 
 export default function PlayableTile({ item, option }) {
+    const history = useHistory();
     const dispatch = useDispatch()
     const [hovered, setHovered] = useState();
     const user = useSelector(({ session }) => session.user);
@@ -45,10 +47,12 @@ export default function PlayableTile({ item, option }) {
     }
 
 
-    const playSong = () => {
+    const handleAction = () => {
+        console.log('option!', option)
         // if (song) dispatch(setSong(song));
         // console.log('fdkafjdalkfjdalk')
-        if (song) dispatch(loadSongAndSetQueue(song));
+        if (option === 'albums') history.push(`/album/${item.id}`)
+        else dispatch(loadSongAndSetQueue(song));
     }
 
     return (
@@ -57,7 +61,7 @@ export default function PlayableTile({ item, option }) {
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
-            <div className='tile-image-container' onClick={playSong}>
+            <div className='tile-image-container' onClick={handleAction}>
 
                 <img alt='content art' className='tile-art' src={item.image_url} />
 

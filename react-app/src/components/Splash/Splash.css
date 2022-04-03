@@ -6,7 +6,7 @@
     color: var(--text-main-white);
     font-family: var(--header-font);
 
-    grid-template-rows: 30% 20% 40%;
+    grid-template-rows: 30% 200px 40%;
     /* grid-template-columns: 100%; */
 
 
@@ -36,8 +36,11 @@
 
     grid-row-start: 2;
 
+
     /* border: green 2px solid; */
     display: flex;
+    height: 200px;
+    /* align-items: center; */
 }
 
 .splash-container  .left-container {
@@ -51,7 +54,8 @@
 }
 
 .splash-container h1 {
-    font-size: 110px;
+    /* font-size: 110px; */
+    font-size: 3.7em;
     margin-right: 20px;
     color: var(--text-secondary-white);
 }
@@ -71,7 +75,8 @@
 }
 
 .header-container img {
-    margin-top: 20px;
+
+    align-self: center;
 }
 
 .splash-container  .bottom {

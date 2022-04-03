@@ -36,6 +36,7 @@
     height: 210px;
     width: 210px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .album-player-album .icon-container {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Modal } from '../../context/Modal';
-import { setSong } from '../../store/active';
+import { loadSongAndSetQueue, setSong } from '../../store/active';
 import { addToPlaylist, getPlaylistsArray } from '../../store/playlists';
 import { createSongLike, deleteSongLike } from '../../store/session';
 import PlaylistList from '../Library/LibraryBody/SongsBody/PlaylistList';
@@ -79,7 +79,8 @@ export default function AlbumPlayerSongs({ song, idx, last, openedMenu, setOpene
     }
 
     const playSong = () => {
-        dispatch(setSong(song))
+        // dispatch(setSong(song));
+        dispatch(loadSongAndSetQueue(song));
     };
 
     return (
