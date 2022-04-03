@@ -154,6 +154,14 @@
     top: -120px;
 }
 
+.last .library-list-dropdown.playlist {
+    top: -60px;
+}
+
+.last .library-list-dropdown.simple {
+    top: -25px;
+}
+
 .library-list-dropdown ul {
     padding: 0;
 }

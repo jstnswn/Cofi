@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { Modal } from '../../context/Modal';
 import { setSong } from '../../store/active';
 import { addToPlaylist, removeFromPlaylist } from '../../store/playlists';
 import { createSongLike, deleteSongLike } from '../../store/session';
+import PlaylistList from '../Library/LibraryBody/SongsBody/PlaylistList';
 
 export default function Song({ song, last, idx }) {
     const dispatch = useDispatch();
@@ -12,10 +14,14 @@ export default function Song({ song, last, idx }) {
     const [showMenu, setShowMenu] = useState(false);
     const [showPlaylists, setShowPlaylists] = useState(false);
 
-    const user = useSelector(({ session }) => session.user);
+    const session = useSelector(({ session }) => session);
+    const user = session.user;
     const album = song.album;
 
     const bottomOfList = idx >= last - 1;
+
+    const openPlaylists = () => setShowPlaylists(true);
+    const closePlaylists = () => setShowPlaylists(false);
 
 
     const playSong = () => {
@@ -24,7 +30,7 @@ export default function Song({ song, last, idx }) {
 
     const addSongToPlaylist = (playlistId) => {
         dispatch(addToPlaylist(song, playlistId));
-        // closePlaylists();
+        closePlaylists();
     };
     // const removeSongFromPlaylist = () => dispatch(removeFromPlaylist(song.id, playlistId))
 
@@ -86,20 +92,20 @@ export default function Song({ song, last, idx }) {
             <i className={`fa-solid fa-ellipsis song-options ${hovered ? 'active' : ''}`} onClick={openDropdown}></i>
 
             {showMenu && (
-                <div className='library-list-dropdown'>
+                <div className='library-list-dropdown simple'>
                     <ul>
-                       <li>Add to playlist</li>
+                       <li onClick={openPlaylists}>Add to playlist</li>
                     </ul>
                 </div>
             )}
 
 
-{/* 
+
             {showPlaylists && (
                 <Modal onClose={closePlaylists}>
                     <PlaylistList song={song} addSongToPlaylist={addSongToPlaylist} />
                 </Modal>
-            )} */}
+            )}
         </div>
     )
 }

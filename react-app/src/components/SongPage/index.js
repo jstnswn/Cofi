@@ -6,6 +6,7 @@ import LibrarySidebar from '../Library/LibrarySidebar';
 import MainSidebar from '../MainSidebar';
 import { orderContent } from '../utils';
 import Header from './Header'
+import Sidebar from './Sidebar';
 import SongPageBody from './SongPageBody';
 
 export default function SongPage() {
@@ -46,7 +47,7 @@ export default function SongPage() {
 
             <div className='sidebar-container'>
                 <MainSidebar />
-                <LibrarySidebar />
+                <Sidebar />
             </div>
         </div>
     )
