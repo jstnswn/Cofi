@@ -70,3 +70,36 @@
     /* 50px to adjust for library song body header */
     grid-template-rows: calc((0.4 * (100vh - 140px)) + 50px)  calc((0.6 * (100vh - 140px)) - 50px);
 }
+
+
+.nav-button-container {
+    /* justify-self: center; */
+    align-self: center;
+    margin: 5px;
+    /* border: red 1px solid; */
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-button-container div {
+    border: rgba(128, 128, 128, 0.371) 1px solid;
+    border-radius: 50%;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-button-container i {
+    font-size: 30px;
+    cursor: pointer;
+    color: gray;
+    transition: .4s;
+}
+
+.nav-button-container div:hover,
+.nav-button-container i:hover {
+    color: white;
+    border: whtie 1px solid;
+}

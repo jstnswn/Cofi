@@ -1,10 +1,12 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import AlbumUploadModal from '../Upload/AlbumUpload';
 import PlaylistUploadModal from '../Upload/PlaylistUpload';
 import SongUploadModal from '../Upload/SongUpload';
 import './MainSidebar.css';
 
 export default function MainSidebar() {
+    const history = useHistory();
     return (
         <div id='main-sidebar'>
             <div className='content-container'>
@@ -21,6 +23,15 @@ export default function MainSidebar() {
                     <i className='fad fa-list-music icon'></i>
                 </div>
             </div>
+
+            <section className='nav-button-container'>
+                <div>
+                    <i className='far fa-angle-left' onClick={() => history.goBack()}></i>
+                </div>
+                <div>
+                    <i className='far fa-angle-right' onClick={() => history.goForward()}></i>
+                </div>
+            </section>
         </div>
     )
 }

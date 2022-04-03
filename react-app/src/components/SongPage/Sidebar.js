@@ -9,12 +9,12 @@ export default function Sidebar() {
     return (
         <div className='sidebar bottom-sidebar'>
             <section className='nav-button-container'>
-                <div>
+                {/* <div>
                     <i className='far fa-angle-left' onClick={() => history.goBack()}></i>
                 </div>
                 <div>
                     <i className='far fa-angle-right' onClick={() => history.goForward()}></i>
-                </div>
+                </div> */}
             </section>
 
         </div>
