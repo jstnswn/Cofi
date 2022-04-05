@@ -85,8 +85,8 @@ export default function Song({ song, last, idx }) {
             <div className='artist-list library-list title'>
                 <p className='item'>{song.artist.name}</p>
             </div>
-            <div className='album-list library-list title'>
-                {album ? <p className='item' onClick={() => history.push(`/library/${user.username}/albums/${album.id}`)}>{album.title}</p> : <p className='item'>--</p>}
+            <div className='album-list library-list title album-page'>
+                <p className='item'>{album.title}</p>
 
             </div>
             <i onClick={toggleLike} className={`${likeIconClass} heart ${hovered ? 'active' : ''}`}></i>

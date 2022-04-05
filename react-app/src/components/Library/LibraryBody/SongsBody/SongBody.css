@@ -79,10 +79,15 @@
     margin: 0;
 }
 
+
 .library-list.song-list,
 .library-list.album-list,
 .list-box i {
     cursor: pointer;
+}
+
+.library-list.album-list.album-page {
+    cursor: default;
 }
 
 .library-songs-body-container .list-box {

@@ -97,7 +97,7 @@ export default function LibraryHeader({ libraryItems }) {
                     <div className='header-title-container'>
 
                         <h2 className='library-header-title'>{headerTitle}
-                            {idParam && userParam === user.username && (
+                            {!likedParam && idParam && userParam === user.username && (
                                 <span><i onClick={openDropdown} className='fas fa-ellipsis-h libary-header-edit'></i></span>)}
                         </h2>
 

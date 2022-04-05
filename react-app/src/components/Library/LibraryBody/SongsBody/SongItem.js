@@ -138,7 +138,7 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
 
     return (
         <div
-            className={`list-box ${last >= 4 && bottomOfList  ? 'last' : ''}`}
+            className={`list-box ${last >= 4 && bottomOfList ? 'last' : ''}`}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
@@ -157,20 +157,30 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
             <i className={`fa-solid fa-ellipsis song-options ${hovered ? 'active' : ''}`} onClick={openDropdown}></i>
 
             {showMenu && (
-                <div className={`library-list-dropdown ${option}`}>
-                    <ul>
-                        <li onClick={openPlaylists}>Add to Playlist</li>
-                       {option === 'playlist' && <li onClick={removeSongFromPlaylist}>Remove from Playlist</li>}
-                        {option !== 'playlist' && (
-                            <>
-                            <li onClick={openEditMenu}>Edit Song</li>
-                            <li onClick={openConfirmDel}>Delete Song</li>
-                                {album && <li onClick={openConfirmSingle}>Make Single</li>}
-                                <li onClick={openChangeAlbum}>Move to Album</li>
-                            </>
-                        )}
-                    </ul>
-                </div>
+                option === 'liked'
+                    ? (
+                        <div className='library-list-dropdown simple'>
+                            <ul>
+                                <li onClick={openPlaylists}>Add to playlist</li>
+                            </ul>
+                        </div>
+                    )
+                    : (
+                        <div className={`library-list-dropdown ${option}`}>
+                            <ul>
+                                <li onClick={openPlaylists}>Add to Playlist</li>
+                                {option === 'playlist' && <li onClick={removeSongFromPlaylist}>Remove from Playlist</li>}
+                                {option !== 'playlist' && (
+                                    <>
+                                        <li onClick={openEditMenu}>Edit Song</li>
+                                        <li onClick={openConfirmDel}>Delete Song</li>
+                                        {album && <li onClick={openConfirmSingle}>Make Single</li>}
+                                        <li onClick={openChangeAlbum}>Move to Album</li>
+                                    </>
+                                )}
+                            </ul>
+                        </div>
+                    )
             )}
 
             {showEditMenu && (
