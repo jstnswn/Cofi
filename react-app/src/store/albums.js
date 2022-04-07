@@ -2,21 +2,21 @@ import { normalize, orderIds } from "./utils";
 
 const LOAD_ALBUM = 'albums/LOAD_ALBUM';
 
-const loadAlbum = (albumId, songs) => {
+const loadAlbum = (album) => {
     return {
         type: LOAD_ALBUM,
-        albumId,
-        songs
+        album
     }
 };
 
 export const getAlbum = (albumId) => async dispatch => {
-    const res = await fetch(`/api/songs/album/${albumId}`);
+    // const res = await fetch(`/api/songs/album/${albumId}`);
+    const res = await fetch(`/api/albums/${albumId}`);
 
     if (res.ok) {
         const data = await res.json();
-        dispatch(loadAlbum(albumId, data.songs));
-        return data.songs;
+        dispatch(loadAlbum(data.album));
+        return data.album;
     } else {
         const error = await res.json();
         return error.error;
@@ -31,15 +31,20 @@ export default function reducer(state = initialState, action) {
 
     switch (action.type) {
         case LOAD_ALBUM:
-            orderedIds = orderIds(action.songs);
-            normalizedData = normalize(action.songs)
+            // orderedIds = orderIds(action.songs);
+            // normalizedData = normalize(action.songs)
+            // return {
+            //     ...state,
+            //     [action.albumId]: {
+            //         byIds: normalizedData,
+            //         order: orderedIds
+            //     }
+            // }
             return {
                 ...state,
-                [action.albumId]: {
-                    byIds: normalizedData,
-                    order: orderedIds
-                }
+                [action.album.id]: action.album
             }
+
 
 
         default:

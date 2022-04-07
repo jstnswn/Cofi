@@ -19,13 +19,30 @@ export default function Splash() {
 
                 {/* </div> */}
                 {/* <div className='right-container'></div> */}
-                <div className='developer-box'>Developed by Justin Sweeney</div>
+                <img alt='Logo' className='splash-logo wave' src='https://cofi-bucket.s3.amazonaws.com/song-seeds/transparent-wave.gif'/>
+                <div className='developer-box'>Developed by <a href='https://justin-sweeney.com/' target='_blank' rel='noopener noreferrer'>Justin Sweeney</a></div>
             </div>
 
         <div className='bottom'>
                 <h2>Lofi Music. Together.</h2>
                 <h3>As background music, for studying, or inspiration. Listen, share, and enjoy lofi music.</h3>
         </div>
+
+        <section id='splash-footer'>
+            <ul>
+                <li>React | Redux</li>
+                <li className='dot-spacer'>.</li>
+                <li>Javascript</li>
+                <li className='dot-spacer'>.</li>
+                <li>Python</li>
+                <li className='dot-spacer'>.</li>
+                <li>Flask</li>
+                <li className='dot-spacer'>.</li>
+                <li>SQLAlchemy</li>
+                <li className='dot-spacer'>.</li>
+                <li>AWS S3</li>
+            </ul>
+        </section>
         </div>
     )
 }

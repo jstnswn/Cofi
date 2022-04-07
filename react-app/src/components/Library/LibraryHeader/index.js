@@ -42,7 +42,6 @@ export default function LibraryHeader({ libraryItems }) {
 
     let headerUrl;
     let headerTitle
-    // if idParam (4th url space) and idParam is not a number
     if (idParam && !isNaN(Number(idParam))) {
         if (inPlaylist) {
             if (!playlists[idParam]) return <Redirect to='/library' />

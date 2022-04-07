@@ -41,8 +41,8 @@ export const cleanActive = () => {
 
 export const loadSongAndSetQueue = (song) => async dispatch => {
     if (song.album) {
-        const songs = await dispatch(getAlbum(song.album.id));
-        const uniqueSongs = songs.filter(currSong => currSong.id !== song.id);
+        const album = await dispatch(getAlbum(song.album.id));
+        const uniqueSongs = album.songs.filter(currSong => currSong.id !== song.id);
         await dispatch(setQueue(uniqueSongs));
     } else dispatch(clearQueue()) // Currently clears queue if song is single.
     dispatch(setSong(song));
