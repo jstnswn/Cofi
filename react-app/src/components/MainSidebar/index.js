@@ -7,6 +7,7 @@ import './MainSidebar.css';
 
 export default function MainSidebar() {
     const history = useHistory();
+    console.log("HISTORY: ", history);
     return (
         <div id='main-sidebar'>
             <div className='content-container'>
