@@ -23,13 +23,11 @@ export default function SongPage() {
 
     const albums = useSelector(({ albums }) => albums);
 
-    let songs;
+    // let songs;
 
-    console.log('albums: ', albums)
-    if (loaded) {
-        console.log('ALBUMID: ', albumId)
-        songs = orderContent(albums[albumId]);
-    }
+    // if (loaded) {
+    //     songs = orderContent(albums[albumId].songs);
+    // }
 
 
     if (!loaded) return null;
@@ -37,10 +35,21 @@ export default function SongPage() {
     return (
         <div id='library-wrapper'>
             <div className='main-wrapper'>
-                <Header album={songs[0].album} />
+                <Header album={albums[albumId]} />
                 <div id='library-body'>
 
-                    <SongPageBody songs={songs}/>
+                    {/* <SongPageBody songs={songs}/> */}
+
+                    {/* <div className='placeholder-message'>
+                        <h3>You don't have any songs in your {placeholderWord}.</h3>
+                        <h4>{placeholderMessage}</h4>
+                    </div> */}
+                    {albums[albumId].songs.length > 0
+                        ? <SongPageBody songs={albums[albumId].songs} />
+                        : <div className='placeholder-message'>
+                            <h3>This album has no songs</h3>
+                        </div>
+                    }
 
                 </div>
             </div>

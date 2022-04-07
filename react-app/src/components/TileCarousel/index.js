@@ -53,7 +53,7 @@ export default function TileCarousel({ content, option, identifier }) {
         };
         window.addEventListener('resize', updateWidth);
 
-        return () => window.removeEventListener('resive', updateWidth)
+        return () => window.removeEventListener('resize', updateWidth)
     }, [])
 
     const scrollRight = (e) => {
