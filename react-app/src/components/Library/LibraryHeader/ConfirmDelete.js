@@ -1,8 +1,7 @@
 import React from 'react'
 import '../LibraryBody/SongsBody/SongConfirmDelete.css'
 
-export default function ConfirmDelete({ album, closeModal, remove }) {
-
+export default function ConfirmDelete({ album, closeModal, remove, inPlaylist }) {
     const hasSongs = album?.songs?.length > 0;
 
     return (
@@ -14,7 +13,7 @@ export default function ConfirmDelete({ album, closeModal, remove }) {
 
             <div className='confirm-message-box'>
 
-                <p>Remove <span className='song-name'>{album?.title}</span>{hasSongs && ' and all of it\'s songs'}?</p>
+                <p>Remove {inPlaylist && 'playlist'} <span className='song-name'>{album?.title}</span>{hasSongs && !inPlaylist && ' and all of it\'s songs'}?</p>
                 <button onClick={remove}>Yes</button>
 
             </div>

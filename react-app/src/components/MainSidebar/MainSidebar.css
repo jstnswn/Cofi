@@ -91,6 +91,7 @@
     align-items: center;
 }
 
+
 .nav-button-container i {
     font-size: 30px;
     cursor: pointer;
@@ -98,8 +99,22 @@
     transition: .4s;
 }
 
-.nav-button-container div:hover,
 .nav-button-container i:hover {
     color: white;
-    border: whtie 1px solid;
+}
+
+/* .nav-button-container div:hover {
+    border: white 1px solid;
+
+} */
+
+.nav-button-container div.faded {
+    opacity: .4;
+}
+
+
+.nav-button-container div.faded,
+.nav-button-container div.faded i:hover {
+    color: gray;
+    cursor: default;
 }

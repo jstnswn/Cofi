@@ -116,6 +116,7 @@ export default function LibraryHeader({ libraryItems }) {
                             <ConfirmDelete
                                 closeModal={closeConfirmMenu}
                                 remove={inPlaylist ? removePlaylist : removeAlbum}
+                                inPlaylist={inPlaylist}
                                 album={inPlaylist ? playlists[idParam] : libraryItems.albums.byIds[idParam]} />
                         </Modal>
                     )}

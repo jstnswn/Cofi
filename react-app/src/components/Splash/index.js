@@ -1,6 +1,7 @@
 import React from 'react';
 import './Splash.css';
-import image from '../../assets/headphones.png'
+import image from '../../assets/headphones.png';
+import gif from '../../assets/wave-t.gif';
 
 export default function Splash() {
     return (
@@ -19,7 +20,7 @@ export default function Splash() {
 
                 {/* </div> */}
                 {/* <div className='right-container'></div> */}
-                <img alt='Logo' className='splash-logo wave' src='https://cofi-bucket.s3.amazonaws.com/song-seeds/transparent-wave.gif'/>
+                <img alt='Logo' className='splash-logo wave' src={gif}/>
                 <div className='developer-box'>Developed by <a href='https://justin-sweeney.com/' target='_blank' rel='noopener noreferrer'>Justin Sweeney</a></div>
             </div>
 
