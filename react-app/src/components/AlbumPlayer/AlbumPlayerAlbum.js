@@ -2,11 +2,14 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createAlbumLike, deleteAlbumLike } from '../../store/session';
+import placeHolderImage from '../../assets/black-square.png'
 
 export default function AlbumPlayerAlbum({ album }) {
     const history = useHistory();
     const dispatch = useDispatch()
     const [hovered, setHovered] = useState(false);
+
+    const [loaded, setLoaded] = useState(false);
 
     const user = useSelector(({ session }) => session.user);
 
@@ -35,9 +38,17 @@ export default function AlbumPlayerAlbum({ album }) {
             <div className='album-player-image-container'>
                 <img
                     className='album-player-image'
+                    src={placeHolderImage}
+                    alt='placeholder'
+                    style={loaded ? {display: 'none'} : {}}
+                />
+                <img
+                    className='album-player-image'
                     alt='album cover'
                     src={album?.image_url}
                     onClick={() => history.push(`/album/${album.id}`)}
+                    onLoad={() => setLoaded(true)}
+                    style={loaded ? {} : {display: 'none'}}
                 />
                 <div className='icon-container'>
                     {hovered && <i onClick={toggleLike} className={likeIconClass}></i>}

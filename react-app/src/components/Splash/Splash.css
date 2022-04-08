@@ -138,6 +138,7 @@
     display: flex;
     justify-content: space-between;
     margin: 0 120px;
+    min-width: 517px;
 }
 
 #splash-footer li {

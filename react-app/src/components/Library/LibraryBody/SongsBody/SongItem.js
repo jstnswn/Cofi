@@ -97,7 +97,8 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
 
     };
 
-    const addSongToPlaylist = (playlistId) => {
+    const addSongToPlaylist = (playlistId, e) => {
+        // e.stopPropagation();
         dispatch(addToPlaylist(song, playlistId));
         closePlaylists();
     };
