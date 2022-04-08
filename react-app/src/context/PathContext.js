@@ -54,7 +54,10 @@ export function PathProvider({ children }) {
 
         setPathHistory(prev => {
             if (!activeNav && prev.length && location.pathname !== prev[prev.length - 1]) {
-                prev.push(location.pathname);
+
+                prev.splice(locationPointer + 1, 0, location.pathname)
+                // setLocationPointer
+                // prev.push(location.pathname);
             }
             return prev;
         })
