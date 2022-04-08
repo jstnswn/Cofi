@@ -29,9 +29,9 @@
 .sidebar-button-container {
     padding: 5px;
     width: 100%;
-    padding-left: 15px;
-    /* height: 100%; */
-    /* padding-left: 3px; */
+    /* padding-left: 15px; */
+
+    text-align: center;
 }
 
 /* .bottom-sidebar > div:first-of-type {

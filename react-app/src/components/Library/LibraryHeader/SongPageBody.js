@@ -30,6 +30,7 @@ export default function LibraryHeader({ libraryItems }) {
     const sectionParam = match?.params?.section;
     const likedParam = location.pathname.split('/')[4] === 'liked';
     const inPlaylist = sectionParam === 'playlists';
+    
 
     let headerUrl;
     let headerTitle
@@ -116,6 +117,7 @@ export default function LibraryHeader({ libraryItems }) {
                             <ConfirmDelete
                                 closeModal={closeConfirmMenu}
                                 remove={inPlaylist ? removePlaylist : removeAlbum}
+                                inPlaylist={inPlaylist}
                                 album={inPlaylist ? playlists[idParam] : libraryItems.albums.byIds[idParam]} />
                         </Modal>
                     )}
