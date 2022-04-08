@@ -5,8 +5,6 @@ import { useParams } from 'react-router-dom';
 export default function Header({ album }) {
     const dispatch = useDispatch();
 
-    console.log('songs', album)
-
     const [showDropdown, setShowDropdown] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const [showEdit, setShowEdit] = useState(false);

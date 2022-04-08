@@ -14,6 +14,7 @@ import Splash from './components/Splash';
 import ErrorPage from './ErrorPage';
 import Album from './components/SongPage/Album';
 import SongPage from './components/SongPage';
+import { PathProvider } from './context/PathContext';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -24,7 +25,7 @@ function App() {
   useEffect(() => {
     (async () => {
       await dispatch(authenticate())
-        // .then(() => dispatch(getPlaylists()))
+      // .then(() => dispatch(getPlaylists()))
       // await dispatch(loadHome())
       // await dispatch(getPlaylists())
       setLoaded(true)
@@ -41,45 +42,49 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
-      <Switch>
-        {/* <Route path='/login' exact={true}>
+      <PathProvider>
+
+
+        <NavBar />
+        <Switch>
+          {/* <Route path='/login' exact={true}>
           <LoginForm />
         </Route> */}
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
-        {!user && (
-          <Route path='/' exact={true}>
-            <Splash />
+          <Route path='/sign-up' exact={true}>
+            <SignUpForm />
           </Route>
+          {!user && (
+            <Route path='/' exact={true}>
+              <Splash />
+            </Route>
+          )}
+
+          <ProtectedRoute path='/users' exact={true} >
+            <UsersList />
+          </ProtectedRoute>
+          <ProtectedRoute path={`/library`}>
+            <Library />
+            {/* <MainSidebar /> */}
+          </ProtectedRoute>
+          <ProtectedRoute path='/' exact={true} >
+            <Home />
+            {/* <MainSidebar /> */}
+          </ProtectedRoute>
+          <ProtectedRoute path='/album/:albumId' exact={true}>
+            <SongPage />
+          </ProtectedRoute>
+          <Route>
+            <ErrorPage />
+          </Route>
+        </Switch>
+        {user && (
+          <>
+            {/* <MainSidebar /> */}
+            <Player />
+          </>
+
         )}
-
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path={`/library`}>
-          <Library />
-          {/* <MainSidebar /> */}
-        </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <Home />
-          {/* <MainSidebar /> */}
-        </ProtectedRoute>
-        <ProtectedRoute path='/album/:albumId' exact={true}>
-          <SongPage />
-        </ProtectedRoute>
-        <Route>
-          <ErrorPage />
-        </Route>
-      </Switch>
-      {user && (
-        <>
-          {/* <MainSidebar /> */}
-          <Player />
-        </>
-
-      )}
+      </PathProvider>
     </BrowserRouter>
   );
 }

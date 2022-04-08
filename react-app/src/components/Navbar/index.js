@@ -14,7 +14,7 @@ export default function NavBar() {
   const sessionLinks = user
     ? (
       <>
-        <NavLink className='library-link' activeClassName='selected' to={`/library/${user.username}`}>Library</NavLink>
+        <NavLink className='library-link' activeClassName='selected' to={`/library/${user.username}/songs`}>Library</NavLink>
         {/* <SongUploadModal /> */}
         {/* <div className='about-links'> */}
         <a href='https://github.com/jstnswn' target='_blank' rel='noopener noreferrer'><i className='fab fa-github about-icons'></i></a>
