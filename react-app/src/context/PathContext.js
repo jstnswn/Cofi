@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 
 export const PathContext = React.createContext();
@@ -10,6 +11,9 @@ export function PathProvider({ children }) {
     const [locationPointer, setLocationPointer] = useState(0);
     const [activeNav, setActiveNav] = useState(false);
     const [pathHistory, setPathHistory] = useState([location.pathname]);
+
+    const user = useSelector(({ session }) => session.user);
+    // if (!user) return null;
 
     // const [path, setPath] = useState({
     //     to: location.pathname,
@@ -40,6 +44,7 @@ export function PathProvider({ children }) {
     };
 
     useEffect(() => {
+        if (!user) return;
         // setPath((prev) => ({
         //     to: location.pathname,
         //     from: prev.to,
