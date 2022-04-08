@@ -111,7 +111,7 @@
     width: 100%;
     align-self: flex-end;
     justify-self: flex-end;
-    filter: brightness(.4);
+    filter: brightness(.3);
     /* filter: brightness(0.6)contrast(3.4)hue-rotate(217deg)saturate(9.9); */
 
 }

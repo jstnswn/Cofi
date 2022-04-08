@@ -95,7 +95,7 @@
     grid-template-columns: 35% 35% 17% 10% 3%;
     display: grid;
     position: relative;
-    padding-left: 20px;
+    padding-left: 40px;
 }
 
 .library-songs-body-container .song-list {
