@@ -44,7 +44,6 @@ export function PathProvider({ children }) {
     };
 
     useEffect(() => {
-        console.log('user', user)
         if (!user) return;
         // setPath((prev) => ({
         //     to: location.pathname,
