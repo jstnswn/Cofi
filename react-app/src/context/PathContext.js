@@ -20,6 +20,7 @@ export function PathProvider({ children }) {
     //     from: location.pathname,
     //     hasBack: false
     // });
+
     const cannotBack = locationPointer < 1;
     const cannotForward = locationPointer >= pathHistory.length - 1
 
@@ -46,7 +47,6 @@ export function PathProvider({ children }) {
     const clearHistory = () => {
         setPathHistory(['/']);
         setLocationPointer(0);
-        // setActiveNav(true);
     };
 
     useEffect(() => {
@@ -55,20 +55,20 @@ export function PathProvider({ children }) {
             return;
         }
 
-        if (location.pathname === pathHistory[locationPointer] || activeNav) {
-            console.log('returned')
+        if (!activeNav && location.pathname === pathHistory[locationPointer]) {
             return;
         }
 
         setPathHistory(prev => {
-            const copy = [...prev];
+            if (activeNav) return prev;
+            const copy = prev.slice(0, locationPointer + 1)
             if (prev.length) {
-                copy.splice(locationPointer + 1, 0, location.pathname)
+                copy.push(location.pathname);
             }
             return copy;
         })
-
         setLocationPointer(prev => {
+            if (activeNav) return prev;
             return prev + 1;
         });
 
