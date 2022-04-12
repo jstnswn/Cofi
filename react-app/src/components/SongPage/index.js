@@ -13,15 +13,19 @@ export default function SongPage() {
     const dispatch = useDispatch();
     const [loaded, setLoaded] = useState(false);
     const { albumId } = useParams();
+    const albums = useSelector(({ albums }) => albums);
 
     useEffect(() => {
+        if (albums && albums[albumId]) {
+            setLoaded(true);
+            return
+        }
         (async () => {
             await dispatch(getAlbum(albumId))
             setLoaded(true);
         })()
-    }, [dispatch, albumId])
+    }, [dispatch, albums, albumId])
 
-    const albums = useSelector(({ albums }) => albums);
 
     // let songs;
 
