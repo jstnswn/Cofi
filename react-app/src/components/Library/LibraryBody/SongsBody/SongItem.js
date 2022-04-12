@@ -16,6 +16,7 @@ import SongConfirmDelete from './SongConfirmDelete';
 export default function SongItem({ song, option, playlistId, idx, last }) {
     const session = useSelector(({ session }) => session);
     const user = session.user;
+
     const album = song.album;
 
     const dispatch = useDispatch();
@@ -58,6 +59,10 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
     const likeSong = () => dispatch(createSongLike(song.id));
     const unlikeSong = () => dispatch(deleteSongLike(song.id));
 
+    const albumNavigation = () => playlistId
+        ? history.push(`/album/${album.id}`)
+        : history.push(`/library/${user.username}/albums/${album.id}` );
+
     useEffect(() => {
         if (hovered) return;
 
@@ -70,7 +75,6 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
     // const likedItems = user.liked;
     const likedSongIds = user.liked.song_ids;
 
-    // console.log('likedSongsIDs', likedSongIds);
 
     let likeIconClass;
     let toggleLike;
@@ -135,7 +139,6 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
         ? idx >= last - 2
         : idx === last;
 
-    // console.log('idx, last', idx, last)
 
     return (
         <div
@@ -151,7 +154,7 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
                 <p className='item'>{song.artist.name}</p>
             </div>
             <div className='album-list library-list title'>
-                {album ? <p className='item' onClick={() => history.push(`/library/${user.username}/albums/${album.id}`)}>{album.title}</p> : <p className='item'>--</p>}
+                {album ? <p className='item' onClick={albumNavigation}>{album.title}</p> : <p className='item'>--</p>}
 
             </div>
             <i onClick={toggleLike} className={`${likeIconClass} heart ${hovered ? 'active' : ''}`}></i>

@@ -81,6 +81,12 @@
     background-color: var(--background-main-black)
 }
 
+
+.library-body-container::-webkit-scrollbar-corner {
+    background-color: var(--background-main-black)
+}
+
+
 .library-body-container::-webkit-scrollbar-thumb {
     background-color: rgb(37, 37, 37);
     border: 3px solid transparent;
