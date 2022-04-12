@@ -7,7 +7,7 @@ export const PathContext = React.createContext();
 export function PathProvider({ children }) {
     const location = useLocation();
     const history = useHistory();
-    const [loaded, setLoaded] = useState(false);
+    // const [loaded, setLoaded] = useState(false);
     const [locationPointer, setLocationPointer] = useState(0);
     const [activeNav, setActiveNav] = useState(false);
     const [pathHistory, setPathHistory] = useState([location.pathname]);
@@ -20,8 +20,10 @@ export function PathProvider({ children }) {
     //     from: location.pathname,
     //     hasBack: false
     // });
-
     const cannotBack = locationPointer < 1;
+    const cannotForward = locationPointer >= pathHistory.length - 1
+    // console.log('🙃🙃🙃🙃', locationPointer, pathHistory)
+
     const goBack = () => {
         if (locationPointer < 1) return;
         const route = pathHistory[locationPointer - 1];
@@ -32,7 +34,6 @@ export function PathProvider({ children }) {
         history.push(route);
     };
 
-    const cannotForward = locationPointer >= pathHistory.length - 1
     const goForward = () => {
         if (cannotForward) return
         const route = pathHistory[locationPointer + 1];
@@ -43,31 +44,38 @@ export function PathProvider({ children }) {
         history.push(route);
     };
 
+    const clearHistory = () => {
+        setPathHistory(['/']);
+        setLocationPointer(0);
+        // setActiveNav(true);
+    };
+
     useEffect(() => {
-        if (!user) return;
-        // setPath((prev) => ({
-        //     to: location.pathname,
-        //     from: prev.to,
-        //     // hasBack: !firstRender ? true: false
-        // }));
-        // setBackNum(prev => prev++);
+        if (!user || !pathHistory.length) {
+            clearHistory();
+            return;
+        }
+
+        if (location.pathname === pathHistory[locationPointer] || activeNav) {
+            console.log('returned')
+            return;
+        }
 
         setPathHistory(prev => {
-            if (!activeNav && prev.length && location.pathname !== prev[prev.length - 1]) {
-
-                prev.splice(locationPointer + 1, 0, location.pathname)
-                // setLocationPointer
-                // prev.push(location.pathname);
+            const copy = [...prev];
+            if (prev.length) {
+                copy.splice(locationPointer + 1, 0, location.pathname)
             }
-            return prev;
+            return copy;
         })
-        setLoaded(true);
 
-        if (loaded && !activeNav) setLocationPointer(prev => prev + 1);
+        setLocationPointer(prev => {
+            return prev + 1;
+        });
 
         setActiveNav(false);
 
-    }, [location])
+    }, [location, user])
 
 
     return (
