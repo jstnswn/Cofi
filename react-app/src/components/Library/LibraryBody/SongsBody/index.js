@@ -33,7 +33,9 @@ export default function SongsBody({ option }) {
         placeholderWord = 'liked collection';
         placeholderMessage = 'Liked songs will be displayed here.'
 
-        songs = getOrderedLiked(likedIds, libraryItems.songs.byIds)
+        if (libraryItems.songs.order.length) {
+            songs = getOrderedLiked(likedIds, libraryItems.songs.byIds)
+        }
     }
 
     else if (albumId) {
@@ -63,8 +65,8 @@ export default function SongsBody({ option }) {
 
             <div ref={scrollContainer} className='library-body-container'>
                 <div className='library-songs-body-container'>
-                    {songs.map((song, idx) => <SongItem key={idx} idx={idx} playlistId={playlistId} song={song} option={option} last={last}/>)}
-                    {songs.length === 0 && (
+                    {songs?.map((song, idx) => <SongItem key={idx} idx={idx} playlistId={playlistId} song={song} option={option} last={last}/>)}
+                    {songs?.length === 0 && (
                         <div className='placeholder-message'>
                             <h3>You don't have any songs in your {placeholderWord}.</h3>
                             <h4>{placeholderMessage}</h4>

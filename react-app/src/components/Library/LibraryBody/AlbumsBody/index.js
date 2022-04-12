@@ -19,7 +19,9 @@ export default function AlbumsBody({  option }) {
     let albums;
     if (option === 'liked') {
         const likedAlbums = getOrderedLiked(likedIds, library.albums.byIds);
-        albums = likedAlbums;
+        if (library.albums.order.length) {
+            albums = likedAlbums;
+        }
 
     } else {
         albums = orderContent(library.albums);
@@ -39,15 +41,18 @@ export default function AlbumsBody({  option }) {
 
                     {option === 'album' || option === 'liked'
                         ? (
-                            albums.length > 0
-                                ? albums.map((album, idx) => (
-                                    <AlbumItem user={user} key={idx} album={album} idx={idx} option={option} />))
-                                : (
-                                    <div className='placeholder-message album'>
+                            <>
+
+                                {albums?.map((album, idx) => <AlbumItem user={user} key={idx} album={album} idx={idx} option={option} />)}
+
+
+                                    {!albums && (<div className='placeholder-message album'>
                                         <h3>You don't have any albums in your library,</h3>
                                         <h4>Create a new album and fill up your collection!</h4>
                                     </div>
-                                )
+                                    )}
+                            </>
+
                         )
 
                         : (
