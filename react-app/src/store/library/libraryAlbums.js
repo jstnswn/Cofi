@@ -1,3 +1,4 @@
+import { loadHomeAlbums } from "../home.js";
 import { loadUserAlbum, removeUserAlbum } from "../session.js";
 import { getImageUrl, normalize, orderIds } from "../utils";
 import { getLibrarySongs } from "./librarySongs";
@@ -117,6 +118,7 @@ export const patchAlbum = (payload) => async dispatch => {
         dispatch(loadAlbum(data.album));
         dispatch(loadUserAlbum(data.album));
         dispatch(getLibrarySongs());
+        dispatch(loadHomeAlbums());
         // if (payload.fromAlbumId) dispatch(loadAlbumSong(data.song, payload.fromAlbumId))
         //  if (payload.fromAlbumId) dispatch(getLibraryAlbums())
         return data.album;
@@ -135,6 +137,7 @@ export const deleteLibraryAlbum = (albumId) => async dispatch => {
         dispatch(removeAlbum(albumId));
         dispatch(removeUserAlbum(albumId));
         dispatch(getLibrarySongs('reload'));
+        dispatch(loadHomeAlbums());
     }
 };
 

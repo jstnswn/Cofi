@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { loadLibrary } from '../../store/library';
+import { loadLibrary, setLoaded } from '../../store/library';
 import { getLibraryAlbumsArray } from '../../store/library/libraryAlbums';
 import AlbumsBody from './LibraryBody/AlbumsBody';
 import './Library.css';
@@ -19,13 +19,18 @@ export default function Library() {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
+        if (libraryItems.isLoaded) {
+            setIsLoaded(true);
+            return;
+        }
         (async () => {
+            await dispatch(setLoaded());
             await dispatch(loadLibrary())
             await dispatch(getPlaylists());
             setIsLoaded(true);
         })()
 
-    }, [dispatch])
+    }, [dispatch, libraryItems])
 
     // useEffect(() => {
 
@@ -66,7 +71,7 @@ export default function Library() {
 
                 <Route path='/library'>
                     <Redirect to={`/library/${user.username}/songs`} />
-                </Route> 
+                </Route>
 
 
 

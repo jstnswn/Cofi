@@ -1,5 +1,7 @@
 import { normalize, orderIds } from "./utils";
 
+const SET_LOADED = 'home/SET_LOADED';
+
 const LOAD_NEW_SONG = 'home/NEW_LOAD_SONG';
 const LOAD_NEW_SONGS = 'home/LOAD_NEW_SONGS';
 const LOAD_FEATURED_SONGS = 'home/LOAD_FEATURED_SONGS';
@@ -12,6 +14,12 @@ const CLEAN_HOME = 'home/CLEAN_HOME';
 const CLEAN_ALBUMS = 'home/CLEAN_ALBUMS';
 
 // Action Creators
+export const setLoaded = () => {
+    return {
+        type: SET_LOADED
+    }
+}
+
 export const loadNewSong = (song) => {
     return {
         type: LOAD_NEW_SONG,
@@ -184,6 +192,7 @@ export const loadHomeAlbums = () => async dispatch => {
 
 // Reducer
 const initialState = {
+    isLoaded: false,
     featuredAlbum: {},
     newAlbums: {
         byIds: {},
@@ -205,6 +214,11 @@ export default function reducer(state = initialState, action) {
     let orderedIds;
 
     switch (action.type) {
+        case SET_LOADED:
+            return {
+                ...state,
+                isLoaded: true
+            }
         case LOAD_NEW_SONG:
             return {
                 ...state,
