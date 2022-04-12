@@ -5,7 +5,7 @@ import SongPlayer from '../SongPlayer';
 import './Home.css';
 import HomeSidebar from './HomeSidebar';
 import TileCarousel from '../TileCarousel';
-import { getNewAlbumsArray, getNewSongsArray, getTopAlbumsArray, loadHome } from '../../store/home';
+import { getNewAlbumsArray, getNewSongsArray, getTopAlbumsArray, loadHome, setLoaded } from '../../store/home';
 import { getPlaylists } from '../../store/playlists';
 import MainSidebar from '../MainSidebar';
 
@@ -21,9 +21,11 @@ export default function Home() {
     const topAlbums = useSelector(getTopAlbumsArray);
 
     useEffect(() => {
+        if (homeItems.isLoaded) return;
         dispatch(getPlaylists());
-        dispatch(loadHome())
-    }, [dispatch])
+        dispatch(loadHome());
+        dispatch(setLoaded());
+    }, [dispatch, homeItems])
 
     // console.log()
     let homeContent;

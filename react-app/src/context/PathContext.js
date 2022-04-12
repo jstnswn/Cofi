@@ -22,7 +22,6 @@ export function PathProvider({ children }) {
     // });
     const cannotBack = locationPointer < 1;
     const cannotForward = locationPointer >= pathHistory.length - 1
-    // console.log('🙃🙃🙃🙃', locationPointer, pathHistory)
 
     const goBack = () => {
         if (locationPointer < 1) return;
