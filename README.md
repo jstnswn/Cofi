@@ -112,3 +112,43 @@ This section displays the user's uploaded songs. Here they can remove the song, 
 [![library.png](https://i.postimg.cc/HkxyJkCt/Screen-Shot-2022-03-24-at-1-34-23-AM.png)](https://postimg.cc/N53MSYFy)
 
 This section displays the user's uploaded albums. Clicking on an album will display the album's song contents. After an album is clicked on, the header will change to display the album's artwork. The user can make changes to the album by clicking the ellipsis by the album's title in the header.
+
+# Playlists
+
+[![upload-playlist.png](https://i.postimg.cc/66YcFnY9/Screen-Shot-2022-04-19-at-11-13-18-AM.png)](https://postimg.cc/z3HTgLsM)
+
+Users can create custom playlists containing their own of other user's songs. Upon creation users can specify a playlist name and image, which can be edited at any time.
+
+Seeds are initialized as python lists. This enabled the feature to randomly generated playlists via a custom seeding script that iterates and randomly appends songs to playlists. 
+
+```JavaScript
+# playlists = [...]
+# songs = [...]
+
+def add_songs_to_playlist(playlist):
+    for song in songs:
+        flip = randint(0, 6)
+
+        if flip == 1:
+            playlist.songs.append(song)
+         
+def seed_playlists():
+    for playlist in playlists:
+        # Add random songs to playlist
+        add_songs_to_playlist(playlist)
+
+        db.session.add(playlist)
+
+    db.session.commit()         
+```
+
+# Navigation
+
+[![navigation.png](https://i.postimg.cc/1zvrnN4m/Screen-Shot-2022-04-19-at-11-18-44-AM.png)](https://postimg.cc/kVtbLGxz)
+
+Users can navigate both backwards and fowards to previously visited pages. Navigation arrows will become avaiable only if navigation is possible. This was achieved by maintaining an in-app navigation history stack via React Context.
+
+
+
+
+
