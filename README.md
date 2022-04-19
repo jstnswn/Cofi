@@ -119,6 +119,7 @@ This section displays the user's uploaded albums. Clicking on an album will disp
 
 Users can create custom playlists containing their own of other user's songs. Upon creation users can specify a playlist name and image, which can be edited at any time.
 
+(Backend - demo playlists creation)
 Seeds are initialized as python lists. This enabled the feature to randomly generated playlists via a custom seeding script that iterates and randomly appends songs to playlists. 
 
 ```JavaScript
