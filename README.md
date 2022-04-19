@@ -93,7 +93,7 @@ Co-fi is a music application inspired by SoundCloud and Spotify with a minimalis
           npm start
           
 # Home Page
-[![home-features.png](https://cofi-bucket.s3.amazonaws.com/art-seeds/home.png)]
+![home-features.png](https://cofi-bucket.s3.amazonaws.com/art-seeds/home.png)
 
 On the home page users can toggle between albums and songs to see their respective featured and new content. "Featured" is randomly chosesn content from the 10 most recent uploads. On this page, users can play music from the caterogires provided, like songs/albums, and add songs from the album player into a previously created playlist.
 
@@ -109,7 +109,7 @@ This section displays the user's uploaded songs. Here they can remove the song, 
 
 # Library Page Albums
 
-[![library.png](https://i.postimg.cc/HkxyJkCt/Screen-Shot-2022-03-24-at-1-34-23-AM.png)](https://postimg.cc/N53MSYFy)
+![library.png](https://cofi-bucket.s3.amazonaws.com/art-seeds/Screen+Shot+2022-03-24+at+1.34.23+AM.png)
 
 This section displays the user's uploaded albums. Clicking on an album will display the album's song contents. After an album is clicked on, the header will change to display the album's artwork. The user can make changes to the album by clicking the ellipsis by the album's title in the header.
 
