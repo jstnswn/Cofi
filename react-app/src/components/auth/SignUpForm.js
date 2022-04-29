@@ -145,9 +145,6 @@ const SignUpForm = () => {
 
         <button
           type='submit'
-          // style={{
-          //   opacity: errors.length ? .5 : 1
-          // }}
           >Sign Up</button>
       </div>
     </form>

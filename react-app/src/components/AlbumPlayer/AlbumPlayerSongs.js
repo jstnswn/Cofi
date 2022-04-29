@@ -79,7 +79,6 @@ export default function AlbumPlayerSongs({ song, idx, last, openedMenu, setOpene
     }
 
     const playSong = () => {
-        // dispatch(setSong(song));
         dispatch(loadSongAndSetQueue(song));
     };
 

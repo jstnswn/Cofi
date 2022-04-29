@@ -1,13 +1,9 @@
 #home-wrapper {
     margin-top: 50px;
-    /* width: 100vw; */
     width: 100%;
     display: grid;
     grid-template-columns: calc(100vw - 200px) 200px;
-    /* grid-template- */
     height: calc(100vh - 140px);
-
-
 }
 
 #home-wrapper .main-wrapper {

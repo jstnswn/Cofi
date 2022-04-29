@@ -61,9 +61,6 @@ export default function SongUploadForm({ closeModal }) {
         setDisableSubmit(true);
 
         setIsLoading(true);
-
-
-
         const payload = {
             title,
             artist,
@@ -229,22 +226,6 @@ export default function SongUploadForm({ closeModal }) {
                     )}
                 </div>
                 {albumOption}
-                {/* <div className='upload-form radio-container'>
-                    <label>Private</label>
-                    <input
-                        type='radio'
-                        onChange={e => setIsPrivate(true)}
-                        value={true}
-                        checked={isPrivate === true ? true : false}
-                    />
-                    <label>Public</label>
-                    <input
-                        type='radio'
-                        onChange={e => setIsPrivate(false)}
-                        value={false}
-                        checked={isPrivate === false ? true : false}
-                    />
-                </div> */}
 
                 <button
                     type='submit'

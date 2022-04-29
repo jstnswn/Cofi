@@ -6,15 +6,11 @@ import './SongPlayer.css';
 
 export default function SongPlayer({ song }) {
     const dispatch = useDispatch();
-
     const user = useSelector(({ session }) => session.user);
     const likedSongIds = user.liked.song_ids;
 
-    const [showOverlay, setShowOverlay] = useState(false);
-
     const playSong = (e) => {
         e.stopPropagation();
-        // dispatch(setSong(song));
         dispatch(loadSongAndSetQueue(song));
     };
 
@@ -23,7 +19,10 @@ export default function SongPlayer({ song }) {
         dispatch(createSongLike(song.id));
     };
 
-    const unlikeSong = () => dispatch(deleteSongLike(song.id));
+    const unlikeSong = (e) => {
+        e.stopPropagation();
+        dispatch(deleteSongLike(song.id));
+    }
 
     let likeIconClass;
     let toggleLike;
@@ -39,8 +38,6 @@ export default function SongPlayer({ song }) {
     return (
         <div
             className='song-player'
-            onMouseEnter={() => setShowOverlay(true)}
-            onMouseLeave={() => setShowOverlay(false)}
         >
             <div className='song-player-image-container'>
                 <img

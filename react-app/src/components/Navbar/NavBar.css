@@ -12,8 +12,6 @@
     background-color: var(--background-secondary-dark-gray);
     font-family: var(--header-font);
     z-index: 5;
-    /* margin-right: 60px; */
-    /* border: blue 5px solid; */
 }
 
 .home-link,
@@ -52,10 +50,7 @@
 .nav-icon-container {
     width: 8em;
     display: flex;
-    /* flex-direction: column; */
-    /* justify-content: space-between; */
     justify-content: center;
-    /* margin: 0; */
 }
 
 #navbar .profile-icon,
@@ -88,19 +83,16 @@
     right: -39px;
     background-color: var(--background-secondary-dark-gray);
     width: 170px;
-    /* border: red 1px solid; */
     font-family: var(--main-font);
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    /* padding-right: 30px; */
     border: rgb(3, 1, 1) solid 1px;
     border-top: none;
     border-bottom-left-radius: 5px;
 }
 
 .user-dropdown > * {
-    /* padding-right: 30px; */
     padding: 5px 0;
 }
 
@@ -112,10 +104,6 @@
     padding: 10px 20px 7px 20px;
 }
 
-/* .profile-dropdown-box i {
-    font-size: 12px;
-} */
-
 .fa-sign-out {
     font-size: 20px
 }
@@ -123,12 +111,6 @@
 .profile-dropdown-single {
     padding-right: 25px;
 }
-
-/* .about-links {
-    width: 170px;
-    display: flex;
-    justify-content: space-between;
-} */
 
 .about-icons {
     font-size: 35px;

@@ -1,27 +1,24 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
+import AudioPlayer from 'react-h5-audio-player'
 import 'react-h5-audio-player/lib/styles.css';
 import './Player.css';
 import * as playActions from '../../store/active';
-import { useLocation } from 'react-router-dom';
 
 export default function Player() {
     const dispatch = useDispatch();
     const active = useSelector(({ active }) => active);
     const queue = active.queue;
     const sessionUser = useSelector(({ session }) => session.user);
-    const location = useLocation();
 
     let songUrl;
     let artworkUrl;
 
     if (active.currentSong) {
         songUrl = active.currentSong.song_url;
-        artworkUrl = active.currentSong.album /* && location.pathname.includes('library') */
+        artworkUrl = active.currentSong.album 
             ? active.currentSong.album.image_url
             : active.currentSong.image_url
-        // artworkUrl =
     };
 
     const handleOnPlay = () => {

@@ -9,17 +9,10 @@ export default function Splash() {
             <div className='top'></div>
 
             <div className='header-container'>
-                {/* <div className='left-container'> */}
                     <div className='header-top'>
                         <h1>Cofi</h1>
                         <img alt='Logo' className='splash-logo' src={image} />
                     </div>
-                    {/* <div className='header-bottom'>
-                        <h2>Lofi Music. Together.</h2>
-                    </div> */}
-
-                {/* </div> */}
-                {/* <div className='right-container'></div> */}
                 <img alt='Logo' className='splash-logo wave' src={gif}/>
                 <div className='developer-box'>Developed by <a href='https://justin-sweeney.com/' target='_blank' rel='noopener noreferrer'>Justin Sweeney</a></div>
             </div>

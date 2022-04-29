@@ -8,9 +8,7 @@
   font-family: var(--main-font);
   font-size: 1.1em;
   height: 282px;
-  /* max-height: 282px; */
   width: 100%;
-  /* width: 100%; */
   align-items: center;
   padding-left: 25px;
 
@@ -19,20 +17,13 @@
 
 
 .album-player-image-container {
-    /* height: 230px;
-    width: 230px; */
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
-
-    /* border: blue 1px solid; */
 }
 
 .album-player-image {
-    /* height: 100%;
-    width: 100%; */
-
     height: 210px;
     width: 210px;
     object-fit: cover;
@@ -40,24 +31,11 @@
 }
 
 .album-player-album .icon-container {
-  /* height: 100%; */
-  /* margin-top: 5px; */
-  /* margin-bottom: auto; */
   height: 35px;
   width: 100%;
-
-  /* text-align: center; */
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  /* padding-top: 5px; */
-
-  /* border: red 1px solid; */
-}
-
-.album-player-album .icon-container .heart {
-  /* padding: 0;
-  margin: 0; */
 }
 
 .album-player.scroll-wrapper {
@@ -74,25 +52,14 @@
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-  /* border: var(--border-gray) .5px solid;
-  border-radius: 6px; */
 }
 
 .album-player-songs-wrapper {
-  /* padding: 10px 0; */
-
-
   height: 100%;
   width: 100%;
-
 }
 
-/* .album-player-songs-container::-webkit-scrollbar {
-  display: none;
-} */
-
 .album-player-songs-container::-webkit-scrollbar {
-    /* background-color: var(--background-main-black); */
     background-color: #0c0f0fa2;
     border-radius: 9px;
 }

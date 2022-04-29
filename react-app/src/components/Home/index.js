@@ -27,7 +27,6 @@ export default function Home() {
         dispatch(setLoaded());
     }, [dispatch, homeItems])
 
-    // console.log()
     let homeContent;
     if (homeDisplay === 'albums') {
         homeContent = (

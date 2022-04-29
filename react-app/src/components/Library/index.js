@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { loadLibrary, setLoaded } from '../../store/library';
-import { getLibraryAlbumsArray } from '../../store/library/libraryAlbums';
 import AlbumsBody from './LibraryBody/AlbumsBody';
 import './Library.css';
 import LibraryHeader from './LibraryHeader';
 import LibrarySidebar from './LibrarySidebar';
 import SongsBody from './LibraryBody/SongsBody';
-import { getPlaylists, getPlaylistsArray } from '../../store/playlists';
+import { getPlaylists } from '../../store/playlists';
 import MainSidebar from '../MainSidebar';
 
 export default function Library() {
@@ -31,10 +30,6 @@ export default function Library() {
         })()
 
     }, [dispatch, libraryItems])
-
-    // useEffect(() => {
-
-    // }, [])
 
     const routes = (
         <>

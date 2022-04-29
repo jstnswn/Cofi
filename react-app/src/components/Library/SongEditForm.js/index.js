@@ -215,38 +215,6 @@ export default function SongEditForm({ closeModal, song, album }) {
                     )}
                 </div>
                 {albumOption}
-                {/* <label>Album</label>
-                <div className='input-container'>
-                    <select
-                        value={albumId}
-                        onChange={e => setAlbumId(e.target.value)}
-                    >
-                        <option>{album ? album.title : '-Select an Album-'}</option>
-                        {libraryAlbums?.map((album, idx) => (
-                            <option key={idx} value={album.id}>{album.title}</option>
-                        ))}
-                        <option value='create new'>--Create a new album--</option>
-                    </select>
-
-                </div> */}
-                {/* <div className='upload-form radio-container'>
-
-                    <label>Private</label>
-                    <input
-                        type='radio'
-                        onChange={e => setPrivate(true)}
-                        value={true}
-                        checked={isPrivate === true ? true : false}
-                    />
-                    <label>Public</label>
-                    <input
-                        type='radio'
-                        onChange={e => setPrivate(false)}
-                        value={false}
-                        checked={isPrivate === false ? true : false}
-                    />
-
-                </div> */}
 
                 {/* Hidden inputs */}
                 <input
