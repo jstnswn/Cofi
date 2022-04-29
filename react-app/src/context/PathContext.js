@@ -7,19 +7,11 @@ export const PathContext = React.createContext();
 export function PathProvider({ children }) {
     const location = useLocation();
     const history = useHistory();
-    // const [loaded, setLoaded] = useState(false);
     const [locationPointer, setLocationPointer] = useState(0);
     const [activeNav, setActiveNav] = useState(false);
     const [pathHistory, setPathHistory] = useState([location.pathname]);
 
     const user = useSelector(({ session }) => session.user);
-    // if (!user) return null;
-
-    // const [path, setPath] = useState({
-    //     to: location.pathname,
-    //     from: location.pathname,
-    //     hasBack: false
-    // });
 
     const cannotBack = locationPointer < 1;
     const cannotForward = locationPointer >= pathHistory.length - 1

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { PathContext } from '../../context/PathContext';
 import AlbumUploadModal from '../Upload/AlbumUpload';
@@ -8,24 +8,15 @@ import './MainSidebar.css';
 
 
 export default function MainSidebar() {
-    // const [backNum, setBackNum] = useState(0);
-    const history = useHistory();
-
     const { goBack, goForward, cannotForward, cannotBack } = useContext(PathContext);
-    // console.log("HISTORY: ", history.length, initHistoryLength);
 
     const prevHistory = () => {
-        // history.goBack();
         goBack();
-        // setBackNum(prev => prev - 1);
     };
 
     const forwardHistory = () => {
         goForward();
-        // setBackNum(prev => prev - 1);
     };
-
-    // const isNoBack = path.from === path.to;
 
     return (
         <div id='main-sidebar'>
@@ -51,7 +42,6 @@ export default function MainSidebar() {
                 <div className={cannotForward ? 'faded' : ''}>
                     <i className='far fa-angle-right' onClick={forwardHistory}></i>
                 </div>
-                {/* <div>{backNum}</div> */}
             </section>
         </div>
     )

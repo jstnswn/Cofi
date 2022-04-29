@@ -146,24 +146,6 @@ export default function AlbumUploadForm({ closeModal }) {
                 >{isLoading ? 'Submitting...' : 'Submit'}</button>
 
             </div>
-            {/* <div className='upload-form radio-container'>
-                <label>Private</label>
-                <input
-                    type='radio'
-                    onChange={e => setIsPrivate(true)}
-                    value={true}
-                    checked={isPrivate === true ? true : false}
-                />
-                <label>Public</label>
-                <input
-                    type='radio'
-                    onChange={e => setIsPrivate(false)}
-                    value={false}
-                    checked={isPrivate === false ? true : false}
-                />
-            </div> */}
-            {/* <label>Artwork (optional)</label> */}
-
 
         </form>
     )

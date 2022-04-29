@@ -72,7 +72,6 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
         return () => document.removeEventListener('click', unHover);
     }, [hovered])
 
-    // const likedItems = user.liked;
     const likedSongIds = user.liked.song_ids;
 
 
@@ -89,7 +88,6 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
     }
 
     const playSong = () => {
-        // dispatch(setSong(song));
         dispatch(loadSongAndSetQueue(song));
     };
 
@@ -102,7 +100,6 @@ export default function SongItem({ song, option, playlistId, idx, last }) {
     };
 
     const addSongToPlaylist = (playlistId, e) => {
-        // e.stopPropagation();
         dispatch(addToPlaylist(song, playlistId));
         closePlaylists();
     };

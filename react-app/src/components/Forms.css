@@ -41,7 +41,6 @@
 }
 
 .form button {
-    /* margin-top: 60px; */
     width: 95px;
     height: 32px;
     font-family: var(--header-font);
@@ -54,10 +53,6 @@
     font-size: 13px;
     align-self: flex-end;
     margin-top: 25px;
-    /* padding-top: 5px; */
-
-    /* border: solid 1px */
-
 }
 
 .form .close-icon {
@@ -143,8 +138,6 @@
     border-radius: 6px;
     width: 100%;
     bottom: 0;
-
-    /* padding: 3px; */
 }
 
 .form .file-message p {
@@ -152,7 +145,6 @@
 }
 
 .form .file-message.art-edit p:last-of-type {
-    /* color: white; */
     font-size: 12px;
     font-style: italic;
 }

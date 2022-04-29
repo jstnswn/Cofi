@@ -1,24 +1,14 @@
 #main-sidebar {
-    /* height: 470px; */
-    /* position: absolute; */
-    /* border: red 3px solid; */
     grid-column-start: 2;
     top: 50px;
-    /* right: 0; */
     width: 200px;
     border-left: 2px solid var(--border-gray);
     border-bottom: 2px solid var(--border-gray);
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* padding-top: 125px; */
     font-family: var(--header-font);
-
     grid-row-start: 1;
-
-
-
-    /* border: pink 2px solid; */
     min-height: 172px;
 }
 
@@ -29,17 +19,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    /* border: blue 2px solid; */
 }
 
 #main-sidebar .content-container > div {
     color: gray;
     display: flex;
     align-items: center;
-
     transition: .5s;
-
 }
 
 #main-sidebar .content-container > div:hover {
@@ -58,13 +44,8 @@
 
 .sidebar-container {
     display: grid;
-    /* height: 100%; */
-    /* height: calc(100vh - 140px); */
-
     height: 100%;
     flex-direction: column;
-
-
 
     /* navbar + player = 140px */
     /* 50px to adjust for library song body header */
@@ -73,10 +54,8 @@
 
 
 .nav-button-container {
-    /* justify-self: center; */
     align-self: center;
     margin: 5px;
-    /* border: red 1px solid; */
     width: 45%;
     display: flex;
     justify-content: space-between;
@@ -102,11 +81,6 @@
 .nav-button-container i:hover {
     color: white;
 }
-
-/* .nav-button-container div:hover {
-    border: white 1px solid;
-
-} */
 
 .nav-button-container div.faded {
     opacity: .4;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { loadSongAndSetQueue, setSong } from '../../store/active';
+import { loadSongAndSetQueue } from '../../store/active';
 import { createAlbumLike, createSongLike, deleteAlbumLike, deleteSongLike } from '../../store/session';
 import './PlayableTile.css';
 
@@ -48,9 +48,6 @@ export default function PlayableTile({ item, option }) {
 
 
     const handleAction = () => {
-        console.log('option!', option)
-        // if (song) dispatch(setSong(song));
-        // console.log('fdkafjdalkfjdalk')
         if (option === 'albums') history.push(`/album/${item.id}`)
         else dispatch(loadSongAndSetQueue(song));
     }

@@ -2,15 +2,9 @@
     grid-column-start: 1;
     display: flex;
     flex-direction: column;
-    /* height: calc(470px - 50px); */
     width: 100%;
     height: 100%;
-
-
-
-    /* border: pink 2px solid; */
     min-height: 172px;
-
 }
 
 .libary-header-container {
@@ -23,7 +17,6 @@
     padding: 0;
     max-width: 800px;
     width: 100%;
-    /* width: 50px; */
     display: flex;
     justify-content: center;
     position: relative;
@@ -33,10 +26,7 @@
 .library-header-image {
     object-fit: cover;
     max-width: calc(100vw - 200px);
-    /* min-height: 420px; */
     width: 100%;
-
-    /* border: red 3px solid; */
 }
 
 .header-title-container {
@@ -47,8 +37,6 @@
     color: var(--text-secondary-white);
     font-family: var(--main-font);
     margin-left: 10px;
-
-    /* border: gray 3px solid; */
 }
 
 .library-header-title {
@@ -75,5 +63,4 @@
     padding: 1px 9px;
     border-radius: 5px;
     color: var(--text-secondary-white)
-
 }

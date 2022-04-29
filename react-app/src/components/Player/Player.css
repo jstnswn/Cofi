@@ -16,12 +16,7 @@
 
 .rhap_container {
   background-color: rgb(25, 25, 25);
-  /* padding-right: 50px; */
   width: 80%;
-}
-
-.rhap_progress-bar {
-    /* width: 80%; */
 }
 
 #rhap_current-time,
@@ -30,11 +25,6 @@
     font-size: 14px;
     color: var(--text-main-white)
 }
-
-
-/* .rhab_time {
-    width: 41px;
-} */
 
 .rhap_progress-bar,
 .rhap_volume-bar {

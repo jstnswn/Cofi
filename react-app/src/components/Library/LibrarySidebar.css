@@ -1,39 +1,22 @@
 #library-wrapper .bottom-sidebar {
     grid-column-start: 2;
     grid-row-start: 2;
-
-    /* height: calc(100vh - 560px); */
-
     display: flex;
     flex-direction: column;
     border-left: 2px solid var(--border-gray);
-    /* margin-top: 470px; */
     padding-top: 50px;
     width: 200px;
-
-    /* border: green 2px solid; */
     min-height: 315px;
-
     position: relative;
 }
 
 
 .content-toggle-container {
-    /* display: flex; */
     width: 100%;
-    /* padding-left: 35px; */
-
     position: absolute;
     top: 10px;
     text-align: center;
-    /* margin-right: 50%;
-    margin-left: 50%; */
 }
-/*
-.content-toggle-container p {
-    color: gray;
-    padding: 10px;
-} */
 
 .content-toggle-container a {
     font-family: var(--header-font);

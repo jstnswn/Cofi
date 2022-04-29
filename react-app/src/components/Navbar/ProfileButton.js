@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import LogoutButton from '../auth/LogoutButton';
 
 export default function ProfileButton({ user }) {
-    const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
 
     const openMenu = () => setShowMenu(true);
@@ -30,7 +28,6 @@ export default function ProfileButton({ user }) {
               <div className='user-dropdown dd'>
 
                   <div className='profile-dropdown-single dd'>{user.username}</div>
-                  {/* <div>{user.email}</div> */}
                   <div className='dd'>
                       <LogoutButton />
                   </div>

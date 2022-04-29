@@ -1,28 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getAlbum } from '../../store/albums';
-import { orderContent } from '../utils';
-import Song from './Song';
+import React, { useRef } from 'react'
 
 export default function Album() {
-    const dispatch = useDispatch();
-
-
     const scrollContainer = useRef(null);
-
-
-
-
-    // if (albums) {
-    //     songs = orderContent(albums[albumId]);
-    // }
-
-
-
-
-
-    // const last = songs?.length - 1;
 
     return (
         <>
