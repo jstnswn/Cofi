@@ -1,101 +1,48 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux';
+import React from 'react'
 import PlayableTile from './PlayableTile';
 import './TileCarousel.css'
 
 export default function TileCarousel({ content, option, identifier }) {
-    const initial = content.length;
-    const [difference, setDifference] = useState(initial);
-
-    const [backTarget, setBackTarget] = useState(0);
-    const [prevDirection, setPrevDirection] = useState();
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    const [changeNum, setChangeNum] = useState(8);
-
-    useEffect(() => {
-        // console.log(screenWidth)
-        if (screenWidth <= 1190) {
-            setChangeNum(8)
-        } else if (screenWidth <= 1360) {
-            setChangeNum(9)
-        } else {
-            setChangeNum(10)
-        }
-
-    }, [screenWidth])
-
-    // useEffect(() => {
-    //     if (screenWidth <= 1190) {
-    //         setChangeNum(8)
-    //     } else if (screenWidth <= 1360) {
-    //         setChangeNum(9)
-    //     } else if (screenWidth <= 1400) {
-    //         setChangeNum(11)
-    //     } else {
-    //         setChangeNum(12)
-    //     }
-
-    // }, [screenWidth])
-
-
-    const [forwardTarget, setForwardTarget] = useState(changeNum);
-
-    useEffect(() => {
-        setDifference(initial - forwardTarget);
-        if (prevDirection === 'forward') setBackTarget(forwardTarget - changeNum);
-        if (prevDirection === 'back') setForwardTarget(backTarget + changeNum);
-
-    }, [prevDirection, initial, difference, forwardTarget, backTarget, changeNum])
-
-    useEffect(() => {
-        const updateWidth = () => {
-            setScreenWidth(window.innerWidth)
-        };
-        window.addEventListener('resize', updateWidth);
-
-        return () => window.removeEventListener('resize', updateWidth)
-    }, [])
-
     const scrollRight = (e) => {
         e.preventDefault()
-        if (difference <= 0) return;
+        const rightButtonLocation = document.querySelector('.fa-chevron-right').getBoundingClientRect().right;
 
-        const tile = document.querySelector(`.tile-carousel.${identifier}`).children[forwardTarget];
+        let tile;
+        const tiles = document.querySelector(`.tile-carousel.${identifier}`).children;
+        for (let currentTile of tiles) {
+            if (rightButtonLocation - currentTile.getBoundingClientRect().right < 0) {
+                tile = currentTile;
+                break;
+            }
+        }
+        if (!tile) return;
 
         tile.scrollIntoView({
             block: 'nearest',
+            inline: 'start',
             behavior: 'smooth'
         });
-
-        setForwardTarget(prev => {
-            if (difference <= initial - prev) {
-                return initial - 1;
-            } else {
-                return prev + changeNum;
-            }
-        })
-        setPrevDirection('forward');
     }
 
     const scrollLeft = (e) => {
         e.preventDefault()
-        if (difference >= initial) return;
 
-        const tile = document.querySelector(`.tile-carousel.${identifier}`).children[backTarget];
+        let tile;
+        const tiles = document.querySelector(`.tile-carousel.${identifier}`).children;
+        for (let i = tiles.length - 1; i >= 0; i--) {
+            const currentTile = tiles[i];
+            if (currentTile.getBoundingClientRect().left < 0) { // tile is large enough to use screen edge as boundry
+                tile = currentTile;
+                break;
+            }
+        }
+        if (!tile) return;
 
         tile.scrollIntoView({
             block: 'nearest',
+            inline: 'end',
             behavior: 'smooth'
         });
-
-        setBackTarget(prev => {
-            if (prev - 8 <= 0) {
-                return 0;
-            } else {
-                return prev - 8;
-            }
-        })
-        setPrevDirection('back');
     };
 
     return (
