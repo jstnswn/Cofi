@@ -15,6 +15,11 @@
     color: gray;
     font-family: var(--header-font);
     padding: 0;
+    transition: .5s;
+}
+
+.sidebar-button:hover {
+    color: white;
 }
 
 .sidebar-button-container {
