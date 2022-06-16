@@ -25,18 +25,10 @@ function App() {
   useEffect(() => {
     (async () => {
       await dispatch(authenticate())
-      // .then(() => dispatch(getPlaylists()))
-      // await dispatch(loadHome())
-      // await dispatch(getPlaylists())
       setLoaded(true)
     })();
 
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (!user) return;
-  //   dispatch(getPlaylists())
-  // }, [user, dispatch])
 
   if (!loaded) return null;
 
@@ -47,9 +39,6 @@ function App() {
 
         <NavBar />
         <Switch>
-          {/* <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route> */}
           <Route path='/sign-up' exact={true}>
             <SignUpForm />
           </Route>
@@ -64,11 +53,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path={`/library`}>
             <Library />
-            {/* <MainSidebar /> */}
           </ProtectedRoute>
           <ProtectedRoute path='/' exact={true} >
             <Home />
-            {/* <MainSidebar /> */}
           </ProtectedRoute>
           <ProtectedRoute path='/album/:albumId' exact={true}>
             <SongPage />
@@ -79,7 +66,6 @@ function App() {
         </Switch>
         {user && (
           <>
-            {/* <MainSidebar /> */}
             <Player />
           </>
 

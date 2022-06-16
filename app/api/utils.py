@@ -9,6 +9,7 @@ def get_or_make_artist_id(name):
     except:
         artist = Artist(name=name)
         db.session.add(artist)
+        # session.flush instead of commit to instantly retrieve new id
         db.session.flush()
         artist_id = artist.id
 
