@@ -67,7 +67,7 @@ export const getPlaylists = () => async dispatch => {
 };
 
 export const createPlaylist = (payload) => async dispatch => {
-    const { title, image, song  } = payload;
+    const { title, image  } = payload;
 
     const formData = new FormData();
     formData.append('title', title);
@@ -117,7 +117,7 @@ export const removeFromPlaylist = (songId, playlistId) => async dispatch => {
 };
 
 export const patchPlaylist = (payload) => async dispatch => {
-    const { title, image, song, playlistId } = payload;
+    const { title, image, playlistId } = payload;
     const formData = new FormData();
 
     formData.append('title', title);

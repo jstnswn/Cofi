@@ -8,11 +8,9 @@ import { authenticate } from './store/session';
 import Home from './components/Home';
 import NavBar from './components/Navbar';
 import Player from './components/Player';
-import MainSidebar from './components/MainSidebar';
 import Library from './components/Library';
 import Splash from './components/Splash';
 import ErrorPage from './ErrorPage';
-import Album from './components/SongPage/Album';
 import SongPage from './components/SongPage';
 import { PathProvider } from './context/PathContext';
 

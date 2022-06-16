@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { PathContext } from '../../context/PathContext';
 import AlbumUploadModal from '../Upload/AlbumUpload';
 import PlaylistUploadModal from '../Upload/PlaylistUpload';
