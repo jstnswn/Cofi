@@ -51,10 +51,11 @@ def get_most_liked_albums(limit):
 
     albums = Album.query.all()
 
-    # Sort by most likers. Rework for time complexity
+    # Sort by most likers. TODO: rework for time complexity
+
     albums.sort(reverse=True, key=by_length)
 
-    return {'albums': [album.to_dict() for album in albums]}
+    return {'albums': [album.to_dict() for album in albums[0:limit]]}
 
 @album_routes.route('/current_user')
 def get_user_albums():
