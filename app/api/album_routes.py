@@ -1,9 +1,8 @@
-from dataclasses import dataclass
 from app.api.utils import get_or_make_artist_id
 from flask import Blueprint, request
 from flask_login import current_user
 from random import randint
-from app.models import Album, db, User
+from app.models import Album, db
 from app.forms.album_form import AlbumForm
 from app.api.auth_routes import validation_errors_to_error_messages
 
@@ -51,7 +50,7 @@ def get_most_liked_albums(limit):
 
     albums = Album.query.all()
 
-    # Sort by most likers. TODO: rework for time complexity
+    # Sort by most likers. TODO: rework query for time complexity
 
     albums.sort(reverse=True, key=by_length)
 

@@ -1,7 +1,6 @@
-from flask import Blueprint, request
+from flask import Blueprint
 from flask_login import current_user
 from app.models import Song, db, User
-from app.forms.song_form import SongForm
 
 song_like_routes = Blueprint('song_likes', __name__)
 
