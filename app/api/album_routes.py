@@ -1,9 +1,8 @@
-from dataclasses import dataclass
 from app.api.utils import get_or_make_artist_id
 from flask import Blueprint, request
 from flask_login import current_user
 from random import randint
-from app.models import Album, db, User
+from app.models import Album, db
 from app.forms.album_form import AlbumForm
 from app.api.auth_routes import validation_errors_to_error_messages
 
@@ -15,10 +14,12 @@ def get_featured_album():
     """
     Returns a random album from 10 most recent
     """
-    id = randint(1, 3)
-    # album = Album.query.get(id)
-    albums = Album.query.all()
-    album = albums[id]
+    albums = Album.query.order_by(Album.id.desc()).limit(10).all()
+
+    rand_end_index = randint(1, 10)
+    if len(albums) < 10:
+        rand_end_index = (1 , len(albums))
+    album = albums[-rand_end_index]
 
     if not album:
         return {'error': 'Unable to get album from database'}
@@ -49,10 +50,11 @@ def get_most_liked_albums(limit):
 
     albums = Album.query.all()
 
-    # Sort by most likers. Rework for time complexity
+    # Sort by most likers. TODO: rework query for time complexity
+
     albums.sort(reverse=True, key=by_length)
 
-    return {'albums': [album.to_dict() for album in albums]}
+    return {'albums': [album.to_dict() for album in albums[0:limit]]}
 
 @album_routes.route('/current_user')
 def get_user_albums():

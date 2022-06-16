@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, session, request
+from flask import Blueprint, request
 from flask_login import current_user
 from flask import Blueprint
 from app.models import Song, db, Playlist

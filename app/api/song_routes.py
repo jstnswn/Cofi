@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import current_user
-from app.models import Song, Artist, db, song, Album
+from app.models import Song, db
 from app.forms.song_form import SongForm
 from random import randint
 from app.aws import (
