@@ -17,7 +17,6 @@ export default function NavBar() {
         <NavLink className={`library-link ${inLibrary ? 'selected' : ''}`} activeClassName='selected' to={`/library/${user.username}/songs`}>Library</NavLink>
         <a href='https://github.com/jstnswn' target='_blank' rel='noopener noreferrer'><i className='fab fa-github about-icons'></i></a>
         <a href='https://www.linkedin.com/in/jstnswn/' target='_blank' rel='noopener noreferrer'><i className='fab fa-linkedin about-icons'></i></a>
-
         <div className='nav-icon-container'>
           <ProfileButton user={user}/>
         </div>

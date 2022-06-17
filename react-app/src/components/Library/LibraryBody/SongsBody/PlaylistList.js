@@ -22,7 +22,7 @@ export default function PlaylistList({ song, addSongToPlaylist }) {
             {playlists.map((playlist, idx) => (
                !playlist.song_ids.includes(song.id) &&
                 <li
-                    onClick={(e) => {e.stopPropagation(); addSongToPlaylist(playlist.id, e)}}
+                    onClick={(e) => {e.stopPropagation(); e.preventDefault(); addSongToPlaylist(playlist.id, e)}}
                     key={idx}>{playlist.title}</li>
             ))}
             {playlists.length === 0 && <li style={{cursor: 'default'}}>You don't have any playlists.</li>}

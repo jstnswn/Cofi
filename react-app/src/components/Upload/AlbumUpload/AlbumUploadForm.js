@@ -55,7 +55,7 @@ export default function AlbumUploadForm({ closeModal }) {
         }
 
         await dispatch(createAlbum(payload))
-            .then((album) => dispatch(loadHomeAlbum(album)))
+            // .then((album) => dispatch(loadHomeAlbum(album)))
             .then(() => closeModal())
             .then(() => popupMessage('Album Created in Library'))
     };

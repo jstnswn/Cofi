@@ -671,8 +671,6 @@ def seed_songs():
 
         db.session.add(song)
 
-
-
     db.session.commit()
 
 

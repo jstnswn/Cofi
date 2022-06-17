@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SignUpForm from './components/auth/SignUpForm';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
 import { authenticate } from './store/session';
 import Home from './components/Home';
 import NavBar from './components/Navbar';
@@ -33,8 +32,6 @@ function App() {
   return (
     <BrowserRouter>
       <PathProvider>
-
-
         <NavBar />
         <Switch>
           <Route path='/sign-up' exact={true}>
@@ -45,10 +42,6 @@ function App() {
               <Splash />
             </Route>
           )}
-
-          <ProtectedRoute path='/users' exact={true} >
-            <UsersList />
-          </ProtectedRoute>
           <ProtectedRoute path={`/library`}>
             <Library />
           </ProtectedRoute>
@@ -62,12 +55,7 @@ function App() {
             <ErrorPage />
           </Route>
         </Switch>
-        {user && (
-          <>
-            <Player />
-          </>
-
-        )}
+        {user && <Player/>}
       </PathProvider>
     </BrowserRouter>
   );

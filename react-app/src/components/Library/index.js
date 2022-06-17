@@ -34,7 +34,6 @@ export default function Library() {
     const routes = (
         <>
             <Switch>
-
                 <Route path={`/library/${user.username}/albums`} exact={true}>
                     <AlbumsBody user={user} option='album' />
                 </Route>
@@ -56,7 +55,6 @@ export default function Library() {
                 <Route path={[`/library/${user.username}`, '/library']} exact={true}>
                     <Redirect to={`/library/${user.username}/songs`}/>
                 </Route>
-
                 <Route path={`/library/${user.username}/songs/liked`} exact={true}>
                     <SongsBody option='liked'/>
                 </Route>
@@ -67,7 +65,6 @@ export default function Library() {
                 <Route path='/library'>
                     <Redirect to={`/library/${user.username}/songs`} />
                 </Route>
-
             </Switch>
         </>
     )
@@ -77,9 +74,7 @@ export default function Library() {
             <div className='main-wrapper'>
                 <LibraryHeader libraryItems={libraryItems} />
                 <div id='library-body'>
-
                     {routes}
-
                 </div>
             </div>
 

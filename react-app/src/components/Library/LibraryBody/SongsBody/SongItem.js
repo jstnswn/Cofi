@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Modal } from '../../../../context/Modal';
-import { loadSongAndSetQueue, setSong } from '../../../../store/active';
+import { loadSongAndSetQueue } from '../../../../store/active';
 import { loadHome } from '../../../../store/home';
 import { deleteLibrarySong, patchSongAlbum } from '../../../../store/library/librarySongs';
 import { addToPlaylist, removeFromPlaylist } from '../../../../store/playlists';

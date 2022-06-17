@@ -1,4 +1,4 @@
-import { loadHomeAlbums } from "../home.js";
+import { loadHomeAlbums, loadNewAlbum } from "../home.js";
 import { loadUserAlbum, removeUserAlbum } from "../session.js";
 import { getImageUrl, normalize, orderIds } from "../utils";
 import { getLibrarySongs } from "./librarySongs";
@@ -90,7 +90,8 @@ export const createAlbum = (payload) => async dispatch => {
     if (res.ok) {
         const data = await res.json();
         dispatch(loadAlbum(data.album));
-        dispatch(loadUserAlbum(data.album))
+        dispatch(loadUserAlbum(data.album));
+        dispatch(loadNewAlbum(data.album));
         return data.album;
     } else {
         const errors = await res.json();

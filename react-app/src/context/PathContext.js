@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -54,7 +54,7 @@ export function PathProvider({ children }) {
         setPathHistory(prev => {
             if (activeNav) return prev;
             const copy = prev.slice(0, locationPointer + 1)
-            if (prev.length) {
+            if (prev.length) { // May not need conditional since pathHistory starts wtih length 1
                 copy.push(location.pathname);
             }
             return copy;
