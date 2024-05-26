@@ -17,6 +17,7 @@ def like_album(album_id):
     db.session.commit()
     return {'user': from_user.to_dict()}, 200
 
+
 @album_like_routes.route('/albums/<int:album_id>', methods=['DELETE'])
 def unlike_album(album_id):
     user_from_id = current_user.get_id()
