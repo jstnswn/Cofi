@@ -3,7 +3,7 @@
 App Academy capstone project.
 Co-fi is a music application inspired by SoundCloud and Spotify with a minimalist approach and lofi-genre theme. Co-fi v1.0.0 is a web music player that allows users to upload, edit, and listen to their own or other user's music. Future editions aim to allow users to create music "sessions" where all participant's music players will be synced to the same playlist.
 
-[Visit the site live here!](https://co-fi.herokuapp.com/)
+[Visit the site live here!](https://co-fi-d145defe0939.herokuapp.com/)
 
 * [MVP Feature List](https://github.com/jstnswn/Cofi/wiki/Feature-List)
 * [User Stories](https://github.com/jstnswn/Cofi/wiki/User-Stories)
@@ -91,7 +91,7 @@ Co-fi is a music application inspired by SoundCloud and Spotify with a minimalis
 8. Open another terminal and change directory into /react-app and run the React app
 
           npm start
-          
+
 # Home Page
 ![home-features.png](https://cofi-bucket.s3.amazonaws.com/art-seeds/home.png)
 
@@ -120,7 +120,7 @@ This section displays the user's uploaded albums. Clicking on an album will disp
 Users can create custom playlists containing their own of other user's songs. Upon creation users can specify a playlist name and image, which can be edited at any time.
 
 (Backend - demo playlists creation)
-Seeds are initialized as python lists. This enabled the feature to randomly generated playlists via a custom seeding script that iterates and randomly appends songs to playlists. 
+Seeds are initialized as python lists. This enabled the feature to randomly generated playlists via a custom seeding script that iterates and randomly appends songs to playlists.
 
 ```JavaScript
 # playlists = [...]
@@ -132,7 +132,7 @@ def add_songs_to_playlist(playlist):
 
         if flip == 1:
             playlist.songs.append(song)
-         
+
 def seed_playlists():
     for playlist in playlists:
         # Add random songs to playlist
@@ -140,7 +140,7 @@ def seed_playlists():
 
         db.session.add(playlist)
 
-    db.session.commit()         
+    db.session.commit()
 ```
 
 # Navigation
@@ -148,8 +148,3 @@ def seed_playlists():
 [![navigation.png](https://i.postimg.cc/1zvrnN4m/Screen-Shot-2022-04-19-at-11-18-44-AM.png)](https://postimg.cc/kVtbLGxz)
 
 Users can navigate both backwards and fowards to previously visited pages. Navigation arrows will become avaiable only if navigation is possible. This was achieved by maintaining an in-app navigation history stack via React Context.
-
-
-
-
-
